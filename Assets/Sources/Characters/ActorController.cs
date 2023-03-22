@@ -45,9 +45,28 @@ public abstract class ActorController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
-    protected abstract void ApplyMoveActor();
-    protected abstract void ApplyRotationActor();
-    protected abstract void ChangeWeapon();
+    protected virtual void ApplyMoveActor()
+    {
+		actorVelocityVector = verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
+		var vectorMove = new Vector3(actorVelocityVector.x * speed, 0.0f, actorVelocityVector.z * speed);
+		characterController.Move(vectorMove * Time.fixedDeltaTime);
+	}
+
+    protected virtual void ApplyRotationActor()
+    {
+		var startPosition = this.transform.position;
+		var endPosition = GetVelocity();
+
+		var direction = Vector3.RotateTowards(this.transform.forward, endPosition - startPosition, Time.fixedDeltaTime * 20, 0.0f);
+		this.transform.rotation = Quaternion.LookRotation(direction);
+	}
+
+	protected virtual Vector3 GetVelocity()
+	{
+        return verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
+	}
+
+	protected abstract void ChangeWeapon();
     protected abstract void ApplyFire();
 
     private void ApplyAnimation() // need to change

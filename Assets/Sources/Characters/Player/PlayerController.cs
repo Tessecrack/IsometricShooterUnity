@@ -1,9 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 
 public class PlayerController : ActorController
 {
     [SerializeField] private PlayerCamera playerCamera;
+
+    private bool isAttack = false;
 
     protected override void InitController()
     {
@@ -19,20 +22,12 @@ public class PlayerController : ActorController
     {
         horizontalMovementValue = Input.GetAxis("Horizontal");
         verticalMovementValue = Input.GetAxis("Vertical");
-
-        actorVelocityVector = verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
-
-        var vectorMovePlayer = new Vector3(actorVelocityVector.x * speed, 0.0f, actorVelocityVector.z * speed);
-        characterController.Move(vectorMovePlayer * Time.fixedDeltaTime);
+        base.ApplyMoveActor();
     }
-
-    protected override void ApplyRotationActor()
+    
+    protected override Vector3 GetVelocity()
     {
-        var startPosition = this.transform.position;
-        var endPosition = playerCamera.GetCursorPosition();
-
-        var direction = Vector3.RotateTowards(this.transform.forward, endPosition - startPosition, Time.fixedDeltaTime * 20, 0.0f);
-        this.transform.rotation = Quaternion.LookRotation(direction);
+        return isAttack ? playerCamera.GetCursorPosition() : this.transform.position + base.GetVelocity();
     }
 
     protected override void ApplyFire()
@@ -48,6 +43,8 @@ public class PlayerController : ActorController
         }
         if (Input.GetMouseButton(0))
         {
+            isAttack = true;
+            //StartCoroutine(ChangeAttackPosition());
             currentWeapon.StartShoot(this, playerCamera.GetCursorPosition());
         }
         if (Input.GetMouseButtonUp(0))
@@ -79,5 +76,11 @@ public class PlayerController : ActorController
         {
             arsenal.ChangeWeapon(4);
         }
+    }
+
+    private IEnumerator ChangeAttackPosition()
+    {
+        yield return new WaitForSeconds(3);
+		isAttack = false;
     }
 }
