@@ -52,28 +52,8 @@ public abstract class ActorController : MonoBehaviour
 
     private void ApplyAnimation() // need to change
     {
-        bool isIdle = horizontalMovementValue == 0 && verticalMovementValue == 0;
-        var currentTypeWeapon = arsenal?.GetCurrentWeapon()?.typeWeapon;        
-        if (isIdle)
-        {
-            if (currentTypeWeapon == null)
-            {
-                animator.Play("IdleGun");
-                return;
-            }
-            switch(currentTypeWeapon)
-            {
-                case TypeWeapon.GUN: 
-                    animator.Play("IdleGun"); 
-                    break;
-                case TypeWeapon.HEAVY: 
-                    animator.Play("Idle"); 
-                    break;
-            }
-        }
-        else
-        {
-            animator.Play("Run");
-        }
-    }
+        animator.SetFloat("Horizontal", horizontalMovementValue);
+        animator.SetFloat("Vertical", verticalMovementValue);
+        animator.SetBool("IsRun", horizontalMovementValue != 0.0f || verticalMovementValue != 0.0f);
+	}
 }
