@@ -50,7 +50,7 @@ public abstract class ActorController : MonoBehaviour
     protected abstract void ChangeWeapon();
     protected abstract void ApplyFire();
 
-    private void ApplyAnimation()
+    private void ApplyAnimation() // need to change
     {
         bool isIdle = horizontalMovementValue == 0 && verticalMovementValue == 0;
         var currentTypeWeapon = arsenal?.GetCurrentWeapon()?.typeWeapon;        

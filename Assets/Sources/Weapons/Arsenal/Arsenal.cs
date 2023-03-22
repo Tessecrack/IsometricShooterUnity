@@ -16,6 +16,11 @@ public class Arsenal : MonoBehaviour
 
     public void ChangeWeapon(int number)
     {
+        if (listOfWeapons.Count <= 0)
+        {
+            return;
+        }
+
         int num = number - 1;
         if (num < 0 || num > listOfWeapons.Count)
         {
