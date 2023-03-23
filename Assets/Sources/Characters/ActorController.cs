@@ -15,9 +15,14 @@ public abstract class ActorController : MonoBehaviour
 
     protected Vector3 actorVelocityVector;
 
-    private Animator animator;
+    protected readonly float timeAttackMode = 3.0f;
 
-    private void Start()
+	protected float currentTimeAttackMode = 0.0f;
+	protected bool isAttackMode = false;
+
+	private Animator animator;
+
+	private void Start()
     {
         InitController();
         arsenal = GetComponent<Arsenal>();
@@ -29,7 +34,8 @@ public abstract class ActorController : MonoBehaviour
         {
             Debug.Log("NULL");
         }
-        ApplyFire();
+        ApplyAttack();
+        ApplyAttackMode();
         ChangeWeapon();
         ApplyAnimation();
     }
@@ -67,8 +73,19 @@ public abstract class ActorController : MonoBehaviour
 	}
 
 	protected abstract void ChangeWeapon();
-    protected abstract void ApplyFire();
-
+    protected abstract void ApplyAttack();
+    protected virtual void ApplyAttackMode()
+    {
+        if (isAttackMode)
+        {
+            currentTimeAttackMode += Time.deltaTime;
+        }
+        if (currentTimeAttackMode >= timeAttackMode)
+        {
+            isAttackMode = false;
+            currentTimeAttackMode = 0;
+        }
+    }
     private void ApplyAnimation() // need to change
     {
         animator.SetFloat("Horizontal", horizontalMovementValue);

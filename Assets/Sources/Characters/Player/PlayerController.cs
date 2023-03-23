@@ -6,8 +6,6 @@ public class PlayerController : ActorController
 {
     [SerializeField] private PlayerCamera playerCamera;
 
-    private bool isAttack = false;
-
     protected override void InitController()
     {
         base.InitController();
@@ -15,7 +13,7 @@ public class PlayerController : ActorController
         {
             playerCamera.SetOwner(this.gameObject);
         }
-        speed = 6;
+        speed = 5;
     }
 
     protected override void ApplyMoveActor()
@@ -27,10 +25,10 @@ public class PlayerController : ActorController
     
     protected override Vector3 GetVelocity()
     {
-        return isAttack ? playerCamera.GetCursorPosition() : this.transform.position + base.GetVelocity();
+        return isAttackMode ? playerCamera.GetCursorPosition() : this.transform.position + base.GetVelocity();
     }
 
-    protected override void ApplyFire()
+    protected override void ApplyAttack()
     {
         if (arsenal ==  null)
         {
@@ -43,8 +41,8 @@ public class PlayerController : ActorController
         }
         if (Input.GetMouseButton(0))
         {
-            isAttack = true;
-            //StartCoroutine(ChangeAttackPosition());
+            isAttackMode = true;
+            currentTimeAttackMode = 0.0f;
             currentWeapon.StartShoot(this, playerCamera.GetCursorPosition());
         }
         if (Input.GetMouseButtonUp(0))
@@ -76,11 +74,5 @@ public class PlayerController : ActorController
         {
             arsenal.ChangeWeapon(4);
         }
-    }
-
-    private IEnumerator ChangeAttackPosition()
-    {
-        yield return new WaitForSeconds(3);
-		isAttack = false;
     }
 }
