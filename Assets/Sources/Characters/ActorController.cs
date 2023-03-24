@@ -30,10 +30,6 @@ public abstract class ActorController : MonoBehaviour
 
     private void Update()
     {
-        if (arsenal == null)
-        {
-            Debug.Log("NULL");
-        }
         ApplyAttack();
         ApplyAttackMode();
         ChangeWeapon();
@@ -53,43 +49,44 @@ public abstract class ActorController : MonoBehaviour
     }
     protected virtual void ApplyMoveActor()
     {
-		actorVelocityVector = verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
+		actorVelocityVector = GetVelocity();
 		var vectorMove = new Vector3(actorVelocityVector.x * speed, 0.0f, actorVelocityVector.z * speed);
 		characterController.Move(vectorMove * Time.fixedDeltaTime);
-	}
+    }
 
     protected virtual void ApplyRotationActor()
     {
-		var startPosition = this.transform.position;
-		var endPosition = GetVelocity();
+    	var startPosition = this.transform.position;
+	var endPosition = GetVelocity();
 
-		var direction = Vector3.RotateTowards(this.transform.forward, endPosition - startPosition, Time.fixedDeltaTime * 20, 0.0f);
-		this.transform.rotation = Quaternion.LookRotation(direction);
-	}
+	var direction = Vector3.RotateTowards(this.transform.forward, endPosition - startPosition, Time.fixedDeltaTime * 20, 0.0f);
+	this.transform.rotation = Quaternion.LookRotation(direction);
+     }
 
 	protected virtual Vector3 GetVelocity()
 	{
-        return verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
+        	return verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
 	}
 
 	protected abstract void ChangeWeapon();
-    protected abstract void ApplyAttack();
-    protected virtual void ApplyAttackMode()
-    {
-        if (isAttackMode)
-        {
-            currentTimeAttackMode += Time.deltaTime;
-        }
-        if (currentTimeAttackMode >= timeAttackMode)
-        {
-            isAttackMode = false;
-            currentTimeAttackMode = 0;
-        }
-    }
-    private void ApplyAnimation() // need to change
-    {
-        animator.SetFloat("Horizontal", horizontalMovementValue);
-        animator.SetFloat("Vertical", verticalMovementValue);
-        animator.SetBool("IsRun", horizontalMovementValue != 0.0f || verticalMovementValue != 0.0f);
+	protected abstract void ApplyAttack();
+	protected virtual void ApplyAttackMode()
+	{
+		if (isAttackMode)
+        	{
+            		currentTimeAttackMode += Time.deltaTime;
+        	}
+        	if (currentTimeAttackMode >= timeAttackMode)
+        	{
+            		isAttackMode = false;
+            		currentTimeAttackMode = 0;
+        	}
+	}
+	
+	private void ApplyAnimation() // need to change
+    	{
+        	animator.SetFloat("Horizontal", horizontalMovementValue);
+        	animator.SetFloat("Vertical", verticalMovementValue);
+        	animator.SetBool("IsRun", horizontalMovementValue != 0.0f || verticalMovementValue != 0.0f);
 	}
 }
