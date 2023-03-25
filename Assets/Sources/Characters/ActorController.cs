@@ -55,7 +55,7 @@ public abstract class ActorController : MonoBehaviour
     protected virtual void ApplyRotationActor()
     {
 		this.transform.forward = Vector3.RotateTowards(this.transform.forward, 
-            new Vector3(-verticalMovementValue, 0.0f, horizontalMovementValue), 
+            actorVelocityVector, 
             Time.fixedDeltaTime * 20, 0.0f);
 	}
 	protected virtual void ApplyAttackMode()
@@ -74,8 +74,8 @@ public abstract class ActorController : MonoBehaviour
 	protected abstract void ChangeWeapon();
 	protected abstract void ApplyAttack();
 	private Vector3 GetVelocity()
-	{
-        return verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
+	{   
+		return verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
 	}
 	private void ApplyAnimation() // need to change
     	{
