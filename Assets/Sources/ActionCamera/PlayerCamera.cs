@@ -30,8 +30,8 @@ public class PlayerCamera : MonoBehaviour
 
     void Start()
     {
-
-        SetInitialPositionCamera();
+		mainCamera = Camera.main;
+		SetInitialPositionCamera();
     }
 
     void FixedUpdate()
@@ -72,7 +72,6 @@ public class PlayerCamera : MonoBehaviour
 
     private void SetInitialPositionCamera()
     {
-        mainCamera = Camera.main;
         mainCamera.transform.position = new Vector3(0.0f, heightCamera, 0.0f);
         mainCamera.transform.rotation = Quaternion.Euler(angleCameraX, angleCameraY, 0);
     }

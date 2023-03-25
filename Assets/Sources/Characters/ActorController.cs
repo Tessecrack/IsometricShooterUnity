@@ -2,34 +2,33 @@ using UnityEngine;
 
 public abstract class ActorController : MonoBehaviour
 {
-    protected Arsenal arsenal;
-    protected float horizontalMovementValue; // a d
-    protected float verticalMovementValue; // w s
+    private Animator animator;
 
-    protected int speed;
+	protected int speed;
+	protected float horizontalMovementValue; // a d
+	protected float verticalMovementValue; // w s
+	protected readonly float timeAttackMode = 3.0f;
+	protected float currentTimeAttackMode = 0.0f;
+	protected bool isAttackMode = false;
+
+	protected Arsenal arsenal;
 
     protected readonly Vector3 initialActorForwardVector = new Vector3(-1.0f, 0.0f, 1.0f);
     protected readonly Vector3 initialActorRightVector = new Vector3(1.0f, 0.0f, 1.0f);
 
     protected CharacterController characterController;
 
+    protected Vector3 targetPoint = Vector3.zero;
     protected Vector3 actorVelocityVector;
-
-    protected readonly float timeAttackMode = 3.0f;
-
-	protected float currentTimeAttackMode = 0.0f;
-	protected bool isAttackMode = false;
-
-	private Animator animator;
 
 	private void Start()
     {
         InitController();
-        arsenal = GetComponent<Arsenal>();
     }
 
     private void Update()
     {
+        ApplyTargetPoint();
         ApplyAttack();
         ApplyAttackMode();
         ChangeWeapon();
@@ -53,36 +52,31 @@ public abstract class ActorController : MonoBehaviour
 		var vectorMove = new Vector3(actorVelocityVector.x * speed, 0.0f, actorVelocityVector.z * speed);
 		characterController.Move(vectorMove * Time.fixedDeltaTime);
     }
-
     protected virtual void ApplyRotationActor()
     {
-    	var startPosition = this.transform.position;
-	var endPosition = GetVelocity();
-
-	var direction = Vector3.RotateTowards(this.transform.forward, endPosition - startPosition, Time.fixedDeltaTime * 20, 0.0f);
-	this.transform.rotation = Quaternion.LookRotation(direction);
-     }
-
-	protected virtual Vector3 GetVelocity()
-	{
-        	return verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
+		this.transform.forward = Vector3.RotateTowards(this.transform.forward, 
+            new Vector3(-verticalMovementValue, 0.0f, horizontalMovementValue), 
+            Time.fixedDeltaTime * 20, 0.0f);
 	}
-
-	protected abstract void ChangeWeapon();
-	protected abstract void ApplyAttack();
 	protected virtual void ApplyAttackMode()
 	{
 		if (isAttackMode)
-        	{
-            		currentTimeAttackMode += Time.deltaTime;
-        	}
-        	if (currentTimeAttackMode >= timeAttackMode)
-        	{
-            		isAttackMode = false;
-            		currentTimeAttackMode = 0;
-        	}
+		{
+			currentTimeAttackMode += Time.deltaTime;
+		}
+		if (currentTimeAttackMode >= timeAttackMode)
+		{
+			isAttackMode = false;
+			currentTimeAttackMode = 0;
+		}
 	}
-	
+    protected abstract void ApplyTargetPoint();
+	protected abstract void ChangeWeapon();
+	protected abstract void ApplyAttack();
+	private Vector3 GetVelocity()
+	{
+        return verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
+	}
 	private void ApplyAnimation() // need to change
     	{
         	animator.SetFloat("Horizontal", horizontalMovementValue);

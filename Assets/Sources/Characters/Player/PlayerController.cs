@@ -5,10 +5,13 @@ using UnityEngine;
 public class PlayerController : ActorController
 {
     [SerializeField] private PlayerCamera playerCamera;
-
     protected override void InitController()
     {
         base.InitController();
+        if (playerCamera == null)
+        {
+			playerCamera = FindObjectOfType<PlayerCamera>();
+		}
         if (playerCamera != null)
         {
             playerCamera.SetOwner(this.gameObject);
@@ -22,36 +25,26 @@ public class PlayerController : ActorController
         verticalMovementValue = Input.GetAxis("Vertical");
         base.ApplyMoveActor();
     }
-    
-    protected override Vector3 GetVelocity()
-    {
-        return isAttackMode ? playerCamera.GetCursorPosition() : this.transform.position + base.GetVelocity();
-    }
 
     protected override void ApplyAttack()
     {
-        if (arsenal ==  null)
-        {
-            return;
-        }
-        var currentWeapon = arsenal.GetCurrentWeapon();
-        if (currentWeapon == null)
-        {
-            return;
-        }
+        var currentWeapon = arsenal?.GetCurrentWeapon();
         if (Input.GetMouseButton(0))
         {
             isAttackMode = true;
             currentTimeAttackMode = 0.0f;
-            currentWeapon.StartShoot(this, playerCamera.GetCursorPosition());
+            //currentWeapon.StartShoot(this, playerCamera.GetCursorPosition());
         }
         if (Input.GetMouseButtonUp(0))
         {
-            currentWeapon.StopShoot();
+            //currentWeapon.StopShoot();
         }
     }
-
-    protected override void ChangeWeapon()
+	protected override void ApplyTargetPoint()
+	{
+        targetPoint = playerCamera.GetCursorPosition();
+	}
+	protected override void ChangeWeapon()
     {
         if (arsenal == null)
         {
