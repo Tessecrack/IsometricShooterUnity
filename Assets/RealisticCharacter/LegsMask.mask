@@ -7,7 +7,7 @@ AvatarMask:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LegsMask
-  m_Mask: 01000000000000000000000001000000010000000000000000000000000000000000000001000000010000000000000000000000
+  m_Mask: 01000000000000000000000001000000010000000000000000000000000000000000000000000000000000000000000000000000
   m_Elements:
   - m_Path: 
     m_Weight: 1
@@ -18,7 +18,7 @@ AvatarMask:
   - m_Path: TSMGWorldJoint/spine1_hiResSpine1
     m_Weight: 1
   - m_Path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResHips
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResHips/leftLeg1_HiResUpperLeg
     m_Weight: 1
   - m_Path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResHips/leftLeg1_HiResUpperLeg/leftLeg1_HiResUpperLegTwist
