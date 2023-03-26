@@ -6,16 +6,16 @@ public class ShockWeapon : Weapon
     {
         base.InitWeapon();
         nameWeapon = "Shock";
-        speed = 50.0f;
-        typeWeapon = TypeWeapon.HEAVY;
+        speedAttack = 50.0f;
+        CurrentTypeWeapon = TypeWeapon.HEAVY;
     }
 
-    public override void StartShoot(ActorController owner, Vector3 targetPosition)
+    public override void StartAttack(ActorController owner, Vector3 targetPosition)
     {
-        if (canShoot)
+        if (canAttack)
         {
-            base.StartShoot(owner, targetPosition);
-            canShoot = false;
+            base.StartAttack(owner, targetPosition);
+            canAttack = false;
         }
     }
 }

@@ -67,5 +67,6 @@ public class PlayerController : ActorController
         {
             arsenal.ChangeWeapon(4);
         }
+        currentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
     }
 }

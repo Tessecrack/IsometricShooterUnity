@@ -6,17 +6,17 @@ public class ArchtronicWeapon : Weapon
     {
         base.InitWeapon();
         nameWeapon = "Archtronic";
-        speed = 70.0f;
-        typeWeapon = TypeWeapon.HEAVY;
-        delayBetweenShoot = 0.1f;
+        speedAttack = 70.0f;
+        CurrentTypeWeapon = TypeWeapon.HEAVY;
+        delayBetweenAttack = 0.1f;
     }
 
-    public override void StartShoot(ActorController owner, Vector3 targetPosition)
+    public override void StartAttack(ActorController owner, Vector3 targetPosition)
     {
-        if (passedTime >= delayBetweenShoot)
+        if (passedAttackTime >= delayBetweenAttack)
         {
-            base.StartShoot(owner, targetPosition);
-            passedTime = 0;
+            base.StartAttack(owner, targetPosition);
+            passedAttackTime = 0;
         }
         
     }

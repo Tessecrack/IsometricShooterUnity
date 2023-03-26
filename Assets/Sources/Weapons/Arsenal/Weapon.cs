@@ -8,17 +8,17 @@ public abstract class Weapon : MonoBehaviour
 
     protected string nameWeapon;
 
-    protected float speed = 10.0f;
+    protected float speedAttack = 10.0f;
 
     protected float damage = 10.0f;
 
-    protected bool canShoot;
+    protected bool canAttack;
 
-    protected float delayBetweenShoot;
+    protected float delayBetweenAttack;
 
-    protected float passedTime;
+    protected float passedAttackTime;
 
-    public TypeWeapon typeWeapon { get; protected set; }
+    public TypeWeapon CurrentTypeWeapon { get; protected set; }
 
     private void Start()
     {
@@ -27,23 +27,27 @@ public abstract class Weapon : MonoBehaviour
 
     private void FixedUpdate()
     {
-        passedTime += Time.fixedDeltaTime;
+        passedAttackTime += Time.fixedDeltaTime;
     }
 
-    public virtual void StartShoot(ActorController owner, Vector3 targetPosition)
+    public virtual void StartAttack(ActorController owner, Vector3 targetPosition)
     {
+        if (CurrentTypeWeapon == TypeWeapon.MELEE)
+        {
+            return;
+        }
         var instanceCurrentBullet = Instantiate<Bullet>(bullet, muzzle.transform.position, muzzle.transform.rotation);
-        instanceCurrentBullet.StartFire(owner, targetPosition, speed, damage);
+        instanceCurrentBullet.StartFire(owner, targetPosition, speedAttack, damage);
     }
 
-    public virtual void StopShoot()
+    public virtual void StopAttack()
     {
-        canShoot = true;
+        canAttack = true;
     }
 
     protected virtual void InitWeapon() 
     {
-        passedTime = delayBetweenShoot;
-        canShoot = true;
+        passedAttackTime = delayBetweenAttack;
+        canAttack = true;
     }
 }

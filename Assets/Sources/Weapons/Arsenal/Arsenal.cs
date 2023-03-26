@@ -9,6 +9,8 @@ public class Arsenal : MonoBehaviour
 
     private Weapon currentWeapon;
 
+    public int CurrentWeaponNumber { get; private set; }
+
     void Start()
     {
         ChangeWeapon(1);        
@@ -20,7 +22,11 @@ public class Arsenal : MonoBehaviour
         {
             return;
         }
-
+        if (CurrentWeaponNumber == number)
+        {
+            return;
+        }
+        CurrentWeaponNumber = number;
         int num = number - 1;
         if (num < 0 || num > listOfWeapons.Count)
         {

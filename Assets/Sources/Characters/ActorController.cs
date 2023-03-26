@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class ActorController : MonoBehaviour
 {
-    private Animator animator;
+	private Animator animator;
 
 	protected int speed;
 	protected float horizontalMovementValue; // a d
@@ -13,50 +13,51 @@ public abstract class ActorController : MonoBehaviour
 
 	protected Arsenal arsenal;
 
-    protected readonly Vector3 initialActorForwardVector = new Vector3(-1.0f, 0.0f, 1.0f);
-    protected readonly Vector3 initialActorRightVector = new Vector3(1.0f, 0.0f, 1.0f);
+	protected readonly Vector3 initialActorForwardVector = new Vector3(-1.0f, 0.0f, 1.0f);
+	protected readonly Vector3 initialActorRightVector = new Vector3(1.0f, 0.0f, 1.0f);
 
-    protected CharacterController characterController;
+	protected CharacterController characterController;
 
-    protected Vector3 targetPoint = Vector3.zero;
-    protected Vector3 actorVelocityVector;
-
+	protected Vector3 targetPoint = Vector3.zero;
+	protected Vector3 actorVelocityVector;
+	protected TypeWeapon currentTypeWeapon;
 	private void Start()
-    {
-        InitController();
-    }
+	{
+		InitController();
+	}
 
-    private void Update()
-    {
-        ApplyTargetPoint();
-        ApplyAttack();
-        ApplyAttackMode();
-        ChangeWeapon();
-        ApplyAnimation();
-    }
+	private void Update()
+	{
+		ApplyTargetPoint();
+		ApplyAttack();
+		ApplyAttackMode();
+		ChangeWeapon();
+		ApplyAnimation();
+	}
 
-    private void FixedUpdate()
-    {
-        ApplyMoveActor();
-        ApplyRotationActor();
-    }
+	private void FixedUpdate()
+	{
+		ApplyMoveActor();
+		ApplyRotationActor();
+	}
 
-    protected virtual void InitController()
-    {
-        characterController = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
-    }
-    protected virtual void ApplyMoveActor()
-    {
+	protected virtual void InitController()
+	{
+		characterController = GetComponent<CharacterController>();
+		animator = GetComponent<Animator>();
+		arsenal = GetComponent<Arsenal>();
+	}
+	protected virtual void ApplyMoveActor()
+	{
 		actorVelocityVector = GetVelocity();
 		var vectorMove = new Vector3(actorVelocityVector.x * speed, 0.0f, actorVelocityVector.z * speed);
 		characterController.Move(vectorMove * Time.fixedDeltaTime);
-    }
-    protected virtual void ApplyRotationActor()
-    {
-		this.transform.forward = Vector3.RotateTowards(this.transform.forward, 
-            actorVelocityVector, 
-            Time.fixedDeltaTime * 20, 0.0f);
+	}
+	protected virtual void ApplyRotationActor()
+	{
+		this.transform.forward = Vector3.RotateTowards(this.transform.forward,
+			actorVelocityVector,
+			Time.fixedDeltaTime * 20, 0.0f);
 	}
 	protected virtual void ApplyAttackMode()
 	{
@@ -70,17 +71,21 @@ public abstract class ActorController : MonoBehaviour
 			currentTimeAttackMode = 0;
 		}
 	}
-    protected abstract void ApplyTargetPoint();
+	protected abstract void ApplyTargetPoint();
 	protected abstract void ChangeWeapon();
 	protected abstract void ApplyAttack();
 	private Vector3 GetVelocity()
-	{   
+	{
 		return verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
 	}
 	private void ApplyAnimation() // need to change
-    	{
-        	animator.SetFloat("Horizontal", horizontalMovementValue);
-        	animator.SetFloat("Vertical", verticalMovementValue);
-        	animator.SetBool("IsRun", horizontalMovementValue != 0.0f || verticalMovementValue != 0.0f);
+	{
+		animator.SetFloat(AnimationParams.FLOAT_HORIZONTAL_MOTION_NAME_PARAM, horizontalMovementValue);
+		animator.SetFloat(AnimationParams.FLOAT_VERTICAL_MOTION_NAME_PARAM, verticalMovementValue);
+		animator.SetBool(AnimationParams.BOOL_RUN_NAME_PARAM, horizontalMovementValue != 0.0f || verticalMovementValue != 0.0f);
+		animator.SetBool(AnimationParams.BOOL_ATTACK_MODE_NAME_PARAM, isAttackMode);
+		animator.SetBool(AnimationParams.BOOL_MELEE_WEAPON_NAME_PARAM, currentTypeWeapon == TypeWeapon.MELEE);
+		animator.SetBool(AnimationParams.BOOL_GUN_WEAPON_NAME_PARAM, currentTypeWeapon == TypeWeapon.GUN);
+		animator.SetBool(AnimationParams.BOOL_HEAVY_WEAPON_NAME_PARAM, currentTypeWeapon == TypeWeapon.HEAVY);
 	}
 }
