@@ -55,8 +55,9 @@ public abstract class ActorController : MonoBehaviour
 	}
 	protected virtual void ApplyRotationActor()
 	{
+		var direction = isAttackMode ? targetPoint - this.transform.position : actorVelocityVector;
 		this.transform.forward = Vector3.RotateTowards(this.transform.forward,
-			actorVelocityVector,
+			direction,
 			Time.fixedDeltaTime * 20, 0.0f);
 	}
 	protected virtual void ApplyAttackMode()

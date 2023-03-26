@@ -28,7 +28,7 @@ public class Arsenal : MonoBehaviour
         }
         CurrentWeaponNumber = number;
         int num = number - 1;
-        if (num < 0 || num > listOfWeapons.Count)
+        if (num < 0 || num >= listOfWeapons.Count)
         {
             return;
         }

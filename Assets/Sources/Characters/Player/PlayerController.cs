@@ -33,11 +33,11 @@ public class PlayerController : ActorController
         {
             isAttackMode = true;
             currentTimeAttackMode = 0.0f;
-            //currentWeapon.StartShoot(this, playerCamera.GetCursorPosition());
+            currentWeapon.StartAttack(this, playerCamera.GetCursorPosition());
         }
         if (Input.GetMouseButtonUp(0))
         {
-            //currentWeapon.StopShoot();
+            currentWeapon.StopAttack();
         }
     }
 	protected override void ApplyTargetPoint()
