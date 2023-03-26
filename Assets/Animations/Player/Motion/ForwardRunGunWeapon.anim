@@ -414,6 +414,15 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
+        time: 0.41666666
+        value: {x: 4.201, y: -210.903, z: 182.613}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
         time: 0.8333333
         value: {x: 0.443, y: -167.728, z: 174.822}
         inSlope: {x: 0, y: 0, z: 0}
@@ -878,6 +887,13 @@ AnimationClip:
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
+      path: 1287707703
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 4
+      isPPtrCurve: 0
+    - serializedVersion: 2
       path: 1165432463
       attribute: 1
       script: {fileID: 0}
@@ -935,13 +951,6 @@ AnimationClip:
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 2059076929
-      attribute: 4
-      script: {fileID: 0}
-      typeID: 4
-      customType: 4
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 1287707703
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -2844,6 +2853,15 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+        time: 0.41666666
+        value: 4.201
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.8333333
         value: 0.443
         inSlope: 0
@@ -2872,6 +2890,15 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
+        time: 0.41666666
+        value: -210.903
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.8333333
         value: -167.728
         inSlope: 0
@@ -2893,6 +2920,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 0
         value: 174.822
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.41666666
+        value: 182.613
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -3895,7 +3931,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/leftArm1_HiResClavical/leftArm1_HiResUpperArm/leftArm1_HiResUpperArmTwist/leftArm1_HiResLowerArm
+    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/rightArm1_HiResClavical/rightArm1_HiResUpperArm/rightArm1_HiResUpperArmTwist/rightArm1_HiResLowerArm/rightArm1_HiResLowerArmTwist/rightArm1_HiResHand/R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3905,7 +3941,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/leftArm1_HiResClavical/leftArm1_HiResUpperArm/leftArm1_HiResUpperArmTwist/leftArm1_HiResLowerArm
+    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/rightArm1_HiResClavical/rightArm1_HiResUpperArm/rightArm1_HiResUpperArmTwist/rightArm1_HiResLowerArm/rightArm1_HiResLowerArmTwist/rightArm1_HiResHand/R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3915,7 +3951,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/leftArm1_HiResClavical/leftArm1_HiResUpperArm/leftArm1_HiResUpperArmTwist/leftArm1_HiResLowerArm
+    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/rightArm1_HiResClavical/rightArm1_HiResUpperArm/rightArm1_HiResUpperArmTwist/rightArm1_HiResLowerArm/rightArm1_HiResLowerArmTwist/rightArm1_HiResHand/R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4015,7 +4051,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/rightArm1_HiResClavical/rightArm1_HiResUpperArm/rightArm1_HiResUpperArmTwist/rightArm1_HiResLowerArm/rightArm1_HiResLowerArmTwist/rightArm1_HiResHand/R
+    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/leftArm1_HiResClavical/leftArm1_HiResUpperArm/leftArm1_HiResUpperArmTwist/leftArm1_HiResLowerArm
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4025,7 +4061,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/rightArm1_HiResClavical/rightArm1_HiResUpperArm/rightArm1_HiResUpperArmTwist/rightArm1_HiResLowerArm/rightArm1_HiResLowerArmTwist/rightArm1_HiResHand/R
+    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/leftArm1_HiResClavical/leftArm1_HiResUpperArm/leftArm1_HiResUpperArmTwist/leftArm1_HiResLowerArm
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4035,7 +4071,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/rightArm1_HiResClavical/rightArm1_HiResUpperArm/rightArm1_HiResUpperArmTwist/rightArm1_HiResLowerArm/rightArm1_HiResLowerArmTwist/rightArm1_HiResHand/R
+    path: TSMGWorldJoint/spine1_hiResSpine1/spine1_hiResSpine2/spine1_hiResSpine3/spine1_hiResSpine4/spine1_hiResSpine5/leftArm1_HiResClavical/leftArm1_HiResUpperArm/leftArm1_HiResUpperArmTwist/leftArm1_HiResLowerArm
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

@@ -86,7 +86,7 @@ public abstract class ActorController : MonoBehaviour
 
 		return normalizeVelocity;
 	}
-	private void ApplyAnimation() // need to change
+	private void ApplyAnimation()
 	{
 		animator.SetFloat(AnimationParams.FLOAT_HORIZONTAL_MOTION_NAME_PARAM, horizontalMovementValue);
 		animator.SetFloat(AnimationParams.FLOAT_VERTICAL_MOTION_NAME_PARAM, verticalMovementValue);
@@ -95,5 +95,7 @@ public abstract class ActorController : MonoBehaviour
 		animator.SetBool(AnimationParams.BOOL_MELEE_WEAPON_NAME_PARAM, currentTypeWeapon == TypeWeapon.MELEE);
 		animator.SetBool(AnimationParams.BOOL_GUN_WEAPON_NAME_PARAM, currentTypeWeapon == TypeWeapon.GUN);
 		animator.SetBool(AnimationParams.BOOL_HEAVY_WEAPON_NAME_PARAM, currentTypeWeapon == TypeWeapon.HEAVY);
+
+		animator.SetFloat(AnimationParams.FLOAT_CURRENT_TYPE_WEAPON, currentTypeWeapon == TypeWeapon.GUN ? 0.0f : 1.0f);
 	}
 }
