@@ -127,11 +127,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1973067888952941854}
-  - {fileID: 5658621740332620808}
+  - {fileID: 7025739425832474966}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &5658621740332484318
+--- !u!1001 &7025739425832600448
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -192,18 +192,28 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 57403acd37dfef7479925aa1832239ac, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0364882f9a8db45dfa89ce8d5bcb95bb, type: 3}
---- !u!1 &5658621740332580904 stripped
+--- !u!4 &7025739425832474926 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400046, guid: 0364882f9a8db45dfa89ce8d5bcb95bb, type: 3}
+  m_PrefabInstance: {fileID: 7025739425832600448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7025739425832474966 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400086, guid: 0364882f9a8db45dfa89ce8d5bcb95bb, type: 3}
+  m_PrefabInstance: {fileID: 7025739425832600448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7025739425832502646 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100086, guid: 0364882f9a8db45dfa89ce8d5bcb95bb, type: 3}
-  m_PrefabInstance: {fileID: 5658621740332484318}
+  m_PrefabInstance: {fileID: 7025739425832600448}
   m_PrefabAsset: {fileID: 0}
---- !u!143 &8912866065084378904
+--- !u!143 &995094617510621892
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658621740332580904}
+  m_GameObject: {fileID: 7025739425832502646}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -215,43 +225,31 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &422279421517559566
+--- !u!114 &5267115168060015265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658621740332580904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e8518e357f3254aadb0f98ca8d18a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listOfWeapons:
-  - {fileID: 5410056109849498439, guid: 9c0e38d8685839546a98b56ab36b5833, type: 3}
-  - {fileID: 1497195621384281178, guid: fa8e569c85e19094aa816215efb6e295, type: 3}
-  - {fileID: 4269172834975590157, guid: 18935289473970e41a66a50b669a66c7, type: 3}
-  pointSpawnWeapon: {fileID: 5658621740332620912}
---- !u!114 &7909923721080594475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658621740332580904}
+  m_GameObject: {fileID: 7025739425832502646}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f383b0f2e7275b4b832d379a2c77e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
---- !u!4 &5658621740332620808 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400086, guid: 0364882f9a8db45dfa89ce8d5bcb95bb, type: 3}
-  m_PrefabInstance: {fileID: 5658621740332484318}
+--- !u!114 &7716123700213171758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &5658621740332620912 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400046, guid: 0364882f9a8db45dfa89ce8d5bcb95bb, type: 3}
-  m_PrefabInstance: {fileID: 5658621740332484318}
-  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025739425832502646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e8518e357f3254aadb0f98ca8d18a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listOfWeapons:
+  - {fileID: 1497195621384281178, guid: fa8e569c85e19094aa816215efb6e295, type: 3}
+  pointSpawnWeapon: {fileID: 7025739425832474926}

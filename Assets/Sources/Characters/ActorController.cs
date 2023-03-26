@@ -77,7 +77,14 @@ public abstract class ActorController : MonoBehaviour
 	protected abstract void ApplyAttack();
 	private Vector3 GetVelocity()
 	{
-		return verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
+		var currentVelocity = verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
+
+		var normalizeVelocity = new Vector3(
+			Mathf.Clamp(currentVelocity.x, -1.5f, 1.5f),
+			currentVelocity.y,
+			Mathf.Clamp(currentVelocity.z, -1.5f, 1.5f));
+
+		return normalizeVelocity;
 	}
 	private void ApplyAnimation() // need to change
 	{
