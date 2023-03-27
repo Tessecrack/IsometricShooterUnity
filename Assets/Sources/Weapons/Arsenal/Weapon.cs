@@ -6,7 +6,7 @@ public abstract class Weapon : MonoBehaviour
 
     [SerializeField] protected Bullet bullet;
 
-    public string nameWeapon;
+	public string nameWeapon;
 
     protected float speedAttack = 10.0f;
 

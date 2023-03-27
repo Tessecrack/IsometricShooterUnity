@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assets.Sources.Weapons.Arsenal
+﻿namespace Assets.Sources.Weapons.Arsenal
 {
 	internal class CyberSwordWeapon : Weapon
 	{
@@ -13,7 +7,7 @@ namespace Assets.Sources.Weapons.Arsenal
 			base.InitWeapon();
 			nameWeapon = "CyberSwordWeapon";
 			speedAttack = 80.0f;
-			delayBetweenAttack = 1.0f;
+			delayBetweenAttack = 2.0f;
 			CurrentTypeWeapon = TypeWeapon.MELEE;
 		}
 	}

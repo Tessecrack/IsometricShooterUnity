@@ -49,6 +49,7 @@ public class PlayerController : ActorController
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            attackMode.StopAttackMode();
 			arsenal.ChangeWeapon(0);
 		}
         else if (Input.GetKeyDown(KeyCode.Alpha2))

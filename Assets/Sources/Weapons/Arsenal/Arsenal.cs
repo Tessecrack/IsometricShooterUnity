@@ -45,10 +45,6 @@ public class Arsenal : MonoBehaviour
         {
             Destroy(currentWeapon.gameObject);
         }
-        for (int i = 0; i < listOfWeapons.Count; ++i)
-        {
-            Debug.Log("Arsenal " + listOfWeapons[i].nameWeapon + " " + listOfWeapons[i].CurrentTypeWeapon);
-        }
         currentWeapon = Instantiate(weapon, pointSpawnWeapon, false);
 	}
 }
