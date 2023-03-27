@@ -92,10 +92,6 @@ public abstract class ActorController : MonoBehaviour
 		animator.SetFloat(AnimationParams.FLOAT_VERTICAL_MOTION_NAME_PARAM, verticalMovementValue);
 		animator.SetBool(AnimationParams.BOOL_RUN_NAME_PARAM, horizontalMovementValue != 0.0f || verticalMovementValue != 0.0f);
 		animator.SetBool(AnimationParams.BOOL_ATTACK_MODE_NAME_PARAM, isAttackMode);
-		animator.SetBool(AnimationParams.BOOL_MELEE_WEAPON_NAME_PARAM, currentTypeWeapon == TypeWeapon.MELEE);
-		animator.SetBool(AnimationParams.BOOL_GUN_WEAPON_NAME_PARAM, currentTypeWeapon == TypeWeapon.GUN);
-		animator.SetBool(AnimationParams.BOOL_HEAVY_WEAPON_NAME_PARAM, currentTypeWeapon == TypeWeapon.HEAVY);
-
-		animator.SetFloat(AnimationParams.FLOAT_CURRENT_TYPE_WEAPON, currentTypeWeapon == TypeWeapon.GUN ? 0.0f : 1.0f);
+		animator.SetFloat(AnimationParams.FLOAT_CURRENT_TYPE_WEAPON, (byte)currentTypeWeapon);
 	}
 }

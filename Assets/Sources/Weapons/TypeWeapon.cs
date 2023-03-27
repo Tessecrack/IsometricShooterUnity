@@ -1,6 +1,6 @@
 public enum TypeWeapon : byte
 {
-    MELEE, 
-    GUN,
-    HEAVY
+    MELEE = 0, 
+    GUN = 1,
+    HEAVY = 2
 }
