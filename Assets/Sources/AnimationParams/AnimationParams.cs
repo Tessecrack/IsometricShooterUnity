@@ -12,5 +12,5 @@ public class AnimationParams
 
 	public readonly static string BOOL_ATTACK_MODE_NAME_PARAM = "IsAttackMode";
 
-	public readonly static string FLOAT_CURRENT_TYPE_WEAPON = "TypeWeapon"; // TODO: needs to change (added sub-state machine for anim)
+	public readonly static string FLOAT_CURRENT_TYPE_WEAPON = "TypeWeapon"; 
 }

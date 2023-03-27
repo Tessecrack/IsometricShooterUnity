@@ -10,13 +10,11 @@ namespace Assets.Sources.Weapons.Arsenal
 	{
 		protected override void InitWeapon()
 		{
+			base.InitWeapon();
 			nameWeapon = "CyberSwordWeapon";
 			speedAttack = 80.0f;
 			delayBetweenAttack = 1.0f;
 			CurrentTypeWeapon = TypeWeapon.MELEE;
-			base.InitWeapon();
 		}
-
-
 	}
 }

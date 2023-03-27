@@ -6,7 +6,7 @@ public abstract class Weapon : MonoBehaviour
 
     [SerializeField] protected Bullet bullet;
 
-    protected string nameWeapon;
+    public string nameWeapon;
 
     protected float speedAttack = 10.0f;
 
@@ -17,13 +17,12 @@ public abstract class Weapon : MonoBehaviour
     protected float delayBetweenAttack;
 
     protected float passedAttackTime;
-
-    public TypeWeapon CurrentTypeWeapon { get; protected set; }
+    public TypeWeapon CurrentTypeWeapon { get; protected set; } = TypeWeapon.GUN; // it's seems strange, but all my weapons without this will be MELEE on start :)
 
     private void Start()
     {
         InitWeapon();
-    }
+	}
 
     private void FixedUpdate()
     {

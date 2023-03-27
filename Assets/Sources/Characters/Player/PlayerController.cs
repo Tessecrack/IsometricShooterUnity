@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 
@@ -29,16 +28,18 @@ public class PlayerController : ActorController
     protected override void ApplyAttack()
     {
         var currentWeapon = arsenal?.GetCurrentWeapon();
-        if (Input.GetMouseButton(0))
+		var isMeleeWeapon = currentTypeWeapon == TypeWeapon.MELEE;
+
+		if (Input.GetMouseButton(0))
         {
-            isAttackMode = true;
-            currentTimeAttackMode = 0.0f;
-            currentWeapon.StartAttack(this, playerCamera.GetCursorPosition());
+            attackMode.StartAttackMode(isMeleeWeapon);
+			currentWeapon.StartAttack(this, playerCamera.GetCursorPosition());
         }
         if (Input.GetMouseButtonUp(0))
         {
             currentWeapon.StopAttack();
         }
+        attackMode.IncreaseCurrentTimeAttackMode(Time.deltaTime);
     }
 	protected override void ApplyTargetPoint()
 	{
@@ -46,27 +47,23 @@ public class PlayerController : ActorController
 	}
 	protected override void ChangeWeapon()
     {
-        if (arsenal == null)
-        {
-            return;
-        }
-
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            arsenal.ChangeWeapon(1);
-        }
+			arsenal.ChangeWeapon(0);
+		}
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            arsenal.ChangeWeapon(2);
-        }
+			arsenal.ChangeWeapon(1);
+		}
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            arsenal.ChangeWeapon(3);
-        }
+			arsenal.ChangeWeapon(2);
+		}
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            arsenal.ChangeWeapon(4);
-        }
+			arsenal.ChangeWeapon(3);
+		}
+        
         currentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
-    }
+	}
 }

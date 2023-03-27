@@ -1,3 +1,4 @@
+using Assets.Sources.Characters;
 using UnityEngine;
 
 public abstract class ActorController : MonoBehaviour
@@ -7,9 +8,8 @@ public abstract class ActorController : MonoBehaviour
 	protected int speed;
 	protected float horizontalMovementValue; // a d
 	protected float verticalMovementValue; // w s
-	protected readonly float timeAttackMode = 3.0f;
-	protected float currentTimeAttackMode = 0.0f;
-	protected bool isAttackMode = false;
+
+	protected AttackMode attackMode = new AttackMode();
 
 	protected Arsenal arsenal;
 
@@ -30,7 +30,6 @@ public abstract class ActorController : MonoBehaviour
 	{
 		ApplyTargetPoint();
 		ApplyAttack();
-		ApplyAttackMode();
 		ChangeWeapon();
 		ApplyAnimation();
 	}
@@ -55,22 +54,10 @@ public abstract class ActorController : MonoBehaviour
 	}
 	protected virtual void ApplyRotationActor()
 	{
-		var direction = isAttackMode ? targetPoint - this.transform.position : actorVelocityVector;
+		var direction = attackMode.IsActiveAttackMode ? targetPoint - this.transform.position : actorVelocityVector;
 		this.transform.forward = Vector3.RotateTowards(this.transform.forward,
 			direction,
 			Time.fixedDeltaTime * 20, 0.0f);
-	}
-	protected virtual void ApplyAttackMode()
-	{
-		if (isAttackMode)
-		{
-			currentTimeAttackMode += Time.deltaTime;
-		}
-		if (currentTimeAttackMode >= timeAttackMode)
-		{
-			isAttackMode = false;
-			currentTimeAttackMode = 0;
-		}
 	}
 	protected abstract void ApplyTargetPoint();
 	protected abstract void ChangeWeapon();
@@ -88,10 +75,10 @@ public abstract class ActorController : MonoBehaviour
 	}
 	private void ApplyAnimation()
 	{
+		animator.SetFloat(AnimationParams.FLOAT_CURRENT_TYPE_WEAPON, (byte)currentTypeWeapon);
 		animator.SetFloat(AnimationParams.FLOAT_HORIZONTAL_MOTION_NAME_PARAM, horizontalMovementValue);
 		animator.SetFloat(AnimationParams.FLOAT_VERTICAL_MOTION_NAME_PARAM, verticalMovementValue);
 		animator.SetBool(AnimationParams.BOOL_RUN_NAME_PARAM, horizontalMovementValue != 0.0f || verticalMovementValue != 0.0f);
-		animator.SetBool(AnimationParams.BOOL_ATTACK_MODE_NAME_PARAM, isAttackMode);
-		animator.SetFloat(AnimationParams.FLOAT_CURRENT_TYPE_WEAPON, (byte)currentTypeWeapon);
+		animator.SetBool(AnimationParams.BOOL_ATTACK_MODE_NAME_PARAM, attackMode.IsActiveAttackMode);
 	}
 }
