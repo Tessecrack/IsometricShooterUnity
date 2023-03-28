@@ -2,7 +2,7 @@
 {
 	public class AttackMode
 	{
-		private readonly float timeAttackMode = 2.0f;
+		private readonly float timeAttackMode = 3.0f;
 		private float currentTimeAttackMode = 0.0f;
 		public bool IsActiveAttackMode { get; private set; }
 

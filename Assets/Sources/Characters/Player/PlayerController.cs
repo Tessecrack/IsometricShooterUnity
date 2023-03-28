@@ -39,7 +39,7 @@ public class PlayerController : ActorController
         {
             currentWeapon.StopAttack();
         }
-        attackMode.IncreaseCurrentTimeAttackMode(Time.deltaTime);
+        attackMode.IncreaseCurrentTimeAttackMode(Time.fixedDeltaTime);
     }
 	protected override void ApplyTargetPoint()
 	{

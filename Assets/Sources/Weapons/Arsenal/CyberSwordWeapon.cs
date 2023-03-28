@@ -7,7 +7,7 @@
 			base.InitWeapon();
 			nameWeapon = "CyberSwordWeapon";
 			speedAttack = 80.0f;
-			delayBetweenAttack = 2.0f;
+			delayBetweenAttack = 3.0f;
 			CurrentTypeWeapon = TypeWeapon.MELEE;
 		}
 	}
