@@ -20,9 +20,10 @@ public class PlayerController : ActorController
 
     protected override void ApplyMoveActor()
     {
-        horizontalMovementValue = Input.GetAxis("Horizontal");
-        verticalMovementValue = Input.GetAxis("Vertical");
-        base.ApplyMoveActor();
+		rightMovementValue = Input.GetAxis("Horizontal");
+        forwardMovementValue = Input.GetAxis("Vertical");
+
+		base.ApplyMoveActor();
     }
 
     protected override void ApplyAttack()
@@ -39,7 +40,7 @@ public class PlayerController : ActorController
         {
             currentWeapon.StopAttack();
         }
-        attackMode.IncreaseCurrentTimeAttackMode(Time.fixedDeltaTime);
+        attackMode.IncreaseCurrentTimeAttackMode(Time.deltaTime);
     }
 	protected override void ApplyTargetPoint()
 	{

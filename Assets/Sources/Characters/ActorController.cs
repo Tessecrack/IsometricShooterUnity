@@ -6,8 +6,12 @@ public abstract class ActorController : MonoBehaviour
 	private Animator animator;
 
 	protected int speed;
-	protected float horizontalMovementValue; // a d
-	protected float verticalMovementValue; // w s
+
+	protected float forwardMovementValue; // w s
+	protected float rightMovementValue; // a d
+
+	protected float directionRightMotion;
+	protected float directionForwardMotion;
 
 	protected AttackMode attackMode = new AttackMode();
 
@@ -48,6 +52,7 @@ public abstract class ActorController : MonoBehaviour
 	}
 	protected virtual void ApplyMoveActor()
 	{
+		SetDirectionMovement();
 		actorVelocityVector = GetVelocity();
 		var vectorMove = new Vector3(actorVelocityVector.x * speed, 0.0f, actorVelocityVector.z * speed);
 		characterController.Move(vectorMove * Time.fixedDeltaTime);
@@ -64,7 +69,7 @@ public abstract class ActorController : MonoBehaviour
 	protected abstract void ApplyAttack();
 	private Vector3 GetVelocity()
 	{
-		var currentVelocity = verticalMovementValue * initialActorForwardVector + horizontalMovementValue * initialActorRightVector;
+		var currentVelocity = forwardMovementValue * initialActorForwardVector + rightMovementValue * initialActorRightVector;
 
 		var normalizeVelocity = new Vector3(
 			Mathf.Clamp(currentVelocity.x, -1.5f, 1.5f),
@@ -76,9 +81,25 @@ public abstract class ActorController : MonoBehaviour
 	private void ApplyAnimation()
 	{
 		animator.SetFloat(AnimationParams.FLOAT_CURRENT_TYPE_WEAPON, (byte)currentTypeWeapon);
-		animator.SetFloat(AnimationParams.FLOAT_HORIZONTAL_MOTION_NAME_PARAM, horizontalMovementValue);
-		animator.SetFloat(AnimationParams.FLOAT_VERTICAL_MOTION_NAME_PARAM, verticalMovementValue);
-		animator.SetBool(AnimationParams.BOOL_RUN_NAME_PARAM, horizontalMovementValue != 0.0f || verticalMovementValue != 0.0f);
+		animator.SetFloat(AnimationParams.FLOAT_HORIZONTAL_MOTION_NAME_PARAM, directionRightMotion);
+		animator.SetFloat(AnimationParams.FLOAT_VERTICAL_MOTION_NAME_PARAM, directionForwardMotion);
+		animator.SetBool(AnimationParams.BOOL_RUN_NAME_PARAM, rightMovementValue != 0.0f || forwardMovementValue != 0.0f);
 		animator.SetBool(AnimationParams.BOOL_ATTACK_MODE_NAME_PARAM, attackMode.IsActiveAttackMode);
+	}
+
+	private void SetDirectionMovement()
+	{
+		float signAngle = Mathf.Sign(Vector3.Dot(Vector3.up, Vector3.Cross(this.actorVelocityVector, this.transform.right)));
+		float angle = Vector3.Angle(this.actorVelocityVector, this.transform.forward);
+
+		if (angle >= 150 && forwardMovementValue == 0.0)
+		{
+			directionForwardMotion = signAngle * Mathf.Abs(rightMovementValue);
+			directionRightMotion = 0;
+			return;
+		}
+
+		directionForwardMotion = signAngle * Mathf.Abs(forwardMovementValue);
+		directionRightMotion = signAngle * Mathf.Abs(rightMovementValue);
 	}
 }

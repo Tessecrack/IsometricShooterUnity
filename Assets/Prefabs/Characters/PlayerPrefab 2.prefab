@@ -190,6 +190,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 57403acd37dfef7479925aa1832239ac, type: 2}
+    - target: {fileID: 13700000, guid: 0364882f9a8db45dfa89ce8d5bcb95bb, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 0364882f9a8db45dfa89ce8d5bcb95bb, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0364882f9a8db45dfa89ce8d5bcb95bb, type: 3}
 --- !u!4 &1360296251474837409 stripped
@@ -225,19 +233,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &8402752923700245034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360296251474862977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f383b0f2e7275b4b832d379a2c77e2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
 --- !u!114 &899870124201843733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,3 +251,16 @@ MonoBehaviour:
   - {fileID: 1497195621384281178, guid: fa8e569c85e19094aa816215efb6e295, type: 3}
   - {fileID: 4269172834975590157, guid: 18935289473970e41a66a50b669a66c7, type: 3}
   pointSpawnWeapon: {fileID: 1360296251474837465}
+--- !u!114 &8402752923700245034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360296251474862977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f383b0f2e7275b4b832d379a2c77e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
