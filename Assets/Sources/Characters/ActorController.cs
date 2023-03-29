@@ -91,8 +91,8 @@ public abstract class ActorController : MonoBehaviour
 	{
 		float signAngle = Mathf.Sign(Vector3.Dot(Vector3.up, Vector3.Cross(this.actorVelocityVector, this.transform.right)));
 		float angle = Vector3.Angle(this.actorVelocityVector, this.transform.forward);
-
-		if (angle >= 150 && forwardMovementValue == 0.0)
+		Debug.Log(angle);
+		if ((angle >= 150 || angle <= 45 ) && forwardMovementValue == 0.0)
 		{
 			directionForwardMotion = signAngle * Mathf.Abs(rightMovementValue);
 			directionRightMotion = 0;
