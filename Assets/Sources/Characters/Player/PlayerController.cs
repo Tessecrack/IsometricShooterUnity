@@ -15,7 +15,9 @@ public class PlayerController : ActorController
         {
             playerCamera.SetOwner(this.gameObject);
         }
-        speed = 5;
+        this.initialActorForwardVector = playerCamera.ForwardVector;
+        this.initialActorRightVector = playerCamera.RightVector;
+        speed = 6;
     }
 
     protected override void ApplyMoveActor()

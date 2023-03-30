@@ -17,8 +17,8 @@ public abstract class ActorController : MonoBehaviour
 
 	protected Arsenal arsenal;
 
-	protected readonly Vector3 initialActorForwardVector = new Vector3(-1.0f, 0.0f, 1.0f);
-	protected readonly Vector3 initialActorRightVector = new Vector3(1.0f, 0.0f, 1.0f);
+	protected Vector3 initialActorForwardVector = new Vector3(-1.0f, 0.0f, 1.0f);
+	protected Vector3 initialActorRightVector = new Vector3(1.0f, 0.0f, 1.0f);
 
 	protected CharacterController characterController;
 
@@ -87,19 +87,12 @@ public abstract class ActorController : MonoBehaviour
 		animator.SetBool(AnimationParams.BOOL_ATTACK_MODE_NAME_PARAM, attackMode.IsActiveAttackMode);
 	}
 
-	private void SetDirectionMovement() // https://pastebin.com/h88YtM8y
+	private void SetDirectionMovement()
 	{
-		float signAngle = Mathf.Sign(Vector3.Dot(Vector3.up, Vector3.Cross(this.actorVelocityVector, this.transform.right)));
-		float angle = Vector3.Angle(this.actorVelocityVector, this.transform.forward);
-		Debug.Log(angle);
-		if ((angle >= 150 || angle <= 45 ) && forwardMovementValue == 0.0)
-		{
-			directionForwardMotion = signAngle * Mathf.Abs(rightMovementValue);
-			directionRightMotion = 0;
-			return;
-		}
+		var movementVector = Vector3.ClampMagnitude(actorVelocityVector, 1);
+		var relativeVector = this.transform.InverseTransformDirection(movementVector);
 
-		directionForwardMotion = signAngle * Mathf.Abs(forwardMovementValue);
-		directionRightMotion = signAngle * Mathf.Abs(rightMovementValue);
+		directionRightMotion = relativeVector.x;
+		directionForwardMotion = relativeVector.z;
 	}
 }

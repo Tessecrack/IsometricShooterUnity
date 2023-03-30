@@ -24,15 +24,15 @@ public class PlayerCamera : MonoBehaviour
 
     private const float speed = 10.0f;
 
-    private readonly Vector3 forwardVector = new Vector3(-1.0f, 0.0f, 1.0f);
+    public Vector3 ForwardVector { get; private set; } = new Vector3(-1.0f, 0.0f, 1.0f);
+	public Vector3 RightVector { get; private set; } = new Vector3(1.0f, 0.0f, 1.0f);
 
-    private int floorLayer = 6;
-
-    void Start()
-    {
+	private int floorLayer = 6;
+	private void Awake()
+	{
 		mainCamera = Camera.main;
 		SetInitialPositionCamera();
-    }
+	}
 
     void FixedUpdate()
     {
@@ -52,7 +52,7 @@ public class PlayerCamera : MonoBehaviour
 
         aimPosition.y = startPosition.y;
 
-        int angle = Mathf.Abs((int)Vector3.SignedAngle(forwardVector, distances, Vector3.up));
+        int angle = Mathf.Abs((int)Vector3.SignedAngle(ForwardVector, distances, Vector3.up));
         float avgValue = (Mathf.Abs(distances.x) + Mathf.Abs(distances.z)) / 2;
 
         var coef = MapValue(angle, 0, 180, upperBoundView, lowerBoundView);
