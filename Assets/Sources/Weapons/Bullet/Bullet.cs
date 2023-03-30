@@ -25,11 +25,8 @@ public class Bullet : MonoBehaviour
         this.target = target;
         this.speed = speed;
         this.damage = damage;
-
-        this.velocity = Vector3.Normalize(target - this.transform.position);
-        this.velocity.y = target.y;
-
-        StartCoroutine(Fire());
+        this.velocity = owner.transform.forward;
+		StartCoroutine(Fire());
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)

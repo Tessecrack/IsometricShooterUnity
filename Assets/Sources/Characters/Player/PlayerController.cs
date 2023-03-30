@@ -24,7 +24,6 @@ public class PlayerController : ActorController
     {
 		rightMovementValue = Input.GetAxis("Horizontal");
         forwardMovementValue = Input.GetAxis("Vertical");
-
 		base.ApplyMoveActor();
     }
 
