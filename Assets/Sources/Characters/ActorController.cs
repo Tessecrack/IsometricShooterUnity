@@ -10,9 +10,9 @@ public abstract class ActorController : MonoBehaviour
 	protected float forwardMovementValue; // w s
 	protected float rightMovementValue; // a d
 
-	protected float directionRightMotion;
 	protected float directionForwardMotion;
-
+	protected float directionRightMotion;
+	
 	protected AttackMode attackMode = new AttackMode();
 
 	protected Arsenal arsenal;
