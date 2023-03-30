@@ -87,7 +87,7 @@ public abstract class ActorController : MonoBehaviour
 		animator.SetBool(AnimationParams.BOOL_ATTACK_MODE_NAME_PARAM, attackMode.IsActiveAttackMode);
 	}
 
-	private void SetDirectionMovement()
+	private void SetDirectionMovement() // https://pastebin.com/h88YtM8y
 	{
 		float signAngle = Mathf.Sign(Vector3.Dot(Vector3.up, Vector3.Cross(this.actorVelocityVector, this.transform.right)));
 		float angle = Vector3.Angle(this.actorVelocityVector, this.transform.forward);
