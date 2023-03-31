@@ -6,7 +6,10 @@ namespace Assets.Sources.Characters
 	{
 		private ActorController actor;
 
-		private float timeAttackMode = 3.0f;
+		private readonly float timeAttackModeRangedWeapon = 3.0f;
+
+		private float timeAttackMode;
+
 		private float currentTimeAttackMode = 0.0f;
 		public bool IsActiveAttackMode { get; private set; }
 		public AttackMode(ActorController actor)
@@ -42,7 +45,7 @@ namespace Assets.Sources.Characters
 					timeAttackMode = currentWeapon.DelayBetweenAttack;
 					break;
 				default:
-					timeAttackMode = 3.0f;
+					timeAttackMode = timeAttackModeRangedWeapon;
 					break;
 			}
 			StartAttackMode(currentWeapon.CurrentTypeWeapon == TypeWeapon.MELEE);
