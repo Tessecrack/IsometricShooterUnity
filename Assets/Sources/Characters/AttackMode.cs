@@ -40,7 +40,6 @@ namespace Assets.Sources.Characters
 			{
 				case TypeWeapon.MELEE:
 					timeAttackMode = currentWeapon.DelayBetweenAttack;
-					Debug.Log(timeAttackMode);
 					break;
 				default:
 					timeAttackMode = 3.0f;
