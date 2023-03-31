@@ -11,14 +11,14 @@ public class ShotgunWeapon : Weapon
     {
         nameWeapon = "Shotgun";
         speedAttack = 80.0f;
-        delayBetweenAttack = 1.0f;
+        DelayBetweenAttack = 1.0f;
         CurrentTypeWeapon = TypeWeapon.HEAVY;
         base.InitWeapon();
     }
 
     public override void StartAttack(ActorController owner, Vector3 targetPosition)
     {
-        if (canAttack && passedAttackTime >= delayBetweenAttack)
+        if (canAttack && passedAttackTime >= DelayBetweenAttack)
         {
             this.owner = owner;
             this.targetPosition = targetPosition;

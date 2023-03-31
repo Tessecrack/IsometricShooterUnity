@@ -1,4 +1,6 @@
-﻿namespace Assets.Sources.Weapons.Arsenal
+﻿using UnityEngine;
+
+namespace Assets.Sources.Weapons.Arsenal
 {
 	internal class CyberSwordWeapon : Weapon
 	{
@@ -7,8 +9,17 @@
 			base.InitWeapon();
 			nameWeapon = "CyberSwordWeapon";
 			speedAttack = 80.0f;
-			delayBetweenAttack = 3.0f;
+			DelayBetweenAttack = 1.0f;
 			CurrentTypeWeapon = TypeWeapon.MELEE;
+		}
+
+		public override void StartAttack(ActorController owner, Vector3 targetPosition)
+		{
+			if (canAttack && passedAttackTime >= DelayBetweenAttack)
+			{
+				passedAttackTime = 0;
+				canAttack = false;
+			}
 		}
 	}
 }

@@ -2,7 +2,10 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] protected GameObject muzzle;
+	public TypeWeapon CurrentTypeWeapon { get; protected set; }
+    public float DelayBetweenAttack { get; protected set; }
+
+	[SerializeField] protected GameObject muzzle;
 
     [SerializeField] protected Bullet bullet;
 
@@ -14,10 +17,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected bool canAttack;
 
-    protected float delayBetweenAttack;
-
     protected float passedAttackTime;
-    public TypeWeapon CurrentTypeWeapon { get; protected set; }
 
 	private void Awake()
 	{
@@ -46,7 +46,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void InitWeapon() 
     {
-        passedAttackTime = delayBetweenAttack;
+        passedAttackTime = DelayBetweenAttack;
         canAttack = true;
     }
 }
