@@ -17,10 +17,10 @@ public abstract class Weapon : MonoBehaviour
     protected float delayBetweenAttack;
 
     protected float passedAttackTime;
-    public TypeWeapon CurrentTypeWeapon { get; protected set; } = TypeWeapon.GUN; // it's seems strange, but all my weapons without this will be MELEE on start :)
+    public TypeWeapon CurrentTypeWeapon { get; protected set; }
 
-    private void Start()
-    {
+	private void Awake()
+	{
         InitWeapon();
 	}
 

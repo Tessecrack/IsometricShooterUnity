@@ -11,7 +11,7 @@ public class ActorAnimator
 	}
 
 	public void Animate()
-	{
+	{		
 		animator.SetFloat(AnimationParams.FLOAT_CURRENT_TYPE_WEAPON, (byte)actorController.CurrentTypeWeapon);
 		animator.SetFloat(AnimationParams.FLOAT_HORIZONTAL_MOTION_NAME_PARAM, actorController.DirectionRightMotion);
 		animator.SetFloat(AnimationParams.FLOAT_VERTICAL_MOTION_NAME_PARAM, actorController.DirectionForwardMotion);

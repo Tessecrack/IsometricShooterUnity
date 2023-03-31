@@ -1,19 +1,17 @@
-﻿namespace Assets.Sources.Characters
+﻿using UnityEngine;
+
+namespace Assets.Sources.Characters
 {
 	public class AttackMode
 	{
+		private ActorController actor;
+
 		private readonly float timeAttackMode = 3.0f;
 		private float currentTimeAttackMode = 0.0f;
 		public bool IsActiveAttackMode { get; private set; }
-
-		public void StartAttackMode(bool isMeleeWeapon)
+		public AttackMode(ActorController actor)
 		{
-			if (IsActiveAttackMode && isMeleeWeapon)
-			{
-				return;
-			}
-			IsActiveAttackMode = true;
-			currentTimeAttackMode = 0.0f;
+			this.actor = actor;
 		}
 
 		public void IncreaseCurrentTimeAttackMode(float passedTime)
@@ -23,15 +21,37 @@
 				currentTimeAttackMode += passedTime;
 				if (currentTimeAttackMode >= timeAttackMode)
 				{
-					StopAttackMode();
+					DeactivateAttackMode();
 				}
 			}
 		}
 
-		public void StopAttackMode()
+		public void DeactivateAttackMode()
 		{
 			IsActiveAttackMode = false;
 			currentTimeAttackMode = 0;
+		}
+
+		public void StartAttack(Vector3 target)
+		{
+			var currentWeapon = actor.GetCurrentWeapon();
+			StartAttackMode(currentWeapon.CurrentTypeWeapon == TypeWeapon.MELEE);
+			currentWeapon.StartAttack(actor, target);
+		}
+
+		public void StopAttack()
+		{
+			actor.GetCurrentWeapon().StopAttack();
+		}
+
+		private void StartAttackMode(bool isMeleeWeapon)
+		{
+			if (IsActiveAttackMode && isMeleeWeapon)
+			{
+				return;
+			}
+			IsActiveAttackMode = true;
+			currentTimeAttackMode = 0.0f;
 		}
 	}
 }

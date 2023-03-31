@@ -29,17 +29,13 @@ public class PlayerController : ActorController
 
     protected override void ApplyAttack()
     {
-        var currentWeapon = arsenal?.GetCurrentWeapon();
-		var isMeleeWeapon = CurrentTypeWeapon == TypeWeapon.MELEE;
-
 		if (Input.GetMouseButton(0))
         {
-            attackMode.StartAttackMode(isMeleeWeapon);
-			currentWeapon.StartAttack(this, playerCamera.GetCursorPosition());
+            attackMode.StartAttack(targetPoint);
         }
         if (Input.GetMouseButtonUp(0))
         {
-            currentWeapon.StopAttack();
+            attackMode.StopAttack();
         }
         attackMode.IncreaseCurrentTimeAttackMode(Time.deltaTime);
     }
@@ -49,24 +45,30 @@ public class PlayerController : ActorController
 	}
 	protected override void ChangeWeapon()
     {
+        bool isChangedWeapon = false;
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            attackMode.StopAttackMode();
-			arsenal.ChangeWeapon(0);
+			isChangedWeapon = arsenal.ChangeWeapon(0);
 		}
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-			arsenal.ChangeWeapon(1);
+			isChangedWeapon = arsenal.ChangeWeapon(1);
 		}
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-			arsenal.ChangeWeapon(2);
+			isChangedWeapon = arsenal.ChangeWeapon(2);
 		}
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-			arsenal.ChangeWeapon(3);
+			isChangedWeapon = arsenal.ChangeWeapon(3);
 		}
-        
-        CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
+
+		CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
+
+		if (isChangedWeapon && CurrentTypeWeapon == TypeWeapon.MELEE)
+        {
+            attackMode.DeactivateAttackMode();
+        }
 	}
 }

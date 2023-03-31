@@ -12,7 +12,7 @@ public abstract class ActorController : MonoBehaviour
 
 	protected int speed;
 
-	protected AttackMode attackMode = new AttackMode();
+	protected AttackMode attackMode;
 
 	protected Arsenal arsenal;
 
@@ -47,6 +47,7 @@ public abstract class ActorController : MonoBehaviour
 
 	protected virtual void InitController()
 	{
+		attackMode = new AttackMode(this);
 		characterController = GetComponent<CharacterController>();
 		arsenal = GetComponent<Arsenal>();
 		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
@@ -96,5 +97,10 @@ public abstract class ActorController : MonoBehaviour
 	public bool IsActiveAttackMode()
 	{
 		return attackMode.IsActiveAttackMode;
+	}
+
+	public Weapon GetCurrentWeapon()
+	{
+		return arsenal.GetCurrentWeapon();
 	}
 }

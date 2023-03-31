@@ -16,22 +16,18 @@ public class Arsenal : MonoBehaviour
         ChangeWeapon(1);        
     }
 
-    public void ChangeWeapon(int number)
+    public bool ChangeWeapon(int number)
     {
-        if (listOfWeapons.Count <= 0)
+        if (listOfWeapons.Count <= 0 
+            || CurrentWeaponNumber == number
+            || number < 0 
+            || number >= listOfWeapons.Count)
         {
-            return;
-        }
-        if (CurrentWeaponNumber == number)
-        {
-            return;
+            return false;
         }
         CurrentWeaponNumber = number;
-        if (number < 0 || number >= listOfWeapons.Count)
-        {
-            return;
-        }
         SpawnWeapon(listOfWeapons[number]);
+        return true;
     }
 
     public Weapon GetCurrentWeapon()
