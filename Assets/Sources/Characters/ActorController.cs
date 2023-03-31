@@ -3,16 +3,15 @@ using UnityEngine;
 
 public abstract class ActorController : MonoBehaviour
 {
-	private Animator animator;
+	public float ForwardMovementValue { get; protected set; } // w s
+	public float RightMovementValue { get; protected set; } // a d
+	public float DirectionForwardMotion { get; protected set; }
+	public float DirectionRightMotion { get; protected set; }
+	public TypeWeapon CurrentTypeWeapon { get; protected set; }
+
 
 	protected int speed;
 
-	protected float forwardMovementValue; // w s
-	protected float rightMovementValue; // a d
-
-	protected float directionForwardMotion;
-	protected float directionRightMotion;
-	
 	protected AttackMode attackMode = new AttackMode();
 
 	protected Arsenal arsenal;
@@ -24,7 +23,9 @@ public abstract class ActorController : MonoBehaviour
 
 	protected Vector3 targetPoint = Vector3.zero;
 	protected Vector3 actorVelocityVector;
-	protected TypeWeapon currentTypeWeapon;
+
+	private ActorAnimator actorAnimator;
+
 	private void Start()
 	{
 		InitController();
@@ -47,8 +48,8 @@ public abstract class ActorController : MonoBehaviour
 	protected virtual void InitController()
 	{
 		characterController = GetComponent<CharacterController>();
-		animator = GetComponent<Animator>();
 		arsenal = GetComponent<Arsenal>();
+		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
 	}
 	protected virtual void ApplyMoveActor()
 	{
@@ -69,7 +70,7 @@ public abstract class ActorController : MonoBehaviour
 	protected abstract void ApplyAttack();
 	private Vector3 GetVelocity()
 	{
-		var currentVelocity = forwardMovementValue * initialActorForwardVector + rightMovementValue * initialActorRightVector;
+		var currentVelocity = ForwardMovementValue * initialActorForwardVector + RightMovementValue * initialActorRightVector;
 
 		var normalizeVelocity = new Vector3(
 			Mathf.Clamp(currentVelocity.x, -1.5f, 1.5f),
@@ -80,11 +81,7 @@ public abstract class ActorController : MonoBehaviour
 	}
 	private void ApplyAnimation()
 	{
-		animator.SetFloat(AnimationParams.FLOAT_CURRENT_TYPE_WEAPON, (byte)currentTypeWeapon);
-		animator.SetFloat(AnimationParams.FLOAT_HORIZONTAL_MOTION_NAME_PARAM, directionRightMotion);
-		animator.SetFloat(AnimationParams.FLOAT_VERTICAL_MOTION_NAME_PARAM, directionForwardMotion);
-		animator.SetBool(AnimationParams.BOOL_RUN_NAME_PARAM, rightMovementValue != 0.0f || forwardMovementValue != 0.0f);
-		animator.SetBool(AnimationParams.BOOL_ATTACK_MODE_NAME_PARAM, attackMode.IsActiveAttackMode);
+		actorAnimator.Animate();
 	}
 
 	private void SetDirectionMovement()
@@ -92,7 +89,12 @@ public abstract class ActorController : MonoBehaviour
 		var movementVector = Vector3.ClampMagnitude(actorVelocityVector, 1);
 		var relativeVector = this.transform.InverseTransformDirection(movementVector);
 
-		directionRightMotion = relativeVector.x;
-		directionForwardMotion = relativeVector.z;
+		DirectionRightMotion = relativeVector.x;
+		DirectionForwardMotion = relativeVector.z;
+	}
+
+	public bool IsActiveAttackMode()
+	{
+		return attackMode.IsActiveAttackMode;
 	}
 }

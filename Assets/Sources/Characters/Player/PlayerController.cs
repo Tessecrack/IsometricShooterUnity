@@ -22,15 +22,15 @@ public class PlayerController : ActorController
 
     protected override void ApplyMoveActor()
     {
-		rightMovementValue = Input.GetAxis("Horizontal");
-        forwardMovementValue = Input.GetAxis("Vertical");
+		RightMovementValue = Input.GetAxis("Horizontal");
+        ForwardMovementValue = Input.GetAxis("Vertical");
 		base.ApplyMoveActor();
     }
 
     protected override void ApplyAttack()
     {
         var currentWeapon = arsenal?.GetCurrentWeapon();
-		var isMeleeWeapon = currentTypeWeapon == TypeWeapon.MELEE;
+		var isMeleeWeapon = CurrentTypeWeapon == TypeWeapon.MELEE;
 
 		if (Input.GetMouseButton(0))
         {
@@ -67,6 +67,6 @@ public class PlayerController : ActorController
 			arsenal.ChangeWeapon(3);
 		}
         
-        currentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
+        CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
 	}
 }
