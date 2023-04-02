@@ -11,10 +11,31 @@ namespace Assets.Sources.Characters
 		private float timeAttackMode;
 
 		private float currentTimeAttackMode = 0.0f;
+
+		public bool IsStartAttack { get; private set; }
+
+		public bool IsStopAttack { get; private set; }
+
 		public bool IsActiveAttackMode { get; private set; }
 		public AttackMode(ActorController actor)
 		{
 			this.actor = actor;
+		}
+
+		public void SetStartAttack()
+		{
+			IsStartAttack = true;
+		}
+
+		public void SetStopAttack()
+		{
+			IsStopAttack = true;
+		}
+
+		public void Reset()
+		{
+			IsStartAttack = false;
+			IsStopAttack = false;
 		}
 
 		public void IncreaseCurrentTimeAttackMode(float passedTime)

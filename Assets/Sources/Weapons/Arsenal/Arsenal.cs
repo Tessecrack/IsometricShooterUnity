@@ -8,7 +8,6 @@ public class Arsenal : MonoBehaviour
     [SerializeField] private Transform pointSpawnWeapon;
 
     private Weapon currentWeapon;
-
     public int CurrentWeaponNumber { get; private set; }
 
     void Start()

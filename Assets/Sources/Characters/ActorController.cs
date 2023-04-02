@@ -9,7 +9,6 @@ public abstract class ActorController : MonoBehaviour
 	public float DirectionRightMotion { get; protected set; }
 	public TypeWeapon CurrentTypeWeapon { get; protected set; }
 
-
 	protected int speed;
 
 	protected AttackMode attackMode;
@@ -26,6 +25,13 @@ public abstract class ActorController : MonoBehaviour
 
 	private ActorAnimator actorAnimator;
 
+	protected int currentNumberWeapon = 1;
+
+	protected abstract void UpdateMovementActor();
+	protected abstract void UpdateTargetPoint();
+	protected abstract void UpdateAttackMode();
+	protected abstract void UpdateWeapon();
+
 	private void Start()
 	{
 		InitController();
@@ -33,16 +39,19 @@ public abstract class ActorController : MonoBehaviour
 
 	private void Update()
 	{
-		ApplyTargetPoint();
-		ApplyAttack();
-		ChangeWeapon();
-		ApplyAnimation();
+		UpdateMovementActor();
+		UpdateTargetPoint();
+		UpdateWeapon();
+		UpdateAttackMode();
+		UpdateAnimation();
 	}
 
 	private void FixedUpdate()
 	{
-		ApplyMoveActor();
+		ApplyMovementActor();
 		ApplyRotationActor();
+		ApplyWeapon();
+		ApplyAttack();
 	}
 
 	protected virtual void InitController()
@@ -52,7 +61,26 @@ public abstract class ActorController : MonoBehaviour
 		arsenal = GetComponent<Arsenal>();
 		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
 	}
-	protected virtual void ApplyMoveActor()
+	private void UpdateAnimation()
+	{
+		actorAnimator.Animate();
+	}
+
+	protected virtual void ApplyAttack()
+	{
+		if (attackMode.IsStartAttack)
+		{
+			attackMode.StartAttack(targetPoint);
+		}
+		if (attackMode.IsStopAttack)
+		{
+			attackMode.StopAttack();
+		}
+		attackMode.Reset();
+		attackMode.IncreaseCurrentTimeAttackMode(Time.fixedDeltaTime);
+	}
+
+	protected virtual void ApplyMovementActor()
 	{
 		SetDirectionMovement();
 		actorVelocityVector = GetVelocity();
@@ -66,9 +94,17 @@ public abstract class ActorController : MonoBehaviour
 			direction,
 			Time.fixedDeltaTime * 20, 0.0f);
 	}
-	protected abstract void ApplyTargetPoint();
-	protected abstract void ChangeWeapon();
-	protected abstract void ApplyAttack();
+
+	protected virtual void ApplyWeapon()
+	{
+		var isChangedWeapon = arsenal.ChangeWeapon(currentNumberWeapon);
+		CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
+		if (isChangedWeapon && CurrentTypeWeapon == TypeWeapon.MELEE)
+		{
+			attackMode.DeactivateAttackMode();
+		}
+	}
+
 	private Vector3 GetVelocity()
 	{
 		var currentVelocity = ForwardMovementValue * initialActorForwardVector + RightMovementValue * initialActorRightVector;
@@ -79,10 +115,6 @@ public abstract class ActorController : MonoBehaviour
 			Mathf.Clamp(currentVelocity.z, -1.5f, 1.5f));
 
 		return normalizeVelocity;
-	}
-	private void ApplyAnimation()
-	{
-		actorAnimator.Animate();
 	}
 
 	private void SetDirectionMovement()

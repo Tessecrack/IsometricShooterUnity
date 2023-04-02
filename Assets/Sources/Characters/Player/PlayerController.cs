@@ -20,55 +20,53 @@ public class PlayerController : ActorController
         speed = 6;
     }
 
-    protected override void ApplyMoveActor()
-    {
+	protected override void UpdateMovementActor()
+	{
 		RightMovementValue = Input.GetAxis("Horizontal");
-        ForwardMovementValue = Input.GetAxis("Vertical");
-		base.ApplyMoveActor();
-    }
-
-    protected override void ApplyAttack()
-    {
+		ForwardMovementValue = Input.GetAxis("Vertical");
+		InputDash();
+	}
+	protected override void UpdateAttackMode()
+	{
 		if (Input.GetMouseButton(0))
-        {
-            attackMode.StartAttack(targetPoint);
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            attackMode.StopAttack();
-        }
-        attackMode.IncreaseCurrentTimeAttackMode(Time.deltaTime);
-    }
-	protected override void ApplyTargetPoint()
+		{
+			attackMode.SetStartAttack();
+		}
+		if (Input.GetMouseButtonUp(0))
+		{
+			attackMode.SetStopAttack();
+		}
+	}
+	protected override void UpdateWeapon()
+	{
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			currentNumberWeapon = 0;
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			currentNumberWeapon = 1;
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			currentNumberWeapon = 2;
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha4))
+		{
+			currentNumberWeapon = 3;
+		}
+	}
+
+	protected override void UpdateTargetPoint()
 	{
         targetPoint = playerCamera.GetCursorPosition();
 	}
-	protected override void ChangeWeapon()
+
+    private void InputDash()
     {
-        bool isChangedWeapon = false;
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-			isChangedWeapon = arsenal.ChangeWeapon(0);
-		}
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-			isChangedWeapon = arsenal.ChangeWeapon(1);
-		}
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-			isChangedWeapon = arsenal.ChangeWeapon(2);
-		}
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-			isChangedWeapon = arsenal.ChangeWeapon(3);
-		}
-
-		CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
-
-		if (isChangedWeapon && CurrentTypeWeapon == TypeWeapon.MELEE)
-        {
-            attackMode.DeactivateAttackMode();
+            Debug.Log("DASH");
         }
-	}
+    }
 }

@@ -5,12 +5,27 @@ public class EnemyController : ActorController
 		
 	}
 
-	protected override void ApplyTargetPoint()
+	protected override void UpdateTargetPoint()
 	{
 		
 	}
 
-	protected override void ChangeWeapon()
+	protected override void ApplyWeapon()
+	{
+		
+	}
+
+	protected override void UpdateMovementActor()
+	{
+		
+	}
+
+	protected override void UpdateAttackMode()
+	{
+		
+	}
+
+	protected override void UpdateWeapon()
 	{
 		
 	}
