@@ -25,7 +25,7 @@ public abstract class ActorController : MonoBehaviour
 
 	private ActorAnimator actorAnimator;
 
-	protected int currentNumberWeapon = 1;
+	protected int currentWeaponNumber = 1;
 
 	protected abstract void UpdateMovementActor();
 	protected abstract void UpdateTargetPoint();
@@ -97,12 +97,8 @@ public abstract class ActorController : MonoBehaviour
 
 	protected virtual void ApplyWeapon()
 	{
-		var isChangedWeapon = arsenal.ChangeWeapon(currentNumberWeapon);
+		arsenal.ChangeWeapon(currentWeaponNumber);
 		CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
-		if (isChangedWeapon && CurrentTypeWeapon == TypeWeapon.MELEE)
-		{
-			attackMode.DeactivateAttackMode();
-		}
 	}
 
 	private Vector3 GetVelocity()

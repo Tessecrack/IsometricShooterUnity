@@ -39,21 +39,27 @@ public class PlayerController : ActorController
 	}
 	protected override void UpdateWeapon()
 	{
+		bool isMeleeWeapon = false;
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			currentNumberWeapon = 0;
+			isMeleeWeapon = true;
+			currentWeaponNumber = 0;
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
-			currentNumberWeapon = 1;
+			currentWeaponNumber = 1;
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
-			currentNumberWeapon = 2;
+			currentWeaponNumber = 2;
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha4))
 		{
-			currentNumberWeapon = 3;
+			currentWeaponNumber = 3;
+		}
+		if (isMeleeWeapon && currentWeaponNumber == 0)
+		{
+			attackMode.DeactivateAttackMode();
 		}
 	}
 

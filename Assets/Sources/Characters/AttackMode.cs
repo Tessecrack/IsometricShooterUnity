@@ -6,7 +6,7 @@ namespace Assets.Sources.Characters
 	{
 		private ActorController actor;
 
-		private readonly float timeAttackModeRangedWeapon = 3.0f;
+		private readonly float timeAttackModeRangedWeapon = 2.0f;
 
 		private float timeAttackMode;
 
