@@ -1,4 +1,5 @@
 using Assets.Sources.Characters;
+using System.Collections;
 using UnityEngine;
 
 public abstract class ActorController : MonoBehaviour
@@ -26,6 +27,8 @@ public abstract class ActorController : MonoBehaviour
 	private ActorAnimator actorAnimator;
 
 	protected int currentWeaponNumber = 1;
+
+	protected bool isDash = false;
 
 	protected abstract void UpdateMovementActor();
 	protected abstract void UpdateTargetPoint();
@@ -83,9 +86,16 @@ public abstract class ActorController : MonoBehaviour
 	protected virtual void ApplyMovementActor()
 	{
 		SetDirectionMovement();
-		actorVelocityVector = GetVelocity();
-		var vectorMove = new Vector3(actorVelocityVector.x * speed, 0.0f, actorVelocityVector.z * speed);
-		characterController.Move(vectorMove * Time.fixedDeltaTime);
+		if (isDash)
+		{
+			StartCoroutine(ApplyDash());
+		}
+		else
+		{
+			actorVelocityVector = GetVelocity();
+			var vectorMove = new Vector3(actorVelocityVector.x * speed, 0.0f, actorVelocityVector.z * speed);
+			characterController.Move(vectorMove * Time.fixedDeltaTime);
+		}
 	}
 	protected virtual void ApplyRotationActor()
 	{
@@ -99,6 +109,15 @@ public abstract class ActorController : MonoBehaviour
 	{
 		arsenal.ChangeWeapon(currentWeaponNumber);
 		CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
+	}
+	public bool IsActiveAttackMode()
+	{
+		return attackMode.IsActiveAttackMode;
+	}
+
+	public Weapon GetCurrentWeapon()
+	{
+		return arsenal.GetCurrentWeapon();
 	}
 
 	private Vector3 GetVelocity()
@@ -122,13 +141,17 @@ public abstract class ActorController : MonoBehaviour
 		DirectionForwardMotion = relativeVector.z;
 	}
 
-	public bool IsActiveAttackMode()
+	private IEnumerator ApplyDash()
 	{
-		return attackMode.IsActiveAttackMode;
-	}
-
-	public Weapon GetCurrentWeapon()
-	{
-		return arsenal.GetCurrentWeapon();
+		float passedTime = 0;
+		while(passedTime <= 0.05f)
+		{
+			passedTime += Time.fixedDeltaTime;
+			actorVelocityVector = GetVelocity();
+			var vectorMove = new Vector3(actorVelocityVector.x * 20, 0.0f, actorVelocityVector.z * 20);
+			characterController.Move(vectorMove * Time.fixedDeltaTime);
+			yield return new WaitForFixedUpdate();
+		}
+		isDash = false;
 	}
 }

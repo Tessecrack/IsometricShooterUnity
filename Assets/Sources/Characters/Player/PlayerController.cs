@@ -72,7 +72,7 @@ public class PlayerController : ActorController
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            Debug.Log("DASH");
-        }
+			isDash = true;
+		}
     }
 }
