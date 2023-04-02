@@ -131,9 +131,4 @@ public abstract class ActorController : MonoBehaviour
 	{
 		return arsenal.GetCurrentWeapon();
 	}
-
-	public void DeactivateAttackMode()
-	{
-		attackMode.DeactivateAttackMode();
-	}
 }
