@@ -29,7 +29,6 @@ public abstract class ActorController : MonoBehaviour
 	protected int currentWeaponNumber = 1;
 
 	protected bool isDash = false;
-
 	protected abstract void UpdateMovementActor();
 	protected abstract void UpdateTargetPoint();
 	protected abstract void UpdateAttackMode();
