@@ -1,9 +1,11 @@
+using UnityEditor;
 using UnityEngine;
 
 
 public class PlayerController : ActorController
 {
     [SerializeField] private PlayerCamera playerCamera;
+	private readonly int speed = 6;
     protected override void InitController()
     {
         base.InitController();
@@ -15,15 +17,13 @@ public class PlayerController : ActorController
         {
             playerCamera.SetOwner(this.gameObject);
         }
-        this.initialActorForwardVector = playerCamera.ForwardVector;
-        this.initialActorRightVector = playerCamera.RightVector;
-        speed = 6;
+		actorMovement.InitInitialOptions(speed, playerCamera.ForwardVector, playerCamera.RightVector);
     }
 
 	protected override void UpdateMovementActor()
 	{
-		RightMovementValue = Input.GetAxis("Horizontal");
-		ForwardMovementValue = Input.GetAxis("Vertical");
+		actorMovement.SetForwardMovementValue(Input.GetAxis("Vertical"));
+		actorMovement.SetRightMovementValue(Input.GetAxis("Horizontal"));
 		InputDash();
 	}
 	protected override void UpdateAttackMode()
@@ -65,14 +65,14 @@ public class PlayerController : ActorController
 
 	protected override void UpdateTargetPoint()
 	{
-        targetPoint = playerCamera.GetCursorPosition();
+        actorMovement.UpdateTargetPoint(playerCamera.GetCursorPosition());
 	}
 
     private void InputDash()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-			isDash = true;
+			actorMovement.IsDash = true;
 		}
     }
 }

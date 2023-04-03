@@ -4,31 +4,20 @@ using UnityEngine;
 
 public abstract class ActorController : MonoBehaviour
 {
-	public float ForwardMovementValue { get; protected set; } // w s
-	public float RightMovementValue { get; protected set; } // a d
-	public float DirectionForwardMotion { get; protected set; }
-	public float DirectionRightMotion { get; protected set; }
 	public TypeWeapon CurrentTypeWeapon { get; protected set; }
 
-	protected int speed;
+	protected ActorMovement actorMovement;
 
 	protected AttackMode attackMode;
 
 	protected Arsenal arsenal;
 
-	protected Vector3 initialActorForwardVector = new Vector3(-1.0f, 0.0f, 1.0f);
-	protected Vector3 initialActorRightVector = new Vector3(1.0f, 0.0f, 1.0f);
-
 	protected CharacterController characterController;
-
-	protected Vector3 targetPoint = Vector3.zero;
-	protected Vector3 actorVelocityVector;
 
 	private ActorAnimator actorAnimator;
 
 	protected int currentWeaponNumber = 1;
 
-	protected bool isDash = false;
 	protected abstract void UpdateMovementActor();
 	protected abstract void UpdateTargetPoint();
 	protected abstract void UpdateAttackMode();
@@ -59,9 +48,11 @@ public abstract class ActorController : MonoBehaviour
 	protected virtual void InitController()
 	{
 		attackMode = new AttackMode(this);
+		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
+		actorMovement = new ActorMovement();
 		characterController = GetComponent<CharacterController>();
 		arsenal = GetComponent<Arsenal>();
-		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
+		
 	}
 	private void UpdateAnimation()
 	{
@@ -72,7 +63,7 @@ public abstract class ActorController : MonoBehaviour
 	{
 		if (attackMode.IsStartAttack)
 		{
-			attackMode.StartAttack(targetPoint);
+			attackMode.StartAttack(actorMovement.GetTargetPoint());
 		}
 		if (attackMode.IsStopAttack)
 		{
@@ -85,23 +76,20 @@ public abstract class ActorController : MonoBehaviour
 	protected virtual void ApplyMovementActor()
 	{
 		SetDirectionMovement();
-		if (isDash)
+		if (actorMovement.IsDash)
 		{
 			StartCoroutine(ApplyDash());
 		}
 		else
 		{
-			actorVelocityVector = GetVelocity();
-			var vectorMove = new Vector3(actorVelocityVector.x * speed, 0.0f, actorVelocityVector.z * speed);
-			characterController.Move(vectorMove * Time.fixedDeltaTime);
+			MoveActor(actorMovement.Speed);
 		}
 	}
 	protected virtual void ApplyRotationActor()
 	{
-		var direction = attackMode.IsActiveAttackMode ? targetPoint - this.transform.position : actorVelocityVector;
-		this.transform.forward = Vector3.RotateTowards(this.transform.forward,
-			direction,
-			Time.fixedDeltaTime * 20, 0.0f);
+		var direction = attackMode.IsActiveAttackMode ? actorMovement.GetTargetPoint() - this.transform.position : actorMovement.ActorVelocityVector;
+		this.transform.forward = actorMovement.Rotate(this.transform.forward, 
+			direction, Time.fixedDeltaTime);
 	}
 
 	protected virtual void ApplyWeapon()
@@ -119,25 +107,16 @@ public abstract class ActorController : MonoBehaviour
 		return arsenal.GetCurrentWeapon();
 	}
 
-	private Vector3 GetVelocity()
-	{
-		var currentVelocity = ForwardMovementValue * initialActorForwardVector + RightMovementValue * initialActorRightVector;
-
-		var normalizeVelocity = new Vector3(
-			Mathf.Clamp(currentVelocity.x, -1.5f, 1.5f),
-			currentVelocity.y,
-			Mathf.Clamp(currentVelocity.z, -1.5f, 1.5f));
-
-		return normalizeVelocity;
-	}
-
 	private void SetDirectionMovement()
 	{
-		var movementVector = Vector3.ClampMagnitude(actorVelocityVector, 1);
+		var movementVector = Vector3.ClampMagnitude(actorMovement.ActorVelocityVector, 1);
 		var relativeVector = this.transform.InverseTransformDirection(movementVector);
+		actorMovement.SetDirectionMovement(relativeVector);
+	}
 
-		DirectionRightMotion = relativeVector.x;
-		DirectionForwardMotion = relativeVector.z;
+	private void MoveActor(float speed)
+	{
+		characterController.Move(actorMovement.GetMoveActor(speed) * Time.fixedDeltaTime);
 	}
 
 	private IEnumerator ApplyDash()
@@ -146,11 +125,14 @@ public abstract class ActorController : MonoBehaviour
 		while(passedTime <= 0.05f)
 		{
 			passedTime += Time.fixedDeltaTime;
-			actorVelocityVector = GetVelocity();
-			var vectorMove = new Vector3(actorVelocityVector.x * 20, 0.0f, actorVelocityVector.z * 20);
-			characterController.Move(vectorMove * Time.fixedDeltaTime);
+			MoveActor(20.0f);
 			yield return new WaitForFixedUpdate();
 		}
-		isDash = false;
+		actorMovement.IsDash = false;
 	}
+
+	public float GetForwardMovementValue() => actorMovement.ForwardMovementValue;
+	public float GetRightMovementValue() => actorMovement.RightMovementValue;
+	public float GetDirectionForwardMovementValue() => actorMovement.DirectionForwardMotion;
+	public float GetDirectionRightMovementValue() => actorMovement.DirectionRightMotion;
 }
