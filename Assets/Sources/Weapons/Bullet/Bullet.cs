@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
         this.target = target;
         this.speed = speed;
         this.damage = damage;
-        this.velocity = owner.transform.forward;
+        this.velocity = Vector3.ClampMagnitude(target - owner.transform.position, 1);
 		StartCoroutine(Fire());
     }
 
