@@ -14,10 +14,6 @@ public class Bullet : MonoBehaviour
 
     protected int ignoreCollisionBulletLayer = 3;
     protected int timeOfLife = 2;
-	private void Start()
-	{
-
-	}
 	public void StartFire(ActorController owner, Vector3 target, float speed, float damage)
     {
 		this.gameObject.layer = ignoreCollisionBulletLayer;
