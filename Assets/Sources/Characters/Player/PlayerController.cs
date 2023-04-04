@@ -57,6 +57,18 @@ public class PlayerController : ActorController
 		{
 			currentWeaponNumber = 3;
 		}
+		else if (Input.GetKeyDown(KeyCode.Alpha5))
+		{
+			currentWeaponNumber = 4;
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha6))
+		{
+			currentWeaponNumber = 5;
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha7))
+		{
+			currentWeaponNumber = 6;
+		}
 		if (isMeleeWeapon && currentWeaponNumber == 0)
 		{
 			attackMode.DeactivateAttackMode();
