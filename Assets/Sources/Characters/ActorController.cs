@@ -130,7 +130,7 @@ public abstract class ActorController : MonoBehaviour
 		}
 		actorMovement.IsDash = false;
 	}
-
+	public Vector3 GetForwardVector() => this.transform.forward;
 	public float GetForwardMovementValue() => actorMovement.ForwardMovementValue;
 	public float GetRightMovementValue() => actorMovement.RightMovementValue;
 	public float GetDirectionForwardMovementValue() => actorMovement.DirectionForwardMotion;

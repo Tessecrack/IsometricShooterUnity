@@ -29,6 +29,10 @@ public class Bullet : MonoBehaviour
         this.speed = speed;
         this.damage = damage;
         this.velocity = Vector3.ClampMagnitude(target - owner.transform.position, 1);
+        if (Vector3.Magnitude(this.velocity) < 1)
+        {
+            this.velocity = owner.GetForwardVector();
+        }
 		StartCoroutine(Fire());
     }
 
