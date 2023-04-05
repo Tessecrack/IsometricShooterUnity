@@ -1,3 +1,6 @@
+using Assets.Sources.Characters;
+using UnityEngine;
+
 public class EnemyController : ActorController
 {
 	protected override void ApplyAttack()
