@@ -39,37 +39,39 @@ public class PlayerController : ActorController
 	}
 	protected override void UpdateWeapon()
 	{
-		bool isMeleeWeapon = false;
+		bool isChanged = false;
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			isMeleeWeapon = true;
-			currentWeaponNumber = 0;
+			isChanged = arsenal.ChangeWeapon(0);
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
-			currentWeaponNumber = 1;
+			isChanged = arsenal.ChangeWeapon(1);
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
-			currentWeaponNumber = 2;
+			isChanged = arsenal.ChangeWeapon(2);
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha4))
 		{
-			currentWeaponNumber = 3;
+			isChanged = arsenal.ChangeWeapon(3);
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha5))
 		{
-			currentWeaponNumber = 4;
+			isChanged = arsenal.ChangeWeapon(4);
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha6))
 		{
-			currentWeaponNumber = 5;
+			isChanged = arsenal.ChangeWeapon(5);
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha7))
 		{
-			currentWeaponNumber = 6;
+			isChanged = arsenal.ChangeWeapon(6);
 		}
-		if (isMeleeWeapon && currentWeaponNumber == 0)
+
+		CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
+
+		if (isChanged && CurrentTypeWeapon == TypeWeapon.MELEE)
 		{
 			attackMode.DeactivateAttackMode();
 		}

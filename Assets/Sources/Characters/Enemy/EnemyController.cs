@@ -10,11 +10,6 @@ public class EnemyController : ActorController
 		
 	}
 
-	protected override void ApplyWeapon()
-	{
-		
-	}
-
 	protected override void UpdateMovementActor()
 	{
 		

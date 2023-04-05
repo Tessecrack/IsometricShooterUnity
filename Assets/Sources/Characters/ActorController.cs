@@ -1,6 +1,7 @@
 using Assets.Sources.Characters;
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public abstract class ActorController : MonoBehaviour
 {
@@ -15,8 +16,6 @@ public abstract class ActorController : MonoBehaviour
 	protected CharacterController characterController;
 
 	private ActorAnimator actorAnimator;
-
-	protected int currentWeaponNumber = 1;
 
 	protected abstract void UpdateMovementActor();
 	protected abstract void UpdateTargetPoint();
@@ -35,14 +34,14 @@ public abstract class ActorController : MonoBehaviour
 		UpdateWeapon();
 		UpdateAttackMode();
 		UpdateAnimation();
+
+		ApplyAttack(); //we can used it in update or fixedUpdate
 	}
 
 	private void FixedUpdate()
 	{
 		ApplyMovementActor();
 		ApplyRotationActor();
-		ApplyWeapon();
-		ApplyAttack();
 	}
 
 	protected virtual void InitController()
@@ -70,7 +69,7 @@ public abstract class ActorController : MonoBehaviour
 			attackMode.StopAttack();
 		}
 		attackMode.Reset();
-		attackMode.IncreaseCurrentTimeAttackMode(Time.fixedDeltaTime);
+		attackMode.IncreaseCurrentTimeAttackMode(Time.deltaTime);
 	}
 
 	protected virtual void ApplyMovementActor()
@@ -92,11 +91,6 @@ public abstract class ActorController : MonoBehaviour
 			direction, Time.fixedDeltaTime);
 	}
 
-	protected virtual void ApplyWeapon()
-	{
-		arsenal.ChangeWeapon(currentWeaponNumber);
-		CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
-	}
 	public bool IsActiveAttackMode()
 	{
 		return attackMode.IsActiveAttackMode;
