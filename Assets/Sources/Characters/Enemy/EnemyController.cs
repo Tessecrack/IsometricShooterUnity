@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemyController : ActorController
 {
+	public TypeEnemy TypeEnemy { get; protected set; }
 	protected override void ApplyAttack()
 	{
 		
