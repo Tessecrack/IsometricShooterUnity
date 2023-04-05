@@ -47,12 +47,12 @@ public abstract class ActorController : MonoBehaviour
 	{
 		attackMode = new AttackMode(this);
 		actorMovement = new ActorMovement();
-		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
 
+		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
 		characterController = GetComponent<CharacterController>();
 		arsenal = GetComponent<Arsenal>();
-		
 	}
+
 	private void UpdateAnimation()
 	{
 		actorAnimator.Animate();
