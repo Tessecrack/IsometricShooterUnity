@@ -48,8 +48,8 @@ public abstract class ActorController : MonoBehaviour
 		attackMode = new AttackMode(this);
 		actorMovement = new ActorMovement();
 
-		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
 		characterController = GetComponent<CharacterController>();
+		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
 		arsenal = GetComponent<Arsenal>();
 	}
 
