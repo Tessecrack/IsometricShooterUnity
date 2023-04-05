@@ -1,7 +1,6 @@
 using Assets.Sources.Characters;
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public abstract class ActorController : MonoBehaviour
 {
@@ -47,8 +46,9 @@ public abstract class ActorController : MonoBehaviour
 	protected virtual void InitController()
 	{
 		attackMode = new AttackMode(this);
-		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
 		actorMovement = new ActorMovement();
+		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
+
 		characterController = GetComponent<CharacterController>();
 		arsenal = GetComponent<Arsenal>();
 		
