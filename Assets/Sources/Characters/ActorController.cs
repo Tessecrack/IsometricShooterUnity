@@ -35,7 +35,7 @@ public abstract class ActorController : MonoBehaviour
 		UpdateAttackMode();
 		UpdateAnimation();
 
-		ApplyAttack(); //we can used it in update or fixedUpdate
+		ApplyAttack(); //we can use it in update or fixedUpdate
 	}
 
 	private void FixedUpdate()
