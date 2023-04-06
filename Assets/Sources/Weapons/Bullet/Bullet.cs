@@ -5,21 +5,17 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private CharacterController characterController;
-    private ActorController owner;
-
     private Vector3 velocity;
     private float speed;
     private float damage;
+    private int ignoreCollisionBulletLayer = 3;
+    private int timeOfLife = 2;
 
-    protected int ignoreCollisionBulletLayer = 3;
-    protected int timeOfLife = 2;
 	public void StartFire(ActorController owner, Vector3 target, float speed, float damage)
     {
 		this.gameObject.layer = ignoreCollisionBulletLayer;
 		characterController = GetComponent<CharacterController>();
 		Destroy(this.gameObject, timeOfLife);
-
-		this.owner = owner;
         this.speed = speed;
         this.damage = damage;
         this.velocity = Vector3.ClampMagnitude(target - owner.transform.position, 1);
