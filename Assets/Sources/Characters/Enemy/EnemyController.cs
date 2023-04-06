@@ -1,7 +1,3 @@
-using Assets.Sources.Characters;
-using System.Collections;
-using UnityEngine;
-
 public class EnemyController : ActorController
 {
 	public TypeEnemy TypeEnemy { get; protected set; }
