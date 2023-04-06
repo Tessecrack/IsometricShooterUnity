@@ -8,7 +8,6 @@ public class Bullet : MonoBehaviour
     private ActorController owner;
 
     private Vector3 velocity;
-    private Vector3 target;
     private float speed;
     private float damage;
 
@@ -21,7 +20,6 @@ public class Bullet : MonoBehaviour
 		Destroy(this.gameObject, timeOfLife);
 
 		this.owner = owner;
-        this.target = target;
         this.speed = speed;
         this.damage = damage;
         this.velocity = Vector3.ClampMagnitude(target - owner.transform.position, 1);
@@ -38,6 +36,11 @@ public class Bullet : MonoBehaviour
         {
             return;
         }
+        if (hit.gameObject.TryGetComponent<ActorController>(out ActorController actor))
+        {
+            actor.TakeDamage(damage);
+        }
+
         Destroy(this.gameObject);
     }
 
@@ -45,6 +48,7 @@ public class Bullet : MonoBehaviour
     {
         while(true)
         {
+            Debug.Log(this.transform.position);
             characterController.Move(velocity * speed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }

@@ -12,6 +12,8 @@ public abstract class ActorController : MonoBehaviour
 
 	protected Arsenal arsenal;
 
+	protected ActorHealth health;
+
 	protected CharacterController characterController;
 
 	private ActorAnimator actorAnimator;
@@ -47,6 +49,7 @@ public abstract class ActorController : MonoBehaviour
 	{
 		attackMode = new AttackMode(this);
 		actorMovement = new ActorMovement();
+		health = new ActorHealth();
 
 		characterController = GetComponent<CharacterController>();
 		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
@@ -99,6 +102,15 @@ public abstract class ActorController : MonoBehaviour
 	public Weapon GetCurrentWeapon()
 	{
 		return arsenal.GetCurrentWeapon();
+	}
+
+	public void TakeDamage(float damage)
+	{
+		health.TakeDamage(damage);
+		if (health.IsDead)
+		{
+			Destroy(this.gameObject);
+		}
 	}
 
 	private void SetDirectionMovement()
