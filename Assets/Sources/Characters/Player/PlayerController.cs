@@ -1,12 +1,15 @@
-using UnityEditor;
 using UnityEngine;
 
 
 public class PlayerController : ActorController
 {
     [SerializeField] private PlayerCamera playerCamera;
+
 	private readonly int speed = 6;
-    protected override void InitController()
+
+	private int defaultNumberWeapon = 1;
+
+	protected override void InitController()
     {
         base.InitController();
         if (playerCamera == null)
@@ -82,7 +85,12 @@ public class PlayerController : ActorController
         actorMovement.UpdateTargetPoint(playerCamera.GetCursorPosition());
 	}
 
-    private void InputDash()
+	protected override void SetDefaultWeapon()
+	{
+		arsenal.SetInitialWeapon(defaultNumberWeapon);
+	}
+
+	private void InputDash()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {

@@ -44,7 +44,6 @@ public class Bullet : MonoBehaviour
     {
         while(true)
         {
-            Debug.Log(this.transform.position);
             characterController.Move(velocity * speed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }

@@ -22,6 +22,7 @@ public abstract class ActorController : MonoBehaviour
 	protected abstract void UpdateTargetPoint();
 	protected abstract void UpdateAttackMode();
 	protected abstract void UpdateWeapon();
+	protected abstract void SetDefaultWeapon();
 
 	private void Start()
 	{
@@ -54,6 +55,7 @@ public abstract class ActorController : MonoBehaviour
 		characterController = GetComponent<CharacterController>();
 		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
 		arsenal = GetComponent<Arsenal>();
+		SetDefaultWeapon();
 	}
 
 	private void UpdateAnimation()

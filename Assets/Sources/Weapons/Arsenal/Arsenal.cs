@@ -9,13 +9,11 @@ public class Arsenal : MonoBehaviour
 
     private Weapon currentWeapon;
     public int CurrentWeaponNumber { get; private set; }
-
-    void Start()
-    {
-        ChangeWeapon(1);        
-    }
-
-    public bool ChangeWeapon(int number)
+	private void Start()
+	{
+        //ChangeWeapon(1);
+	}
+	public bool ChangeWeapon(int number)
     {
         if (listOfWeapons.Count <= 0 
             || CurrentWeaponNumber == number
@@ -33,6 +31,12 @@ public class Arsenal : MonoBehaviour
     {
         return currentWeapon;
     }
+
+    public void SetInitialWeapon(int number)
+    {
+		CurrentWeaponNumber = number;
+		SpawnWeapon(listOfWeapons[number]);
+	}
 
     private void SpawnWeapon(Weapon weapon)
     { 
