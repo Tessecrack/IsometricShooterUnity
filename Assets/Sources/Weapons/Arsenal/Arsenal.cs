@@ -9,10 +9,6 @@ public class Arsenal : MonoBehaviour
 
     private Weapon currentWeapon;
     public int CurrentWeaponNumber { get; private set; }
-	private void Start()
-	{
-        //ChangeWeapon(1);
-	}
 	public bool ChangeWeapon(int number)
     {
         if (listOfWeapons.Count <= 0 
