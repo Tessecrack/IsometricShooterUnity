@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AIController : MonoBehaviour
+public class AIController
 {
 	private Transform agentTransform;
 
