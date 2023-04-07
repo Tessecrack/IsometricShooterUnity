@@ -1,3 +1,4 @@
+using UnityEditor.UIElements;
 using UnityEngine;
 
 
@@ -21,6 +22,7 @@ public class PlayerController : ActorController
             playerCamera.SetOwner(this.gameObject);
         }
 		actorMovement.InitInitialOptions(speed, playerCamera.ForwardVector, playerCamera.RightVector);
+		this.gameObject.layer = playerLayerMask;
     }
 
 	protected override void UpdateMovementActor()

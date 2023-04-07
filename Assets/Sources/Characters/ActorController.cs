@@ -18,6 +18,7 @@ public abstract class ActorController : MonoBehaviour
 
 	private ActorAnimator actorAnimator;
 
+	protected readonly int playerLayerMask = 7;
 	protected abstract void UpdateMovementActor();
 	protected abstract void UpdateTargetPoint();
 	protected abstract void UpdateAttackMode();
