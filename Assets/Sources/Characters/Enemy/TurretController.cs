@@ -21,6 +21,8 @@ public class TurretController : MonoBehaviour // THIS WILL BE REMOVED LATER
 
 	private bool canAttack = true;
 
+	private bool isPlayedSound = false;
+
 	private readonly float speedRotation = 10.0f;
 
 	private AudioSource audioMovement;
@@ -56,9 +58,10 @@ public class TurretController : MonoBehaviour // THIS WILL BE REMOVED LATER
 	{
 		if (agent.IsPlayerFounded && canAttack)
 		{
-			if (!audioMovement.isPlaying)
+			if (!isPlayedSound)
 			{
 				audioMovement.Play();
+				isPlayedSound = true;
 			}
 			StartFire();
 			canAttack = false;
