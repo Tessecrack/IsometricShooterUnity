@@ -30,6 +30,10 @@ public class Arsenal : MonoBehaviour
 
     public void SetInitialWeapon(int number)
     {
+        if (listOfWeapons.Count <= 0)
+        {
+            return;
+        }
 		CurrentWeaponNumber = number;
 		SpawnWeapon(listOfWeapons[number]);
 	}

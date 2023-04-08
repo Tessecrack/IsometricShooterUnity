@@ -11,20 +11,30 @@ public class Bullet : MonoBehaviour
     private int ignoreCollisionBulletLayer = 3;
     private int timeOfLife = 2;
 
+	public void StartFire(TurretController owner, Vector3 target, float speed, float damage)
+	{
+        StartFire(owner.transform, target, speed, damage);
+	}
+
 	public void StartFire(ActorController owner, Vector3 target, float speed, float damage)
+    {
+		StartFire(owner.transform, target, speed, damage);
+	}
+
+    private void StartFire(Transform owner, Vector3 target, float speed, float damage)
     {
 		this.gameObject.layer = ignoreCollisionBulletLayer;
 		characterController = GetComponent<CharacterController>();
 		Destroy(this.gameObject, timeOfLife);
-        this.speed = speed;
-        this.damage = damage;
-        this.velocity = Vector3.ClampMagnitude(target - owner.transform.position, 1);
-        if (Vector3.Magnitude(this.velocity) < 1)
-        {
-            this.velocity = owner.GetForwardVector();
-        }
+		this.speed = speed;
+		this.damage = damage;
+		this.velocity = Vector3.ClampMagnitude(target - owner.transform.position, 1);
+		if (Vector3.Magnitude(this.velocity) < 1)
+		{
+			this.velocity = owner.forward;
+		}
 		StartCoroutine(Fire());
-    }
+	}
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -36,7 +46,10 @@ public class Bullet : MonoBehaviour
         {
             actor.TakeDamage(damage);
         }
-
+        else if (hit.gameObject.TryGetComponent<TurretController>(out TurretController turret)) // THIS WILL BE REMOVED LATER
+		{
+            turret.TakeDamage(damage);
+        }
         Destroy(this.gameObject);
     }
 
