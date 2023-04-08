@@ -12,7 +12,7 @@ public class TurretController : MonoBehaviour // THIS WILL BE REMOVED LATER
 
 	private readonly float speedAttack = 50.0f;
 
-	private readonly float damage = 20.0f;
+	private readonly float damage = 25.0f;
 
 	private AIController agent;
 
@@ -21,13 +21,16 @@ public class TurretController : MonoBehaviour // THIS WILL BE REMOVED LATER
 
 	private bool canAttack = true;
 
-	private readonly float speedRotation = 20.0f;
+	private readonly float speedRotation = 10.0f;
+
+	private AudioSource audioMovement;
 	private void Start()
 	{
 		var player = FindObjectOfType<PlayerController>();
 		agent = AIController.InitAIController(this.transform, player.transform, player.gameObject.layer);
 		passedTimeFire = delayBetweenFire;
 		health = new ActorHealth();
+		audioMovement = GetComponent<AudioSource>();
 	}
 
 	private void Update()
@@ -53,6 +56,10 @@ public class TurretController : MonoBehaviour // THIS WILL BE REMOVED LATER
 	{
 		if (agent.IsPlayerFounded && canAttack)
 		{
+			if (!audioMovement.isPlaying)
+			{
+				audioMovement.Play();
+			}
 			StartFire();
 			canAttack = false;
 		}
