@@ -1,3 +1,9 @@
+/*
+ * this is a test class for showing location.
+ * later this class needs to be rewritten for the ActorController
+ * */
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
