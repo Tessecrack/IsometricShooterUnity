@@ -19,10 +19,9 @@ public class AIController
 		this.targetLayerMask = targetLayerMask;
 	}
 
-	public static AIController InitAIController(Transform agentTransform, Transform target, int targetLayerMask)
+	public static AIController InitAIController(Transform agentTransform, Transform targetTransform, int targetLayerMask)
 	{
-		var agent = new AIController(agentTransform, target, targetLayerMask);
-		return agent;
+		return new AIController(agentTransform, targetTransform, targetLayerMask);
 	}
 
 	private void SearchTarget()
