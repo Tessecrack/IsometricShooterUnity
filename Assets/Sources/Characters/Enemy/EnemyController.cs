@@ -15,19 +15,6 @@ public class EnemyController : ActorController
 		agent = AIController.InitAIController(this.transform, player.transform, player.gameObject.layer);
 	}
 
-	protected override void ApplyAttack()
-	{
-		if (agent.IsPlayerFounded)
-		{
-			attackMode.StartAttack(actorMovement.GetTargetPoint());
-		}
-		else
-		{
-			attackMode.StopAttack();
-			attackMode.DeactivateAttackMode();
-		}
-	}
-
 	protected override void UpdateTargetPoint()
 	{
 		actorMovement.UpdateTargetPoint(agent.GetTargetPosition());
@@ -40,7 +27,14 @@ public class EnemyController : ActorController
 
 	protected override void UpdateAttackMode()
 	{
-		
+		if (agent.IsPlayerFounded)
+		{
+			attackMode.SetStartAttack();
+		}
+		else
+		{
+			attackMode.SetStopAttack();
+		}
 	}
 
 	protected override void UpdateWeapon()
