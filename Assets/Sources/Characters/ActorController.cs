@@ -25,6 +25,7 @@ public abstract class ActorController : MonoBehaviour
 	protected abstract void UpdateWeapon();
 	protected abstract void SetDefaultWeapon();
 
+	public Action<int> OnTakeDamage;
 	public Action OnStartAttack;
 	public Action OnStopAttack;
 
@@ -110,8 +111,9 @@ public abstract class ActorController : MonoBehaviour
 		return arsenal.GetCurrentWeapon();
 	}
 
-	public void TakeDamage(float damage)
+	public void TakeDamage(int damage)
 	{
+		OnTakeDamage?.Invoke(damage);
 		health.TakeDamage(damage);
 		if (health.IsDead)
 		{

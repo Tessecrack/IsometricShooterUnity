@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected float speedAttack = 10.0f;
 
-    protected float damage = 10.0f;
+    protected int damage = 10;
 
     protected bool canAttack;
 

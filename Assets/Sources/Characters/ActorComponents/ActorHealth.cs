@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class ActorHealth
 {
-	private readonly float maxHealth = 100.0f;
-	public float Health { get; private set; }
+	private readonly int maxHealth = 100;
+	public int Health { get; private set; }
 	public ActorHealth()
 	{
 		Health = maxHealth;
 	}
 
-	public void TakeDamage(float damage)
+	public void TakeDamage(int damage)
 	{
 		Health = Mathf.Clamp(Health - damage, 0, maxHealth);
 	}
