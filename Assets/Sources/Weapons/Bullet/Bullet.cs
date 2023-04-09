@@ -11,17 +11,7 @@ public class Bullet : MonoBehaviour
     private int ignoreCollisionBulletLayer = 3;
     private int timeOfLife = 2;
 
-	public void StartFire(TurretController owner, Vector3 target, float speed, int damage)
-	{
-        StartFire(owner.transform, target, speed, damage);
-	}
-
-	public void StartFire(ActorController owner, Vector3 target, float speed, int damage)
-    {
-		StartFire(owner.transform, target, speed, damage);
-	}
-
-    private void StartFire(Transform owner, Vector3 target, float speed, int damage)
+    public void StartFire(Transform owner, Vector3 target, float speed, int damage)
     {
 		this.gameObject.layer = ignoreCollisionBulletLayer;
 		characterController = GetComponent<CharacterController>();

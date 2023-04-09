@@ -1,7 +1,7 @@
 ﻿public class AttackMode
 {
 	public float TimeAttackModeRangedWeapon { get; private set; }
-	public bool IsInAttackMode { get; private set; }
+	public bool IsActive { get; private set; }
 
 	private float passedTime = 0.0f;
 
@@ -12,7 +12,7 @@
 
 	public void Enable()
 	{
-		IsInAttackMode = true;
+		IsActive = true;
 		passedTime = 0.0f;
 	}
 
@@ -20,26 +20,26 @@
 	{
 		if (passedTime >= TimeAttackModeRangedWeapon)
 		{
-			IsInAttackMode = false;
+			IsActive = false;
 		}
 	}
 
 	public void ForceDisable()
 	{
-		IsInAttackMode = false;
+		IsActive = false;
 		passedTime = 0.0f;
 	}
 
 	public void UpdateTimeAttackMode(float time)
 	{
-		if (IsInAttackMode == false)
+		if (IsActive == false)
 		{
 			return;
 		}
 
 		if (passedTime >= TimeAttackModeRangedWeapon)
 		{
-			IsInAttackMode = false;
+			IsActive = false;
 			return;
 		}
 

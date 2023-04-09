@@ -96,14 +96,14 @@ public abstract class ActorController : MonoBehaviour
 	}
 	protected virtual void ApplyRotationActor()
 	{
-		var direction = attackMode.IsInAttackMode ? actorMovement.GetTargetPoint() - this.transform.position : actorMovement.ActorVelocityVector;
+		var direction = attackMode.IsActive ? actorMovement.GetTargetPoint() - this.transform.position : actorMovement.ActorVelocityVector;
 		this.transform.forward = actorMovement.Rotate(this.transform.forward, 
 			direction, Time.fixedDeltaTime);
 	}
 
 	public bool IsActiveAttackMode()
 	{
-		return attackMode.IsInAttackMode;
+		return attackMode.IsActive;
 	}
 
 	public Weapon GetCurrentWeapon()

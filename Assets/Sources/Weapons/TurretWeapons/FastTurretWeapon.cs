@@ -31,7 +31,7 @@ public class FastTurretWeapon : Weapon
 		foreach (var muzzle in muzzles)
 		{
 			var instanceCurrentBullet = Instantiate<Bullet>(bullet, muzzle.transform.position, muzzle.transform.rotation);
-			instanceCurrentBullet.StartFire(owner, targetPosition, speedAttack, damage);
+			instanceCurrentBullet.StartFire(owner.transform, targetPosition, speedAttack, damage);
 			yield return new WaitForFixedUpdate();
 		}
 	}

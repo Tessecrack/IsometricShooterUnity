@@ -5,11 +5,15 @@ public class AIController
 {
 	public bool IsPlayerFounded { get; private set; }
 
+	public bool CanAttack { get; private set; }
+
 	private Transform agentTransform;
 
 	private Transform targetTransform;
 
 	private readonly int rangeVision = 8;
+
+	private readonly int distanceVision = 15;
 	
 	private int targetLayerMask;
 
@@ -31,6 +35,7 @@ public class AIController
 	{
 		if (targetTransform == null)
 		{
+			CanAttack = false;
 			IsPlayerFounded = false;
 			return;
 		}
@@ -40,6 +45,9 @@ public class AIController
 			OnTargetFound?.Invoke();
 			IsPlayerFounded = true;
 		}
+
+		var start = new Vector3(agentTransform.position.x, agentTransform.position.y + 1, agentTransform.position.z);
+		CanAttack = Physics.Raycast(start, agentTransform.forward, distanceVision, 1 << targetLayerMask);
 	}
 
 	public Vector3 GetTargetPosition()

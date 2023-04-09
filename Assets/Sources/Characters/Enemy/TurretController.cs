@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class TurretController : ActorController
 {
 	private AIController agent;
@@ -20,7 +22,7 @@ public class TurretController : ActorController
 
 	protected override void UpdateAttackMode()
 	{
-		if (agent.IsPlayerFounded)
+		if (agent.CanAttack)
 		{
 			OnStartAttack?.Invoke();
 		}
@@ -45,6 +47,17 @@ public class TurretController : ActorController
 	{
 		attackMode.Disable();
 		turretWeapon.StopAttack();
+	}
+
+	protected override void ApplyRotationActor()
+	{
+		var direction = actorMovement.ActorVelocityVector;
+		if (agent.IsPlayerFounded)
+		{
+			direction = actorMovement.GetTargetPoint() - this.transform.position;
+		}
+		this.transform.forward = actorMovement.Rotate(this.transform.forward,
+			direction, Time.fixedDeltaTime);
 	}
 
 	protected override void UpdateAnimation()
