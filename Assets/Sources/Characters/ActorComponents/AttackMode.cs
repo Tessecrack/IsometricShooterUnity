@@ -1,9 +1,6 @@
-﻿using UnityEngine;
-
-public class AttackMode
+﻿public class AttackMode
 {
 	public float TimeAttackModeRangedWeapon { get; private set; }
-	public bool IsNeedAttack { get; private set; }
 	public bool IsInAttackMode { get; private set; }
 
 	private float passedTime = 0.0f;
@@ -16,13 +13,21 @@ public class AttackMode
 	public void Enable()
 	{
 		IsInAttackMode = true;
-		IsNeedAttack = true;
 		passedTime = 0.0f;
 	}
 
 	public void Disable()
 	{
-		IsNeedAttack = false;
+		if (passedTime >= TimeAttackModeRangedWeapon)
+		{
+			IsInAttackMode = false;
+		}
+	}
+
+	public void ForceDisable()
+	{
+		IsInAttackMode = false;
+		passedTime = 0.0f;
 	}
 
 	public void UpdateTimeAttackMode(float time)

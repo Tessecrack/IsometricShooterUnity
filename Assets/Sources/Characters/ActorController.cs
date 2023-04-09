@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -24,6 +25,9 @@ public abstract class ActorController : MonoBehaviour
 	protected abstract void UpdateWeapon();
 	protected abstract void SetDefaultWeapon();
 
+	public Action OnStartAttack;
+	public Action OnStopAttack;
+
 	private void Start()
 	{
 		InitController();
@@ -36,8 +40,6 @@ public abstract class ActorController : MonoBehaviour
 		UpdateWeapon();
 		UpdateAttackMode();
 		UpdateAnimation();
-
-		ApplyAttack(); //we can use it in update or fixedUpdate
 	}
 
 	private void FixedUpdate()
@@ -55,6 +57,10 @@ public abstract class ActorController : MonoBehaviour
 		characterController = GetComponent<CharacterController>();
 		actorAnimator = new ActorAnimator(this, GetComponent<Animator>());
 		arsenal = GetComponent<Arsenal>();
+
+		OnStartAttack += StartAttack;
+		OnStopAttack += StopAttack;
+
 		SetDefaultWeapon();
 	}
 
@@ -63,27 +69,16 @@ public abstract class ActorController : MonoBehaviour
 		actorAnimator.Animate();
 	}
 
-	protected virtual void ApplyAttack()
+	protected virtual void StartAttack()
 	{
-		if (attackMode.IsNeedAttack)
-		{
-			StartAttack(actorMovement.GetTargetPoint());
-		}
-
-		if (!attackMode.IsNeedAttack)
-		{
-			StopAttack();
-		}
-	}
-
-	protected virtual void StartAttack(Vector3 target)
-	{
+		attackMode.Enable();
 		var currentWeapon = this.GetCurrentWeapon();
-		currentWeapon.StartAttack(this, target);
+		currentWeapon.StartAttack(this, actorMovement.GetTargetPoint());
 	}
 
 	protected virtual void StopAttack()
 	{
+		attackMode.Disable();
 		this.GetCurrentWeapon().StopAttack();
 	}
 	protected virtual void ApplyMovementActor()
@@ -142,7 +137,7 @@ public abstract class ActorController : MonoBehaviour
 		while(passedTime <= 0.05f)
 		{
 			passedTime += Time.fixedDeltaTime;
-			MoveActor(20.0f);
+			MoveActor(actorMovement.SpeedDash);
 			yield return new WaitForFixedUpdate();
 		}
 		actorMovement.IsDash = false;

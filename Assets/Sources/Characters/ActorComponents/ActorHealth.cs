@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class ActorHealth
 {
 	private readonly float maxHealth = 100.0f;
@@ -9,12 +11,7 @@ public class ActorHealth
 
 	public void TakeDamage(float damage)
 	{
-		Health -= damage;
-
-		if (Health <= 0)
-		{
-			Health = 0;
-		}
+		Health = Mathf.Clamp(Health - damage, 0, maxHealth);
 	}
 
 	public bool IsDead => Health <= 0;

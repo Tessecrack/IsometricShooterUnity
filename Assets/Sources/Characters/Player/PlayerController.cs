@@ -29,18 +29,20 @@ public class PlayerController : ActorController
 		actorMovement.SetRightMovementValue(Input.GetAxis("Horizontal"));
 		InputDash();
 	}
+
 	protected override void UpdateAttackMode()
 	{
 		if (Input.GetMouseButton(0))
 		{
-			attackMode.Enable();
+			OnStartAttack?.Invoke();
 		}
 		if (Input.GetMouseButtonUp(0))
 		{
-			attackMode.Disable();
+			OnStopAttack?.Invoke();
 		}
 		attackMode.UpdateTimeAttackMode(Time.deltaTime);
 	}
+
 	protected override void UpdateWeapon()
 	{
 		bool isChanged = false;
@@ -77,7 +79,7 @@ public class PlayerController : ActorController
 
 		if (isChanged && CurrentTypeWeapon == TypeWeapon.MELEE)
 		{
-			attackMode.Disable();
+			attackMode.ForceDisable();
 		}
 	}
 

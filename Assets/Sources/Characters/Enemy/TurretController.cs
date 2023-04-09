@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class TurretController : ActorController
 {
 	private AIController agent;
@@ -15,17 +13,20 @@ public class TurretController : ActorController
 
 		var player = FindObjectOfType<PlayerController>();
 		agent = AIController.InitAIController(this.transform, player.transform, player.gameObject.layer);
+
+		OnStartAttack += StartAttack;
+		OnStopAttack += StopAttack;
 	}
 
 	protected override void UpdateAttackMode()
 	{
 		if (agent.IsPlayerFounded)
 		{
-			attackMode.Enable();
+			OnStartAttack?.Invoke();
 		}
 		else
 		{
-			attackMode.Disable();
+			OnStopAttack?.Invoke();
 		}
 	}
 
@@ -34,20 +35,16 @@ public class TurretController : ActorController
 		actorMovement.UpdateTargetPoint(agent.GetTargetPosition());
 	}
 
-	protected override void StartAttack(Vector3 target)
+	protected override void StartAttack()
 	{
-		if (attackMode.IsNeedAttack)
-		{
-			turretWeapon.StartAttack(this, agent.GetTargetPosition());
-		}
+		attackMode.Enable();
+		turretWeapon.StartAttack(this, agent.GetTargetPosition());
 	}
 
 	protected override void StopAttack()
 	{
-		if (!attackMode.IsNeedAttack)
-		{
-			turretWeapon.StopAttack();
-		}
+		attackMode.Disable();
+		turretWeapon.StopAttack();
 	}
 
 	protected override void UpdateAnimation()

@@ -1,4 +1,3 @@
-using System.Threading;
 using UnityEngine;
 
 public class ActorMovement
@@ -27,6 +26,7 @@ public class ActorMovement
 		initialActorForwardVector = initialForwardVector;
 		initialActorRightVector = initialRightVector;
 		Speed = speed;
+		SpeedDash = 20;
 	}
 
 	public Vector3 Rotate(Vector3 forwardVector, Vector3 direction, float time) 

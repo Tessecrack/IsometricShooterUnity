@@ -26,11 +26,11 @@ public class EnemyController : ActorController
 	{
 		if (agent.IsPlayerFounded)
 		{
-			attackMode.Enable();
+			OnStartAttack?.Invoke();
 		}
 		else
 		{
-			attackMode.Disable();
+			OnStopAttack?.Invoke();
 		}
 	}
 

@@ -1,16 +1,19 @@
+using System;
 using UnityEngine;
 
 public class AIController
 {
+	public bool IsPlayerFounded { get; private set; }
+
 	private Transform agentTransform;
 
 	private Transform targetTransform;
 
 	private readonly int rangeVision = 8;
-
-	public bool IsPlayerFounded { get; private set; }
-
+	
 	private int targetLayerMask;
+
+	public Action OnTargetFound;
 
 	private AIController(Transform agentTransform, Transform target, int targetLayerMask)
 	{
@@ -31,8 +34,10 @@ public class AIController
 			IsPlayerFounded = false;
 			return;
 		}
+
 		if (Physics.CheckSphere(agentTransform.position, rangeVision, 1 << this.targetLayerMask))
 		{
+			OnTargetFound?.Invoke();
 			IsPlayerFounded = true;
 		}
 	}
