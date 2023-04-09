@@ -1,7 +1,5 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class FastTurretWeapon : Weapon
 {
