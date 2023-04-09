@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 8894222191326132660}
   - component: {fileID: 5434791177328428091}
   - component: {fileID: 4173661826809757548}
+  - component: {fileID: 3543880031797461488}
   m_Layer: 0
   m_Name: turret_mount1
   m_TagString: Untagged
@@ -530,12 +531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8347015c2a46d439f63ab263f6cd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzles:
-  - {fileID: 1340944538135935640}
-  - {fileID: 2996342021486962243}
-  - {fileID: 4036075849916099852}
-  - {fileID: 6673564905310368789}
-  bullet: {fileID: 1771879199563905702, guid: 07effad1061ceba43bf3f5dca970c643, type: 3}
 --- !u!136 &5434791177328428091
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -646,6 +641,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3543880031797461488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4585616983224468151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048356d06d507a640bf424dc243d4d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzles:
+  - {fileID: 1340944538135935640}
+  - {fileID: 2996342021486962243}
+  - {fileID: 4036075849916099852}
+  - {fileID: 6673564905310368789}
+  bullet: {fileID: 1771879199563905702, guid: 07effad1061ceba43bf3f5dca970c643, type: 3}
+  nameWeapon: 
 --- !u!1 &5179902555083121622
 GameObject:
   m_ObjectHideFlags: 0
