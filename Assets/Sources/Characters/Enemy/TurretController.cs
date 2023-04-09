@@ -5,14 +5,15 @@ using UnityEngine;
 public class TurretController : ActorController
 {
 	private AIController agent;
-
-	[SerializeField] private List<GameObject> muzzles;
+	private FastTurretWeapon turretWeapon;
 
 	protected override void InitController()
 	{
 		attackMode = new AttackMode();
 		actorMovement = new ActorMovement();
 		health = new ActorHealth();
+
+		turretWeapon = GetComponent<FastTurretWeapon>();
 
 		var player = FindObjectOfType<PlayerController>();
 		agent = AIController.InitAIController(this.transform, player.transform, player.gameObject.layer);
@@ -24,6 +25,10 @@ public class TurretController : ActorController
 		{
 			attackMode.Enable();
 		}
+		else
+		{
+			attackMode.Disable();
+		}
 	}
 
 	protected override void UpdateTargetPoint()
@@ -33,12 +38,18 @@ public class TurretController : ActorController
 
 	protected override void StartAttack(Vector3 target)
 	{
-
+		if (attackMode.IsNeedAttack)
+		{
+			turretWeapon.StartAttack(this, agent.GetTargetPosition());
+		}
 	}
 
 	protected override void StopAttack()
 	{
-		
+		if (!attackMode.IsNeedAttack)
+		{
+			turretWeapon.StopAttack();
+		}
 	}
 
 	protected override void UpdateAnimation()

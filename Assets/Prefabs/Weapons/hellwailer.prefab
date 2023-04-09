@@ -98,7 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277af3e46e0ae9a4eb453f9e2ff4c679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 8780396417363242170}
+  muzzles:
+  - {fileID: 8780396417363242170}
   bullet: {fileID: 5381595270429091022, guid: 86ab7c6e98e1c394ca31622302f3e588, type: 3}
   nameWeapon: 
 --- !u!1 &8780396417363242170

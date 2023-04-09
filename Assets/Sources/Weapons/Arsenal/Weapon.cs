@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
@@ -6,7 +7,7 @@ public abstract class Weapon : MonoBehaviour
 	public TypeWeapon CurrentTypeWeapon { get; protected set; }
     public float DelayBetweenAttack { get; protected set; }
 
-	[SerializeField] protected GameObject muzzle;
+	[SerializeField] protected List<GameObject> muzzles;
 
     [SerializeField] protected Bullet bullet;
 
@@ -36,8 +37,11 @@ public abstract class Weapon : MonoBehaviour
         {
             return;
         }
-        var instanceCurrentBullet = Instantiate<Bullet>(bullet, muzzle.transform.position, muzzle.transform.rotation);
-        instanceCurrentBullet.StartFire(owner, targetPosition, speedAttack, damage);
+        foreach (var muzzle in muzzles)
+        {
+            var instanceCurrentBullet = Instantiate<Bullet>(bullet, muzzle.transform.position, muzzle.transform.rotation);
+            instanceCurrentBullet.StartFire(owner, targetPosition, speedAttack, damage);
+        }
     }
 
     public virtual void StopAttack()
