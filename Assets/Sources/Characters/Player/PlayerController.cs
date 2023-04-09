@@ -35,12 +35,13 @@ public class PlayerController : ActorController
 	{
 		if (Input.GetMouseButton(0))
 		{
-			attackMode.SetStartAttack();
+			attackMode.Enable();
 		}
 		if (Input.GetMouseButtonUp(0))
 		{
-			attackMode.SetStopAttack();
+			attackMode.Disable();
 		}
+		attackMode.UpdateTimeAttackMode(Time.deltaTime);
 	}
 	protected override void UpdateWeapon()
 	{
@@ -78,7 +79,7 @@ public class PlayerController : ActorController
 
 		if (isChanged && CurrentTypeWeapon == TypeWeapon.MELEE)
 		{
-			attackMode.DeactivateAttackMode();
+			attackMode.Disable();
 		}
 	}
 

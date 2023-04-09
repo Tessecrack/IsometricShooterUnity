@@ -1,113 +1,68 @@
-/*
- * this is a test class for showing location.
- * later this class needs to be rewritten for the ActorController
- * */
-
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretController : MonoBehaviour // THIS WILL BE REMOVED LATER
+public class TurretController : ActorController
 {
-	[SerializeField] private List<GameObject> muzzles;
-
-	[SerializeField] private Bullet bullet;
-
-	private ActorHealth health;
-
-	private readonly float speedAttack = 50.0f;
-
-	private readonly float damage = 25.0f;
-
 	private AIController agent;
 
-	private int delayBetweenFire = 1;
-	private float passedTimeFire = 0.0f;
+	[SerializeField] private List<GameObject> muzzles;
 
-	private bool canAttack = true;
-
-	private bool isPlayedSound = false;
-
-	private readonly float speedRotation = 10.0f;
-
-	private AudioSource audioMovement;
-	private void Start()
+	protected override void InitController()
 	{
+		attackMode = new AttackMode();
+		actorMovement = new ActorMovement();
+		health = new ActorHealth();
+
 		var player = FindObjectOfType<PlayerController>();
 		agent = AIController.InitAIController(this.transform, player.transform, player.gameObject.layer);
-		passedTimeFire = delayBetweenFire;
-		health = new ActorHealth();
-		audioMovement = GetComponent<AudioSource>();
 	}
 
-	private void Update()
+	protected override void UpdateAttackMode()
 	{
-		UpdateRotation();
-		UpdateAttack();
-		UpdateTimeAttack();
-	}
-
-	private void UpdateRotation()
-	{
-		var targetPos = agent.GetTargetPosition();
 		if (agent.IsPlayerFounded)
 		{
-			this.transform.forward = Vector3.RotateTowards(this.transform.forward,
-				targetPos - this.transform.position,
-				Time.deltaTime * speedRotation,
-				0.0f);
+			attackMode.Enable();
 		}
 	}
 
-	private void UpdateAttack()
+	protected override void UpdateTargetPoint()
 	{
-		if (agent.IsPlayerFounded && canAttack)
-		{
-			if (!isPlayedSound)
-			{
-				audioMovement.Play();
-				isPlayedSound = true;
-			}
-			StartFire();
-			canAttack = false;
-		}
+		actorMovement.UpdateTargetPoint(agent.GetTargetPosition());
 	}
 
-	private void UpdateTimeAttack()
+	protected override void StartAttack(Vector3 target)
 	{
-		if (!canAttack)
-		{
-			passedTimeFire += Time.deltaTime;
-		}
-		if (passedTimeFire >= delayBetweenFire)
-		{
-			canAttack = true;
-			passedTimeFire = 0.0f;
-		}
+
 	}
 
-	public void TakeDamage(float damage)
+	protected override void StopAttack()
 	{
-		health.TakeDamage(damage);
-		if (health.IsDead)
-		{
-			Destroy(this.gameObject);
-		}
+		
 	}
 
-	private void StartFire()
+	protected override void UpdateAnimation()
 	{
-		StartCoroutine(Fire());
+
 	}
 
-	IEnumerator Fire()
+	protected override void UpdateMovementActor()
 	{
-		foreach(var muzzle in muzzles) 
-		{
-			var instanceCurrentBullet = Instantiate<Bullet>(bullet, muzzle.transform.position, muzzle.transform.rotation);
-			instanceCurrentBullet.StartFire(this, agent.GetTargetPosition(), speedAttack, damage);
-			yield return new WaitForSeconds(Time.deltaTime);
-		}
+		
+	}
+
+	protected override void UpdateWeapon()
+	{
+		
+	}
+
+	protected override void ApplyMovementActor()
+	{
+		
+	}
+
+	protected override void SetDefaultWeapon()
+	{
+
 	}
 }

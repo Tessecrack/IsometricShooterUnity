@@ -303,9 +303,9 @@ GameObject:
   - component: {fileID: 8393500895467326827}
   - component: {fileID: 1648379654087878887}
   - component: {fileID: 8184474386887649499}
-  - component: {fileID: 145529248865156154}
   - component: {fileID: 1859714605287914948}
   - component: {fileID: 1816092363775317828}
+  - component: {fileID: 2782186351536931415}
   m_Layer: 0
   m_Name: turret_mount1
   m_TagString: Untagged
@@ -385,24 +385,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &145529248865156154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5722733375902582763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e8347015c2a46d439f63ab263f6cd2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzles:
-  - {fileID: 7451372839157454117}
-  - {fileID: 3848992140858096186}
-  - {fileID: 4620552401062863088}
-  - {fileID: 1005041856720744834}
-  bullet: {fileID: 5381595270429091022, guid: 86ab7c6e98e1c394ca31622302f3e588, type: 3}
 --- !u!136 &1859714605287914948
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -513,6 +495,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2782186351536931415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5722733375902582763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8347015c2a46d439f63ab263f6cd2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzles:
+  - {fileID: 7451372839157454117}
+  - {fileID: 3848992140858096186}
+  - {fileID: 4620552401062863088}
+  - {fileID: 1005041856720744834}
 --- !u!1 &5873385786087487407
 GameObject:
   m_ObjectHideFlags: 0

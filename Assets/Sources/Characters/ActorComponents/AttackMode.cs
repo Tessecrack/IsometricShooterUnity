@@ -2,87 +2,45 @@
 
 public class AttackMode
 {
-	private ActorController actor;
+	public float TimeAttackModeRangedWeapon { get; private set; }
+	public bool IsNeedAttack { get; private set; }
+	public bool IsInAttackMode { get; private set; }
 
-	private readonly float timeAttackModeRangedWeapon = 2.0f;
+	private float passedTime = 0.0f;
 
-	private float timeAttackMode;
-
-	private float currentTimeAttackMode = 0.0f;
-
-	public bool IsStartAttack { get; private set; }
-
-	public bool IsStopAttack { get; private set; }
-
-	public bool IsActiveAttackMode { get; private set; }
-	public AttackMode(ActorController actor)
+	public AttackMode()
 	{
-		this.actor = actor;
+		TimeAttackModeRangedWeapon = 2.0f;
 	}
 
-	public void SetStartAttack()
+	public void Enable()
 	{
-		IsStartAttack = true;
+		IsInAttackMode = true;
+		IsNeedAttack = true;
+		passedTime = 0.0f;
 	}
 
-	public void SetStopAttack()
+	public void Disable()
 	{
-		IsStopAttack = true;
+		IsNeedAttack = false;
 	}
 
-	public void Reset()
+	public void UpdateTimeAttackMode(float time)
 	{
-		IsStartAttack = false;
-		IsStopAttack = false;
-	}
-
-	public void IncreaseCurrentTimeAttackMode(float passedTime)
-	{
-		if (IsActiveAttackMode)
-		{
-			currentTimeAttackMode += passedTime;
-			if (currentTimeAttackMode >= timeAttackMode)
-			{
-				DeactivateAttackMode();
-			}
-		}
-	}
-
-	public void DeactivateAttackMode()
-	{
-		IsActiveAttackMode = false;
-		currentTimeAttackMode = 0;
-	}
-
-	public void StartAttack(Vector3 target)
-	{
-		var currentWeapon = actor.GetCurrentWeapon();
-		var currentTypeWeapon = currentWeapon.CurrentTypeWeapon;
-		switch (currentTypeWeapon)
-		{
-			case TypeWeapon.MELEE:
-				timeAttackMode = currentWeapon.DelayBetweenAttack;
-				break;
-			default:
-				timeAttackMode = timeAttackModeRangedWeapon;
-				break;
-		}
-		StartAttackMode(currentWeapon.CurrentTypeWeapon == TypeWeapon.MELEE);
-		currentWeapon.StartAttack(actor, target);
-	}
-
-	public void StopAttack()
-	{
-		actor.GetCurrentWeapon().StopAttack();
-	}
-
-	private void StartAttackMode(bool isMeleeWeapon)
-	{
-		if (IsActiveAttackMode && isMeleeWeapon)
+		if (IsInAttackMode == false)
 		{
 			return;
 		}
-		IsActiveAttackMode = true;
-		currentTimeAttackMode = 0.0f;
+
+		if (passedTime >= TimeAttackModeRangedWeapon)
+		{
+			IsInAttackMode = false;
+			return;
+		}
+
+		if (passedTime <= TimeAttackModeRangedWeapon)
+		{
+			passedTime += time;
+		}
 	}
 }

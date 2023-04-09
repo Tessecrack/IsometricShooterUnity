@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class EnemyController : ActorController
 {
 	private AIController agent;
@@ -11,7 +9,6 @@ public class EnemyController : ActorController
 	{
 		base.InitController();
 		var player = FindObjectOfType<PlayerController>();
-
 		agent = AIController.InitAIController(this.transform, player.transform, player.gameObject.layer);
 	}
 
@@ -29,21 +26,22 @@ public class EnemyController : ActorController
 	{
 		if (agent.IsPlayerFounded)
 		{
-			attackMode.SetStartAttack();
+			attackMode.Enable();
 		}
 		else
 		{
-			attackMode.SetStopAttack();
+			attackMode.Disable();
 		}
 	}
 
 	protected override void UpdateWeapon()
 	{
-		CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
+
 	}
 
 	protected override void SetDefaultWeapon()
 	{
 		arsenal.SetInitialWeapon(defaultNumberWeapon);
+		CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
 	}
 }

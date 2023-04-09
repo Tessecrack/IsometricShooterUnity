@@ -48,7 +48,7 @@ public abstract class ActorController : MonoBehaviour
 
 	protected virtual void InitController()
 	{
-		attackMode = new AttackMode(this);
+		attackMode = new AttackMode();
 		actorMovement = new ActorMovement();
 		health = new ActorHealth();
 
@@ -58,25 +58,34 @@ public abstract class ActorController : MonoBehaviour
 		SetDefaultWeapon();
 	}
 
-	private void UpdateAnimation()
+	protected virtual void UpdateAnimation()
 	{
 		actorAnimator.Animate();
 	}
 
 	protected virtual void ApplyAttack()
 	{
-		if (attackMode.IsStartAttack)
+		if (attackMode.IsNeedAttack)
 		{
-			attackMode.StartAttack(actorMovement.GetTargetPoint());
+			StartAttack(actorMovement.GetTargetPoint());
 		}
-		if (attackMode.IsStopAttack)
+
+		if (!attackMode.IsNeedAttack)
 		{
-			attackMode.StopAttack();
+			StopAttack();
 		}
-		attackMode.Reset();
-		attackMode.IncreaseCurrentTimeAttackMode(Time.deltaTime);
 	}
 
+	protected virtual void StartAttack(Vector3 target)
+	{
+		var currentWeapon = this.GetCurrentWeapon();
+		currentWeapon.StartAttack(this, target);
+	}
+
+	protected virtual void StopAttack()
+	{
+		this.GetCurrentWeapon().StopAttack();
+	}
 	protected virtual void ApplyMovementActor()
 	{
 		SetDirectionMovement();
@@ -91,14 +100,14 @@ public abstract class ActorController : MonoBehaviour
 	}
 	protected virtual void ApplyRotationActor()
 	{
-		var direction = attackMode.IsActiveAttackMode ? actorMovement.GetTargetPoint() - this.transform.position : actorMovement.ActorVelocityVector;
+		var direction = attackMode.IsInAttackMode ? actorMovement.GetTargetPoint() - this.transform.position : actorMovement.ActorVelocityVector;
 		this.transform.forward = actorMovement.Rotate(this.transform.forward, 
 			direction, Time.fixedDeltaTime);
 	}
 
 	public bool IsActiveAttackMode()
 	{
-		return attackMode.IsActiveAttackMode;
+		return attackMode.IsInAttackMode;
 	}
 
 	public Weapon GetCurrentWeapon()

@@ -46,10 +46,6 @@ public class Bullet : MonoBehaviour
         {
             actor.TakeDamage(damage);
         }
-        else if (hit.gameObject.TryGetComponent<TurretController>(out TurretController turret)) // THIS WILL BE REMOVED LATER
-		{
-            turret.TakeDamage(damage);
-        }
         Destroy(this.gameObject);
     }
 

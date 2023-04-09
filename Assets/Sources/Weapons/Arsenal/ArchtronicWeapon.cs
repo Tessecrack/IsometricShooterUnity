@@ -18,6 +18,5 @@ public class ArchtronicWeapon : Weapon
             base.StartAttack(owner, targetPosition);
             passedAttackTime = 0;
         }
-        
     }
 }
