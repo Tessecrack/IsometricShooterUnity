@@ -18,6 +18,7 @@ public class TurretController : ActorController
 
 		OnStartAttack += StartAttack;
 		OnStopAttack += StopAttack;
+		OnTakeDamage += health.TakeDamage;
 	}
 
 	protected override void UpdateAttackMode()

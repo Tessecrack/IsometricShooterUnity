@@ -61,7 +61,7 @@ public abstract class ActorController : MonoBehaviour
 
 		OnStartAttack += StartAttack;
 		OnStopAttack += StopAttack;
-
+		OnTakeDamage += health.TakeDamage;
 		SetDefaultWeapon();
 	}
 
@@ -114,7 +114,6 @@ public abstract class ActorController : MonoBehaviour
 	public void TakeDamage(int damage)
 	{
 		OnTakeDamage?.Invoke(damage);
-		health.TakeDamage(damage);
 		if (health.IsDead)
 		{
 			Destroy(this.gameObject);
