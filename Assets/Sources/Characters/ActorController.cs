@@ -1,4 +1,3 @@
-using Assets.Sources.Characters;
 using System.Collections;
 using UnityEngine;
 
