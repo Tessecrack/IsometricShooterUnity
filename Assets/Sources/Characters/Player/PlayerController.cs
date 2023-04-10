@@ -9,19 +9,19 @@ public class PlayerController : ActorController
 	private int defaultNumberWeapon = 1;
 
 	protected override void InitController()
-    {
-        base.InitController();
-        if (playerCamera == null)
-        {
+    	{
+        	base.InitController();
+        	if (playerCamera == null)
+        	{
 			playerCamera = FindObjectOfType<PlayerCamera>();
 		}
-        if (playerCamera != null)
-        {
-            playerCamera.SetOwner(this.gameObject);
-        }
+        	if (playerCamera != null)
+        	{
+            		playerCamera.SetOwner(this.gameObject);
+        	}
 		actorMovement.InitInitialOptions(speed, playerCamera.ForwardVector, playerCamera.RightVector);
 		this.gameObject.layer = playerLayerMask;
-    }
+    	}
 
 	protected override void UpdateMovementActor()
 	{
@@ -85,7 +85,7 @@ public class PlayerController : ActorController
 
 	protected override void UpdateTargetPoint()
 	{
-        actorMovement.UpdateTargetPoint(playerCamera.GetCursorPosition());
+        	actorMovement.UpdateTargetPoint(playerCamera.GetCursorPosition());
 	}
 
 	protected override void SetDefaultWeapon()
@@ -94,10 +94,10 @@ public class PlayerController : ActorController
 	}
 
 	private void InputDash()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-			actorMovement.IsDash = true;
+	{
+        	if (Input.GetKeyDown(KeyCode.LeftShift))
+        	{
+			OnDash?.Invoke();
 		}
-    }
+    	}
 }
