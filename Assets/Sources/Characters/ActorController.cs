@@ -135,7 +135,7 @@ public abstract class ActorController : MonoBehaviour
 	private IEnumerator ApplyDash()
 	{
 		float passedTime = 0;
-		while(passedTime <= 0.05f)
+		while(passedTime <= 0.1f)
 		{
 			passedTime += Time.fixedDeltaTime;
 			MoveActor(actorMovement.SpeedDash);

@@ -11,7 +11,7 @@ public class AIController
 
 	private Transform targetTransform;
 
-	private readonly int rangeVision = 8;
+	private readonly int rangeVision = 10;
 
 	private readonly int distanceVision = 15;
 	
@@ -40,7 +40,7 @@ public class AIController
 			return;
 		}
 
-		if (Physics.CheckSphere(agentTransform.position, rangeVision, 1 << this.targetLayerMask))
+		if (!IsPlayerFounded && Physics.CheckSphere(agentTransform.position, rangeVision, 1 << this.targetLayerMask))
 		{
 			OnTargetFound?.Invoke();
 			IsPlayerFounded = true;
@@ -55,5 +55,11 @@ public class AIController
 		SearchTarget();
 
 		return IsPlayerFounded && targetTransform != null ? targetTransform.position : Vector3.zero;
+	}
+
+	public void TakeDamage(int damage)
+	{
+		IsPlayerFounded = true;
+		CanAttack = true;
 	}
 }

@@ -95,9 +95,9 @@ public class PlayerController : ActorController
 
 	private void InputDash()
 	{
-        	if (Input.GetKeyDown(KeyCode.LeftShift))
-        	{
+		if (Input.GetKeyDown(KeyCode.LeftShift))
+		{
 			OnDash?.Invoke();
 		}
-    	}
+    }
 }

@@ -12,6 +12,7 @@ public class EnemyController : ActorController
 		base.InitController();
 		var player = FindObjectOfType<PlayerController>();
 		agent = AIController.InitAIController(this.transform, player.transform, player.gameObject.layer);
+		OnTakeDamage += agent.TakeDamage;
 	}
 
 	protected override void UpdateTargetPoint()

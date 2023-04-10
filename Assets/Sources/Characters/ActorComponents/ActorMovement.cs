@@ -11,8 +11,6 @@ public class ActorMovement
 
 	public int SpeedDash { get; protected set; }
 
-	public bool IsDash { get; set; } = false;
-
 	public Vector3 ActorVelocityVector { get; protected set; }
 
 	private readonly float speedRotation = 20.0f;
