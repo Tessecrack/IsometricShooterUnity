@@ -63,6 +63,7 @@ public abstract class ActorController : MonoBehaviour
 		OnStartAttack += StartAttack;
 		OnStopAttack += StopAttack;
 		OnTakeDamage += health.TakeDamage;
+		OnDash += Dash();	
 		SetDefaultWeapon();
 	}
 
