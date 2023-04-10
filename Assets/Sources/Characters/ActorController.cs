@@ -28,7 +28,8 @@ public abstract class ActorController : MonoBehaviour
 	public Action<int> OnTakeDamage;
 	public Action OnStartAttack;
 	public Action OnStopAttack;
-
+	public Action OnDash;
+	
 	private void Start()
 	{
 		InitController();
@@ -85,14 +86,7 @@ public abstract class ActorController : MonoBehaviour
 	protected virtual void ApplyMovementActor()
 	{
 		SetDirectionMovement();
-		if (actorMovement.IsDash)
-		{
-			StartCoroutine(ApplyDash());
-		}
-		else
-		{
-			MoveActor(actorMovement.Speed);
-		}
+		MoveActor(actorMovement.Speed);
 	}
 	protected virtual void ApplyRotationActor()
 	{
@@ -131,7 +125,12 @@ public abstract class ActorController : MonoBehaviour
 	{
 		characterController.Move(actorMovement.GetMoveActor(speed) * Time.fixedDeltaTime);
 	}
-
+	
+	private void Dash()
+	{
+		StartCoroutine(ApplyDash());
+	}
+	
 	private IEnumerator ApplyDash()
 	{
 		float passedTime = 0;
@@ -141,8 +140,8 @@ public abstract class ActorController : MonoBehaviour
 			MoveActor(actorMovement.SpeedDash);
 			yield return new WaitForFixedUpdate();
 		}
-		actorMovement.IsDash = false;
 	}
+	
 	public Vector3 GetForwardVector() => this.transform.forward;
 	public float GetForwardMovementValue() => actorMovement.ForwardMovementValue;
 	public float GetRightMovementValue() => actorMovement.RightMovementValue;
