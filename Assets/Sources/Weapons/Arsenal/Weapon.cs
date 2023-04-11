@@ -20,6 +20,9 @@ public abstract class Weapon : MonoBehaviour
 
     protected float passedAttackTime;
 
+    public abstract void StartAttack(Transform ownerTransform, Vector3 targetPosition);
+    public abstract void StopAttack();
+
 	private void Awake()
 	{
         InitWeapon();
@@ -30,7 +33,7 @@ public abstract class Weapon : MonoBehaviour
         passedAttackTime += Time.fixedDeltaTime;
     }
 
-    public virtual void StartAttack(ActorController owner, Vector3 targetPosition)
+    protected void SpawnBullet(Transform ownerTransform, Vector3 targetPosition)
     {
         if (CurrentTypeWeapon == TypeWeapon.MELEE)
         {
@@ -39,13 +42,8 @@ public abstract class Weapon : MonoBehaviour
         foreach (var muzzle in muzzles)
         {
             var instanceCurrentBullet = Instantiate<Bullet>(bullet, muzzle.transform.position, muzzle.transform.rotation);
-            instanceCurrentBullet.StartFire(owner.transform, targetPosition, speedAttack, damage);
+            instanceCurrentBullet.StartFire(ownerTransform, targetPosition, speedAttack, damage);
         }
-    }
-
-    public virtual void StopAttack()
-    {
-        canAttack = true;
     }
 
     protected virtual void InitWeapon() 

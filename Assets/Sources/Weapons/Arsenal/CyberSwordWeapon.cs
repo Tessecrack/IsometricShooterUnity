@@ -13,13 +13,18 @@ namespace Assets.Sources.Weapons.Arsenal
 			CurrentTypeWeapon = TypeWeapon.MELEE;
 		}
 
-		public override void StartAttack(ActorController owner, Vector3 targetPosition)
+		public override void StartAttack(Transform ownerTransform, Vector3 targetPosition)
 		{
 			if (canAttack && passedAttackTime >= DelayBetweenAttack)
 			{
 				passedAttackTime = 0;
 				canAttack = false;
 			}
+		}
+
+		public override void StopAttack()
+		{
+			canAttack = false;
 		}
 	}
 }

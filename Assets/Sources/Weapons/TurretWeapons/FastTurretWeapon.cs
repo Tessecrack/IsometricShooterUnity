@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FastTurretWeapon : Weapon
 {
-	private ActorController owner;
+	private Transform ownerTransform;
 
 	private Vector3 targetPosition;
 	protected override void InitWeapon()
@@ -15,15 +15,20 @@ public class FastTurretWeapon : Weapon
 		base.InitWeapon();
 	}
 
-	public override void StartAttack(ActorController owner, Vector3 targetPosition)
+	public override void StartAttack(Transform ownerTransform, Vector3 targetPosition)
 	{
 		if (passedAttackTime >= DelayBetweenAttack)
 		{
-			this.owner = owner;
+			this.ownerTransform = ownerTransform;
 			this.targetPosition = targetPosition;
 			StartCoroutine(StartFire());
 			passedAttackTime = 0;
 		}
+	}
+
+	public override void StopAttack()
+	{
+		canAttack = false;
 	}
 
 	IEnumerator StartFire()
@@ -31,7 +36,7 @@ public class FastTurretWeapon : Weapon
 		foreach (var muzzle in muzzles)
 		{
 			var instanceCurrentBullet = Instantiate<Bullet>(bullet, muzzle.transform.position, muzzle.transform.rotation);
-			instanceCurrentBullet.StartFire(owner.transform, targetPosition, speedAttack, damage);
+			instanceCurrentBullet.StartFire(ownerTransform, targetPosition, speedAttack, damage);
 			yield return new WaitForFixedUpdate();
 		}
 	}

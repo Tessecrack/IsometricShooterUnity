@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class ActorMovement
+public class ActorMovement : IActorComponent
 { 
 	public float ForwardMovementValue { get; protected set; } // w s
 	public float RightMovementValue { get; protected set; } // a d
-	public float DirectionForwardMotion { get; protected set; }
-	public float DirectionRightMotion { get; protected set; }
+	public float LocalDirectionForwardMotion { get; protected set; }
+	public float LocalDirectionRightMotion { get; protected set; }
 
 	public int Speed { get; protected set; }
 
@@ -19,6 +19,11 @@ public class ActorMovement
 	protected Vector3 initialActorRightVector = new Vector3(1.0f, 0.0f, 1.0f);
 	protected Vector3 targetPoint = Vector3.zero;
 
+	public void Update()
+	{
+		
+	}
+
 	public void InitInitialOptions(int speed, Vector3 initialForwardVector, Vector3 initialRightVector)
 	{
 		initialActorForwardVector = initialForwardVector;
@@ -30,7 +35,7 @@ public class ActorMovement
 	public Vector3 Rotate(Vector3 forwardVector, Vector3 direction, float time) 
 		=> Vector3.RotateTowards(forwardVector, direction, time * speedRotation, 0.0f);
 
-	public Vector3 GetVelocity()
+	private Vector3 GetVelocity()
 	{
 		var currentVelocity = ForwardMovementValue * initialActorForwardVector + RightMovementValue * initialActorRightVector;
 
@@ -44,8 +49,8 @@ public class ActorMovement
 
 	public void SetDirectionMovement(Vector3 relativeVector)
 	{
-		DirectionRightMotion = relativeVector.x;
-		DirectionForwardMotion = relativeVector.z;
+		LocalDirectionRightMotion = relativeVector.x;
+		LocalDirectionForwardMotion = relativeVector.z;
 	}
 
 	public Vector3 GetMoveActor(float speed)
@@ -62,11 +67,11 @@ public class ActorMovement
 
 	public Vector3 GetTargetPoint() => targetPoint;
 
-	public void SetForwardMovementValue(float value)
+	public void SetLocalForwardMovementValue(float value)
 	{
 		ForwardMovementValue = value;
 	}
-	public void SetRightMovementValue(float value)
+	public void SetLocalRightMovementValue(float value)
 	{
 		RightMovementValue = value;
 	}

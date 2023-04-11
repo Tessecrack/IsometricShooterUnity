@@ -1,11 +1,9 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class ShotgunWeapon : Weapon
 {
-    private ActorController owner;
+    private Transform ownerTransform;
     private Vector3 targetPosition;
     protected override void InitWeapon()
     {
@@ -16,11 +14,11 @@ public class ShotgunWeapon : Weapon
         base.InitWeapon();
     }
 
-    public override void StartAttack(ActorController owner, Vector3 targetPosition)
+    public override void StartAttack(Transform ownerTransform, Vector3 targetPosition)
     {
         if (canAttack && passedAttackTime >= DelayBetweenAttack)
         {
-            this.owner = owner;
+            this.ownerTransform = ownerTransform;
             this.targetPosition = targetPosition;
             StartCoroutine(GenerateSpreadBullets());
             passedAttackTime = 0;
@@ -30,14 +28,19 @@ public class ShotgunWeapon : Weapon
     IEnumerator GenerateSpreadBullets()
     {
 		var shotgunShell = 5;
-		var spreadShell = Vector3.Distance(targetPosition, owner.transform.position);
-		base.StartAttack(owner, targetPosition);
+		var spreadShell = Vector3.Distance(targetPosition, ownerTransform.position);
+		SpawnBullet(ownerTransform, targetPosition);
 		for (int i = 3; i <= shotgunShell; ++i)
 		{
-			base.StartAttack(owner, targetPosition + owner.transform.right * spreadShell / i);
-			base.StartAttack(owner, targetPosition + owner.transform.right * -spreadShell / i);
+			SpawnBullet(ownerTransform, targetPosition + ownerTransform.right * spreadShell / i);
+			SpawnBullet(ownerTransform, targetPosition + ownerTransform.right * -spreadShell / i);
 			yield return new WaitForFixedUpdate();
 		}
         yield break;
+	}
+
+	public override void StopAttack()
+	{
+        canAttack = false;
 	}
 }

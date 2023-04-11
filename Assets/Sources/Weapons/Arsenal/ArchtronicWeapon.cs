@@ -11,12 +11,17 @@ public class ArchtronicWeapon : Weapon
 		base.InitWeapon();
 	}
 
-    public override void StartAttack(ActorController owner, Vector3 targetPosition)
+    public override void StartAttack(Transform ownerTransform, Vector3 targetPosition)
     {
         if (passedAttackTime >= DelayBetweenAttack)
         {
-            base.StartAttack(owner, targetPosition);
+            SpawnBullet(ownerTransform, targetPosition);
             passedAttackTime = 0;
         }
     }
+
+	public override void StopAttack()
+	{
+		canAttack = true;
+	}
 }

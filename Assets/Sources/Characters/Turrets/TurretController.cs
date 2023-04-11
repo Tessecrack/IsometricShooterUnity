@@ -38,18 +38,6 @@ public class TurretController : ActorController
 		actorMovement.UpdateTargetPoint(agent.GetTargetPosition());
 	}
 
-	protected override void StartAttack()
-	{
-		attackMode.Enable();
-		turretWeapon.StartAttack(this, agent.GetTargetPosition());
-	}
-
-	protected override void StopAttack()
-	{
-		attackMode.Disable();
-		turretWeapon.StopAttack();
-	}
-
 	protected override void ApplyRotationActor()
 	{
 		var direction = actorMovement.ActorVelocityVector;
@@ -60,6 +48,8 @@ public class TurretController : ActorController
 		this.transform.forward = actorMovement.Rotate(this.transform.forward,
 			direction, Time.fixedDeltaTime);
 	}
+
+	public override Weapon GetCurrentWeapon() => turretWeapon;
 
 	protected override void UpdateAnimation()
 	{

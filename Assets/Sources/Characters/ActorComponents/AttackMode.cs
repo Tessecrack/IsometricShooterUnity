@@ -1,4 +1,6 @@
-﻿public class AttackMode
+﻿using UnityEngine;
+
+public class AttackMode
 {
 	public float TimeAttackModeRangedWeapon { get; private set; }
 	public bool IsActive { get; private set; }
@@ -47,5 +49,17 @@
 		{
 			passedTime += time;
 		}
+	}
+
+	public void StartAttack(Weapon weapon, Transform ownerTransform, Vector3 targetPoint)
+	{
+		Enable();
+		weapon.StartAttack(ownerTransform, targetPoint);
+	}
+
+	public void StopAttack(Weapon weapon)
+	{
+		Disable();
+		weapon.StopAttack();
 	}
 }

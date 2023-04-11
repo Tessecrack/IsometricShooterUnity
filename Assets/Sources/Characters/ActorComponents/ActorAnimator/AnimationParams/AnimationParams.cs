@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class AnimationParams
 {
 	public readonly static string FLOAT_HORIZONTAL_MOTION_NAME_PARAM = "Horizontal";

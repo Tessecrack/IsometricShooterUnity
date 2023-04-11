@@ -10,12 +10,17 @@ public class ShockWeapon : Weapon
         CurrentTypeWeapon = TypeWeapon.HEAVY;
     }
 
-    public override void StartAttack(ActorController owner, Vector3 targetPosition)
+    public override void StartAttack(Transform ownerTransform, Vector3 targetPosition)
     {
         if (canAttack)
         {
-            base.StartAttack(owner, targetPosition);
+            SpawnBullet(ownerTransform, targetPosition);
             canAttack = false;
         }
     }
+
+	public override void StopAttack()
+	{
+        canAttack = false;
+	}
 }

@@ -49,7 +49,6 @@ public abstract class ActorController : MonoBehaviour
 		ApplyMovementActor();
 		ApplyRotationActor();
 	}
-
 	protected virtual void InitController()
 	{
 		attackMode = new AttackMode();
@@ -66,45 +65,32 @@ public abstract class ActorController : MonoBehaviour
 		OnDash += Dash;	
 		SetDefaultWeapon();
 	}
-
 	protected virtual void UpdateAnimation()
 	{
 		actorAnimator.Animate();
 	}
-
 	protected virtual void StartAttack()
 	{
-		attackMode.Enable();
-		var currentWeapon = this.GetCurrentWeapon();
-		currentWeapon.StartAttack(this, actorMovement.GetTargetPoint());
+		attackMode.StartAttack(this.GetCurrentWeapon(), this.transform, actorMovement.GetTargetPoint());
 	}
-
 	protected virtual void StopAttack()
 	{
-		attackMode.Disable();
-		this.GetCurrentWeapon().StopAttack();
+		attackMode.StopAttack(this.GetCurrentWeapon());
 	}
 	protected virtual void ApplyMovementActor()
 	{
-		SetDirectionMovement();
 		MoveActor(actorMovement.Speed);
 	}
 	protected virtual void ApplyRotationActor()
 	{
 		var direction = attackMode.IsActive ? actorMovement.GetTargetPoint() - this.transform.position : actorMovement.ActorVelocityVector;
+
 		this.transform.forward = actorMovement.Rotate(this.transform.forward, 
 			direction, Time.fixedDeltaTime);
 	}
 
-	public bool IsActiveAttackMode()
-	{
-		return attackMode.IsActive;
-	}
-
-	public Weapon GetCurrentWeapon()
-	{
-		return arsenal.GetCurrentWeapon();
-	}
+	public bool IsActiveAttackMode() => attackMode.IsActive;
+	public virtual Weapon GetCurrentWeapon() => arsenal.GetCurrentWeapon();
 
 	public void TakeDamage(int damage)
 	{
@@ -114,24 +100,21 @@ public abstract class ActorController : MonoBehaviour
 			Destroy(this.gameObject);
 		}
 	}
-
-	private void SetDirectionMovement()
+	private void SetLocalDirectionMovement()
 	{
 		var movementVector = Vector3.ClampMagnitude(actorMovement.ActorVelocityVector, 1);
 		var relativeVector = this.transform.InverseTransformDirection(movementVector);
 		actorMovement.SetDirectionMovement(relativeVector);
 	}
-
 	private void MoveActor(float speed)
 	{
+		SetLocalDirectionMovement();
 		characterController.Move(actorMovement.GetMoveActor(speed) * Time.fixedDeltaTime);
 	}
-	
 	private void Dash()
 	{
 		StartCoroutine(ApplyDash());
 	}
-	
 	private IEnumerator ApplyDash()
 	{
 		float passedTime = 0;
@@ -142,10 +125,9 @@ public abstract class ActorController : MonoBehaviour
 			yield return new WaitForFixedUpdate();
 		}
 	}
-	
 	public Vector3 GetForwardVector() => this.transform.forward;
 	public float GetForwardMovementValue() => actorMovement.ForwardMovementValue;
 	public float GetRightMovementValue() => actorMovement.RightMovementValue;
-	public float GetDirectionForwardMovementValue() => actorMovement.DirectionForwardMotion;
-	public float GetDirectionRightMovementValue() => actorMovement.DirectionRightMotion;
+	public float GetLocalDirectionForwardMovementValue() => actorMovement.LocalDirectionForwardMotion;
+	public float GetLocalDirectionRightMovementValue() => actorMovement.LocalDirectionRightMotion;
 }

@@ -3,7 +3,6 @@ using UnityEngine;
 public class EnemyController : ActorController
 {
 	private AIController agent;
-	public TypeEnemy TypeEnemy { get; protected set; }
 
 	private readonly int defaultNumberWeapon = 0;
 
