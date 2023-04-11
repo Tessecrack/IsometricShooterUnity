@@ -10,8 +10,8 @@ public class TurretController : ActorController
 		health = new ActorHealth();
 
 		turretWeapon = GetComponent<FastTurretWeapon>();
-
 		var player = FindObjectOfType<PlayerController>();
+
 		agent = AIController.InitAIController(this.transform, player.transform, player.gameObject.layer);
 
 		OnStartAttack += StartAttack;
@@ -35,7 +35,9 @@ public class TurretController : ActorController
 	{
 		actorMovement.UpdateTargetPoint(agent.GetTargetPosition());
 	}
+
 	public override Weapon GetCurrentWeapon() => turretWeapon;
+
 	protected override void UpdateMovementActor()
 	{
 		

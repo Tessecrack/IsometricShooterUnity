@@ -116,7 +116,7 @@ public abstract class ActorController : MonoBehaviour
 	private void MoveActor(float speed)
 	{
 		SetLocalDirectionMovement();
-		characterController?.Move(actorMovement.GetMoveActor(speed) * Time.fixedDeltaTime);
+		characterController?.Move(actorMovement.GetSpeedVelocity(speed) * Time.fixedDeltaTime);
 	}
 	private void Dash()
 	{

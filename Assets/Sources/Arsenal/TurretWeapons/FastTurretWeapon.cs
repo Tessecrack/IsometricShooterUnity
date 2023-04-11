@@ -28,7 +28,7 @@ public class FastTurretWeapon : Weapon
 
 	public override void StopAttack()
 	{
-		canAttack = false;
+		canAttack = true;
 	}
 
 	IEnumerator StartFire()

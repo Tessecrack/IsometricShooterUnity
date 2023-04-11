@@ -22,6 +22,6 @@ public class HellWailerWeapon : Weapon
 
 	public override void StopAttack()
 	{
-		canAttack = false;
+		canAttack = true;
 	}
 }

@@ -21,6 +21,6 @@ public class GunWeapon : Weapon
 
 	public override void StopAttack()
 	{
-        canAttack = false;
+        canAttack = true;
 	}
 }

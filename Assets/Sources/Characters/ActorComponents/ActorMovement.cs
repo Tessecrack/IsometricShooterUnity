@@ -19,11 +19,6 @@ public class ActorMovement
 	protected Vector3 initialActorRightVector = new Vector3(1.0f, 0.0f, 1.0f);
 	protected Vector3 targetPoint = Vector3.zero;
 
-	public void Update()
-	{
-		
-	}
-
 	public void InitInitialOptions(int speed, Vector3 initialForwardVector, Vector3 initialRightVector)
 	{
 		initialActorForwardVector = initialForwardVector;
@@ -49,7 +44,7 @@ public class ActorMovement
 		LocalDirectionForwardMotion = relativeVector.z;
 	}
 
-	public Vector3 GetMoveActor(float speed)
+	public Vector3 GetSpeedVelocity(float speed)
 	{
 		ActorVelocityVector = GetVelocity();
 		return new Vector3(ActorVelocityVector.x * speed, 0.0f, ActorVelocityVector.z * speed);

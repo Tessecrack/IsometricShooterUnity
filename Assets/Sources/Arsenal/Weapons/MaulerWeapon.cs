@@ -23,6 +23,6 @@ public class MaulerWeapon : Weapon
 
 	public override void StopAttack()
 	{
-		canAttack = false;
+		canAttack = true;
 	}
 }

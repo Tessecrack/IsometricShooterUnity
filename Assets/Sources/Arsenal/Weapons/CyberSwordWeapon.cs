@@ -24,7 +24,7 @@ namespace Assets.Sources.Weapons.Arsenal
 
 		public override void StopAttack()
 		{
-			canAttack = false;
+			canAttack = true;
 		}
 	}
 }
