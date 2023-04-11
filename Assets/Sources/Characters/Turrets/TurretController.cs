@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class TurretController : ActorController
 {
 	private AIController agent;
@@ -37,36 +35,13 @@ public class TurretController : ActorController
 	{
 		actorMovement.UpdateTargetPoint(agent.GetTargetPosition());
 	}
-
-	protected override void ApplyRotationActor()
-	{
-		var direction = actorMovement.ActorVelocityVector;
-		if (agent.IsPlayerFounded)
-		{
-			direction = actorMovement.GetTargetPoint() - this.transform.position;
-		}
-		this.transform.forward = actorMovement.Rotate(this.transform.forward,
-			direction, Time.fixedDeltaTime);
-	}
-
 	public override Weapon GetCurrentWeapon() => turretWeapon;
-
-	protected override void UpdateAnimation()
-	{
-
-	}
-
 	protected override void UpdateMovementActor()
 	{
 		
 	}
 
 	protected override void UpdateWeapon()
-	{
-		
-	}
-
-	protected override void ApplyMovementActor()
 	{
 		
 	}

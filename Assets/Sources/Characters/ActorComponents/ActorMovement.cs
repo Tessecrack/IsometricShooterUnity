@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ActorMovement : IActorComponent
+public class ActorMovement
 { 
 	public float ForwardMovementValue { get; protected set; } // w s
 	public float RightMovementValue { get; protected set; } // a d
@@ -37,17 +37,13 @@ public class ActorMovement : IActorComponent
 
 	private Vector3 GetVelocity()
 	{
-		var currentVelocity = ForwardMovementValue * initialActorForwardVector + RightMovementValue * initialActorRightVector;
+		var currentVelocity = 
+			Vector3.ClampMagnitude(ForwardMovementValue * initialActorForwardVector + RightMovementValue * initialActorRightVector, 1.5f);
 
-		var normalizeVelocity = new Vector3(
-			Mathf.Clamp(currentVelocity.x, -1.5f, 1.5f),
-			currentVelocity.y,
-			Mathf.Clamp(currentVelocity.z, -1.5f, 1.5f));
-
-		return normalizeVelocity;
+		return currentVelocity;
 	}
 
-	public void SetDirectionMovement(Vector3 relativeVector)
+	public void SetLocalDirectionMovement(Vector3 relativeVector)
 	{
 		LocalDirectionRightMotion = relativeVector.x;
 		LocalDirectionForwardMotion = relativeVector.z;
@@ -56,22 +52,20 @@ public class ActorMovement : IActorComponent
 	public Vector3 GetMoveActor(float speed)
 	{
 		ActorVelocityVector = GetVelocity();
-		var vectorMove = new Vector3(ActorVelocityVector.x * speed, 0.0f, ActorVelocityVector.z * speed);
-		return vectorMove;
+		return new Vector3(ActorVelocityVector.x * speed, 0.0f, ActorVelocityVector.z * speed);
 	}
 
 	public void UpdateTargetPoint(Vector3 newTargetPoint)
 	{
 		targetPoint = newTargetPoint;
 	}
-
 	public Vector3 GetTargetPoint() => targetPoint;
 
-	public void SetLocalForwardMovementValue(float value)
+	public void SetForwardMovementValue(float value)
 	{
 		ForwardMovementValue = value;
 	}
-	public void SetLocalRightMovementValue(float value)
+	public void SetRightMovementValue(float value)
 	{
 		RightMovementValue = value;
 	}

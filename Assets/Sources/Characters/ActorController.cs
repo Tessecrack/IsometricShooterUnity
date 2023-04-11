@@ -41,7 +41,8 @@ public abstract class ActorController : MonoBehaviour
 		UpdateTargetPoint();
 		UpdateWeapon();
 		UpdateAttackMode();
-		UpdateAnimation();
+		UpdateTimeAttackMode();
+		UpdateAnimations();
 	}
 
 	private void FixedUpdate()
@@ -49,6 +50,7 @@ public abstract class ActorController : MonoBehaviour
 		ApplyMovementActor();
 		ApplyRotationActor();
 	}
+
 	protected virtual void InitController()
 	{
 		attackMode = new AttackMode();
@@ -65,23 +67,28 @@ public abstract class ActorController : MonoBehaviour
 		OnDash += Dash;	
 		SetDefaultWeapon();
 	}
-	protected virtual void UpdateAnimation()
+
+	protected void UpdateAnimations()
 	{
-		actorAnimator.Animate();
+		actorAnimator?.Animate();
 	}
-	protected virtual void StartAttack()
+	protected void StartAttack()
 	{
 		attackMode.StartAttack(this.GetCurrentWeapon(), this.transform, actorMovement.GetTargetPoint());
 	}
-	protected virtual void StopAttack()
+	protected void StopAttack()
 	{
 		attackMode.StopAttack(this.GetCurrentWeapon());
 	}
-	protected virtual void ApplyMovementActor()
+	private void UpdateTimeAttackMode()
+	{
+		attackMode.UpdateTimeAttackMode(Time.deltaTime);
+	}
+	private void ApplyMovementActor()
 	{
 		MoveActor(actorMovement.Speed);
 	}
-	protected virtual void ApplyRotationActor()
+	private void ApplyRotationActor()
 	{
 		var direction = attackMode.IsActive ? actorMovement.GetTargetPoint() - this.transform.position : actorMovement.ActorVelocityVector;
 
@@ -104,12 +111,12 @@ public abstract class ActorController : MonoBehaviour
 	{
 		var movementVector = Vector3.ClampMagnitude(actorMovement.ActorVelocityVector, 1);
 		var relativeVector = this.transform.InverseTransformDirection(movementVector);
-		actorMovement.SetDirectionMovement(relativeVector);
+		actorMovement.SetLocalDirectionMovement(relativeVector);
 	}
 	private void MoveActor(float speed)
 	{
 		SetLocalDirectionMovement();
-		characterController.Move(actorMovement.GetMoveActor(speed) * Time.fixedDeltaTime);
+		characterController?.Move(actorMovement.GetMoveActor(speed) * Time.fixedDeltaTime);
 	}
 	private void Dash()
 	{
@@ -128,6 +135,6 @@ public abstract class ActorController : MonoBehaviour
 	public Vector3 GetForwardVector() => this.transform.forward;
 	public float GetForwardMovementValue() => actorMovement.ForwardMovementValue;
 	public float GetRightMovementValue() => actorMovement.RightMovementValue;
-	public float GetLocalDirectionForwardMovementValue() => actorMovement.LocalDirectionForwardMotion;
-	public float GetLocalDirectionRightMovementValue() => actorMovement.LocalDirectionRightMotion;
+	public float GetLocalForwardVector() => actorMovement.LocalDirectionForwardMotion;
+	public float GetLocalRightVector() => actorMovement.LocalDirectionRightMotion;
 }

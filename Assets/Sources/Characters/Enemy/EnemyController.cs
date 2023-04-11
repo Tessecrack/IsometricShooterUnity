@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class EnemyController : ActorController
 {
 	private AIController agent;
@@ -11,7 +9,6 @@ public class EnemyController : ActorController
 		base.InitController();
 		var player = FindObjectOfType<PlayerController>();
 		agent = AIController.InitAIController(this.transform, player.transform, player.gameObject.layer);
-		OnTakeDamage += agent.TakeDamage;
 	}
 
 	protected override void UpdateTargetPoint()
@@ -45,16 +42,5 @@ public class EnemyController : ActorController
 	{
 		arsenal.SetInitialWeapon(defaultNumberWeapon);
 		CurrentTypeWeapon = arsenal.GetCurrentWeapon().CurrentTypeWeapon;
-	}
-
-	protected override void ApplyRotationActor()
-	{
-		var direction = actorMovement.ActorVelocityVector;
-		if (agent.IsPlayerFounded)
-		{
-			direction = actorMovement.GetTargetPoint() - this.transform.position;
-		}
-		this.transform.forward = actorMovement.Rotate(this.transform.forward,
-			direction, Time.fixedDeltaTime);
 	}
 }

@@ -21,12 +21,12 @@ public class PlayerController : ActorController
 		}
 		actorMovement.InitInitialOptions(speed, playerCamera.ForwardVector, playerCamera.RightVector);
 		this.gameObject.layer = playerLayerMask;
-    	}
+    }
 
 	protected override void UpdateMovementActor()
 	{
-		actorMovement.SetLocalForwardMovementValue(Input.GetAxis("Vertical"));
-		actorMovement.SetLocalRightMovementValue(Input.GetAxis("Horizontal"));
+		actorMovement.SetForwardMovementValue(Input.GetAxis("Vertical"));
+		actorMovement.SetRightMovementValue(Input.GetAxis("Horizontal"));
 		InputDash();
 	}
 
@@ -40,7 +40,6 @@ public class PlayerController : ActorController
 		{
 			OnStopAttack?.Invoke();
 		}
-		attackMode.UpdateTimeAttackMode(Time.deltaTime);
 	}
 
 	protected override void UpdateWeapon()
