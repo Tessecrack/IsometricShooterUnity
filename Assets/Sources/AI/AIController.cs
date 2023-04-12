@@ -40,7 +40,7 @@ public class AIController
 			return;
 		}
 
-		if (!IsPlayerFounded && (LookAround() || LookAhead()))
+		if (!IsPlayerFounded && LookAround())
 		{
 			OnTargetFound?.Invoke();
 		}
@@ -59,12 +59,6 @@ public class AIController
 	}
 
 	private bool LookAround() => Physics.CheckSphere(agentTransform.position, rangeVision, 1 << this.targetLayerMask);
-
-	private bool LookAhead()
-	{
-		var start = new Vector3(agentTransform.position.x, agentTransform.position.y + 1, agentTransform.position.z);
-		return Physics.Raycast(start, agentTransform.forward, distanceVision, 1 << targetLayerMask);
-	}
 
 	private void TargetFound()
 	{
