@@ -11,8 +11,6 @@ public class AIController
 	private Transform targetTransform;
 
 	private readonly int rangeVision = 10;
-
-	private readonly int distanceVision = 20;
 	
 	private int targetLayerMask;
 
