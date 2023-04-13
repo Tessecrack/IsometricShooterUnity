@@ -12,18 +12,10 @@ public class AttackMode
 		TimeAttackModeRangedWeapon = 2.0f;
 	}
 
-	public void Enable()
+	private void Enable()
 	{
 		IsActive = true;
 		passedTime = 0.0f;
-	}
-
-	public void Disable()
-	{
-		if (passedTime >= TimeAttackModeRangedWeapon)
-		{
-			IsActive = false;
-		}
 	}
 
 	public void ForceDisable()
@@ -59,7 +51,6 @@ public class AttackMode
 
 	public void StopAttack(Weapon weapon)
 	{
-		Disable();
 		weapon.StopAttack();
 	}
 }
