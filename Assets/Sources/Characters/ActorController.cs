@@ -88,7 +88,7 @@ public abstract class ActorController : MonoBehaviour
 	{
 		MoveActor(actorMovement.Speed);
 	}
-	private void ApplyRotationActor()
+	protected virtual void ApplyRotationActor()
 	{
 		var direction = attackMode.IsActive ? actorMovement.GetTargetPoint() - this.transform.position : actorMovement.ActorVelocityVector;
 

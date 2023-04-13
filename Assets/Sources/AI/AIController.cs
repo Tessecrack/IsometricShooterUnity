@@ -10,18 +10,22 @@ public class AIController
 
 	private Transform targetTransform;
 
-	private readonly int rangeVision = 10;
+	private readonly int rangeVision = 8;
 	
 	private int targetLayerMask;
 
 	public Action OnTargetFound;
+
+	public Action OnAttack;
 
 	private AIController(Transform agentTransform, Transform target, int targetLayerMask)
 	{
 		this.agentTransform = agentTransform;
 		this.targetTransform = target;
 		this.targetLayerMask = targetLayerMask;
+
 		OnTargetFound += TargetFound;
+		OnAttack += Attack;
 	}
 
 	public static AIController InitAIController(Transform agentTransform, Transform targetTransform, int targetLayerMask)
@@ -42,6 +46,11 @@ public class AIController
 		{
 			OnTargetFound?.Invoke();
 		}
+
+		if (IsPlayerFounded)
+		{
+			OnAttack?.Invoke();
+		}
 	}
 
 	public Vector3 GetTargetPosition()
@@ -54,13 +63,30 @@ public class AIController
 	public void TakeDamage(int damage)
 	{
 		OnTargetFound?.Invoke();
+		OnAttack?.Invoke();
 	}
 
 	private bool LookAround() => Physics.CheckSphere(agentTransform.position, rangeVision, 1 << this.targetLayerMask);
 
+	private bool LookAhead()
+	{
+		var startPoint = new Vector3(agentTransform.position.x, agentTransform.position.y + 1, agentTransform.position.z);
+		if (Physics.Raycast(startPoint, agentTransform.forward, out RaycastHit hitInfo, rangeVision, this.targetLayerMask - 1))
+		{
+			return false;
+		}
+		Debug.DrawRay(startPoint, agentTransform.forward * rangeVision, Color.red);
+		return true;
+
+	}
+
 	private void TargetFound()
 	{
 		IsPlayerFounded = true;
+	}
+
+	private void Attack()
+	{
 		CanAttack = true;
 	}
 }
