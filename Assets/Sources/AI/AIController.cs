@@ -68,18 +68,6 @@ public class AIController
 
 	private bool LookAround() => Physics.CheckSphere(agentTransform.position, rangeVision, 1 << this.targetLayerMask);
 
-	private bool LookAhead()
-	{
-		var startPoint = new Vector3(agentTransform.position.x, agentTransform.position.y + 1, agentTransform.position.z);
-		if (Physics.Raycast(startPoint, agentTransform.forward, out RaycastHit hitInfo, rangeVision, this.targetLayerMask - 1))
-		{
-			return false;
-		}
-		Debug.DrawRay(startPoint, agentTransform.forward * rangeVision, Color.red);
-		return true;
-
-	}
-
 	private void TargetFound()
 	{
 		IsPlayerFounded = true;
