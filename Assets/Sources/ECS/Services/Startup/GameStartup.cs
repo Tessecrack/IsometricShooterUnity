@@ -12,20 +12,31 @@ public class GameStartup : MonoBehaviour
     
     private void Start()
     {
+        SceneData.SetCamera();
+
+        var runtimeData = new RuntimeData();
+
         ecsWorld = new EcsWorld();
         ecsUpdateSystems = new EcsSystems(ecsWorld, "UPDATE SYSTEM");
         ecsFixedUpdateSystems = new EcsSystems(ecsWorld, "FIXED UPDATE SYSTEM");
 
         ecsUpdateSystems
             .Add(new PlayerInitSystem())
+            .Add(new CameraInitSystem())
             .Add(new InputMovementSystem())
+            .Add(new CharacterMoveAnimationSystem())
+            .Add(new CameraFollowSystem())
             .Inject(StaticData)
-            .Inject(SceneData);
+            .Inject(SceneData)
+            .Inject(runtimeData);
 
         ecsFixedUpdateSystems
-            .Add(new PlayerMoveSystem());
+            .Add(new PlayerMoveSystem())
+			.Inject(StaticData)
+			.Inject(SceneData)
+			.Inject(runtimeData);
 
-        ecsUpdateSystems.Init();
+		ecsUpdateSystems.Init();
         ecsFixedUpdateSystems.Init();
     }
 
