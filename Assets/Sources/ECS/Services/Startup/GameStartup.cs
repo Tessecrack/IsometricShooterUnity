@@ -8,7 +8,6 @@ public class GameStartup : MonoBehaviour
 
     private EcsWorld ecsWorld;
     private EcsSystems ecsUpdateSystems;
-    private EcsSystems ecsFixedUpdateSystems;
     
     private void Start()
     {
@@ -18,26 +17,19 @@ public class GameStartup : MonoBehaviour
 
         ecsWorld = new EcsWorld();
         ecsUpdateSystems = new EcsSystems(ecsWorld, "UPDATE SYSTEM");
-        ecsFixedUpdateSystems = new EcsSystems(ecsWorld, "FIXED UPDATE SYSTEM");
 
         ecsUpdateSystems
             .Add(new PlayerInitSystem())
             .Add(new CameraInitSystem())
             .Add(new InputMovementSystem())
-            .Add(new CharacterMoveAnimationSystem())
+			.Add(new PlayerMoveSystem())
+			.Add(new CharacterMoveAnimationSystem())
             .Add(new CameraFollowSystem())
             .Inject(StaticData)
             .Inject(SceneData)
             .Inject(runtimeData);
 
-        ecsFixedUpdateSystems
-            .Add(new PlayerMoveSystem())
-			.Inject(StaticData)
-			.Inject(SceneData)
-			.Inject(runtimeData);
-
 		ecsUpdateSystems.Init();
-        ecsFixedUpdateSystems.Init();
     }
 
     private void Update()
@@ -45,18 +37,10 @@ public class GameStartup : MonoBehaviour
         ecsUpdateSystems?.Run();
     }
 
-	private void FixedUpdate()
-	{
-		ecsFixedUpdateSystems?.Run();
-	}
-
 	private void OnDestroy()
 	{
         ecsUpdateSystems?.Destroy();
         ecsUpdateSystems = null;
-
-        ecsFixedUpdateSystems?.Destroy();
-        ecsFixedUpdateSystems = null;
 
         ecsWorld?.Destroy();
         ecsWorld = null;

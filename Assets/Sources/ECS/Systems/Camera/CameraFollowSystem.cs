@@ -12,10 +12,19 @@ public class CameraFollowSystem : IEcsRunSystem
 		{
 			ref var cameraComponent = ref filter.Get1(i);
 
-			cameraComponent.camera.transform.position = runtimeData.OwnerCameraTransform.position 
-				+ cameraComponent.offset;
+			var pointCameraOwner = runtimeData.OwnerCameraTransform.position;
 
-			runtimeData.CursorPosition = GetCursorPosition(cameraComponent.camera, runtimeData.OwnerCameraTransform.position);
+			var cursorPosition = GetCursorPosition(cameraComponent.camera, runtimeData.OwnerCameraTransform.position);
+
+			runtimeData.CursorPosition = cursorPosition;
+
+			var result = pointCameraOwner + cameraComponent.offset;
+
+			var distance = Vector3.ClampMagnitude(cursorPosition - pointCameraOwner, 3.0f);
+
+			Debug.DrawLine(pointCameraOwner, distance + pointCameraOwner);
+
+			cameraComponent.camera.transform.position = new Vector3(result.x, pointCameraOwner.y + cameraComponent.offset.y, result.z);
 		}
 	}
 

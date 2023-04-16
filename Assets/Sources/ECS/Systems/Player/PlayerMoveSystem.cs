@@ -24,7 +24,7 @@ public class PlayerMoveSystem : IEcsRunSystem
 				movableComponent.transform.forward = Vector3.Slerp(movableComponent.transform.forward, velocity, 0.3f);
 			}
 
-			characterComponent.characterController.Move(movableComponent.velocity * movableComponent.speedMove * Time.fixedDeltaTime);
+			characterComponent.characterController.Move(movableComponent.velocity * movableComponent.speedMove * Time.deltaTime);
 		}
 	}
 }
