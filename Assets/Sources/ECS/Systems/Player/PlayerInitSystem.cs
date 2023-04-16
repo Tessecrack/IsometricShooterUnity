@@ -18,7 +18,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var animatorComponent = ref entityPlayer.Get<AnimatorComponent>();
 
 		GameObject player = Object.Instantiate(staticData.playerPrefab, sceneData.playerSpawnPoint.position, Quaternion.identity);
-		runtimeData.TargetPositionForCamera = player.transform;
+		runtimeData.OwnerCameraTransform = player.transform;
 
 		player.transform.forward = staticData.GlobalForwardVector;
 

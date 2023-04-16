@@ -2,5 +2,7 @@ using UnityEngine;
 
 public class RuntimeData
 {
-	public Transform TargetPositionForCamera { get; set; }
+	public Transform OwnerCameraTransform { get; set; }
+
+	public Vector3 CursorPosition { get; set; }
 }

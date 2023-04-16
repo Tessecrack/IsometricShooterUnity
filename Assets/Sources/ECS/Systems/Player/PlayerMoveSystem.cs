@@ -21,7 +21,7 @@ public class PlayerMoveSystem : IEcsRunSystem
 
 			if (movableComponent.velocity.magnitude > 0)
 			{
-				movableComponent.transform.forward = velocity;
+				movableComponent.transform.forward = Vector3.Slerp(movableComponent.transform.forward, velocity, 0.3f);
 			}
 
 			characterComponent.characterController.Move(movableComponent.velocity * movableComponent.speedMove * Time.fixedDeltaTime);
