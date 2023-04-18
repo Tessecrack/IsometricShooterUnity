@@ -18,7 +18,7 @@ public class CameraInitSystem : IEcsInitSystem
 		cameraComponent.camera = sceneData.camera;
 		cameraComponent.owner = runtimeData.OwnerCameraTransform;
 
-		cameraComponent.offset = staticData.CameraOffset;
-		cameraComponent.camera.transform.rotation = Quaternion.Euler(staticData.GetAngleCameraX(), staticData.GetAngleCameraY(), 0.0f);
+		cameraComponent.offset = staticData.CameraSettings.CameraOffset;
+		cameraComponent.camera.transform.rotation = Quaternion.Euler(staticData.CameraSettings.GetAngleCameraX(), staticData.CameraSettings.GetAngleCameraY(), 0.0f);
 	}
 }

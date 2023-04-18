@@ -24,7 +24,7 @@ public class CameraFollowSystem : IEcsRunSystem
 			var additionOffsetDown = MapValue(currentAngle, 90, 180, 0, 2);
 
 			var result = pointCameraOwner + cameraComponent.offset;
-			var distance = Vector3.ClampMagnitude(cursorPosition - result, staticData.CameraMagnitude);
+			var distance = Vector3.ClampMagnitude(cursorPosition - result, staticData.CameraSettings.CameraMagnitude);
 
 			var currentPosition = cameraComponent.camera.transform.position;
 			var targetPosition = new Vector3(result.x + distance.x + additionOffsetDown,
