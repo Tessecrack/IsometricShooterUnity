@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class GameStartup : MonoBehaviour
 {
+    [Header("Scriptable objects")]
     public StaticData StaticData;
+
+    [Header("Scene data")]
     public SceneData SceneData;
 
     private EcsWorld ecsWorld;
