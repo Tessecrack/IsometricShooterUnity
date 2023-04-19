@@ -84,3 +84,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4604100373526868305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450067015900086060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e018e23ee43d37a4b838aaa55c04c37c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PointSpawnWeapon: {fileID: 450067015900570484}
+  CharacterSpeed: 6
+--- !u!4 &450067015900570484 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400046, guid: 0364882f9a8db45dfa89ce8d5bcb95bb, type: 3}
+  m_PrefabInstance: {fileID: 450067015900183002}
+  m_PrefabAsset: {fileID: 0}

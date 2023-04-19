@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 109346123317991288}
   - component: {fileID: 109346123316664152}
   - component: {fileID: 109346123315565976}
-  - component: {fileID: 5410056109849498439}
+  - component: {fileID: 7288182209706961647}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -85,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5410056109849498439
+--- !u!114 &7288182209706961647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,13 +94,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 109346123317562200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b647703550134eb47a0f51a805deeb35, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ee5fbede128c444f93dbbd6d677a54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NameWeapon: Gun
+  TypeWeapon: 1
+  IsAutomaticWeapon: 0
+  prefabProjectTile: {fileID: 0}
   muzzles:
   - {fileID: 6557690337677116527}
-  bullet: {fileID: 6259905942262159682, guid: d4c70b0141854b846ade2e7b621f351d, type: 3}
-  nameWeapon: 
+  quantityOneShotBullet: 1
 --- !u!1 &6557690337677116527
 GameObject:
   m_ObjectHideFlags: 0

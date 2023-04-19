@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerMoveSystem : IEcsRunSystem
 {
-	private EcsFilter<CharacterComponent, InputMovementComponent, MovableComponent> filter;
+	private EcsFilter<CharacterComponent, InputEventComponent, MovableComponent> filter;
 	private StaticData staticData;
 	public void Run()
 	{
