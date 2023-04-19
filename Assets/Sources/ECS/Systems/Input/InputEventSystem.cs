@@ -11,7 +11,7 @@ public class InputEventSystem : IEcsRunSystem
 			ref var inputComponent = ref filter.Get1(i);
 			inputComponent.inputMovement = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 			inputComponent.isAttack = Input.GetMouseButton(0);
-			inputComponent.currentNumberWeapon = GetNumberSelectedWeapon(inputComponent.currentNumberWeapon);
+			inputComponent.selectedNumberWeapon = GetNumberSelectedWeapon(inputComponent.selectedNumberWeapon);
 		}
 	}
 

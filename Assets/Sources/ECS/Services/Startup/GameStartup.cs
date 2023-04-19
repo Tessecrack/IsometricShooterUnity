@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class GameStartup : MonoBehaviour
 {
-    [Header("Scriptable objects")]
+    [Header("Objects/data in game")]
     public StaticData StaticData;
 
-    [Header("Scene data")]
+    [Header("Obejcts/data in current scene")]
     public SceneData SceneData;
 
     private EcsWorld ecsWorld;
@@ -26,7 +26,8 @@ public class GameStartup : MonoBehaviour
             .Add(new CameraInitSystem())
             .Add(new InputEventSystem())
 			.Add(new PlayerMoveSystem())
-			.Add(new CharacterMoveAnimationSystem())
+            .Add(new PlayerSelectWeaponSystem())
+			.Add(new CharacterAnimationSystem())
             .Add(new CameraFollowSystem())
             .Inject(StaticData)
             .Inject(SceneData)

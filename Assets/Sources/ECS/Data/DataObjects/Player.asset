@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 450067015900086060, guid: 6e2d433482d3ce34c943ce79fc2a2b76, type: 3}
+  Weapons: {fileID: 11400000, guid: dc0b9e61128f85844bc09e8dcc4352e5, type: 2}

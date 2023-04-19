@@ -20,6 +20,7 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		GameObject player = Object.Instantiate(staticData.PlayerPrefab, sceneData.playerSpawnPoint.position, Quaternion.identity);
 		runtimeData.OwnerCameraTransform = player.transform;
+
 		var characterSettings = player.GetComponent<CharacterSettings>();
 		player.transform.forward = staticData.GlobalForwardVector;
 
@@ -28,5 +29,14 @@ public class PlayerInitSystem : IEcsInitSystem
 		characterComponent.characterController = player.GetComponent<CharacterController>();
 		movableComponent.transform = player.transform;
 		movableComponent.speedMove = characterSettings.CharacterSpeed;
+		inputComponent.selectedNumberWeapon = 0;
+
+		weaponComponent.pointSpawnWeapon = characterSettings.PointSpawnWeapon;
+
+		weaponComponent.weaponInstance = Object.Instantiate(staticData.Weapons.WeaponsPrefabs[inputComponent.selectedNumberWeapon], 
+			characterSettings.PointSpawnWeapon, false);
+		weaponComponent.weapon = weaponComponent.weaponInstance.GetComponent<Weapon>();
+		weaponComponent.typeWeapon = weaponComponent.weapon.TypeWeapon;
+		weaponComponent.currentNumberWeapon = inputComponent.selectedNumberWeapon;
 	}
 }
