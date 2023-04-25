@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7124737278642890966}
   - component: {fileID: 7124737278642890965}
   - component: {fileID: 7124737278642890964}
-  - component: {fileID: 5381595270429091022}
   - component: {fileID: 3851849585992794987}
   m_Layer: 0
   m_Name: HellWailerBullet
@@ -99,18 +98,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5381595270429091022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7124737278642890963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e1de04f97c4cf946ad39d1848424898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!143 &3851849585992794987
 CharacterController:
   m_ObjectHideFlags: 0
