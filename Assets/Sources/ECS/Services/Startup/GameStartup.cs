@@ -27,8 +27,10 @@ public class GameStartup : MonoBehaviour
             .Add(new InputEventSystem())
 			.Add(new PlayerMoveSystem())
             .Add(new PlayerSelectWeaponSystem())
+			.Add(new PlayerAttackSystem())
 			.Add(new CharacterAnimationSystem())
             .Add(new CameraFollowSystem())
+            .Add(new AttackSystem())
             .Inject(StaticData)
             .Inject(SceneData)
             .Inject(runtimeData);

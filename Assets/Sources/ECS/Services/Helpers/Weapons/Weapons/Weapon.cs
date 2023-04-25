@@ -14,4 +14,9 @@ public class Weapon : MonoBehaviour
 	public List<GameObject> muzzles;
 
 	public int quantityOneShotBullet = 1;
+
+	public void Attack()
+	{
+		Debug.Log("Attack");
+	}
 }
