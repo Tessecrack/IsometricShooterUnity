@@ -16,7 +16,6 @@ public class CameraFollowSystem : IEcsRunSystem
 			var cursorPosition = GetCursorPosition(cameraComponent.camera, pointCameraOwner);
 			runtimeData.CursorPosition = cursorPosition;
 
-
 			var currentAngle = Vector3.Angle(staticData.GlobalForwardVector, cursorPosition - pointCameraOwner);
 
 			var coeffInterpolate = currentAngle > 90 ? 3.0f : 2.0f;
