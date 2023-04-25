@@ -131,7 +131,7 @@ MonoBehaviour:
   NameWeapon: Mauler
   TypeWeapon: 2
   IsAutomaticWeapon: 0
-  prefabProjectTile: {fileID: 0}
+  prefabProjectTile: {fileID: 3476722609331548987, guid: 07effad1061ceba43bf3f5dca970c643, type: 3}
   muzzles:
   - {fileID: 3492047633189612653}
   quantityOneShotBullet: 1

@@ -132,7 +132,7 @@ MonoBehaviour:
   NameWeapon: Shock
   TypeWeapon: 2
   IsAutomaticWeapon: 0
-  prefabProjectTile: {fileID: 0}
+  prefabProjectTile: {fileID: 1924134549938743637, guid: 6ca21177d8de8244b8ff64d4952ffb2e, type: 3}
   muzzles:
   - {fileID: 371285711893407331}
   quantityOneShotBullet: 1

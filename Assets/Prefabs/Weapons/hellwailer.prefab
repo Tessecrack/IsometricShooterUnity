@@ -101,7 +101,7 @@ MonoBehaviour:
   NameWeapon: Hellwailer
   TypeWeapon: 2
   IsAutomaticWeapon: 0
-  prefabProjectTile: {fileID: 0}
+  prefabProjectTile: {fileID: 7124737278642890963, guid: 86ab7c6e98e1c394ca31622302f3e588, type: 3}
   muzzles:
   - {fileID: 8780396417363242170}
   quantityOneShotBullet: 1

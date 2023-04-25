@@ -100,7 +100,7 @@ MonoBehaviour:
   NameWeapon: Gun
   TypeWeapon: 1
   IsAutomaticWeapon: 0
-  prefabProjectTile: {fileID: 0}
+  prefabProjectTile: {fileID: 2281499393827452360, guid: d4c70b0141854b846ade2e7b621f351d, type: 3}
   muzzles:
   - {fileID: 6557690337677116527}
   quantityOneShotBullet: 1

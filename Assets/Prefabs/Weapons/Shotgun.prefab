@@ -100,7 +100,7 @@ MonoBehaviour:
   NameWeapon: Shotgun
   TypeWeapon: 2
   IsAutomaticWeapon: 0
-  prefabProjectTile: {fileID: 0}
+  prefabProjectTile: {fileID: 9086379581574355896, guid: 481d0ea200b455a4ba32af9db099767f, type: 3}
   muzzles:
   - {fileID: 8303513549622553672}
   quantityOneShotBullet: 6

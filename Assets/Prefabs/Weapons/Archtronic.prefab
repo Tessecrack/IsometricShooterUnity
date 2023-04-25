@@ -131,7 +131,7 @@ MonoBehaviour:
   NameWeapon: Archtronic
   TypeWeapon: 2
   IsAutomaticWeapon: 1
-  prefabProjectTile: {fileID: 0}
+  prefabProjectTile: {fileID: 9086379581574355896, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
   muzzles:
   - {fileID: 2538392431875503170}
   quantityOneShotBullet: 1
