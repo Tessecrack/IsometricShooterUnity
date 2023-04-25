@@ -20,10 +20,8 @@ public class PlayerSelectWeaponSystem : IEcsRunSystem
 				Object.Destroy(weaponComponent.weaponInstance);
 				weaponComponent.weaponInstance = null;
 
-				weaponComponent.weaponInstance = Object.Instantiate(
-					staticData.Weapons.WeaponsPrefabs[inputComponent.selectedNumberWeapon],
+				weaponComponent.weaponInstance = Object.Instantiate(staticData.Weapons.WeaponsPrefabs[inputComponent.selectedNumberWeapon],
 					weaponComponent.pointSpawnWeapon, false);
-
 				weaponComponent.weapon = weaponComponent.weaponInstance.GetComponent<Weapon>();
 				weaponComponent.typeWeapon = weaponComponent.weapon.TypeWeapon;
 				weaponComponent.currentNumberWeapon = inputComponent.selectedNumberWeapon;

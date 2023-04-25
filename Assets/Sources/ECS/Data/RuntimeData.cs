@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RuntimeData
 {
-	public int MaxCountWeapons { get; private set; } = 3;
+	public List<byte> CurrentArsenal = new List<byte>();
+
+	public byte MaxCountWeapons { get; private set; } = 3;
 
 	public Transform OwnerCameraTransform { get; set; }
 

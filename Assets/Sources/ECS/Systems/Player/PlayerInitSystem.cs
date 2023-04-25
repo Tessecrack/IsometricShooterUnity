@@ -30,14 +30,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		movableComponent.transform = player.transform;
 		movableComponent.speedMove = characterSettings.CharacterSpeed;
 		inputComponent.selectedNumberWeapon = 0;
-
 		weaponComponent.pointSpawnWeapon = characterSettings.PointSpawnWeapon;
-
-		weaponComponent.weaponInstance = Object.Instantiate(staticData.Weapons.WeaponsPrefabs[inputComponent.selectedNumberWeapon], 
-			characterSettings.PointSpawnWeapon, false);
-
-		weaponComponent.weapon = weaponComponent.weaponInstance.GetComponent<Weapon>();
-		weaponComponent.typeWeapon = weaponComponent.weapon.TypeWeapon;
-		weaponComponent.currentNumberWeapon = inputComponent.selectedNumberWeapon;
+		weaponComponent.currentNumberWeapon = -1;
 	}
 }
