@@ -12,7 +12,7 @@ public class AttackSystem : IEcsRunSystem
 
 			if (attackComponent.isStartAttack)
 			{
-				weaponComponent.weapon.Attack();
+				weaponComponent.weapon.Attack(attackComponent.attackerTransform, attackComponent.targetPoint);
 			}
 		}
 	}

@@ -15,8 +15,8 @@ public class Weapon : MonoBehaviour
 
 	public int quantityOneShotBullet = 1;
 
-	public void Attack()
+	public void Attack(Transform startTrasform, Vector3 targetPosition)
 	{
-		Debug.Log("Attack");
+
 	}
 }
