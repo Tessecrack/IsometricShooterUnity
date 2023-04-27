@@ -3,6 +3,8 @@ using UnityEngine;
 public struct AttackComponent
 {
 	public Transform attackerTransform;
-	public bool isStartAttack;
 	public Vector3 targetPoint;
+
+	public bool isStartAttack;
+	public bool isStopAttack;
 }

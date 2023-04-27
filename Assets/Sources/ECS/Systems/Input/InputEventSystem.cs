@@ -10,7 +10,8 @@ public class InputEventSystem : IEcsRunSystem
 		{
 			ref var inputComponent = ref filter.Get1(i);
 			inputComponent.inputMovement = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-			inputComponent.isAttack = Input.GetMouseButton(0);
+			inputComponent.isStartAttack = Input.GetMouseButton(0);
+			inputComponent.isStopAttack = Input.GetMouseButtonUp(0);
 			inputComponent.selectedNumberWeapon = GetNumberSelectedWeapon(inputComponent.selectedNumberWeapon);
 		}
 	}

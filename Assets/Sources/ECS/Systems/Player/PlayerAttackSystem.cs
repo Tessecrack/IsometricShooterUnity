@@ -11,7 +11,9 @@ public class PlayerAttackSystem : IEcsRunSystem
 			ref var attackComponent = ref filter.Get2(i);
 			ref var characterComponent = ref filter.Get3(i);
 
-			attackComponent.isStartAttack = inputComponent.isAttack;
+			attackComponent.isStartAttack = inputComponent.isStartAttack;
+			attackComponent.isStopAttack = inputComponent.isStopAttack;
+
 			attackComponent.targetPoint = runtimeData.CursorPosition;
 			attackComponent.attackerTransform = characterComponent.currentPosition;
 		}

@@ -15,8 +15,13 @@ public class Weapon : MonoBehaviour
 
 	public int quantityOneShotBullet = 1;
 
-	public void Attack(Transform startTrasform, Vector3 targetPosition)
+	public void StartAttack(Transform startTrasform, Vector3 targetPosition)
 	{
+		Debug.Log("START");
+	}
 
+	public void StopAttack()
+	{
+		Debug.Log("STOP");
 	}
 }

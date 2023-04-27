@@ -12,7 +12,12 @@ public class AttackSystem : IEcsRunSystem
 
 			if (attackComponent.isStartAttack)
 			{
-				weaponComponent.weapon.Attack(attackComponent.attackerTransform, attackComponent.targetPoint);
+				weaponComponent.weapon.StartAttack(attackComponent.attackerTransform, attackComponent.targetPoint);
+			}
+
+			if (attackComponent.isStopAttack)
+			{
+				weaponComponent.weapon.StopAttack();
 			}
 		}
 	}
