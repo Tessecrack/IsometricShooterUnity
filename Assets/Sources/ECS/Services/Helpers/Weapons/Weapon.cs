@@ -20,4 +20,9 @@ public abstract class Weapon : MonoBehaviour
 	public abstract void StopAttack();
 
 	public TypeWeapon GetTypeWeapon() => typeWeapon;
+
+	private void OnDestroy()
+	{
+		
+	}
 }
