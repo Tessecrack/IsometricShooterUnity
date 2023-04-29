@@ -1,27 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
-	public string NameWeapon;
+	[SerializeField] protected string nameWeapon;
 
-	public TypeWeapon TypeWeapon;
+	[SerializeField] protected TypeWeapon typeWeapon;
 
-	public bool IsAutomaticWeapon;
+	[SerializeField] protected GameObject prefabProjectTile;
 
-	public GameObject prefabProjectTile;
+	[SerializeField] protected List<GameObject> muzzles;
 
-	public List<GameObject> muzzles;
+	[SerializeField] protected int quantityOneShotBullet = 1;
 
-	public int quantityOneShotBullet = 1;
+	protected int lifeTime = 3;
 
-	public void StartAttack(Transform startTrasform, Vector3 targetPosition)
-	{
-		
-	}
+	public abstract void StartAttack(Transform startTrasform, Vector3 targetPosition);
 
-	public void StopAttack()
-	{
-		
-	}
+	public abstract void StopAttack();
+
+	public TypeWeapon GetTypeWeapon() => typeWeapon;
 }

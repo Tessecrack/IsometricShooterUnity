@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6663567665271436445}
   - component: {fileID: 6663567665274827965}
   - component: {fileID: 6663567665273861757}
-  - component: {fileID: -2945083777636644163}
+  - component: {fileID: 484656055515670263}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -85,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-2945083777636644163
+--- !u!114 &484656055515670263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,16 +94,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6663567665271924925}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ee5fbede128c444f93dbbd6d677a54f, type: 3}
+  m_Script: {fileID: 11500000, guid: 562d327f541448d48b62968987a27a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameWeapon: Shotgun
-  TypeWeapon: 2
-  IsAutomaticWeapon: 0
+  nameWeapon: Shotgun
+  typeWeapon: 2
   prefabProjectTile: {fileID: 9086379581574355896, guid: 481d0ea200b455a4ba32af9db099767f, type: 3}
   muzzles:
   - {fileID: 8303513549622553672}
-  quantityOneShotBullet: 6
+  quantityOneShotBullet: 1
 --- !u!1 &8303513549622553672
 GameObject:
   m_ObjectHideFlags: 0

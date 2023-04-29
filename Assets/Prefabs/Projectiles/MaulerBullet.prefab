@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1682423211391700247}
   - component: {fileID: 7434661196713479565}
   - component: {fileID: 5871548295750750130}
+  - component: {fileID: 8957505712129958546}
   m_Layer: 0
   m_Name: MaulerBullet
   m_TagString: Untagged
@@ -116,3 +117,15 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8957505712129958546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3476722609331548987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1fb303ac1f7c1a41946250fa1e64d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

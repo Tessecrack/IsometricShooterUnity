@@ -23,7 +23,7 @@ public class PlayerSelectWeaponSystem : IEcsRunSystem
 				weaponComponent.weaponInstance = Object.Instantiate(staticData.Weapons.WeaponsPrefabs[inputComponent.selectedNumberWeapon],
 					weaponComponent.pointSpawnWeapon, false);
 				weaponComponent.weapon = weaponComponent.weaponInstance.GetComponent<Weapon>();
-				weaponComponent.typeWeapon = weaponComponent.weapon.TypeWeapon;
+				weaponComponent.typeWeapon = weaponComponent.weapon.GetTypeWeapon();
 				weaponComponent.currentNumberWeapon = inputComponent.selectedNumberWeapon;
 			}
 		}

@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6581988658537621146}
   - component: {fileID: 6581988658541012666}
   - component: {fileID: 6581988658540045434}
-  - component: {fileID: 6206887140444241946}
+  - component: {fileID: 3442815442287369325}
   m_Layer: 0
   m_Name: Mauler
   m_TagString: Untagged
@@ -116,7 +116,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6206887140444241946
+--- !u!114 &3442815442287369325
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,12 +125,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6581988658538052282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ee5fbede128c444f93dbbd6d677a54f, type: 3}
+  m_Script: {fileID: 11500000, guid: b502db6ea1301aa4d907b0b1e63d330f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameWeapon: Mauler
-  TypeWeapon: 2
-  IsAutomaticWeapon: 0
+  nameWeapon: Mauler
+  typeWeapon: 2
   prefabProjectTile: {fileID: 3476722609331548987, guid: 07effad1061ceba43bf3f5dca970c643, type: 3}
   muzzles:
   - {fileID: 3492047633189612653}

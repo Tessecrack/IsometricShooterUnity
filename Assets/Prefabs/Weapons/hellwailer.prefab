@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4309202705036523021}
   - component: {fileID: 4309202705037850157}
   - component: {fileID: 4309202705038947565}
-  - component: {fileID: 317804797293841515}
+  - component: {fileID: 6153288541132295599}
   m_Layer: 0
   m_Name: hellwailer
   m_TagString: Untagged
@@ -86,7 +86,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &317804797293841515
+--- !u!114 &6153288541132295599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,12 +95,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4309202705036683821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ee5fbede128c444f93dbbd6d677a54f, type: 3}
+  m_Script: {fileID: 11500000, guid: 562d327f541448d48b62968987a27a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameWeapon: Hellwailer
-  TypeWeapon: 2
-  IsAutomaticWeapon: 0
+  nameWeapon: Hellwailer
+  typeWeapon: 2
   prefabProjectTile: {fileID: 7124737278642890963, guid: 86ab7c6e98e1c394ca31622302f3e588, type: 3}
   muzzles:
   - {fileID: 8780396417363242170}
