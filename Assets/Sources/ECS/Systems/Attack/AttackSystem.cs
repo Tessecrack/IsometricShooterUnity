@@ -17,7 +17,7 @@ public class AttackSystem : IEcsRunSystem
 			if (attackComponent.isStopAttack)
 			{
 				weaponComponent.weapon.StopAttack();
-			}
+			}	
 		}
 	}
 }

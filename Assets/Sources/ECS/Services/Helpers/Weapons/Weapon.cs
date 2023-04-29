@@ -17,11 +17,11 @@ public class Weapon : MonoBehaviour
 
 	public void StartAttack(Transform startTrasform, Vector3 targetPosition)
 	{
-		Debug.Log("START");
+		
 	}
 
 	public void StopAttack()
 	{
-		Debug.Log("STOP");
+		
 	}
 }

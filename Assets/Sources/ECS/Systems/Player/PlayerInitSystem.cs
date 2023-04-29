@@ -17,7 +17,10 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var movableComponent = ref entityPlayer.Get<MovableComponent>();
 		ref var animatorComponent = ref entityPlayer.Get<AnimatorComponent>();
 		ref var weaponComponent = ref entityPlayer.Get<WeaponComponent>();
-		ref var attackComponent = ref entityPlayer.Get<AttackComponent>(); 
+		ref var attackComponent = ref entityPlayer.Get<AttackComponent>();
+		ref var characterState = ref entityPlayer.Get<CharacterStateComponent>();
+
+		characterState.stateAttackTime = 3;
 
 		GameObject player = Object.Instantiate(staticData.PlayerPrefab, sceneData.playerSpawnPoint.position, Quaternion.identity);
 

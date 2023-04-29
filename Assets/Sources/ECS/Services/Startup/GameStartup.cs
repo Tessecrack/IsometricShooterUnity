@@ -28,6 +28,7 @@ public class GameStartup : MonoBehaviour
 			.Add(new PlayerMoveSystem())
             .Add(new PlayerSelectWeaponSystem())
 			.Add(new PlayerAttackSystem())
+			.Add(new CharacterChangeStateSystem())
 			.Add(new CharacterAnimationSystem())
             .Add(new CameraFollowSystem())
             .Add(new AttackSystem())
