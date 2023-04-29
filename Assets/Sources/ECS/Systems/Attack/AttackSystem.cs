@@ -14,7 +14,6 @@ public class AttackSystem : IEcsRunSystem
 			{
 				weaponComponent.weapon.StartAttack(attackComponent.attackerTransform, attackComponent.targetPoint);
 			}
-
 			if (attackComponent.isStopAttack)
 			{
 				weaponComponent.weapon.StopAttack();
