@@ -134,3 +134,4 @@ MonoBehaviour:
   muzzles:
   - {fileID: 2538392431875503170}
   quantityOneShotBullet: 1
+  projectile: {fileID: 8932127953273655131, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
