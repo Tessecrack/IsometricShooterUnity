@@ -13,8 +13,7 @@ public class CameraFollowSystem : IEcsRunSystem
 			ref var cameraComponent = ref filter.Get1(i);
 
 			var pointCameraOwner = runtimeData.OwnerCameraTransform.position;
-			var cursorPosition = GetCursorPosition(cameraComponent.camera, pointCameraOwner);
-			runtimeData.CursorPosition = cursorPosition;
+			var cursorPosition = runtimeData.GetModifyCursorPosition();
 
 			var currentAngle = Vector3.Angle(staticData.GlobalForwardVector, cursorPosition - pointCameraOwner);
 
@@ -33,15 +32,6 @@ public class CameraFollowSystem : IEcsRunSystem
 			cameraComponent.camera.transform.position = Vector3.Slerp(currentPosition, targetPosition,
 				coeffInterpolate * Time.deltaTime);
 		}
-	}
-
-	private Vector3 GetCursorPosition(Camera camera, Vector3 ownerPosition)
-	{
-		Ray rayFromCursor = camera.ScreenPointToRay(Input.mousePosition);
-		RaycastHit raycastHit;
-		int layerMask = 1 << staticData.GetFloorLayer();
-		Physics.Raycast(rayFromCursor, out raycastHit, int.MaxValue, layerMask);
-		return new Vector3(raycastHit.point.x, ownerPosition.y, raycastHit.point.z);
 	}
 
 	private float MapValue(float value, float leftMin, float leftMax, float rightMin, float rightMax)

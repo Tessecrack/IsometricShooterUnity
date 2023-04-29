@@ -10,4 +10,11 @@ public class RuntimeData
 	public Transform OwnerCameraTransform { get; set; }
 
 	public Vector3 CursorPosition { get; set; }
+
+	public void SetCursorPosition(Vector3 cursorPosition)
+	{
+		CursorPosition = cursorPosition;
+	}
+
+	public Vector3 GetModifyCursorPosition() => new Vector3(CursorPosition.x, OwnerCameraTransform.position.y, CursorPosition.z);
 }

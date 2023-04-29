@@ -9,6 +9,9 @@ public class GameStartup : MonoBehaviour
     [Header("Obejcts/data in current scene")]
     public SceneData SceneData;
 
+    private Raycaster raycaster;
+    private RuntimeData runtimeData;
+
     private EcsWorld ecsWorld;
     private EcsSystems ecsUpdateSystems;
     
@@ -16,7 +19,11 @@ public class GameStartup : MonoBehaviour
     {
         SceneData.SetCamera();
 
-        var runtimeData = new RuntimeData();
+        raycaster = new Raycaster();
+        raycaster.SetCamera(SceneData.camera);
+        raycaster.SetGroundLayer(StaticData.GetFloorLayer());
+
+        runtimeData = new RuntimeData();
 
         ecsWorld = new EcsWorld();
         ecsUpdateSystems = new EcsSystems(ecsWorld, "UPDATE SYSTEM");
@@ -41,6 +48,7 @@ public class GameStartup : MonoBehaviour
 
     private void Update()
     {
+        runtimeData.SetCursorPosition(raycaster.GetCursorPosition());
         ecsUpdateSystems?.Run();
     }
 
