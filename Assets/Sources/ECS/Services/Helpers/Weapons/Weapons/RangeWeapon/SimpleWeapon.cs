@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class SimpleWeapon : Weapon
+public class SimpleWeapon : RangeWeapon
 {
+	private bool needClickTrigger = false;
 	public override void StartAttack(Transform startTrasform, Vector3 targetPosition)
 	{
-		if (canAttack)
+		if (canAttack && !needClickTrigger)
 		{
 			if (quantityOneShotBullet == 1)
 			{
@@ -15,11 +16,12 @@ public class SimpleWeapon : Weapon
 				StartCoroutine(GenerateSpreadBullets(startTrasform, targetPosition));
 			}
 			canAttack = false;
+			needClickTrigger = true;
 		}
 	}
 
 	public override void StopAttack()
 	{
-		canAttack = true;
+		needClickTrigger = false;
 	}
 }

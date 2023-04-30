@@ -28,10 +28,6 @@ public class CameraFollowSystem : IEcsRunSystem
 			var coeffInterpolate = currentAngle > 90 || needOffset ? 4.0f : 3.0f;
 			var additionOffsetDown = MapValue(currentAngle, 90, 180, 0, 2);
 
-			if (additionOffsetDown == 0 && needOffset)
-			{
-				coeffInterpolate = 6.0f;
-			}
 			var result = pointCameraOwner + cameraComponent.offset;
 			var distance = Vector3.ClampMagnitude(cursorPosition - result, staticData.CameraSettings.CameraMagnitude);
 

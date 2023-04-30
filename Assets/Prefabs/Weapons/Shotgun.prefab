@@ -104,6 +104,7 @@ MonoBehaviour:
   - {fileID: 8303513549622553672}
   quantityOneShotBullet: 5
   projectile: {fileID: 6773687861171711744, guid: 481d0ea200b455a4ba32af9db099767f, type: 3}
+  delayBetweenAttack: 3
 --- !u!1 &8303513549622553672
 GameObject:
   m_ObjectHideFlags: 0
