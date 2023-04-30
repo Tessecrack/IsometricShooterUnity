@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,15 +16,14 @@ public abstract class Weapon : MonoBehaviour
 
 	[SerializeField] protected Projectile projectile;
 
-	protected int lifeTime = 3;
+	[SerializeField] protected float delayBetweenAttack = 1.0f;
 
 	protected bool canAttack = true;
 
-	protected float delayBetweenAttack = 2.0f;
-
 	protected int damage = 25;
 
-	protected float speedAttack = 20;
+	protected float speedAttack = 40;
+
 
 	public abstract void StartAttack(Transform startTrasform, Vector3 targetPosition);
 
@@ -38,10 +38,21 @@ public abstract class Weapon : MonoBehaviour
 		}
 	}
 
+	protected IEnumerator GenerateSpreadBullets(Transform ownerTransform, Vector3 targetPosition)
+	{
+		var partBullets = quantityOneShotBullet / 2;
+		for (int i = -partBullets; i <= partBullets; ++i)
+		{
+			Attack(ownerTransform, targetPosition + i * ownerTransform.right.normalized);
+			yield return new WaitForFixedUpdate();
+		}
+		yield break;
+	}
+
 	public TypeWeapon GetTypeWeapon() => typeWeapon;
 
 	private void OnDestroy()
 	{
-		
+
 	}
 }

@@ -6,7 +6,14 @@ public class SimpleWeapon : Weapon
 	{
 		if (canAttack)
 		{
-			Attack(startTrasform, targetPosition);
+			if (quantityOneShotBullet == 1)
+			{
+				Attack(startTrasform, targetPosition);
+			}
+			else
+			{
+				StartCoroutine(GenerateSpreadBullets(startTrasform, targetPosition));
+			}
 			canAttack = false;
 		}
 	}

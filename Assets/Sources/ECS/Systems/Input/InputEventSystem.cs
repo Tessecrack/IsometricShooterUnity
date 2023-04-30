@@ -12,6 +12,7 @@ public class InputEventSystem : IEcsRunSystem
 			inputComponent.inputMovement = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 			inputComponent.isStartAttack = Input.GetMouseButton(0);
 			inputComponent.isStopAttack = Input.GetMouseButtonUp(0);
+			inputComponent.isDash = Input.GetKeyDown(KeyCode.LeftShift);
 			inputComponent.selectedNumberWeapon = GetNumberSelectedWeapon(inputComponent.selectedNumberWeapon);
 		}
 	}

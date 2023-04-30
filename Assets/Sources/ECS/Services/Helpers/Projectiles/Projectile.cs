@@ -3,19 +3,18 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
 	private CharacterController characterController;
 	private Vector3 velocity;
 	private float speed;
 	private int damage;
 	private int ignoreCollisionBulletLayer = 3;
-	private int timeOfLife = 2;
+	private int lifeTime = 2;
 
 	public void StartFire(Transform owner, Vector3 target, float speed, int damage)
 	{
 		this.gameObject.layer = ignoreCollisionBulletLayer;
 		characterController = GetComponent<CharacterController>();
-		Destroy(this.gameObject, timeOfLife);
+		Destroy(this.gameObject, lifeTime);
 		this.speed = speed;
 		this.damage = damage;
 		this.velocity = Vector3.ClampMagnitude(target - owner.transform.position, 1);
