@@ -19,8 +19,11 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var weaponComponent = ref entityPlayer.Get<WeaponComponent>();
 		ref var attackComponent = ref entityPlayer.Get<AttackComponent>();
 		ref var characterState = ref entityPlayer.Get<CharacterStateComponent>();
+		ref var dashComponent = ref entityPlayer.Get<DashComponent>();
 
 		characterState.stateAttackTime = 3;
+		dashComponent.dashTime = 0.06f;
+		dashComponent.dashSpeed = 80.0f;
 
 		GameObject player = Object.Instantiate(staticData.PlayerPrefab, sceneData.playerSpawnPoint.position, Quaternion.identity);
 
@@ -35,7 +38,7 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		movableComponent.transform = player.transform;
 
-		movableComponent.speedMove = characterSettings.CharacterSpeed;
+		movableComponent.moveSpeed = characterSettings.CharacterSpeed;
 		weaponComponent.pointSpawnWeapon = characterSettings.PointSpawnWeapon;
 
 		weaponComponent.currentNumberWeapon = -1;

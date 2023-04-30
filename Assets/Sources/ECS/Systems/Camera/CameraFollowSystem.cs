@@ -17,8 +17,21 @@ public class CameraFollowSystem : IEcsRunSystem
 
 			var currentAngle = Vector3.Angle(staticData.GlobalForwardVector, cursorPosition - pointCameraOwner);
 
-			var coeffInterpolate = currentAngle > 90 ? 4.0f : 3.0f;
+			var cameraPosition = cameraComponent.camera.transform.position;
+
+			var cameraRelativePlayer = new Vector3(cameraPosition.x, pointCameraOwner.y, cameraPosition.z);
+
+			var distancePlayerToCamera = Vector3.Distance(cameraRelativePlayer, pointCameraOwner);
+
+			var needOffset = distancePlayerToCamera <= 2;
+
+			var coeffInterpolate = currentAngle > 90 || needOffset ? 4.0f : 3.0f;
 			var additionOffsetDown = MapValue(currentAngle, 90, 180, 0, 2);
+
+			if (additionOffsetDown == 0 && needOffset)
+			{
+				coeffInterpolate = 6.0f;
+			}
 			var result = pointCameraOwner + cameraComponent.offset;
 			var distance = Vector3.ClampMagnitude(cursorPosition - result, staticData.CameraSettings.CameraMagnitude);
 
