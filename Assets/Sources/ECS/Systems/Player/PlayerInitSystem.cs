@@ -20,6 +20,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var attackComponent = ref entityPlayer.Get<AttackComponent>();
 		ref var characterState = ref entityPlayer.Get<CharacterStateComponent>();
 		ref var dashComponent = ref entityPlayer.Get<DashComponent>();
+		ref var healthComponent = ref entityPlayer.Get<HealthComponent>();
 
 		characterState.stateAttackTime = 3;
 		dashComponent.dashTime = 0.06f;
@@ -33,6 +34,9 @@ public class PlayerInitSystem : IEcsInitSystem
 		var characterSettings = player.GetComponent<CharacterSettings>();
 		player.transform.forward = staticData.GlobalForwardVector;
 
+		healthComponent.maxHealth = characterSettings.maxHealth;
+		healthComponent.currentHealth = healthComponent.maxHealth;
+
 		animatorComponent.animator = player.GetComponent<Animator>();
 		characterComponent.characterController = player.GetComponent<CharacterController>();
 
@@ -41,7 +45,6 @@ public class PlayerInitSystem : IEcsInitSystem
 		movableComponent.moveSpeed = characterSettings.CharacterSpeed;
 		weaponComponent.pointSpawnWeapon = characterSettings.PointSpawnWeapon;
 
-		weaponComponent.currentNumberWeapon = -1;
-		inputComponent.selectedNumberWeapon = 0;
+		weaponComponent.currentNumberWeapon = -1;	
 	}
 }

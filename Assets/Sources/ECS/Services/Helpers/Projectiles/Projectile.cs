@@ -31,6 +31,12 @@ public class Projectile : MonoBehaviour
 		{
 			return;
 		}
+
+		if (hit.gameObject.TryGetComponent<Damageable>(out Damageable damageableObj))
+		{
+			damageableObj.TakeDamage(damage);
+		}
+
 		Destroy(this.gameObject);
 	}
 

@@ -13,7 +13,9 @@ public class GameStartup : MonoBehaviour
     private RuntimeData runtimeData;
 
     private EcsWorld ecsWorld;
-    private EcsSystems ecsUpdateSystems;
+
+    private EcsSystems ecsUpdateCharacterSystems;
+    private EcsSystems ecsUpdateCameraSystems;
     
     private void Start()
     {
@@ -26,39 +28,60 @@ public class GameStartup : MonoBehaviour
         runtimeData = new RuntimeData();
 
         ecsWorld = new EcsWorld();
-        ecsUpdateSystems = new EcsSystems(ecsWorld, "UPDATE SYSTEM");
-
-        ecsUpdateSystems
-            .Add(new PlayerInitSystem())
-            .Add(new CameraInitSystem())
-            .Add(new InputEventSystem())
-            .Add(new CharacterDashTimerSystem())
-			.Add(new PlayerMoveSystem())
-            .Add(new PlayerSelectWeaponSystem())
-			.Add(new PlayerAttackSystem())
-			.Add(new CharacterChangeStateSystem())
-			.Add(new CharacterAnimationSystem())
-            .Add(new CameraFollowSystem())
-            .Add(new AttackSystem())
-            .Inject(StaticData)
-            .Inject(SceneData)
-            .Inject(runtimeData);
-
-		ecsUpdateSystems.Init();
-    }
+		InitPlayerSystem();
+		InitCameraSystem();
+	}
 
     private void Update()
     {
         runtimeData.SetCursorPosition(raycaster.GetCursorPosition());
-        ecsUpdateSystems?.Run();
-    }
+        ecsUpdateCharacterSystems?.Run();
+		ecsUpdateCameraSystems?.Run();
+	}
 
 	private void OnDestroy()
 	{
-        ecsUpdateSystems?.Destroy();
-        ecsUpdateSystems = null;
+        ecsUpdateCharacterSystems?.Destroy();
+        ecsUpdateCharacterSystems = null;
+
+        ecsUpdateCameraSystems?.Destroy();
+        ecsUpdateCameraSystems = null;
 
         ecsWorld?.Destroy();
         ecsWorld = null;
+	}
+
+    private void InitPlayerSystem()
+    {
+		ecsUpdateCharacterSystems = new EcsSystems(ecsWorld, "UPDATE SYSTEM CHARACTER");
+
+		ecsUpdateCharacterSystems
+			.Add(new PlayerInitSystem())
+			.Add(new InputEventSystem())
+			.Add(new CharacterDashTimerSystem())
+			.Add(new PlayerMoveSystem())
+			.Add(new PlayerSelectWeaponSystem())
+			.Add(new PlayerAttackSystem())
+			.Add(new CharacterChangeStateSystem())
+			.Add(new CharacterAnimationSystem())
+			.Add(new AttackSystem())
+			.Inject(StaticData)
+			.Inject(SceneData)
+			.Inject(runtimeData);
+
+		ecsUpdateCharacterSystems.Init();
+	}
+
+    private void InitCameraSystem()
+    {
+		ecsUpdateCameraSystems = new EcsSystems(ecsWorld, "UPDATE SYSTEM CAMERA");
+		ecsUpdateCameraSystems
+			.Add(new CameraInitSystem())
+			.Add(new CameraFollowSystem())
+			.Inject(StaticData)
+			.Inject(SceneData)
+			.Inject(runtimeData);
+
+		ecsUpdateCameraSystems.Init();
 	}
 }
