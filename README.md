@@ -1,12 +1,12 @@
-# `Complex13` (ECS)
+# `Complex13`
 Isometric 3D-shooter on Unity    
-Stage: development      
+Stage: development (transfer to `ECS`; branch - `ECS`)    
 Sources: /Assets/Sources  
 
 ![prototype_screen](https://github.com/Tessecrack/Complex13/blob/master/Assets/Screenshots/TestLocation.png)
-
-Реализация ECS-архитектуры:  
+  
+Framework ECS:
 https://github.com/Leopotam/ecs
   
-Полезности:
+Features:
 https://learn.microsoft.com/ru-ru/windows/mixed-reality/develop/unity/performance-recommendations-for-unity?tabs=openxr
