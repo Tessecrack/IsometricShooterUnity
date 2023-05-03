@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4621747238906404}
   - component: {fileID: 33659945122864526}
   - component: {fileID: 23358734570075446}
-  - component: {fileID: 6186092822340634930}
+  - component: {fileID: 1812760131726900488}
   m_Layer: 0
   m_Name: Prefab_Sword_Cyber_Magma
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1858147060561370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.5, z: 2}
+  m_LocalScale: {x: 2, y: 1.5, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6186092822340634930
+--- !u!114 &1812760131726900488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,8 +93,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1858147060561370}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97c029ef82648604498fdbbbe532d931, type: 3}
+  m_Script: {fileID: 11500000, guid: 75b13a007827e364c8ca174589e06e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 0}
-  bullet: {fileID: 0}
+  nameWeapon: 
+  typeWeapon: 0
+  delayBetweenAttack: 1

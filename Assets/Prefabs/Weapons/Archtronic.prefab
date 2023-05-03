@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 8728977337962422653}
   - component: {fileID: 8728977337961095517}
   - component: {fileID: 8728977337959998365}
-  - component: {fileID: 1497195621384281178}
+  - component: {fileID: 1410798988926299852}
   m_Layer: 0
   m_Name: Archtronic
   m_TagString: Untagged
@@ -116,7 +116,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1497195621384281178
+--- !u!114 &1410798988926299852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,10 +125,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8728977337962003805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9452da9d1b6d5014f862115dfd1871e3, type: 3}
+  m_Script: {fileID: 11500000, guid: b502db6ea1301aa4d907b0b1e63d330f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameWeapon: Archtronic
+  typeWeapon: 2
+  prefabProjectTile: {fileID: 9086379581574355896, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
   muzzles:
   - {fileID: 2538392431875503170}
-  bullet: {fileID: 7105907417775955238, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
-  nameWeapon: 
+  quantityOneShotBullet: 1
+  projectile: {fileID: 8932127953273655131, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
+  delayBetweenAttack: 0.2
