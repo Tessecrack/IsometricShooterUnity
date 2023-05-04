@@ -1,6 +1,6 @@
 # `Complex13`
 Isometric 3D-shooter on Unity    
-Stage: development (transfer to `ECS`; branch - `ECS`)    
+Stage: development
 Sources: /Assets/Sources  
 
 ![prototype_screen](https://github.com/Tessecrack/Complex13/blob/master/Assets/Screenshots/TestLocation.png)
