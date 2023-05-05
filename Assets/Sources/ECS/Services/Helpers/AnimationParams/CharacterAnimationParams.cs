@@ -1,4 +1,4 @@
-public class AnimationParams
+public class CharacterAnimationParams
 {
 	public readonly static string FLOAT_TYPE_WEAPON_NAME_PARAM = "TypeWeapon";
 

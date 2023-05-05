@@ -17,12 +17,18 @@ public class CharacterAnimationSystem : IEcsRunSystem
 
 			var currentState = characterStateComponent.characterState;
 
-			animatorComponent.animator.SetFloat(AnimationParams.FLOAT_TYPE_WEAPON_NAME_PARAM, (int)weaponComponent.typeWeapon);
-			animatorComponent.animator.SetBool(AnimationParams.BOOL_RUN_NAME_PARAM, 
+			bool isHeavyWeapon = weaponComponent.typeWeapon == TypeWeapon.HEAVY;
+			bool isGunWeaponAttack = weaponComponent.typeWeapon == TypeWeapon.GUN && currentState == CharacterState.ATTACK;
+
+			animatorComponent.animator.SetLayerWeight((int)CharacterAnimationLayers.ArmsHeavyWeapon, isHeavyWeapon ? 1 : 0);
+			animatorComponent.animator.SetLayerWeight((int)CharacterAnimationLayers.ArmsGunWeaponAttack, isGunWeaponAttack ? 1 : 0);
+
+			animatorComponent.animator.SetFloat(CharacterAnimationParams.FLOAT_TYPE_WEAPON_NAME_PARAM, (int)weaponComponent.typeWeapon);
+			animatorComponent.animator.SetBool(CharacterAnimationParams.BOOL_RUN_NAME_PARAM, 
 				movableComponent.velocity.z != 0 || movableComponent.velocity.x != 0);
-			animatorComponent.animator.SetFloat(AnimationParams.FLOAT_VERTICAL_MOTION_NAME_PARAM, movableComponent.relativeVector.z);
-			animatorComponent.animator.SetFloat(AnimationParams.FLOAT_HORIZONTAL_MOTION_NAME_PARAM, movableComponent.relativeVector.x);
-			animatorComponent.animator.SetBool(AnimationParams.BOOL_IS_ATTACK_MODE_NAME_PARAM, currentState == CharacterState.ATTACK);
+			animatorComponent.animator.SetFloat(CharacterAnimationParams.FLOAT_VERTICAL_MOTION_NAME_PARAM, movableComponent.relativeVector.z);
+			animatorComponent.animator.SetFloat(CharacterAnimationParams.FLOAT_HORIZONTAL_MOTION_NAME_PARAM, movableComponent.relativeVector.x);
+			animatorComponent.animator.SetBool(CharacterAnimationParams.BOOL_IS_ATTACK_MODE_NAME_PARAM, currentState == CharacterState.ATTACK);
 		}
 	}
 }
