@@ -20,8 +20,8 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			bool isHeavyWeapon = weaponComponent.typeWeapon == TypeWeapon.HEAVY;
 			bool isGunWeaponAttack = weaponComponent.typeWeapon == TypeWeapon.GUN && currentState == CharacterState.ATTACK;
 
-			animatorComponent.animator.SetLayerWeight((int)CharacterAnimationLayers.ArmsHeavyWeapon, isHeavyWeapon ? 1 : 0);
-			animatorComponent.animator.SetLayerWeight((int)CharacterAnimationLayers.ArmsGunWeaponAttack, isGunWeaponAttack ? 1 : 0);
+			//animatorComponent.animator.SetLayerWeight((int)CharacterAnimationLayers.ArmsHeavyWeapon, isHeavyWeapon ? 1 : 0);
+			//animatorComponent.animator.SetLayerWeight((int)CharacterAnimationLayers.ArmsGunWeaponAttack, isGunWeaponAttack ? 1 : 0);
 
 			animatorComponent.animator.SetFloat(CharacterAnimationParams.FLOAT_TYPE_WEAPON_NAME_PARAM, (int)weaponComponent.typeWeapon);
 			animatorComponent.animator.SetBool(CharacterAnimationParams.BOOL_RUN_NAME_PARAM, 
