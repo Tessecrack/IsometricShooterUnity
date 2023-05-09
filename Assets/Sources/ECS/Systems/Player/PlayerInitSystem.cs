@@ -1,26 +1,37 @@
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 public class PlayerInitSystem : IEcsInitSystem
 {
-	private EcsWorld ecsWorld;
-	private StaticData staticData;
-	private SceneData sceneData;
-	private RuntimeData runtimeData;
-
-	public void Init()
+	public void Init(IEcsSystems systems)
 	{
-		var entityPlayer = ecsWorld.NewEntity();
+		EcsWorld world = systems.GetWorld();
+		int entityPlayer = world.NewEntity();
+		SharedData sharedData = systems.GetShared<SharedData>();
 
-		ref var characterComponent = ref entityPlayer.Get<CharacterComponent>();
-		ref var inputComponent = ref entityPlayer.Get<InputEventComponent>();
-		ref var movableComponent = ref entityPlayer.Get<MovableComponent>();
-		ref var animatorComponent = ref entityPlayer.Get<AnimatorComponent>();
-		ref var weaponComponent = ref entityPlayer.Get<WeaponComponent>();
-		ref var attackComponent = ref entityPlayer.Get<AttackComponent>();
-		ref var characterState = ref entityPlayer.Get<CharacterStateComponent>();
-		ref var dashComponent = ref entityPlayer.Get<DashComponent>();
-		ref var healthComponent = ref entityPlayer.Get<HealthComponent>();
+		var staticData = sharedData.StaticData;
+		var sceneData = sharedData.SceneData;
+		var runtimeData = sharedData.RuntimeData;
+
+		EcsPool<CharacterComponent> poolCharacterComponent = world.GetPool<CharacterComponent>();
+		EcsPool<InputEventComponent> poolInpuntEventComponent = world.GetPool<InputEventComponent>();
+		EcsPool<MovableComponent> poolMovableComponent = world.GetPool<MovableComponent>();
+		EcsPool<AnimatorComponent> poolAnimatorComponent = world.GetPool<AnimatorComponent>();
+		EcsPool<WeaponComponent> poolWeaponComponent = world.GetPool<WeaponComponent>();
+		EcsPool<AttackComponent> poolAttackComponent = world.GetPool<AttackComponent>();
+		EcsPool<CharacterStateComponent> poolCharacterStateComponent = world.GetPool<CharacterStateComponent>();
+		EcsPool<DashComponent> poolDashComponent = world.GetPool<DashComponent>();
+		EcsPool<HealthComponent> poolHealthComponent = world.GetPool<HealthComponent>();
+
+		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
+		ref var inputComponent = ref poolInpuntEventComponent.Add(entityPlayer);
+		ref var movableComponent = ref poolMovableComponent.Add(entityPlayer);
+		ref var animatorComponent = ref poolAnimatorComponent.Add(entityPlayer);
+		ref var weaponComponent = ref poolWeaponComponent.Add(entityPlayer);
+		ref var attackComponent = ref poolAttackComponent.Add(entityPlayer);
+		ref var characterState = ref poolCharacterStateComponent.Add(entityPlayer);
+		ref var dashComponent = ref poolDashComponent.Add(entityPlayer);	
+		ref var healthComponent = ref poolHealthComponent.Add(entityPlayer);
 
 		characterState.stateAttackTime = 3;
 		dashComponent.dashTime = 0.06f;

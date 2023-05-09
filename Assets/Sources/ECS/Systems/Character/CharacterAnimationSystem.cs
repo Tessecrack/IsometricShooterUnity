@@ -1,19 +1,30 @@
-using Leopotam.Ecs;
-using UnityEngine;
+using Leopotam.EcsLite;
 
 public class CharacterAnimationSystem : IEcsRunSystem
 {
-	private EcsFilter<AnimatorComponent, MovableComponent, WeaponComponent, AttackComponent, CharacterStateComponent> filter;
-
-	public void Run()
+	public void Run(IEcsSystems systems)
 	{
-		foreach(var i in filter)
+		var world = systems.GetWorld();
+		var filter = world.Filter<AnimatorComponent>()
+			.Inc<MovableComponent>()
+			.Inc<WeaponComponent>()
+			.Inc<AttackComponent>()
+			.Inc<CharacterStateComponent>()
+			.End();
+
+		var animators = world.GetPool<AnimatorComponent>();
+		var movables = world.GetPool<MovableComponent>();
+		var weapons = world.GetPool<WeaponComponent>();
+		var attacks = world.GetPool<AttackComponent>();
+		var characterStates = world.GetPool<CharacterStateComponent>();
+
+		foreach(int entity in filter)
 		{
-			ref var animatorComponent = ref filter.Get1(i);
-			ref var movableComponent = ref filter.Get2(i);
-			ref var weaponComponent = ref filter.Get3(i);
-			ref var attackComponent = ref filter.Get4(i);
-			ref var characterStateComponent = ref filter.Get5(i);
+			ref var animatorComponent = ref animators.Get(entity);
+			ref var movableComponent = ref movables.Get(entity);
+			ref var weaponComponent = ref weapons.Get(entity);
+			ref var attackComponent = ref attacks.Get(entity);
+			ref var characterStateComponent = ref characterStates.Get(entity);
 
 			var currentState = characterStateComponent.characterState;
 

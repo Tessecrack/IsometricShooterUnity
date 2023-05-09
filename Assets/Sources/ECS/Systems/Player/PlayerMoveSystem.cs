@@ -1,20 +1,35 @@
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 public class PlayerMoveSystem : IEcsRunSystem
 {
-	private EcsFilter<CharacterComponent, InputEventComponent, MovableComponent, CharacterStateComponent, DashComponent> filter;
-	private StaticData staticData;
-	private RuntimeData runtimeData;
-	public void Run()
+	public void Run(IEcsSystems systems)
 	{
-		foreach(var i in filter)
+		EcsWorld world = systems.GetWorld();
+		EcsFilter filter = world.Filter<CharacterComponent>()
+			.Inc<InputEventComponent>()
+			.Inc<MovableComponent>()
+			.Inc<CharacterStateComponent>()
+			.Inc<DashComponent>()
+			.End();
+
+		var sharedData = systems.GetShared<SharedData>();
+		var staticData = sharedData.StaticData;
+		var runtimeData = sharedData.RuntimeData;
+
+		var characters = world.GetPool<CharacterComponent>();
+		var inputs = world.GetPool<InputEventComponent>();
+		var movables = world.GetPool<MovableComponent>();
+		var characterStates = world.GetPool<CharacterStateComponent>();
+		var dashes = world.GetPool<DashComponent>();
+
+		foreach(int entity in filter)
 		{
-			ref var characterComponent = ref filter.Get1(i);
-			ref var inputComponent = ref filter.Get2(i);
-			ref var movableComponent = ref filter.Get3(i);
-			ref var characterStateComponent = ref filter.Get4(i);
-			ref var dashComponent = ref filter.Get5(i);
+			ref var characterComponent = ref characters.Get(entity);
+			ref var inputComponent = ref inputs.Get(entity);
+			ref var movableComponent = ref movables.Get(entity);
+			ref var characterStateComponent = ref characterStates.Get(entity);
+			ref var dashComponent = ref dashes.Get(entity);
 
 			var isStateAttack = characterStateComponent.characterState == CharacterState.ATTACK;
 

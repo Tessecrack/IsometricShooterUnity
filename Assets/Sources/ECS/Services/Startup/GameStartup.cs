@@ -1,4 +1,4 @@
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 public class GameStartup : MonoBehaviour
@@ -12,6 +12,8 @@ public class GameStartup : MonoBehaviour
     private Raycaster raycaster;
     private RuntimeData runtimeData;
 
+	private SharedData sharedData = new SharedData();
+
     private EcsWorld ecsWorld;
 
     private EcsSystems ecsUpdateCharacterSystems;
@@ -19,15 +21,16 @@ public class GameStartup : MonoBehaviour
     
     private void Start()
     {
-        SceneData.SetCamera();
-
         raycaster = new Raycaster();
-        raycaster.SetCamera(SceneData.camera);
+        raycaster.SetCamera(SceneData.Camera);
         raycaster.SetGroundLayer(StaticData.GetFloorLayer());
 
         runtimeData = new RuntimeData();
 
         ecsWorld = new EcsWorld();
+
+		InitSharedData();
+
 		InitPlayerSystem();
 		InitCameraSystem();
 	}
@@ -35,6 +38,7 @@ public class GameStartup : MonoBehaviour
     private void Update()
     {
         runtimeData.SetCursorPosition(raycaster.GetCursorPosition());
+
         ecsUpdateCharacterSystems?.Run();
 		ecsUpdateCameraSystems?.Run();
 	}
@@ -51,10 +55,14 @@ public class GameStartup : MonoBehaviour
         ecsWorld = null;
 	}
 
+	private void InitSharedData()
+	{
+		sharedData.InitSharedData(StaticData, SceneData, runtimeData);
+	}
+
     private void InitPlayerSystem()
     {
-		ecsUpdateCharacterSystems = new EcsSystems(ecsWorld, "UPDATE SYSTEM CHARACTER");
-
+		ecsUpdateCharacterSystems = new EcsSystems(ecsWorld, sharedData);
 		ecsUpdateCharacterSystems
 			.Add(new PlayerInitSystem())
 			.Add(new InputEventSystem())
@@ -64,23 +72,17 @@ public class GameStartup : MonoBehaviour
 			.Add(new PlayerAttackSystem())
 			.Add(new CharacterChangeStateSystem())
 			.Add(new CharacterAnimationSystem())
-			.Add(new AttackSystem())
-			.Inject(StaticData)
-			.Inject(SceneData)
-			.Inject(runtimeData);
+			.Add(new AttackSystem());
 
 		ecsUpdateCharacterSystems.Init();
 	}
 
     private void InitCameraSystem()
     {
-		ecsUpdateCameraSystems = new EcsSystems(ecsWorld, "UPDATE SYSTEM CAMERA");
+		ecsUpdateCameraSystems = new EcsSystems(ecsWorld, sharedData);
 		ecsUpdateCameraSystems
 			.Add(new CameraInitSystem())
-			.Add(new CameraFollowSystem())
-			.Inject(StaticData)
-			.Inject(SceneData)
-			.Inject(runtimeData);
+			.Add(new CameraFollowSystem());
 
 		ecsUpdateCameraSystems.Init();
 	}

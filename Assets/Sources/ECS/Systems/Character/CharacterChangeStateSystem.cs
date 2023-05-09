@@ -1,15 +1,20 @@
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 public class CharacterChangeStateSystem : IEcsRunSystem
 {
-	private EcsFilter<AttackComponent, CharacterStateComponent> filter;
-	public void Run()
+	public void Run(IEcsSystems systems)
 	{
-		foreach(var i in filter)
+		var world = systems.GetWorld();
+		var filter = world.Filter<AttackComponent>().Inc<CharacterStateComponent>().End();
+
+		var attacks = world.GetPool<AttackComponent>();
+		var characterStates = world.GetPool<CharacterStateComponent>();
+
+		foreach(int entity in filter)
 		{
-			ref var attackComponent = ref filter.Get1(i);
-			ref var characterState = ref filter.Get2(i);
+			ref var attackComponent = ref attacks.Get(entity);
+			ref var characterState = ref characterStates.Get(entity);
 
 			if (attackComponent.isStartAttack) 
 			{

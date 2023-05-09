@@ -1,20 +1,31 @@
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
+
 public class PlayerAttackSystem : IEcsRunSystem
 {
-	private EcsFilter<InputEventComponent, AttackComponent, CharacterComponent> filter;
-	private RuntimeData runtimeData;
-	public void Run()
+	public void Run(IEcsSystems systems)
 	{
-		foreach (var i in filter)
+		var world = systems.GetWorld();
+		var filter = world.Filter<InputEventComponent>()
+			.Inc<AttackComponent>()
+			.Inc<CharacterComponent>()
+			.End();
+
+		var inputs = world.GetPool<InputEventComponent>();
+		var attacks = world.GetPool<AttackComponent>();
+		var characters = world.GetPool<CharacterComponent>();
+
+		var sharedData = systems.GetShared<SharedData>();
+
+		foreach (int entity in filter)
 		{
-			ref var inputComponent = ref filter.Get1(i);
-			ref var attackComponent = ref filter.Get2(i);
-			ref var characterComponent = ref filter.Get3(i);
+			ref var inputComponent = ref inputs.Get(entity);
+			ref var attackComponent = ref attacks.Get(entity);
+			ref var characterComponent = ref characters.Get(entity);
 
 			attackComponent.isStartAttack = inputComponent.isStartAttack;
 			attackComponent.isStopAttack = inputComponent.isStopAttack;
 
-			attackComponent.targetPoint = runtimeData.CursorPosition;
+			attackComponent.targetPoint = sharedData.RuntimeData.CursorPosition;
 			attackComponent.attackerTransform = characterComponent.currentPosition;
 		}
 	}

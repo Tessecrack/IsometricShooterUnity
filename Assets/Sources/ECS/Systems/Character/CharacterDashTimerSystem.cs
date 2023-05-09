@@ -1,14 +1,18 @@
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 public class CharacterDashTimerSystem : IEcsRunSystem
 {
-	private EcsFilter<DashComponent> filter;
-	public void Run()
+	public void Run(IEcsSystems systems)
 	{
-		foreach(var i in filter)
+		var world = systems.GetWorld();
+		var filter = world.Filter<DashComponent>().End();
+
+		var dashes = world.GetPool<DashComponent>();
+
+		foreach(int entity in filter)
 		{
-			ref var dashComponent = ref filter.Get1(i);
+			ref var dashComponent = ref dashes.Get(entity);
 
 			if (dashComponent.isStartDash)
 			{

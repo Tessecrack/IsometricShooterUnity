@@ -1,14 +1,19 @@
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 
 public class AttackSystem : IEcsRunSystem
 {
-	private EcsFilter<AttackComponent, WeaponComponent> filter;
-	public void Run()
+	public void Run(IEcsSystems systems)
 	{
-		foreach (var i in filter)
+		var world = systems.GetWorld();
+		var filter = world.Filter<AttackComponent>().Inc<WeaponComponent>().End();
+
+		var attacks = world.GetPool<AttackComponent>();
+		var weapons = world.GetPool<WeaponComponent>();
+
+		foreach (int entity in filter)
 		{
-			ref var attackComponent = ref filter.Get1(i);
-			ref var weaponComponent = ref filter.Get2(i);
+			ref var attackComponent = ref attacks.Get(entity);
+			ref var weaponComponent = ref weapons.Get(entity);
 
 			if (attackComponent.isStartAttack)
 			{

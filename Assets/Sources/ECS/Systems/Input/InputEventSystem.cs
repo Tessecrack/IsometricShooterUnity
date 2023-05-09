@@ -1,14 +1,17 @@
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 public class InputEventSystem : IEcsRunSystem
 {
-	private EcsFilter<InputEventComponent> filter;
-	public void Run()
+	public void Run(IEcsSystems systems)
 	{
-		foreach(var i in filter)
+		var world = systems.GetWorld();
+		var filter = world.Filter<InputEventComponent>().End();
+		var inputs = world.GetPool<InputEventComponent>();
+
+		foreach(int entity in filter)
 		{
-			ref var inputComponent = ref filter.Get1(i);
+			ref var inputComponent = ref inputs.Get(entity);
 			inputComponent.inputMovement = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 			inputComponent.isStartAttack = Input.GetMouseButton(0);
 			inputComponent.isStopAttack = Input.GetMouseButtonUp(0);

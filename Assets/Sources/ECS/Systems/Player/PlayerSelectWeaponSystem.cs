@@ -1,18 +1,25 @@
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 public class PlayerSelectWeaponSystem : IEcsRunSystem
 {
-	EcsFilter<InputEventComponent, WeaponComponent> filter;
-	private StaticData staticData;
-	public void Run()
+	public void Run(IEcsSystems systems)
 	{
-		foreach(var i in filter)
-		{
-			ref var inputComponent = ref filter.Get1(i);
-			ref var weaponComponent = ref filter.Get2(i);
+		EcsWorld world = systems.GetWorld();
+		EcsFilter filter = world.Filter<InputEventComponent>()
+			.Inc<WeaponComponent>()
+			.End();
 
-			int amountWeapons = staticData.Weapons.WeaponsPrefabs.Count;
+		EcsPool<InputEventComponent> inputs = world.GetPool<InputEventComponent>();
+		EcsPool<WeaponComponent> weapons = world.GetPool<WeaponComponent>();
+		var sharedData = systems.GetShared<SharedData>();
+
+		foreach(int entity in filter)
+		{
+			ref var inputComponent = ref inputs.Get(entity);
+			ref var weaponComponent = ref weapons.Get(entity);
+
+			int amountWeapons = sharedData.StaticData.Weapons.WeaponsPrefabs.Count;
 
 			if (inputComponent.selectedNumberWeapon < amountWeapons
 				&& inputComponent.selectedNumberWeapon != weaponComponent.currentNumberWeapon)
@@ -20,8 +27,10 @@ public class PlayerSelectWeaponSystem : IEcsRunSystem
 				Object.Destroy(weaponComponent.weaponInstance);
 				weaponComponent.weaponInstance = null;
 
-				weaponComponent.weaponInstance = Object.Instantiate(staticData.Weapons.WeaponsPrefabs[inputComponent.selectedNumberWeapon],
+				weaponComponent.weaponInstance = Object
+					.Instantiate(sharedData.StaticData.Weapons.WeaponsPrefabs[inputComponent.selectedNumberWeapon],
 					weaponComponent.pointSpawnWeapon, false);
+
 				weaponComponent.weapon = weaponComponent.weaponInstance.GetComponent<Weapon>();
 				weaponComponent.typeWeapon = weaponComponent.weapon.GetTypeWeapon();
 				weaponComponent.currentNumberWeapon = inputComponent.selectedNumberWeapon;

@@ -1,16 +1,21 @@
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 public class CameraFollowSystem : IEcsRunSystem
 {
-	private EcsFilter<CameraComponent> filter;
-	private StaticData staticData;
-	private RuntimeData runtimeData;
-	public void Run()
+	public void Run(IEcsSystems systems)
 	{
-		foreach(var i in filter)
+		var world = systems.GetWorld();
+		var filter = world.Filter<CameraComponent>().End();
+		var cameras = world.GetPool<CameraComponent>();
+
+		var sharedData = systems.GetShared<SharedData>();
+		var staticData = sharedData.StaticData;
+		var runtimeData = sharedData.RuntimeData;
+
+		foreach(int entity in filter)
 		{
-			ref var cameraComponent = ref filter.Get1(i);
+			ref var cameraComponent = ref cameras.Get(entity);
 
 			var pointCameraOwner = runtimeData.OwnerCameraTransform.position;
 			var cursorPosition = runtimeData.GetModifyCursorPosition();
