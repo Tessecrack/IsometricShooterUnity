@@ -11695,7 +11695,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawnPoints: []
   playerSpawnPoint: {fileID: 174642666}
-  camera: {fileID: 2084791003}
 --- !u!1 &174928997
 GameObject:
   m_ObjectHideFlags: 0
@@ -121802,6 +121801,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3445261361879102270, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 26489012c8ee8af4d84156e5e5ac1035, type: 3}
     - target: {fileID: 3445261361879102271, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
       propertyPath: m_Name
       value: PlayerRenegadePrefabVariant
