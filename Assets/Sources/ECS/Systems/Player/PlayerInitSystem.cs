@@ -48,7 +48,6 @@ public class PlayerInitSystem : IEcsInitSystem
 		healthComponent.maxHealth = characterSettings.maxHealth;
 		healthComponent.currentHealth = healthComponent.maxHealth;
 
-		animatorComponent.animator = player.GetComponent<Animator>();
 		animatorComponent.animationsManager = player.GetComponent<CharacterAnimationsManager>();
 
 		characterComponent.characterController = player.GetComponent<CharacterController>();
