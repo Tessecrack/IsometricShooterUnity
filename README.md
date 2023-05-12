@@ -12,3 +12,7 @@ https://github.com/Leopotam/ecslite
   
 Features:
 https://learn.microsoft.com/ru-ru/windows/mixed-reality/develop/unity/performance-recommendations-for-unity?tabs=openxr
+
+
+Combining animations:
+https://answers.unity.com/questions/471102/combining-two-animations.html
