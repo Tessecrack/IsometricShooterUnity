@@ -1,4 +1,4 @@
-public struct CharacterStateComponent
+public struct CharacterStateAttackComponent
 {
 	public CharacterState characterState;
 

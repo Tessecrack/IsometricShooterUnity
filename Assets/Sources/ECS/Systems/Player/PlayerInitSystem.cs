@@ -19,7 +19,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<AnimatorComponent> poolAnimatorComponent = world.GetPool<AnimatorComponent>();
 		EcsPool<WeaponComponent> poolWeaponComponent = world.GetPool<WeaponComponent>();
 		EcsPool<AttackComponent> poolAttackComponent = world.GetPool<AttackComponent>();
-		EcsPool<CharacterStateComponent> poolCharacterStateComponent = world.GetPool<CharacterStateComponent>();
+		EcsPool<CharacterStateAttackComponent> poolCharacterStateComponent = world.GetPool<CharacterStateAttackComponent>();
 		EcsPool<DashComponent> poolDashComponent = world.GetPool<DashComponent>();
 		EcsPool<HealthComponent> poolHealthComponent = world.GetPool<HealthComponent>();
 
@@ -49,7 +49,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		healthComponent.currentHealth = healthComponent.maxHealth;
 
 		animatorComponent.animationsManager = player.GetComponent<CharacterAnimationsManager>();
-
+		animatorComponent.animationState = new CharacterAnimationState();
 		characterComponent.characterController = player.GetComponent<CharacterController>();
 
 		movableComponent.transform = player.transform;

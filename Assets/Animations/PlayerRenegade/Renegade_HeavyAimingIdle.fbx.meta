@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7f0b89ec0c25df1498201f72d16238fa
+guid: 5fb79c96a7b4cfc4da32429938a65dae
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -33,13 +33,13 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: RenegadeUnarmedIdle
+      name: Renegade_HeavyAimingIdle
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 223
+      lastFrame: 93
       wrapMode: 0
-      orientationOffsetY: 10
+      orientationOffsetY: 5
       level: 0
       cycleOffset: 0
       loop: 0

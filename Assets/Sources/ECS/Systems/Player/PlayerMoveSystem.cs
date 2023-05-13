@@ -9,7 +9,7 @@ public class PlayerMoveSystem : IEcsRunSystem
 		EcsFilter filter = world.Filter<CharacterComponent>()
 			.Inc<InputEventComponent>()
 			.Inc<MovableComponent>()
-			.Inc<CharacterStateComponent>()
+			.Inc<CharacterStateAttackComponent>()
 			.Inc<DashComponent>()
 			.End();
 
@@ -20,7 +20,7 @@ public class PlayerMoveSystem : IEcsRunSystem
 		var characters = world.GetPool<CharacterComponent>();
 		var inputs = world.GetPool<InputEventComponent>();
 		var movables = world.GetPool<MovableComponent>();
-		var characterStates = world.GetPool<CharacterStateComponent>();
+		var characterStates = world.GetPool<CharacterStateAttackComponent>();
 		var dashes = world.GetPool<DashComponent>();
 
 		foreach(int entity in filter)
