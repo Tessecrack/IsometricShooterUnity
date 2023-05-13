@@ -5,8 +5,7 @@ public class CharacterAnimationsManager : MonoBehaviour
     private Animator animator;
     private HashCharacterAnimations hashAnimations;
     private CharacterAnimationState currentAnimationState;
-    private CharacterAnimationState updatedAnimationsState;
-
+    
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -21,41 +20,72 @@ public class CharacterAnimationsManager : MonoBehaviour
             return;
         }
 
-        if (updatedAnimationsState.IsAttackState == true)
+        bool isChangedAttackState = ChangeAttackState(updatedAnimationsState);
+		
+		if (updatedAnimationsState.IsAttackState == false)
         {
-            if (currentAnimationState.IsAttackState != updatedAnimationsState.IsAttackState)
+			ChangeLayerArmsHeavyNoAttack(updatedAnimationsState, isChangedAttackState);
+			if (currentAnimationState.IsMoving != updatedAnimationsState.IsMoving || isChangedAttackState)
             {
-                PlayAnimation(hashAnimations.HeavyAimingIdle);
-            }
-		}
-        else if (updatedAnimationsState.IsAttackState == false)
-        {
-			if (currentAnimationState.IsMoving != updatedAnimationsState.IsMoving)
-            {
-                if (updatedAnimationsState.IsMoving == true)
-                {
-                    PlayAnimation(hashAnimations.Run);
-                }
-                else
-                {
-                    PlayAnimation(hashAnimations.Idle);
-                }
+                ChangeNoAttackMovingState(updatedAnimationsState);
             }
         }
+
         currentAnimationState.UpdateValuesState(updatedAnimationsState);
 	}
 
-    private void UpdateAnimationsAttackState()
+    private bool ChangeAttackState(CharacterAnimationState updatedAnimationsState)
     {
+		if (currentAnimationState.IsAttackState != updatedAnimationsState.IsAttackState)
+		{
+			ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
+			PlayAnimation(hashAnimations.HeavyAimingIdle);
+            return true;
+		}
+        return false;
+	}
 
+    private void ChangeNoAttackMovingState(CharacterAnimationState updatedAnimationsState)
+    {
+		if (updatedAnimationsState.IsMoving == true)
+		{
+			PlayAnimation(hashAnimations.Run);
+		}
+		else
+		{
+			PlayAnimation(hashAnimations.Idle);
+		}
+	}
+
+    private void ChangeLayerArmsHeavyNoAttack(CharacterAnimationState updatedAnimationState, bool isChangedAttackState)
+    {
+        if (currentAnimationState.CurrentTypeWeapon == updatedAnimationState.CurrentTypeWeapon && isChangedAttackState == false)
+        {
+            return;
+        }
+
+        if (updatedAnimationState.CurrentTypeWeapon == TypeWeapon.HEAVY)
+        {
+            SetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
+        }
+        else
+        {
+            ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
+		}
+	}
+
+    private void SetLayer(int idLayer)
+    {
+		animator.SetLayerWeight(idLayer, 1.0f);
+	}
+
+    private void ResetLayer(int idLayer)
+    {
+        animator.SetLayerWeight(idLayer, 0.0f);
     }
 
-    private void UpdateAnimationsNoAttackState()
-    {
-
-    }
     private void PlayAnimation(int hashId)
     {
-		animator.CrossFade(hashId, 0.05f);
+		animator.CrossFade(hashId, 0.02f);
 	}
 }
