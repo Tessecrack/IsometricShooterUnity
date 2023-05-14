@@ -3,13 +3,11 @@ using UnityEngine;
 public class CharacterAnimationsManager : MonoBehaviour
 {
     private Animator animator;
-    private HashCharacterAnimations hashAnimations;
     private CharacterAnimationState currentAnimationState;
     
     void Start()
     {
         animator = GetComponent<Animator>();
-        hashAnimations = new HashCharacterAnimations();
         currentAnimationState = new CharacterAnimationState();
     }
 
@@ -36,10 +34,13 @@ public class CharacterAnimationsManager : MonoBehaviour
 
     private bool ChangeAttackState(CharacterAnimationState updatedAnimationsState)
     {
-		if (currentAnimationState.IsAttackState != updatedAnimationsState.IsAttackState)
+        bool isChangedWeapon = updatedAnimationsState.CurrentTypeWeapon != currentAnimationState.CurrentTypeWeapon;
+
+		if (currentAnimationState.IsAttackState != updatedAnimationsState.IsAttackState || 
+            isChangedWeapon && updatedAnimationsState.IsAttackState == true)
 		{
-			ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
-			PlayAnimation(hashAnimations.HeavyAimingIdle);
+            ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
+            ChangeAnimationAttakRangeWeapon(updatedAnimationsState.CurrentTypeWeapon);
             return true;
 		}
         return false;
@@ -49,11 +50,11 @@ public class CharacterAnimationsManager : MonoBehaviour
     {
 		if (updatedAnimationsState.IsMoving == true)
 		{
-			PlayAnimation(hashAnimations.Run);
+			PlayAnimation(HashCharacterAnimations.Run);
 		}
 		else
 		{
-			PlayAnimation(hashAnimations.Idle);
+			PlayAnimation(HashCharacterAnimations.Idle);
 		}
 	}
 
@@ -73,6 +74,18 @@ public class CharacterAnimationsManager : MonoBehaviour
             ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
 		}
 	}
+    private void ChangeAnimationAttakRangeWeapon(TypeWeapon typeWeapon)
+    {
+        switch (typeWeapon)
+        {
+            case TypeWeapon.GUN:
+                PlayAnimation(HashCharacterAnimations.GunAimingIdle);
+                break;
+            case TypeWeapon.HEAVY:
+                PlayAnimation(HashCharacterAnimations.HeavyAimingIdle);
+                break;
+        }
+    }
 
     private void SetLayer(int idLayer)
     {

@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class HashCharacterAnimations
 {
-	public HashCharacterAnimations()
-	{
-		Idle = Animator.StringToHash("Idle");
-		Run = Animator.StringToHash("Run");
-		HeavyAimingIdle = Animator.StringToHash("HeavyAimingIdle");
-	}
-	public int Idle { get; private set; }
-	public int Run { get; private set; }
-	public int HeavyAimingIdle { get; private set; }
+	public static readonly int Idle = Animator.StringToHash("Idle");
+
+	public static readonly int Run = Animator.StringToHash("Run");
+
+	public static readonly int HeavyAimingIdle = Animator.StringToHash("HeavyAimingIdle");
+
+	public static readonly int GunAimingIdle = Animator.StringToHash("GunAimingIdle");
 }
