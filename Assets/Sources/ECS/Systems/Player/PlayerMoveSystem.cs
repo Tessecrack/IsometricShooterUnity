@@ -44,6 +44,7 @@ public class PlayerMoveSystem : IEcsRunSystem
 
 			if (movableComponent.velocity.magnitude > 0 || isStateAttack)
 			{
+				direction.y = 0;
 				movableComponent.transform.forward = Vector3.Slerp(movableComponent.transform.forward, direction, 0.3f);
 			}
 			var speedMove = dashComponent.isActiveDash ? dashComponent.dashSpeed : movableComponent.moveSpeed;
