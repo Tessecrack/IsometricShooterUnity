@@ -57,6 +57,11 @@ public class PlayerInitSystem : IEcsInitSystem
 		movableComponent.moveSpeed = characterSettings.CharacterSpeed;
 		weaponComponent.pointSpawnWeapon = characterSettings.PointSpawnWeapon;
 
-		weaponComponent.currentNumberWeapon = -1;	
+		weaponComponent.currentNumberWeapon = -1;
+
+		var weaponsPool = new WeaponsPool();
+		weaponsPool.InitWeapons(staticData.Weapons.WeaponsPrefabs, weaponComponent.pointSpawnWeapon);
+
+		weaponComponent.weaponsPool = weaponsPool; // TODO: NEED IMPROVE
 	}
 }

@@ -121805,6 +121805,10 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: 26489012c8ee8af4d84156e5e5ac1035, type: 3}
+    - target: {fileID: 3445261361879102270, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 654d5a0d07b4156408860b582321ce68, type: 2}
     - target: {fileID: 3445261361879102271, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
       propertyPath: m_Name
       value: PlayerRenegadePrefabVariant

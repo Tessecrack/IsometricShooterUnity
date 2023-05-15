@@ -24,14 +24,13 @@ public class PlayerSelectWeaponSystem : IEcsRunSystem
 			if (inputComponent.selectedNumberWeapon < amountWeapons
 				&& inputComponent.selectedNumberWeapon != weaponComponent.currentNumberWeapon)
 			{
-				Object.Destroy(weaponComponent.weaponInstance);
-				weaponComponent.weaponInstance = null;
+				weaponComponent.weaponsPool.Disable(weaponComponent.currentNumberWeapon);
 
-				weaponComponent.weaponInstance = Object
-					.Instantiate(sharedData.StaticData.Weapons.WeaponsPrefabs[inputComponent.selectedNumberWeapon],
-					weaponComponent.pointSpawnWeapon, false);
+				var currentInstanceWeapon = weaponComponent.weaponsPool.Enable(inputComponent.selectedNumberWeapon);
 
-				weaponComponent.weapon = weaponComponent.weaponInstance.GetComponent<Weapon>();
+				weaponComponent.weaponInstance = currentInstanceWeapon.instance;
+				weaponComponent.weapon = currentInstanceWeapon.weapon;
+
 				weaponComponent.typeWeapon = weaponComponent.weapon.GetTypeWeapon();
 				weaponComponent.currentNumberWeapon = inputComponent.selectedNumberWeapon;
 			}
