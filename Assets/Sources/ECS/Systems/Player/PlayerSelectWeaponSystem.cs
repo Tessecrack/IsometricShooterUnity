@@ -24,7 +24,7 @@ public class PlayerSelectWeaponSystem : IEcsRunSystem
 			if (inputComponent.selectedNumberWeapon < amountWeapons
 				&& inputComponent.selectedNumberWeapon != weaponComponent.currentNumberWeapon)
 			{
-				weaponComponent.weaponsPool.Disable(weaponComponent.currentNumberWeapon);
+				weaponComponent.weaponsPool.Disable(weaponComponent.currentNumberWeapon);	
 
 				var currentInstanceWeapon = weaponComponent.weaponsPool.Enable(inputComponent.selectedNumberWeapon);
 
