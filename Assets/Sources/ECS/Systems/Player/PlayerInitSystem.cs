@@ -43,6 +43,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		characterComponent.currentPosition = player.transform;
 
 		var characterSettings = player.GetComponent<CharacterSettings>();
+		characterComponent.characterSettings = characterSettings;
 		player.transform.forward = staticData.GlobalForwardVector;
 
 		healthComponent.maxHealth = characterSettings.maxHealth;

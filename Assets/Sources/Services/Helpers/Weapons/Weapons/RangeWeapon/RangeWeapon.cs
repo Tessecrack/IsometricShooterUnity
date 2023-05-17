@@ -27,6 +27,7 @@ public abstract class RangeWeapon : Weapon
 
 	protected void Attack(Transform startTransform, Vector3 targetPosition)
 	{
+		this.transform.right = startTransform.forward;
 		foreach (var muzzle in muzzles)
 		{
 			var instanceProjectile = Instantiate<Projectile>(projectile, muzzle.transform.position, muzzle.transform.rotation);

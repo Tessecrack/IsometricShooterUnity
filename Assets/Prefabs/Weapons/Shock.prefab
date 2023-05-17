@@ -79,7 +79,6 @@ MonoBehaviour:
   nameWeapon: 
   typeWeapon: 2
   delayBetweenAttack: 1
-  grip: {fileID: 0}
   prefabProjectTile: {fileID: 1924134549938743637, guid: 6ca21177d8de8244b8ff64d4952ffb2e, type: 3}
   muzzles:
   - {fileID: 2873406339963018589}
@@ -114,31 +113,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 808d8bedf2d978e47a4a056a0c33f3d9, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.49255952
+      value: 0.50829107
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 808d8bedf2d978e47a4a056a0c33f3d9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.50733143
+      value: 0.49156913
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 808d8bedf2d978e47a4a056a0c33f3d9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.50733143
+      value: -0.50829107
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 808d8bedf2d978e47a4a056a0c33f3d9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.49255952
+      value: 0.49156913
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 808d8bedf2d978e47a4a056a0c33f3d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 88.084
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 808d8bedf2d978e47a4a056a0c33f3d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -91.693
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 808d8bedf2d978e47a4a056a0c33f3d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 808d8bedf2d978e47a4a056a0c33f3d9, type: 3}
