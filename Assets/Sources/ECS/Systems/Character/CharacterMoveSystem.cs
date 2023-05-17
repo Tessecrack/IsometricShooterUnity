@@ -1,13 +1,13 @@
 using Leopotam.EcsLite;
 using UnityEngine;
 
-public class PlayerMoveSystem : IEcsRunSystem
+public class CharacterMoveSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
 		EcsWorld world = systems.GetWorld();
 		EcsFilter filter = world.Filter<CharacterComponent>()
-			.Inc<InputEventComponent>()
+			.Inc<CharacterEventsComponent>()
 			.Inc<MovableComponent>()
 			.Inc<CharacterStateAttackComponent>()
 			.Inc<DashComponent>()
@@ -18,7 +18,7 @@ public class PlayerMoveSystem : IEcsRunSystem
 		var runtimeData = sharedData.RuntimeData;
 
 		var characters = world.GetPool<CharacterComponent>();
-		var inputs = world.GetPool<InputEventComponent>();
+		var inputs = world.GetPool<CharacterEventsComponent>();
 		var movables = world.GetPool<MovableComponent>();
 		var characterStates = world.GetPool<CharacterStateAttackComponent>();
 		var dashes = world.GetPool<DashComponent>();
@@ -31,7 +31,7 @@ public class PlayerMoveSystem : IEcsRunSystem
 			ref var characterStateComponent = ref characterStates.Get(entity);
 			ref var dashComponent = ref dashes.Get(entity);
 
-			var isStateAttack = characterStateComponent.characterState == CharacterState.ATTACK;
+			var isStateAttack = characterStateComponent.characterState == CharacterState.AIMING;
 
 			var velocity = (staticData.GlobalForwardVector * inputComponent.inputMovement.z
 				+ staticData.GlobalRightVector * inputComponent.inputMovement.x).normalized;
@@ -52,8 +52,6 @@ public class PlayerMoveSystem : IEcsRunSystem
 			characterComponent.characterController.Move(movableComponent.velocity * speedMove * Time.deltaTime);
 
 			var pointSpawnWeapon = characterComponent.characterSettings.PointSpawnWeapon;
-
-			Debug.DrawLine(pointSpawnWeapon.position, pointSpawnWeapon.position + pointSpawnWeapon.right * 5);
 		}
 	}
 }

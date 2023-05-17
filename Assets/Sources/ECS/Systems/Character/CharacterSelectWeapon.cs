@@ -1,16 +1,16 @@
 using Leopotam.EcsLite;
 using UnityEngine;
 
-public class PlayerSelectWeaponSystem : IEcsRunSystem
+public class CharacterSelectWeaponSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
 		EcsWorld world = systems.GetWorld();
-		EcsFilter filter = world.Filter<InputEventComponent>()
+		EcsFilter filter = world.Filter<CharacterEventsComponent>()
 			.Inc<WeaponComponent>()
 			.End();
 
-		EcsPool<InputEventComponent> inputs = world.GetPool<InputEventComponent>();
+		EcsPool<CharacterEventsComponent> inputs = world.GetPool<CharacterEventsComponent>();
 		EcsPool<WeaponComponent> weapons = world.GetPool<WeaponComponent>();
 		var sharedData = systems.GetShared<SharedData>();
 

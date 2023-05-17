@@ -16,8 +16,11 @@ public class GameStartup : MonoBehaviour
 
     private EcsWorld ecsWorld;
 
-    private EcsSystems ecsUpdateCharacterSystems;
+	private EcsSystems ecsUpdateInputSystems;
+	private EcsSystems ecsUpdatePlayerSystems;
+	private EcsSystems ecsUpdateCharacterSystems;
     private EcsSystems ecsUpdateCameraSystems;
+	
     
     private void Start()
     {
@@ -31,7 +34,9 @@ public class GameStartup : MonoBehaviour
 
 		InitSharedData();
 
+		InitInputSystem();
 		InitPlayerSystem();
+		InitCharacterSystem();
 		InitCameraSystem();
 	}
 
@@ -39,12 +44,20 @@ public class GameStartup : MonoBehaviour
     {
         runtimeData.SetCursorPosition(raycaster.GetCursorPosition());
 
+		ecsUpdateInputSystems?.Run();
+		ecsUpdatePlayerSystems?.Run();
         ecsUpdateCharacterSystems?.Run();
 		ecsUpdateCameraSystems?.Run();
 	}
 
 	private void OnDestroy()
 	{
+		ecsUpdateInputSystems?.Destroy();
+		ecsUpdateInputSystems = null;
+
+		ecsUpdatePlayerSystems?.Destroy();
+		ecsUpdatePlayerSystems = null;
+
         ecsUpdateCharacterSystems?.Destroy();
         ecsUpdateCharacterSystems = null;
 
@@ -60,16 +73,33 @@ public class GameStartup : MonoBehaviour
 		sharedData.InitSharedData(StaticData, SceneData, runtimeData);
 	}
 
+	private void InitInputSystem()
+	{
+		ecsUpdateInputSystems = new EcsSystems(ecsWorld, sharedData);
+		ecsUpdateInputSystems
+			.Add(new InputEventSystem());
+
+		ecsUpdateInputSystems.Init();
+	}
+
     private void InitPlayerSystem()
     {
+		ecsUpdatePlayerSystems = new EcsSystems(ecsWorld, sharedData);
+		ecsUpdatePlayerSystems
+			.Add(new PlayerInitSystem())
+			.Add(new PlayerInputSystem());
+
+		ecsUpdatePlayerSystems.Init();
+	}
+
+	private void InitCharacterSystem()
+	{
 		ecsUpdateCharacterSystems = new EcsSystems(ecsWorld, sharedData);
 		ecsUpdateCharacterSystems
-			.Add(new PlayerInitSystem())
-			.Add(new InputEventSystem())
 			.Add(new CharacterDashTimerSystem())
-			.Add(new PlayerMoveSystem())
-			.Add(new PlayerSelectWeaponSystem())
-			.Add(new PlayerAttackSystem())
+			.Add(new CharacterMoveSystem())
+			.Add(new CharacterSelectWeaponSystem())
+			.Add(new CharacterAttackSystem())
 			.Add(new CharacterChangeStateSystem())
 			.Add(new CharacterAnimationSystem())
 			.Add(new AttackSystem());

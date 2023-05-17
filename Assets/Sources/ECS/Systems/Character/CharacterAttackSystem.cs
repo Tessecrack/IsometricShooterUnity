@@ -1,16 +1,16 @@
 using Leopotam.EcsLite;
 
-public class PlayerAttackSystem : IEcsRunSystem
+public class CharacterAttackSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<InputEventComponent>()
+		var filter = world.Filter<CharacterEventsComponent>()
 			.Inc<AttackComponent>()
 			.Inc<CharacterComponent>()
 			.End();
 
-		var inputs = world.GetPool<InputEventComponent>();
+		var inputs = world.GetPool<CharacterEventsComponent>();
 		var attacks = world.GetPool<AttackComponent>();
 		var characters = world.GetPool<CharacterComponent>();
 

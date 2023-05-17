@@ -14,7 +14,8 @@ public class PlayerInitSystem : IEcsInitSystem
 		var runtimeData = sharedData.RuntimeData;
 
 		EcsPool<CharacterComponent> poolCharacterComponent = world.GetPool<CharacterComponent>();
-		EcsPool<InputEventComponent> poolInpuntEventComponent = world.GetPool<InputEventComponent>();
+		EcsPool<CharacterEventsComponent> poolCharacterEventComponent = world.GetPool<CharacterEventsComponent>();
+		EcsPool<InputEventComponent> poolInputEventComponent = world.GetPool<InputEventComponent>();
 		EcsPool<MovableComponent> poolMovableComponent = world.GetPool<MovableComponent>();
 		EcsPool<AnimatorComponent> poolAnimatorComponent = world.GetPool<AnimatorComponent>();
 		EcsPool<WeaponComponent> poolWeaponComponent = world.GetPool<WeaponComponent>();
@@ -24,7 +25,8 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<HealthComponent> poolHealthComponent = world.GetPool<HealthComponent>();
 
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
-		ref var inputComponent = ref poolInpuntEventComponent.Add(entityPlayer);
+		ref var characterEventsComponent = ref poolCharacterEventComponent.Add(entityPlayer);
+		ref var inputComponent = ref poolInputEventComponent.Add(entityPlayer);
 		ref var movableComponent = ref poolMovableComponent.Add(entityPlayer);
 		ref var animatorComponent = ref poolAnimatorComponent.Add(entityPlayer);
 		ref var weaponComponent = ref poolWeaponComponent.Add(entityPlayer);
@@ -38,7 +40,6 @@ public class PlayerInitSystem : IEcsInitSystem
 		dashComponent.dashSpeed = 80.0f;
 
 		GameObject player = Object.Instantiate(staticData.PlayerPrefab, sceneData.playerSpawnPoint.position, Quaternion.identity);
-
 		runtimeData.OwnerCameraTransform = player.transform;
 		characterComponent.currentPosition = player.transform;
 

@@ -18,11 +18,11 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 
 			if (attackComponent.isStartAttack) 
 			{
-				characterState.characterState = CharacterState.ATTACK;
+				characterState.characterState = CharacterState.AIMING;
 				characterState.passedTime = 0;
 			}
 
-			if (characterState.characterState == CharacterState.ATTACK) 
+			if (characterState.characterState == CharacterState.AIMING) 
 			{
 				characterState.passedTime += Time.deltaTime;
 			}
