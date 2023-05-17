@@ -1,5 +1,4 @@
 using Leopotam.EcsLite;
-using UnityEngine;
 
 public class CharacterSelectWeaponSystem : IEcsRunSystem
 {
@@ -8,31 +7,31 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 		EcsWorld world = systems.GetWorld();
 		EcsFilter filter = world.Filter<CharacterEventsComponent>()
 			.Inc<WeaponComponent>()
+			.Inc<CharacterComponent>()
 			.End();
 
-		EcsPool<CharacterEventsComponent> inputs = world.GetPool<CharacterEventsComponent>();
+		EcsPool<CharacterEventsComponent> eventComponents = world.GetPool<CharacterEventsComponent>();
 		EcsPool<WeaponComponent> weapons = world.GetPool<WeaponComponent>();
 		var sharedData = systems.GetShared<SharedData>();
 
 		foreach(int entity in filter)
 		{
-			ref var inputComponent = ref inputs.Get(entity);
+			ref var eventComponent = ref eventComponents.Get(entity);
 			ref var weaponComponent = ref weapons.Get(entity);
 
 			int amountWeapons = sharedData.StaticData.Weapons.WeaponsPrefabs.Count;
 
-			if (inputComponent.selectedNumberWeapon < amountWeapons
-				&& inputComponent.selectedNumberWeapon != weaponComponent.currentNumberWeapon)
+			if (eventComponent.selectedNumberWeapon < amountWeapons
+				&& eventComponent.selectedNumberWeapon != weaponComponent.currentNumberWeapon)
 			{
 				weaponComponent.weaponsPool.Disable(weaponComponent.currentNumberWeapon);	
 
-				var currentInstanceWeapon = weaponComponent.weaponsPool.Enable(inputComponent.selectedNumberWeapon);
-
+				var currentInstanceWeapon = weaponComponent.weaponsPool.Enable(eventComponent.selectedNumberWeapon);
+				
 				weaponComponent.weaponInstance = currentInstanceWeapon.instance;
 				weaponComponent.weapon = currentInstanceWeapon.weapon;
-
 				weaponComponent.typeWeapon = weaponComponent.weapon.GetTypeWeapon();
-				weaponComponent.currentNumberWeapon = inputComponent.selectedNumberWeapon;
+				weaponComponent.currentNumberWeapon = eventComponent.selectedNumberWeapon;
 			}
 		}
 	}
