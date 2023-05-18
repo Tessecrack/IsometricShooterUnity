@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using UnityEngine;
 
-public class CameraInitSystem : IEcsInitSystem, IEcsRunSystem
+public class CameraSystem : IEcsInitSystem, IEcsRunSystem
 {
 	public void Init(IEcsSystems systems)
 	{
