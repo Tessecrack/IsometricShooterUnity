@@ -49,6 +49,7 @@ MonoBehaviour:
   typeWeapon: 1
   delayBetweenAttack: 1
   gripWeapon: {fileID: 6770979467355006884}
+  additionalGrip: {fileID: 0}
   prefabProjectTile: {fileID: 2281499393827452360, guid: d4c70b0141854b846ade2e7b621f351d, type: 3}
   muzzles:
   - {fileID: 6248557226392801920}
@@ -133,15 +134,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5f9b176058917ba49a8059f6da098866, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5f9b176058917ba49a8059f6da098866, type: 3}
       propertyPath: m_LocalScale.y
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5f9b176058917ba49a8059f6da098866, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5f9b176058917ba49a8059f6da098866, type: 3}
       propertyPath: m_LocalPosition.x
