@@ -31,6 +31,37 @@ Transform:
   m_Father: {fileID: 7247197496452000359}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4589319002542429078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3741136998241806469}
+  m_Layer: 0
+  m_Name: AdditionalGrip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3741136998241806469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589319002542429078}
+  m_LocalRotation: {x: 0.5168563, y: 0.5004313, z: -0.4831427, w: 0.49900025}
+  m_LocalPosition: {x: -0.023, y: -0.0393, z: -0.0022}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7247197496452000359}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 92.01401, y: 0, z: -88.14999}
 --- !u!1 &6476889742284762790
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +141,8 @@ MonoBehaviour:
   nameWeapon: 
   typeWeapon: 2
   delayBetweenAttack: 1
-  gripWeapon: {fileID: 0}
+  gripWeapon: {fileID: 7289308023419879959}
+  additionalGrip: {fileID: 0}
   prefabProjectTile: {fileID: 1924134549938743637, guid: 6ca21177d8de8244b8ff64d4952ffb2e, type: 3}
   muzzles:
   - {fileID: 2873406339963018589}

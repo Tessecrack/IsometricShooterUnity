@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class RangeWeapon : Weapon
 {
+	[SerializeField] protected Transform additionalGrip; // only for HEAVY weapon
+
 	[SerializeField] protected GameObject prefabProjectTile;
 
 	[SerializeField] protected List<GameObject> muzzles;
