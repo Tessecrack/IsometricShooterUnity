@@ -1,5 +1,4 @@
 using Leopotam.EcsLite;
-using UnityEngine;
 
 public class CharacterAimingSystem : IEcsRunSystem
 {
@@ -9,7 +8,6 @@ public class CharacterAimingSystem : IEcsRunSystem
 		var entities = world.Filter<CharacterComponent>()
 			.Inc<CharacterStateAttackComponent>()
 			.End();
-
 		var characterComponents = world.GetPool<CharacterComponent>();
 		var statesComponent = world.GetPool<CharacterStateAttackComponent>();
 

@@ -50,8 +50,11 @@ public class CharacterMoveSystem : IEcsRunSystem
 			var speedMove = dashComponent.isActiveDash ? dashComponent.dashSpeed : movableComponent.moveSpeed;
 
 			characterComponent.characterController.Move(movableComponent.velocity * speedMove * Time.deltaTime);
-
-			var pointSpawnWeapon = characterComponent.characterSettings.PointSpawnWeapon;
+			
+			if (!isStateAttack)
+			{
+				characterComponent.characterRigController.SetHeadTarget(runtimeData.CursorPosition);
+			}
 		}
 	}
 }

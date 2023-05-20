@@ -56,11 +56,15 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		movableComponent.transform = player.transform;
 
+		characterComponent.characterRigController = player.GetComponent<CharacterRigController>();
+
 		movableComponent.moveSpeed = characterSettings.CharacterSpeed;
 		weaponComponent.pointSpawnWeapon = characterSettings.PointSpawnWeapon;
 
 		weaponComponent.currentNumberWeapon = -1;
 
+
+		/*NEED IMPROVE; SPOILER: OBJECT POOL*/
 		var weaponsPool = new WeaponsPool();
 		weaponsPool.InitWeapons(staticData.Weapons.WeaponsPrefabs, weaponComponent.pointSpawnWeapon);
 
