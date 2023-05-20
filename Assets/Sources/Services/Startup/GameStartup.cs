@@ -112,7 +112,7 @@ public class GameStartup : MonoBehaviour
     {
 		ecsUpdateCameraSystems = new EcsSystems(ecsWorld, sharedData);
 		ecsUpdateCameraSystems
-			.Add(new CameraInitSystem());
+			.Add(new CameraSystem());
 
 		ecsUpdateCameraSystems.Init();
 	}
