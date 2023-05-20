@@ -8,6 +8,8 @@ public abstract class Weapon : MonoBehaviour
 
 	[SerializeField] protected float delayBetweenAttack = 1.0f;
 
+	[SerializeField] protected Transform gripWeapon;
+
 	protected bool canAttack = true;
 
 	protected int damage = 25;
@@ -20,4 +22,15 @@ public abstract class Weapon : MonoBehaviour
 
 	public abstract void StopAttack();
 	public TypeWeapon GetTypeWeapon() => typeWeapon;
+
+	public Transform GetGripWeapon() => gripWeapon;
+
+	private void Start()
+	{
+		if (gripWeapon != null)
+		{
+			var diff = this.transform.position - this.gripWeapon.position;
+			this.transform.position += diff;
+		}
+	}
 }

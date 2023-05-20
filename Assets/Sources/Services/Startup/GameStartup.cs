@@ -96,6 +96,7 @@ public class GameStartup : MonoBehaviour
 	{
 		ecsUpdateCharacterSystems = new EcsSystems(ecsWorld, sharedData);
 		ecsUpdateCharacterSystems
+			.Add(new CharacterAimingSystem())
 			.Add(new CharacterDashTimerSystem())
 			.Add(new CharacterMoveSystem())
 			.Add(new CharacterSelectWeaponSystem())
