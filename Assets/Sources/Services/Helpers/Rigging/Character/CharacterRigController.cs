@@ -1,16 +1,25 @@
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class CharacterRigController : MonoBehaviour
 {
-	[SerializeField] private Transform headTarget;
+	[Header("Rig head/chest REST State")]
+	[SerializeField] private Transform rigHeadChestTarget;
+	[SerializeField] private Rig rigHeadChest;
+	[SerializeField] private Transform head;
 
-	public void SetHeadTarget(Vector3 target)
+	public void SetTargetHeadChestRig(Vector3 newTarget)
 	{
-		if (headTarget == null)
+		if (rigHeadChest.weight == 0)
 		{
-			return;
+			rigHeadChest.weight = 1;
 		}
+		newTarget.y = head.position.y;
+		rigHeadChestTarget.position = newTarget;
+	}
 
-		this.headTarget.position = target;
+	public void ResetHeadChesRig()
+	{
+		rigHeadChest.weight = 0;
 	}
 }

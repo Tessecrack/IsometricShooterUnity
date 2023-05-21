@@ -24809,6 +24809,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2218566613163763892, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
+      propertyPath: m_Data.m_ConstrainedAxes.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3445261361879102265, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -24871,7 +24875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7406933845918805644, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
       propertyPath: m_Data.m_ConstrainedAxes.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}

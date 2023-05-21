@@ -32,7 +32,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			animatorComponent.animationState.CurrentTypeWeapon = weaponComponent.typeWeapon;
 			animatorComponent.animationState.VerticalMoveValue = movableComponent.relativeVector.z;
 			animatorComponent.animationState.HorizontalMoveValue = movableComponent.relativeVector.x;
-			animatorComponent.animationState.IsAttackState = currentState == CharacterState.AIMING;
+			animatorComponent.animationState.IsAttackState = currentState == CharacterState.Aiming;
 
 			animatorComponent.animationsManager.ChangeAnimationsState(animatorComponent.animationState);
 		}

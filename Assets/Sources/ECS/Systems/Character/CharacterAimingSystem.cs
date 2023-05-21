@@ -16,8 +16,8 @@ public class CharacterAimingSystem : IEcsRunSystem
 			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var stateComponent = ref statesComponent.Get(entity);
 
-			var weaponSpawnPoint = characterComponent.characterSettings.PointSpawnWeapon;
-			if (stateComponent.characterState == CharacterState.AIMING)
+			var weaponSpawnPoint = characterComponent.characterSettings.GetPointSpawnWeapon();
+			if (stateComponent.characterState == CharacterState.Aiming)
 			{
 				weaponSpawnPoint.forward = characterComponent.currentPosition.forward;
 			}

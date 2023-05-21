@@ -2571,8 +2571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e018e23ee43d37a4b838aaa55c04c37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PointSpawnWeapon: {fileID: 1001549539155377157}
-  CharacterSpeed: 6
+  pointSpawnWeapon: {fileID: 1001549539155377157}
+  characterSpeed: 6
   maxHealth: 100
 --- !u!143 &4210835231722591443
 CharacterController:
@@ -2705,7 +2705,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6077e59b32c144ca0cbbe2f4ba3943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headTarget: {fileID: 5117943096743835780}
+  rigHeadChestTarget: {fileID: 5117943096743835780}
+  rigHeadChest: {fileID: 1077673361006335606}
+  head: {fileID: 3445261361048532173}
 --- !u!1 &3445261361912603064
 GameObject:
   m_ObjectHideFlags: 0
@@ -2895,7 +2897,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4394609255867816826}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2218566613163763892
 MonoBehaviour:
@@ -2939,8 +2941,8 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -70
-    m_MaxLimit: 70
+    m_MinLimit: -60
+    m_MaxLimit: 60
     m_AimAxis: 3
     m_UpAxis: 1
     m_WorldUpType: 0
@@ -3012,7 +3014,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4394609255867816826}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7406933845918805644
 MonoBehaviour:
@@ -3079,7 +3081,7 @@ GameObject:
   - component: {fileID: 4394609255867816826}
   - component: {fileID: 1077673361006335606}
   m_Layer: 0
-  m_Name: RigHeadAimRestState
+  m_Name: RigHeadChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3098,8 +3100,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5117943096743835780}
-  - {fileID: 7788613726174147634}
   - {fileID: 3812398796486440475}
+  - {fileID: 7788613726174147634}
   m_Father: {fileID: 3445261361879102265}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -23,6 +23,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<CharacterStateAttackComponent> poolCharacterStateComponent = world.GetPool<CharacterStateAttackComponent>();
 		EcsPool<DashComponent> poolDashComponent = world.GetPool<DashComponent>();
 		EcsPool<HealthComponent> poolHealthComponent = world.GetPool<HealthComponent>();
+		EcsPool<CharacterRigComponent> poolCharacterRigComponent = world.GetPool<CharacterRigComponent>();
 
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
 		ref var characterEventsComponent = ref poolCharacterEventComponent.Add(entityPlayer);
@@ -34,6 +35,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var characterState = ref poolCharacterStateComponent.Add(entityPlayer);
 		ref var dashComponent = ref poolDashComponent.Add(entityPlayer);	
 		ref var healthComponent = ref poolHealthComponent.Add(entityPlayer);
+		ref var characterRigComponent = ref poolCharacterRigComponent.Add(entityPlayer);
 
 		characterState.stateAttackTime = 3;
 		dashComponent.dashTime = 0.06f;
@@ -47,7 +49,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		characterComponent.characterSettings = characterSettings;
 		player.transform.forward = staticData.GlobalForwardVector;
 
-		healthComponent.maxHealth = characterSettings.maxHealth;
+		healthComponent.maxHealth = characterSettings.GetMaxHealth();
 		healthComponent.currentHealth = healthComponent.maxHealth;
 
 		animatorComponent.animationsManager = player.GetComponent<CharacterAnimationsManager>();
@@ -56,10 +58,10 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		movableComponent.transform = player.transform;
 
-		characterComponent.characterRigController = player.GetComponent<CharacterRigController>();
+		characterRigComponent.characterRigController = player.GetComponent<CharacterRigController>();
 
-		movableComponent.moveSpeed = characterSettings.CharacterSpeed;
-		weaponComponent.pointSpawnWeapon = characterSettings.PointSpawnWeapon;
+		movableComponent.moveSpeed = characterSettings.GetCharacterSpeed();
+		weaponComponent.pointSpawnWeapon = characterSettings.GetPointSpawnWeapon();
 
 		weaponComponent.currentNumberWeapon = -1;
 

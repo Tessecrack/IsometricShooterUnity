@@ -31,7 +31,7 @@ public class CharacterMoveSystem : IEcsRunSystem
 			ref var characterStateComponent = ref characterStates.Get(entity);
 			ref var dashComponent = ref dashes.Get(entity);
 
-			var isStateAttack = characterStateComponent.characterState == CharacterState.AIMING;
+			var isStateAttack = characterStateComponent.characterState == CharacterState.Aiming;
 
 			var velocity = (staticData.GlobalForwardVector * inputComponent.inputMovement.z
 				+ staticData.GlobalRightVector * inputComponent.inputMovement.x).normalized;
@@ -50,11 +50,6 @@ public class CharacterMoveSystem : IEcsRunSystem
 			var speedMove = dashComponent.isActiveDash ? dashComponent.dashSpeed : movableComponent.moveSpeed;
 
 			characterComponent.characterController.Move(movableComponent.velocity * speedMove * Time.deltaTime);
-			
-			if (!isStateAttack)
-			{
-				characterComponent.characterRigController.SetHeadTarget(runtimeData.CursorPosition);
-			}
 		}
 	}
 }

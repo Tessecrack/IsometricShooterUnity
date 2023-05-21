@@ -1,5 +1,5 @@
 public enum CharacterState : byte
 {
-	REST,
-	AIMING
+	Rest,
+	Aiming
 }
