@@ -1,5 +1,5 @@
 using Leopotam.EcsLite;
-using System.Numerics;
+using UnityEngine;
 
 public class CharacterRigSystem : IEcsRunSystem
 {
@@ -28,14 +28,19 @@ public class CharacterRigSystem : IEcsRunSystem
 			ref var stateComponent = ref stateComponents.Get(entity);
 			ref var movableComponent = ref movableComponents.Get(entity);
 
+			var characterTransform = characterComponent.characterTransform;
+
+			var angle = Vector3.Angle(characterTransform.forward, cursorPosition - characterTransform.position);
+
 			if (stateComponent.characterState == CharacterState.Rest 
-				&& movableComponent.velocity.magnitude == 0)
+				&& movableComponent.velocity.magnitude == 0 && angle < 90)
 			{
 				characterRigComponent.characterRigController.SetTargetHeadChestRig(cursorPosition);
-			}	
+			}
+			
 			else
 			{
-				characterRigComponent.characterRigController.ResetHeadChesRig();
+				characterRigComponent.characterRigController.ResetHeadChesRig(true);
 			}
 		}
 	}

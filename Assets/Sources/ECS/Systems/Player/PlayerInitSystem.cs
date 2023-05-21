@@ -43,7 +43,7 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		GameObject player = Object.Instantiate(staticData.PlayerPrefab, sceneData.playerSpawnPoint.position, Quaternion.identity);
 		runtimeData.OwnerCameraTransform = player.transform;
-		characterComponent.currentPosition = player.transform;
+		characterComponent.characterTransform = player.transform;
 
 		var characterSettings = player.GetComponent<CharacterSettings>();
 		characterComponent.characterSettings = characterSettings;

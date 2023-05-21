@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GunAimingIdle
+  m_Name: HeavyAimingIdle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -20,7 +20,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: eded63848f3bc8748823030de2022ee9, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 5fb79c96a7b4cfc4da32429938a65dae, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

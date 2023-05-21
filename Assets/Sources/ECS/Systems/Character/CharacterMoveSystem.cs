@@ -36,7 +36,7 @@ public class CharacterMoveSystem : IEcsRunSystem
 			var velocity = (staticData.GlobalForwardVector * inputComponent.inputMovement.z
 				+ staticData.GlobalRightVector * inputComponent.inputMovement.x).normalized;
 
-			var direction = isStateAttack ? runtimeData.CursorPosition - characterComponent.currentPosition.position : velocity;
+			var direction = isStateAttack ? runtimeData.CursorPosition - characterComponent.characterTransform.position : velocity;
 
 			movableComponent.relativeVector = movableComponent.transform.InverseTransformDirection(velocity);
 			movableComponent.velocity = velocity;

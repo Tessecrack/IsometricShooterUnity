@@ -7,10 +7,15 @@ public class CharacterRigController : MonoBehaviour
 	[SerializeField] private Transform rigHeadChestTarget;
 	[SerializeField] private Rig rigHeadChest;
 	[SerializeField] private Transform head;
+	private float coefLerpRigHeadChest = 0.05f;
 
 	public void SetTargetHeadChestRig(Vector3 newTarget)
 	{
-		if (rigHeadChest.weight == 0)
+		if (rigHeadChest.weight < 1)
+		{
+			rigHeadChest.weight = Mathf.Lerp(rigHeadChest.weight, 1, coefLerpRigHeadChest);
+		}
+		if (rigHeadChest.weight > 0.9)
 		{
 			rigHeadChest.weight = 1;
 		}
@@ -18,8 +23,15 @@ public class CharacterRigController : MonoBehaviour
 		rigHeadChestTarget.position = newTarget;
 	}
 
-	public void ResetHeadChesRig()
+	public void ResetHeadChesRig(bool withSmooth)
 	{
-		rigHeadChest.weight = 0;
+		if (withSmooth)
+		{
+			rigHeadChest.weight = Mathf.Lerp(rigHeadChest.weight, 0, coefLerpRigHeadChest);
+		}
+		else
+		{
+			rigHeadChest.weight = 0;
+		}
 	}
 }

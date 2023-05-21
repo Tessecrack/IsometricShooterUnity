@@ -32,12 +32,12 @@ public class CameraSystem : IEcsInitSystem, IEcsRunSystem
 		var staticData = sharedData.StaticData;
 		var runtimeData = sharedData.RuntimeData;
 
+		var pointCameraOwner = runtimeData.OwnerCameraTransform.position;
+		var cursorPosition = runtimeData.GetModifyCursorPosition();
+
 		foreach (int entity in filter)
 		{
 			ref var cameraComponent = ref cameras.Get(entity);
-
-			var pointCameraOwner = runtimeData.OwnerCameraTransform.position;
-			var cursorPosition = runtimeData.GetModifyCursorPosition();
 
 			var currentAngle = Vector3.Angle(staticData.GlobalForwardVector, cursorPosition - pointCameraOwner);
 

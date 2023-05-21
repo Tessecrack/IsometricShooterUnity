@@ -2,7 +2,7 @@ using UnityEngine;
 
 public struct CharacterComponent
 {
-	public Transform currentPosition;
+	public Transform characterTransform;
 	public CharacterController characterController;
 	public CharacterSettings characterSettings;
 }

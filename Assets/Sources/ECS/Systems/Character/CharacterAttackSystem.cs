@@ -26,7 +26,7 @@ public class CharacterAttackSystem : IEcsRunSystem
 			attackComponent.isStopAttack = inputComponent.isStopAttack;
 
 			attackComponent.targetPoint = sharedData.RuntimeData.CursorPosition;
-			attackComponent.attackerTransform = characterComponent.currentPosition;
+			attackComponent.attackerTransform = characterComponent.characterTransform;
 		}
 	}
 }
