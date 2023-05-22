@@ -11,6 +11,7 @@ public class CharacterRigSystem : IEcsRunSystem
 			.Inc<CharacterComponent>()
 			.Inc<CharacterStateAttackComponent>()
 			.Inc<MovableComponent>()
+			.Inc<WeaponComponent>()
 			.End();
 
 		var sharedData = systems.GetShared<SharedData>();
@@ -20,6 +21,7 @@ public class CharacterRigSystem : IEcsRunSystem
 		var characterComponents = world.GetPool<CharacterComponent>();
 		var stateComponents = world.GetPool<CharacterStateAttackComponent>();
 		var movableComponents = world.GetPool<MovableComponent>();
+		var weaponComponents = world.GetPool<WeaponComponent>();
 
 		foreach(var entity in entities)
 		{
@@ -27,6 +29,7 @@ public class CharacterRigSystem : IEcsRunSystem
 			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var stateComponent = ref stateComponents.Get(entity);
 			ref var movableComponent = ref movableComponents.Get(entity);
+			ref var weaponComponent = ref weaponComponents.Get(entity);
 
 			var characterTransform = characterComponent.characterTransform;
 
@@ -37,10 +40,18 @@ public class CharacterRigSystem : IEcsRunSystem
 			{
 				characterRigComponent.characterRigController.SetTargetHeadChestRig(cursorPosition);
 			}
-			
 			else
 			{
-				characterRigComponent.characterRigController.ResetHeadChesRig(true);
+				characterRigComponent.characterRigController.ResetRigHeadChest(true);
+			}
+
+			if (weaponComponent.typeWeapon == TypeWeapon.HEAVY)
+			{
+				characterRigComponent.characterRigController.SetTargetLeftArm(weaponComponent.weapon.GetAdditionalGrip().position);
+			}
+			else
+			{
+				characterRigComponent.characterRigController.ResetRigArms();
 			}
 		}
 	}

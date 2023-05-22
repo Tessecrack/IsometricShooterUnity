@@ -10,6 +10,8 @@ public abstract class Weapon : MonoBehaviour
 
 	[SerializeField] protected Transform gripWeapon;
 
+	[SerializeField] protected Transform additionalGrip; // only for HEAVY weapon
+
 	protected bool canAttack = true;
 
 	protected int damage = 25;
@@ -24,6 +26,8 @@ public abstract class Weapon : MonoBehaviour
 	public TypeWeapon GetTypeWeapon() => typeWeapon;
 
 	public Transform GetGripWeapon() => gripWeapon;
+
+	public Transform GetAdditionalGrip() => additionalGrip;
 
 	private void Start()
 	{
