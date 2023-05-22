@@ -12,7 +12,7 @@ public class CharacterAnimationsManager : MonoBehaviour
     }
 
     public void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
-    {        
+    {
         if (currentAnimationState.Equals(updatedAnimationsState)) 
         {
             return;
