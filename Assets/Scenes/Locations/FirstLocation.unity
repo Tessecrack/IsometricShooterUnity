@@ -24867,6 +24867,15 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 654d5a0d07b4156408860b582321ce68, type: 2}
+    - target: {fileID: 3445261361879102270, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'lowerarm_l'\n\tTransform 'hand_l'\n\tTransform
+        'upperarm_l'\n\tTransform 'lowerarm_l'\n\tTransform 'hand_l'\n\tTransform
+        'upperarm_l'\n\tTransform 'lowerarm_l'\n\tTransform 'hand_l'\n\tTransform
+        'upperarm_l'"
+      objectReference: {fileID: 0}
     - target: {fileID: 3445261361879102271, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
       propertyPath: m_Name
       value: PlayerRenegadePrefabVariant
@@ -24878,6 +24887,10 @@ PrefabInstance:
     - target: {fileID: 6660533328300548379, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
       propertyPath: boneSize
       value: 2.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975986923958498700, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7406933845918805644, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
       propertyPath: m_Data.m_UpAxis
@@ -26937,6 +26950,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 555955466}
+  - {fileID: 1933569794}
+  - {fileID: 1371052938}
   m_Father: {fileID: 2026849686}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -36611,9 +36626,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1371052938}
-  - {fileID: 1933569794}
+  m_Children: []
   m_Father: {fileID: 412677715}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -83150,13 +83163,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371052937}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5718265, y: 0, z: 7.35112}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2, y: 1.384, z: 0.732}
   m_LocalScale: {x: 0.07692308, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 555955466}
-  m_RootOrder: 0
+  m_Father: {fileID: 412677715}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1376347664
 GameObject:
@@ -113281,14 +113294,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933569793}
-  m_LocalRotation: {x: -0.004899727, y: 0.75740623, z: 0.65292454, w: 0.0011700277}
-  m_LocalPosition: {x: 0.06949755, y: 1.3976231, z: 0.66449165}
+  m_LocalRotation: {x: -0.4977897, y: -0.46392536, z: 0.53007406, w: -0.50596464}
+  m_LocalPosition: {x: 0.0692, y: 1.404, z: 0.692}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 555955466}
+  m_Father: {fileID: 412677715}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 84.597, y: -38.235, z: -127.675}
 --- !u!1 &1933700473
 GameObject:
   m_ObjectHideFlags: 0
@@ -121899,7 +121912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 698929899725621801, guid: b4c29fe74a4814040accfb833977a605, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 698929899725621801, guid: b4c29fe74a4814040accfb833977a605, type: 3}
       propertyPath: m_LocalPosition.x
