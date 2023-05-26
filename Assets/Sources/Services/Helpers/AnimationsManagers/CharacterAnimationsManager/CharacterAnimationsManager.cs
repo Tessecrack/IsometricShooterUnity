@@ -96,7 +96,7 @@ public class CharacterAnimationsManager : MonoBehaviour
 
     private void SetBlendTreeHeavyAttack()
     {
-		PlayAnimation(HashCharacterAnimations.GunAimingRunBlendTree);
+		PlayAnimation(HashCharacterAnimations.HeavyAimingRunBlendTree);
 	}
 
     private void SetLayer(int idLayer)
