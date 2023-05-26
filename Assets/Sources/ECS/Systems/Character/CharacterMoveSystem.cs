@@ -38,9 +38,12 @@ public class CharacterMoveSystem : IEcsRunSystem
 
 			var direction = isStateAttack ? runtimeData.CursorPosition - characterComponent.characterTransform.position : velocity;
 
-			movableComponent.relativeVector = movableComponent.transform.InverseTransformDirection(velocity);
+			movableComponent.relativeVector = Vector3.Normalize(movableComponent.transform.InverseTransformDirection(velocity));
 			movableComponent.velocity = velocity;
 			dashComponent.isStartDash = inputComponent.isDash;
+
+			Debug.DrawLine(characterComponent.characterTransform.position,
+				characterComponent.characterTransform.position + movableComponent.relativeVector);
 
 			if (movableComponent.velocity.magnitude > 0 || isStateAttack)
 			{

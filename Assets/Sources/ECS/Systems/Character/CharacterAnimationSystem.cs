@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using UnityEngine;
 
 public class CharacterAnimationSystem : IEcsRunSystem
 {
@@ -27,7 +28,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			ref var characterStateComponent = ref characterStates.Get(entity);
 
 			var currentState = characterStateComponent.characterState;
-			
+
 			animatorComponent.animationState.IsMoving = movableComponent.velocity.z != 0 || movableComponent.velocity.x != 0;
 			animatorComponent.animationState.CurrentTypeWeapon = weaponComponent.typeWeapon;
 			animatorComponent.animationState.VerticalMoveValue = movableComponent.relativeVector.z;

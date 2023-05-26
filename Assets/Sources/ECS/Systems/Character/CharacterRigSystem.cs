@@ -34,7 +34,6 @@ public class CharacterRigSystem : IEcsRunSystem
 			var characterTransform = characterComponent.characterTransform;
 
 			var angle = Vector3.Angle(characterTransform.forward, cursorPosition - characterTransform.position);
-
 			if (stateComponent.characterState == CharacterState.Rest 
 				&& movableComponent.velocity.magnitude == 0 && angle < 90)
 			{

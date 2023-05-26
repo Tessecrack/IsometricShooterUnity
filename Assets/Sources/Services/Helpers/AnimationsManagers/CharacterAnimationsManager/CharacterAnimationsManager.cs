@@ -13,6 +13,7 @@ public class CharacterAnimationsManager : MonoBehaviour
 
     public void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
     {
+        SetParamsBlendTree(updatedAnimationsState);
         if (currentAnimationState.Equals(updatedAnimationsState)) 
         {
             return;
@@ -40,7 +41,7 @@ public class CharacterAnimationsManager : MonoBehaviour
             isChangedWeapon && updatedAnimationsState.IsAttackState == true)
 		{
             ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
-            ChangeAnimationAttakRangeWeapon(updatedAnimationsState.CurrentTypeWeapon);
+            ChangeAnimationAttakRangeWeapon(updatedAnimationsState);
             return true;
 		}
         return false;
@@ -74,18 +75,29 @@ public class CharacterAnimationsManager : MonoBehaviour
             ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
 		}
 	}
-    private void ChangeAnimationAttakRangeWeapon(TypeWeapon typeWeapon)
+    private void ChangeAnimationAttakRangeWeapon(CharacterAnimationState animationState)
     {
+        var typeWeapon = animationState.CurrentTypeWeapon;
         switch (typeWeapon)
         {
             case TypeWeapon.GUN:
-                PlayAnimation(HashCharacterAnimations.GunAimingIdle);
+                SetBlendTreeGunAttack();
                 break;
             case TypeWeapon.HEAVY:
-                PlayAnimation(HashCharacterAnimations.HeavyAimingIdle);
+				SetBlendTreeHeavyAttack();
                 break;
         }
     }
+
+    private void SetBlendTreeGunAttack()
+    {
+        PlayAnimation(HashCharacterAnimations.GunAimingRunBlendTree);
+    }
+
+    private void SetBlendTreeHeavyAttack()
+    {
+		PlayAnimation(HashCharacterAnimations.GunAimingRunBlendTree);
+	}
 
     private void SetLayer(int idLayer)
     {
@@ -101,4 +113,10 @@ public class CharacterAnimationsManager : MonoBehaviour
     {
 		animator.CrossFade(hashId, 0.02f);
 	}
+
+    private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)
+    {
+        animator.SetFloat(HashCharacterAnimations.ParamHorizontal, updatedAnimationsState.HorizontalMoveValue);
+        animator.SetFloat(HashCharacterAnimations.ParamVertical, updatedAnimationsState.VerticalMoveValue);
+    }
 }
