@@ -41,7 +41,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		dashComponent.dashTime = 0.06f;
 		dashComponent.dashSpeed = 80.0f;
 
-		GameObject player = Object.Instantiate(staticData.PlayerPrefab, sceneData.playerSpawnPoint.position, Quaternion.identity);
+		GameObject player = Object.Instantiate(staticData.PlayerPrefab, sceneData.PlayerSpawnPoint.position, Quaternion.identity);
 		runtimeData.OwnerCameraTransform = player.transform;
 		characterComponent.characterTransform = player.transform;
 

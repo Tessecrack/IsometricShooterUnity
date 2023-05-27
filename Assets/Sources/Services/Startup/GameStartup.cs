@@ -18,6 +18,7 @@ public class GameStartup : MonoBehaviour
 
 	private EcsSystems ecsUpdateInputSystems;
 	private EcsSystems ecsUpdatePlayerSystems;
+	private EcsSystems ecsUpdateEnemySystems;
 	private EcsSystems ecsUpdateCharacterSystems;
     private EcsSystems ecsUpdateCameraSystems;
 	
@@ -33,7 +34,7 @@ public class GameStartup : MonoBehaviour
         ecsWorld = new EcsWorld();
 
 		InitSharedData();
-
+		InitEnemySystem();
 		InitInputSystem();
 		InitPlayerSystem();
 		InitCharacterSystem();
@@ -52,6 +53,9 @@ public class GameStartup : MonoBehaviour
 
 	private void OnDestroy()
 	{
+		ecsUpdateEnemySystems?.Destroy();
+		ecsUpdateEnemySystems = null;
+
 		ecsUpdateInputSystems?.Destroy();
 		ecsUpdateInputSystems = null;
 
@@ -90,6 +94,14 @@ public class GameStartup : MonoBehaviour
 			.Add(new PlayerInputSystem());
 
 		ecsUpdatePlayerSystems.Init();
+	}
+
+	private void InitEnemySystem()
+	{
+		ecsUpdateEnemySystems = new EcsSystems(ecsWorld, sharedData);
+		ecsUpdateEnemySystems
+			.Add(new EnemyInitSystem());
+		ecsUpdateEnemySystems.Init();
 	}
 
 	private void InitCharacterSystem()

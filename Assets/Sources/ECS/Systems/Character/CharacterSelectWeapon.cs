@@ -12,12 +12,15 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 
 		EcsPool<CharacterEventsComponent> eventComponents = world.GetPool<CharacterEventsComponent>();
 		EcsPool<WeaponComponent> weapons = world.GetPool<WeaponComponent>();
+		EcsPool<CharacterComponent> characterComponents = world.GetPool<CharacterComponent>();
+
 		var sharedData = systems.GetShared<SharedData>();
 
 		foreach(int entity in filter)
 		{
 			ref var eventComponent = ref eventComponents.Get(entity);
 			ref var weaponComponent = ref weapons.Get(entity);
+			ref var characterComponent = ref characterComponents.Get(entity);
 
 			int amountWeapons = sharedData.StaticData.Weapons.WeaponsPrefabs.Count;
 

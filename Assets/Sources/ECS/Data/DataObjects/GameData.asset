@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b008758978e4de9459c9d3131303864f, type: 3}
-  m_Name: Player
+  m_Name: GameData
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 3445261361879102271, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
+  Enemies: {fileID: 11400000, guid: dd256aa5b8154e94584645f037018adf, type: 2}
   Weapons: {fileID: 11400000, guid: dc0b9e61128f85844bc09e8dcc4352e5, type: 2}

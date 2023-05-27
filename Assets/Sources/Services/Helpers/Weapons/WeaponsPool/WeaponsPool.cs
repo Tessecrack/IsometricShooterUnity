@@ -14,7 +14,7 @@ public class WeaponsPool
 			var weaponComponent = instance.GetComponent<Weapon>();
 			instance.SetActive(false);
 			weaponComponent.enabled = false;
-
+			//instance.transform.forward = pointSpawnWeapon.forward;
 			weaponPool.Add((instance, weaponComponent));
 		}
 	}
