@@ -24,6 +24,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<DashComponent> poolDashComponent = world.GetPool<DashComponent>();
 		EcsPool<HealthComponent> poolHealthComponent = world.GetPool<HealthComponent>();
 		EcsPool<CharacterRigComponent> poolCharacterRigComponent = world.GetPool<CharacterRigComponent>();
+		EcsPool<TargetComponent> poolTargetComponent = world.GetPool<TargetComponent>();
 
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
 		ref var characterEventsComponent = ref poolCharacterEventComponent.Add(entityPlayer);
@@ -36,6 +37,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var dashComponent = ref poolDashComponent.Add(entityPlayer);	
 		ref var healthComponent = ref poolHealthComponent.Add(entityPlayer);
 		ref var characterRigComponent = ref poolCharacterRigComponent.Add(entityPlayer);
+		ref var targetComponent = ref poolTargetComponent.Add(entityPlayer);
 
 		characterState.stateAttackTime = 3;
 		dashComponent.dashTime = 0.06f;
@@ -61,6 +63,9 @@ public class PlayerInitSystem : IEcsInitSystem
 		characterRigComponent.characterRigController = player.GetComponent<CharacterRigController>();
 
 		movableComponent.moveSpeed = characterSettings.GetCharacterSpeed();
+
+		targetComponent.target = runtimeData.CursorPosition;
+
 		weaponComponent.pointSpawnWeapon = characterSettings.GetPointSpawnWeapon();
 
 		weaponComponent.currentNumberWeapon = -1;

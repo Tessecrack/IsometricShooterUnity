@@ -42,9 +42,6 @@ public class CharacterMoveSystem : IEcsRunSystem
 			movableComponent.velocity = velocity;
 			dashComponent.isStartDash = inputComponent.isDash;
 
-			Debug.DrawLine(characterComponent.characterTransform.position,
-				characterComponent.characterTransform.position + movableComponent.relativeVector);
-
 			if (movableComponent.velocity.magnitude > 0 || isStateAttack)
 			{
 				direction.y = 0;

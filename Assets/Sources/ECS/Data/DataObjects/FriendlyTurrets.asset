@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4ea081ab6e506541b4de0a208548d8d, type: 3}
-  m_Name: Enemies
+  m_Script: {fileID: 11500000, guid: 34169dfd6b6add4438c0925a383955c8, type: 3}
+  m_Name: FriendlyTurrets
   m_EditorClassIdentifier: 
-  PrefabsTurret: []
+  PrefabsFriendlyTurrets:
+  - {fileID: 5365694819214133738, guid: a182e58f2a1256a4e95fa78bc58a9193, type: 3}
