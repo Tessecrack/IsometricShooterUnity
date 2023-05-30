@@ -27,8 +27,6 @@ public class CharacterRotationSystem : IEcsRunSystem
 
 			if (isStateAttack)
 			{
-				Debug.DrawLine(characterComponent.characterTransform.position, 
-					characterComponent.characterTransform.position + 5 * direction);
 				direction.y = 0;
 				characterComponent.characterTransform.forward = Vector3.Slerp(characterComponent.characterTransform.forward,
 					direction, rotatableComponent.coefSmooth);
