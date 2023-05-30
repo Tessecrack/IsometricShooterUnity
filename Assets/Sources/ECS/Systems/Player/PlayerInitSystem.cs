@@ -74,6 +74,8 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		weaponComponent.currentNumberWeapon = -1;
 
+		movableComponent.coefSmooth = 0.3f;
+		rotatableComponent.coefSmooth = 0.3f;
 
 		/*NEED IMPROVE; SPOILER: OBJECT POOL*/
 		var weaponsPool = new WeaponsPool();

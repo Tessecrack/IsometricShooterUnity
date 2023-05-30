@@ -22,20 +22,14 @@ public class CharacterRotationSystem : IEcsRunSystem
 			ref var targetComponent = ref targetComponents.Get(entity);
 			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var characterState = ref characterStates.Get(entity);
-
 			var isStateAttack = characterState.characterState == CharacterState.Aiming;
+			var direction = targetComponent.target - characterComponent.characterTransform.position;
 
-			var direction = isStateAttack ? targetComponent.target - characterComponent.characterTransform.position
-				: characterComponent.characterTransform.forward;
-
-			if (characterComponent.characterController.velocity.magnitude > 0 || isStateAttack)
+			if (isStateAttack)
 			{
 				direction.y = 0;
-				characterComponent.characterTransform.forward = Vector3.Slerp(characterComponent.characterTransform.forward, direction, 0.3f);
-			}
-			else if (!isStateAttack)
-			{
-				characterComponent.characterTransform.forward = characterComponent.characterController.velocity;
+				characterComponent.characterTransform.forward = Vector3.Slerp(characterComponent.characterTransform.forward,
+					direction, rotatableComponent.coefSmooth);
 			}
 		}
 	}

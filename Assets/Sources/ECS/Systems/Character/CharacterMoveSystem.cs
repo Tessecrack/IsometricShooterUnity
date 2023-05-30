@@ -21,6 +21,7 @@ public class CharacterMoveSystem : IEcsRunSystem
 		var inputs = world.GetPool<CharacterEventsComponent>();
 		var movables = world.GetPool<MovableComponent>();
 		var dashes = world.GetPool<DashComponent>();
+		var states = world.GetPool<CharacterStateAttackComponent>();
 
 		foreach(int entity in filter)
 		{
@@ -28,7 +29,7 @@ public class CharacterMoveSystem : IEcsRunSystem
 			ref var inputComponent = ref inputs.Get(entity);
 			ref var movableComponent = ref movables.Get(entity);
 			ref var dashComponent = ref dashes.Get(entity);
-
+			ref var state = ref states.Get(entity);
 			var velocity = (staticData.GlobalForwardVector * inputComponent.inputMovement.z
 				+ staticData.GlobalRightVector * inputComponent.inputMovement.x).normalized;
 
@@ -37,6 +38,13 @@ public class CharacterMoveSystem : IEcsRunSystem
 			movableComponent.velocity = velocity;
 			var speedMove = dashComponent.isActiveDash ? dashComponent.dashSpeed : movableComponent.moveSpeed;
 			characterComponent.characterController.Move(velocity * speedMove * Time.deltaTime);
+
+			if (velocity.magnitude > 0 && state.characterState == CharacterState.Rest)
+			{
+				velocity.y = 0;
+				movableComponent.transform.forward = Vector3.Slerp(characterComponent.characterTransform.forward,
+					velocity, movableComponent.coefSmooth);
+			}
 		}
 	}
 }
