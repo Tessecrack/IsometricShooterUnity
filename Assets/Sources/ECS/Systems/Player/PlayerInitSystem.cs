@@ -13,10 +13,12 @@ public class PlayerInitSystem : IEcsInitSystem
 		var sceneData = sharedData.SceneData;
 		var runtimeData = sharedData.RuntimeData;
 
+		EcsPool<PlayerComponent> poolPlayer = world.GetPool<PlayerComponent>();
 		EcsPool<CharacterComponent> poolCharacterComponent = world.GetPool<CharacterComponent>();
 		EcsPool<CharacterEventsComponent> poolCharacterEventComponent = world.GetPool<CharacterEventsComponent>();
 		EcsPool<InputEventComponent> poolInputEventComponent = world.GetPool<InputEventComponent>();
 		EcsPool<MovableComponent> poolMovableComponent = world.GetPool<MovableComponent>();
+		EcsPool<RotatableComponent> poolRotatableComponent = world.GetPool<RotatableComponent>();
 		EcsPool<AnimatorComponent> poolAnimatorComponent = world.GetPool<AnimatorComponent>();
 		EcsPool<WeaponComponent> poolWeaponComponent = world.GetPool<WeaponComponent>();
 		EcsPool<AttackComponent> poolAttackComponent = world.GetPool<AttackComponent>();
@@ -26,10 +28,12 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<CharacterRigComponent> poolCharacterRigComponent = world.GetPool<CharacterRigComponent>();
 		EcsPool<TargetComponent> poolTargetComponent = world.GetPool<TargetComponent>();
 
+		ref var playerComponent = ref poolPlayer.Add(entityPlayer);
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
 		ref var characterEventsComponent = ref poolCharacterEventComponent.Add(entityPlayer);
 		ref var inputComponent = ref poolInputEventComponent.Add(entityPlayer);
 		ref var movableComponent = ref poolMovableComponent.Add(entityPlayer);
+		ref var rotatableComponent = ref poolRotatableComponent.Add(entityPlayer);
 		ref var animatorComponent = ref poolAnimatorComponent.Add(entityPlayer);
 		ref var weaponComponent = ref poolWeaponComponent.Add(entityPlayer);
 		ref var attackComponent = ref poolAttackComponent.Add(entityPlayer);

@@ -12,16 +12,17 @@ public class CharacterRigSystem : IEcsRunSystem
 			.Inc<CharacterStateAttackComponent>()
 			.Inc<MovableComponent>()
 			.Inc<WeaponComponent>()
+			.Inc<TargetComponent>()
 			.End();
 
 		var sharedData = systems.GetShared<SharedData>();
-		var cursorPosition = sharedData.RuntimeData.CursorPosition;
 
 		var characterRigComponents = world.GetPool<CharacterRigComponent>();
 		var characterComponents = world.GetPool<CharacterComponent>();
 		var stateComponents = world.GetPool<CharacterStateAttackComponent>();
 		var movableComponents = world.GetPool<MovableComponent>();
 		var weaponComponents = world.GetPool<WeaponComponent>();
+		var targetComponents = world.GetPool<TargetComponent>();
 
 		foreach(var entity in entities)
 		{
@@ -30,14 +31,15 @@ public class CharacterRigSystem : IEcsRunSystem
 			ref var stateComponent = ref stateComponents.Get(entity);
 			ref var movableComponent = ref movableComponents.Get(entity);
 			ref var weaponComponent = ref weaponComponents.Get(entity);
+			ref var targetComponent = ref targetComponents.Get(entity);
 
 			var characterTransform = characterComponent.characterTransform;
 
-			var angle = Vector3.Angle(characterTransform.forward, cursorPosition - characterTransform.position);
+			var angle = Vector3.Angle(characterTransform.forward, targetComponent.target - characterTransform.position);
 			if (stateComponent.characterState == CharacterState.Rest 
 				&& movableComponent.velocity.magnitude == 0 && angle < 90)
 			{
-				characterRigComponent.characterRigController.SetTargetHeadChestRig(cursorPosition);
+				characterRigComponent.characterRigController.SetTargetHeadChestRig(targetComponent.target);
 			}
 			else
 			{

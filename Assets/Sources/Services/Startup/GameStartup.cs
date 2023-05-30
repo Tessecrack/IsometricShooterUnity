@@ -98,8 +98,8 @@ public class GameStartup : MonoBehaviour
 		ecsUpdatePlayerSystems = new EcsSystems(ecsWorld, sharedData);
 		ecsUpdatePlayerSystems
 			.Add(new PlayerInitSystem())
-			.Add(new PlayerInputSystem());
-
+			.Add(new PlayerInputSystem())
+			.Add(new PlayerDetectTargetSystem());
 		ecsUpdatePlayerSystems.Init();
 	}
 
@@ -127,6 +127,7 @@ public class GameStartup : MonoBehaviour
 			.Add(new CharacterAimingSystem())
 			.Add(new CharacterDashTimerSystem())
 			.Add(new CharacterMoveSystem())
+			.Add(new CharacterRotationSystem())
 			.Add(new CharacterSelectWeaponSystem())
 			.Add(new CharacterAttackSystem())
 			.Add(new CharacterChangeStateSystem())

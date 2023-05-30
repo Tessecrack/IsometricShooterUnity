@@ -20,7 +20,10 @@ public class TurretInitSystem : IEcsInitSystem
 		{
 			int entityTurret = world.NewEntity();
 			EcsPool<TurretComponent> poolTurretComponents = world.GetPool<TurretComponent>();
+			EcsPool<RotatableComponent> poolRotatableComponents = world.GetPool<RotatableComponent>();
+
 			ref var turretComponent = ref poolTurretComponents.Add(entityTurret);
+			ref var rotatableComponent = ref poolRotatableComponents.Add(entityTurret);
 
 			var randomTurretNumber = new System.Random().Next(0, enemyTurretPrefabs.Count);
 			var enemyTurretPrefab = enemyTurretPrefabs[randomTurretNumber];
