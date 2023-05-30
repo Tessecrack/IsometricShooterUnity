@@ -10,14 +10,14 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			.Inc<MovableComponent>()
 			.Inc<WeaponComponent>()
 			.Inc<AttackComponent>()
-			.Inc<CharacterStateAttackComponent>()
+			.Inc<StateAttackComponent>()
 			.End();
 
 		var animators = world.GetPool<AnimatorComponent>();
 		var movables = world.GetPool<MovableComponent>();
 		var weapons = world.GetPool<WeaponComponent>();
 		var attacks = world.GetPool<AttackComponent>();
-		var characterStates = world.GetPool<CharacterStateAttackComponent>();
+		var characterStates = world.GetPool<StateAttackComponent>();
 
 		foreach(int entity in filter)
 		{
@@ -27,7 +27,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var characterStateComponent = ref characterStates.Get(entity);
 
-			var currentState = characterStateComponent.characterState;
+			var currentState = characterStateComponent.state;
 
 			animatorComponent.animationState.IsMoving = movableComponent.velocity.z != 0 || movableComponent.velocity.x != 0;
 			animatorComponent.animationState.CurrentTypeWeapon = weaponComponent.typeWeapon;

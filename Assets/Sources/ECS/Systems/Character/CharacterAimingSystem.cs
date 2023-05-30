@@ -6,11 +6,11 @@ public class CharacterAimingSystem : IEcsRunSystem
 	{
 		var world = systems.GetWorld();
 		var entities = world.Filter<CharacterComponent>()
-			.Inc<CharacterStateAttackComponent>()
+			.Inc<StateAttackComponent>()
 			.Inc<WeaponComponent>()
 			.End();
 		var characterComponents = world.GetPool<CharacterComponent>();
-		var statesComponents = world.GetPool<CharacterStateAttackComponent>();
+		var statesComponents = world.GetPool<StateAttackComponent>();
 		var weaponComponents = world.GetPool<WeaponComponent>();
 		foreach( var entity in entities )
 		{
@@ -19,7 +19,7 @@ public class CharacterAimingSystem : IEcsRunSystem
 			ref var weaponComponent = ref weaponComponents.Get(entity);
 
 			var weaponSpawnPoint = characterComponent.characterSettings.GetPointSpawnWeapon();
-			if (stateComponent.characterState == CharacterState.Aiming && weaponComponent.typeWeapon != TypeWeapon.MELEE)
+			if (stateComponent.state == CharacterState.Aiming && weaponComponent.typeWeapon != TypeWeapon.MELEE)
 			{
 				weaponSpawnPoint.forward = characterComponent.characterTransform.forward;
 			}

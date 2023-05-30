@@ -11,6 +11,8 @@ public class RuntimeData
 
 	public Vector3 CursorPosition { get; set; }
 
+	public Vector3 PlayerPosition { get; set; }
+
 	public void SetCursorPosition(Vector3 cursorPosition)
 	{
 		CursorPosition = cursorPosition;

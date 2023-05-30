@@ -22,7 +22,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<AnimatorComponent> poolAnimatorComponent = world.GetPool<AnimatorComponent>();
 		EcsPool<WeaponComponent> poolWeaponComponent = world.GetPool<WeaponComponent>();
 		EcsPool<AttackComponent> poolAttackComponent = world.GetPool<AttackComponent>();
-		EcsPool<CharacterStateAttackComponent> poolCharacterStateComponent = world.GetPool<CharacterStateAttackComponent>();
+		EcsPool<StateAttackComponent> poolCharacterStateComponent = world.GetPool<StateAttackComponent>();
 		EcsPool<DashComponent> poolDashComponent = world.GetPool<DashComponent>();
 		EcsPool<HealthComponent> poolHealthComponent = world.GetPool<HealthComponent>();
 		EcsPool<CharacterRigComponent> poolCharacterRigComponent = world.GetPool<CharacterRigComponent>();

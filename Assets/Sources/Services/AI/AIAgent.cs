@@ -2,16 +2,11 @@ using UnityEngine;
 
 public class AIAgent : MonoBehaviour
 {
-	private bool hasTarget = false;
-	private Vector3 targetPosition = Vector3.zero;
-
-	public virtual void SetTargetPosition(Vector3 target)
+	[SerializeField] private float distanceDetection = 5.0f;
+	
+	public virtual bool IsDetectTarget(Vector3 target)
 	{
-		this.targetPosition = target;
-	}
-
-	public void SearchTarget()
-	{
-
+		var distance = target - transform.position;
+		return distanceDetection >= distance.magnitude;
 	}
 }

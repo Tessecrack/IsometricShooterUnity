@@ -6,10 +6,10 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<AttackComponent>().Inc<CharacterStateAttackComponent>().End();
+		var filter = world.Filter<AttackComponent>().Inc<StateAttackComponent>().End();
 
 		var attacks = world.GetPool<AttackComponent>();
-		var characterStates = world.GetPool<CharacterStateAttackComponent>();
+		var characterStates = world.GetPool<StateAttackComponent>();
 
 		foreach(int entity in filter)
 		{
@@ -18,18 +18,18 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 
 			if (attackComponent.isStartAttack) 
 			{
-				characterState.characterState = CharacterState.Aiming;
+				characterState.state = CharacterState.Aiming;
 				characterState.passedTime = 0;
 			}
 
-			if (characterState.characterState == CharacterState.Aiming) 
+			if (characterState.state == CharacterState.Aiming) 
 			{
 				characterState.passedTime += Time.deltaTime;
 			}
 
 			if (characterState.passedTime >= characterState.stateAttackTime)
 			{
-				characterState.characterState = CharacterState.Rest;
+				characterState.state = CharacterState.Rest;
 				characterState.passedTime = 0;
 			}
 		}
