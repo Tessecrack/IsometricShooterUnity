@@ -32,7 +32,7 @@ public class CameraSystem : IEcsInitSystem, IEcsRunSystem
 		var staticData = sharedData.StaticData;
 		var runtimeData = sharedData.RuntimeData;
 
-		var pointCameraOwner = runtimeData.OwnerCameraTransform.position;
+		var pointCameraOwner = runtimeData.OwnerCameraTransform;
 		var cursorPosition = runtimeData.GetModifyCursorPosition();
 
 		foreach (int entity in filter)

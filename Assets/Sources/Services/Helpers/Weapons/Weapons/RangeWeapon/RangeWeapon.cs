@@ -12,6 +12,10 @@ public abstract class RangeWeapon : Weapon
 
 	[SerializeField] protected Projectile projectile;
 
+	[SerializeField] protected bool isAttackFromOneMuzzle = false;
+
+	private int currentMuzzle = 0;
+
 	private void FixedUpdate()
 	{
 		if (passedTime >= delayBetweenAttack)
@@ -27,11 +31,25 @@ public abstract class RangeWeapon : Weapon
 
 	protected void Attack(Transform startTransform, Vector3 targetPosition)
 	{
+		if (isAttackFromOneMuzzle)
+		{
+			AttackFromOneMuzzle(startTransform, targetPosition);
+			return;
+		}
+
 		foreach (var muzzle in muzzles)
 		{
 			var instanceProjectile = Instantiate<Projectile>(projectile, muzzle.transform.position, muzzle.transform.rotation);
 			instanceProjectile.StartFire(startTransform, targetPosition, speedAttack, damage);
 		}
+	}
+
+	protected void AttackFromOneMuzzle(Transform startTransform, Vector3 targetPosition)
+	{
+		var muzzle = muzzles[currentMuzzle++];
+		var instanceProjectile = Instantiate<Projectile>(projectile, muzzle.transform.position, muzzle.transform.rotation);
+		instanceProjectile.StartFire(startTransform, targetPosition, speedAttack, damage);
+		currentMuzzle %= muzzles.Count;
 	}
 
 	protected IEnumerator GenerateSpreadBullets(Transform ownerTransform, Vector3 targetPosition)

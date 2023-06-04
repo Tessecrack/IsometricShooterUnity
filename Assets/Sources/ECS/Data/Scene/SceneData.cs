@@ -9,15 +9,25 @@ public class SceneData : MonoBehaviour
 	[Header("Enemies")]
 	public List<Transform> EnemySpawnPoints = new List<Transform>();
 
-	[Header("Enemy turrets")]
-	public List<Transform> EnemyTurretsSpawnPoints = new List<Transform>();
+	[Header("Enemy blue turrets")]
+	public GameObject EnemyBlueTurretsSpawnPoints;
+
+	[Header("Enemy red turrets")]
+	public GameObject EnemyRedTurretsSpawnPoints;
 
 	[Header("Friendly turrets")]
-	public List<Transform> FriendlyTurretsSpawnPoints = new List<Transform>();
-
+	public GameObject FriendlyGreenTurretsSpawnPoints;
 	public Camera Camera { get; private set; }
-	private void Start()
+
+	public Transform[] BlueTurretsSpawnPoints { get; private set; }
+	public Transform[] RedTurretsSpawnPoints { get; private set; }
+	public Transform[] GreenTurretsSpawnPoints { get; private set; }
+
+	private void Awake()
 	{
 		Camera = Camera.main;
+		BlueTurretsSpawnPoints = EnemyBlueTurretsSpawnPoints.GetComponentsInChildren<Transform>();
+		RedTurretsSpawnPoints = EnemyRedTurretsSpawnPoints.GetComponentsInChildren<Transform>();
+		GreenTurretsSpawnPoints = FriendlyGreenTurretsSpawnPoints.GetComponentsInChildren<Transform>();
 	}
 }

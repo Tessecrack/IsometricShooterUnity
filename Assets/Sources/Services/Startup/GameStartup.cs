@@ -135,8 +135,8 @@ public class GameStartup : MonoBehaviour
 			.Add(new CharacterChangeStateSystem())
 			.Add(new CharacterAnimationSystem())
 			.Add(new AttackSystem())
-			.Add(new CharacterRigSystem());
-
+			.Add(new CharacterRigSystem())
+			.Add(new DamageSystem());
 		ecsUpdateCharacterSystems.Init();
 	}
 

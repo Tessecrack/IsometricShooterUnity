@@ -16,6 +16,7 @@ public class PlayerRuntimePositionSystem : IEcsRunSystem
 		{
 			ref var movable = ref movableComponent.Get(entity);
 			sharedData.RuntimeData.PlayerPosition = movable.transform.position;
+			sharedData.RuntimeData.OwnerCameraTransform = movable.transform.position;
 		}
 	}
 }

@@ -48,13 +48,14 @@ public class PlayerInitSystem : IEcsInitSystem
 		dashComponent.dashSpeed = 80.0f;
 
 		GameObject player = Object.Instantiate(staticData.PlayerPrefab, sceneData.PlayerSpawnPoint.position, Quaternion.identity);
-		runtimeData.OwnerCameraTransform = player.transform;
+		runtimeData.OwnerCameraTransform = player.transform.position;
 		characterComponent.characterTransform = player.transform;
 
 		var characterSettings = player.GetComponent<CharacterSettings>();
 		characterComponent.characterSettings = characterSettings;
 		player.transform.forward = staticData.GlobalForwardVector;
 
+		healthComponent.damageable = player.GetComponent<Damageable>();
 		healthComponent.maxHealth = characterSettings.GetMaxHealth();
 		healthComponent.currentHealth = healthComponent.maxHealth;
 

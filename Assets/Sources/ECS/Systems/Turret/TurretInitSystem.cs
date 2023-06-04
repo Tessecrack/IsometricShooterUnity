@@ -10,13 +10,21 @@ public class TurretInitSystem : IEcsInitSystem
 
 		var staticData = sharedData.StaticData;
 		var sceneData = sharedData.SceneData;
-		var runtimeData = sharedData.RuntimeData;
 
-		var turretsSpawnPoints = sceneData.EnemyTurretsSpawnPoints;
-		var enemyTurretPrefabs = staticData.EnemyTurrets.PrefabsEnemyTurrets;
-		var friendlyTurretsPrefabs = staticData.FriendlyTurrets.PrefabsFriendlyTurrets;
+		var redTurretsSpawnPoints = sceneData.RedTurretsSpawnPoints;
+		var blueTurretsSpawnPoints = sceneData.BlueTurretsSpawnPoints;
 
-		for (int i = 0; i < turretsSpawnPoints.Count; ++i)
+		var redTurretPrefab = staticData.EnemyTurrets.PrefabRedTurrets;
+		var blueTurretPrefab = staticData.EnemyTurrets.PrefabBlueTurrets;
+
+		SpawnTurrets(world, redTurretPrefab, redTurretsSpawnPoints);
+		SpawnTurrets(world, blueTurretPrefab, blueTurretsSpawnPoints);
+	}
+
+
+	private void SpawnTurrets(EcsWorld world, GameObject turretPrefab, Transform[] turretsSpawnPoints, bool isFriend = false)
+	{
+		for (int i = 1; i < turretsSpawnPoints.Length; ++i)
 		{
 			int entityTurret = world.NewEntity();
 
@@ -29,6 +37,7 @@ public class TurretInitSystem : IEcsInitSystem
 			EcsPool<WeaponComponent> poolWeaponComponents = world.GetPool<WeaponComponent>();
 			EcsPool<AttackComponent> poolAttackComponents = world.GetPool<AttackComponent>();
 			EcsPool<CharacterEventsComponent> poolEventsComponents = world.GetPool<CharacterEventsComponent>();
+			EcsPool<HealthComponent> poolHeathComponents = world.GetPool<HealthComponent>();
 
 			ref var turretComponent = ref poolTurretComponents.Add(entityTurret);
 			ref var rotatableComponent = ref poolRotatableComponents.Add(entityTurret);
@@ -39,19 +48,25 @@ public class TurretInitSystem : IEcsInitSystem
 			ref var weaponComponent = ref poolWeaponComponents.Add(entityTurret);
 			ref var attackComponent = ref poolAttackComponents.Add(entityTurret);
 			ref var eventComponent = ref poolEventsComponents.Add(entityTurret);
+			ref var healthComponent = ref poolHeathComponents.Add(entityTurret);
 
-			var randomTurretNumber = new System.Random().Next(0, enemyTurretPrefabs.Count);
-			var enemyTurretPrefab = enemyTurretPrefabs[randomTurretNumber];
-
-			var turretInstance = UnityEngine.Object.Instantiate(enemyTurretPrefab, 
-				turretsSpawnPoints[i].position, 
+			var turretInstance = UnityEngine.Object.Instantiate(turretPrefab,
+				turretsSpawnPoints[i].position,
 				Quaternion.identity);
+
 			rotatableComponent.coefSmooth = 0.05f;
+
 			turretComponent.turretSettings = turretInstance.GetComponent<TurretSettings>();
 			aiEnemyComponent.enemyAgent = turretInstance.GetComponent<AIEnemyAgent>();
 
+			healthComponent.damageable = turretComponent.turretSettings.GetDamageable();
+			healthComponent.maxHealth = turretComponent.turretSettings.GetMaxHealth();
+			healthComponent.currentHealth = healthComponent.maxHealth;
+
+			characterComponent.instance = turretInstance;
 			characterComponent.characterController = turretComponent.turretSettings.GetCharacterController();
 			characterComponent.characterTransform = turretComponent.turretSettings.GetTransform();
+
 			weaponComponent.currentNumberWeapon = 0;
 			weaponComponent.pointSpawnWeapon = null;
 			weaponComponent.weapon = turretComponent.turretSettings.GetWeapon();

@@ -4,6 +4,9 @@ public class Damageable : MonoBehaviour
 {
 	[HideInInspector]
 	public bool IsTakedDamage { get; private set; }
+	[HideInInspector]
+	public bool IsDeath { get; private set; }
+
 	private int damage;
 
 	public void TakeDamage(int damage)
@@ -17,9 +20,15 @@ public class Damageable : MonoBehaviour
 		if (result < 0)
 		{
 			result = 0;
+			IsDeath = true;
 		}
 		Reset();
 		return result;
+	}
+
+	public void DisableObject()
+	{
+		Destroy(gameObject);
 	}
 
 	private void Reset()

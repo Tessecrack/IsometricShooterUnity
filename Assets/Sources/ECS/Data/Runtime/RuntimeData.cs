@@ -7,7 +7,7 @@ public class RuntimeData
 
 	public byte MaxCountWeapons { get; private set; } = 3;
 
-	public Transform OwnerCameraTransform { get; set; }
+	public Vector3 OwnerCameraTransform { get; set; }
 
 	public Vector3 CursorPosition { get; set; }
 
@@ -18,5 +18,7 @@ public class RuntimeData
 		CursorPosition = cursorPosition;
 	}
 
-	public Vector3 GetModifyCursorPosition() => new Vector3(CursorPosition.x, OwnerCameraTransform.position.y, CursorPosition.z);
+	public Vector3 GetModifyCursorPosition() => new Vector3(CursorPosition.x, OwnerCameraTransform.y, CursorPosition.z);
+
+	public bool IsPlayerDeath { get; set; }
 }

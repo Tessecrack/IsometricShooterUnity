@@ -12,9 +12,9 @@ public abstract class Weapon : MonoBehaviour
 
 	[SerializeField] protected Transform additionalGrip; // only for HEAVY weapon
 
-	protected bool canAttack = true;
+	[SerializeField] protected int damage = 25;
 
-	protected int damage = 25;
+	protected bool canAttack = true;
 
 	protected float speedAttack = 40;
 

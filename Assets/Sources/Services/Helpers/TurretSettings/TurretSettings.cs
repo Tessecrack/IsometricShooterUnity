@@ -3,6 +3,7 @@ using UnityEngine;
 public class TurretSettings : MonoBehaviour
 {
 	[SerializeField] private GameObject turretMount;
+	[SerializeField] private int maxHealth = 100;
 	private CharacterController characterController;
 	private Damageable damageable;
 	private AutomaticWeapon weapon;
@@ -18,4 +19,5 @@ public class TurretSettings : MonoBehaviour
 	public Damageable GetDamageable() => damageable;
 	public Transform GetTransform() => turretMount.transform;
 	public Weapon GetWeapon() => weapon;
+	public int GetMaxHealth() => maxHealth;
 }

@@ -261,7 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameWeapon: TurretWeaponRed
   typeWeapon: 2
-  delayBetweenAttack: 1
+  delayBetweenAttack: 0.2
   gripWeapon: {fileID: 0}
   additionalGrip: {fileID: 0}
   prefabProjectTile: {fileID: 9086379581574355896, guid: 481d0ea200b455a4ba32af9db099767f, type: 3}
@@ -272,6 +272,7 @@ MonoBehaviour:
   - {fileID: 2433856444341171487}
   quantityOneShotBullet: 1
   projectile: {fileID: 6773687861171711744, guid: 481d0ea200b455a4ba32af9db099767f, type: 3}
+  isAttackFromOneMuzzle: 1
 --- !u!114 &4563321229096513212
 MonoBehaviour:
   m_ObjectHideFlags: 0

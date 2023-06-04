@@ -27,6 +27,8 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 			ref var stateComponent = ref stateComponents.Get(entity);
 			ref var eventComponent = ref inputEvents.Get(entity);
 
+			var hasTarget = aiEnemyComponent.enemyAgent.IsDetectTarget(playerPosition);
+
 			if (aiEnemyComponent.enemyAgent.IsDetectTarget(playerPosition))
 			{
 				targetComponent.target = playerPosition;

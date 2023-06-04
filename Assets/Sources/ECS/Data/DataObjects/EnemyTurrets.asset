@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae88b9a4e19aed4896fb3602959f7c7, type: 3}
   m_Name: EnemyTurrets
   m_EditorClassIdentifier: 
-  PrefabsEnemyTurrets:
-  - {fileID: 5182490288178967833, guid: 85b0fcfbabf016f4a9e7ad7a63436ad7, type: 3}
-  - {fileID: 2570818114527106543, guid: d04bb57b086c6fd4e8ff1962c28c3d6d, type: 3}
+  PrefabRedTurrets: {fileID: 2570818114527106543, guid: d04bb57b086c6fd4e8ff1962c28c3d6d, type: 3}
+  PrefabBlueTurrets: {fileID: 5182490288178967833, guid: 85b0fcfbabf016f4a9e7ad7a63436ad7, type: 3}
