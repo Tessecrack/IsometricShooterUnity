@@ -8,24 +8,25 @@ public class CharacterAttackSystem : IEcsRunSystem
 		var filter = world.Filter<CharacterEventsComponent>()
 			.Inc<AttackComponent>()
 			.Inc<CharacterComponent>()
+			.Inc<TargetComponent>()
 			.End();
 
 		var inputs = world.GetPool<CharacterEventsComponent>();
 		var attacks = world.GetPool<AttackComponent>();
 		var characters = world.GetPool<CharacterComponent>();
-
-		var sharedData = systems.GetShared<SharedData>();
+		var targets = world.GetPool<TargetComponent>();
 
 		foreach (int entity in filter)
 		{
 			ref var inputComponent = ref inputs.Get(entity);
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var characterComponent = ref characters.Get(entity);
+			ref var targetComponent = ref targets.Get(entity);
 
 			attackComponent.isStartAttack = inputComponent.isStartAttack;
 			attackComponent.isStopAttack = inputComponent.isStopAttack;
 
-			attackComponent.targetPoint = sharedData.RuntimeData.CursorPosition;
+			attackComponent.targetPoint = targetComponent.target;
 			attackComponent.attackerTransform = characterComponent.characterTransform;
 		}
 	}

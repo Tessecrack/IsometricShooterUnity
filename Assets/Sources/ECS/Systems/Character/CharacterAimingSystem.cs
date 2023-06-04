@@ -8,11 +8,12 @@ public class CharacterAimingSystem : IEcsRunSystem
 		var entities = world.Filter<CharacterComponent>()
 			.Inc<StateAttackComponent>()
 			.Inc<WeaponComponent>()
+			.Exc<TurretComponent>()
 			.End();
 		var characterComponents = world.GetPool<CharacterComponent>();
 		var statesComponents = world.GetPool<StateAttackComponent>();
 		var weaponComponents = world.GetPool<WeaponComponent>();
-		foreach( var entity in entities )
+		foreach(var entity in entities)
 		{
 			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var stateComponent = ref statesComponents.Get(entity);
