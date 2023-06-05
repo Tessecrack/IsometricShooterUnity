@@ -2538,6 +2538,7 @@ GameObject:
   - component: {fileID: 1709042859659896358}
   - component: {fileID: 6340366110240624981}
   - component: {fileID: 8322615476185346409}
+  - component: {fileID: 769023355603686269}
   m_Layer: 0
   m_Name: PlayerRenegadePrefabVariant
   m_TagString: Untagged
@@ -2757,6 +2758,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c86af0ac450f31440b10ad1e64b1239a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &769023355603686269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3445261361879102271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37aad2e7ad7ac134298c70d9cc6c7b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3445261361912603064

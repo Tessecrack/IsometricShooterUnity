@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Raycaster
 {
@@ -17,7 +18,9 @@ public class Raycaster
 
 	public Vector3 GetCursorPosition()
 	{
-		Ray rayFromCursor = camera.ScreenPointToRay(Input.mousePosition);
+		Vector3 mousePos = Mouse.current.position.ReadValue();
+		mousePos.z = camera.nearClipPlane;
+		Ray rayFromCursor = camera.ScreenPointToRay(mousePos);
 		RaycastHit raycastHit;
 		int layerMask = 1 << groundLayer;
 		Physics.Raycast(rayFromCursor, out raycastHit, int.MaxValue, layerMask);

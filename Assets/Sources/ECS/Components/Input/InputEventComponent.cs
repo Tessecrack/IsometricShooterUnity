@@ -7,4 +7,6 @@ public struct InputEventComponent
 	public Vector3 inputMovement;
 	public int selectedNumberWeapon;
 	public bool isDash;
+
+	public UserInput userInput;
 }
