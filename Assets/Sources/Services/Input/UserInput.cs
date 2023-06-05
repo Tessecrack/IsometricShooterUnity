@@ -7,6 +7,8 @@ public class UserInput : MonoBehaviour
     public bool IsStopFire { get; private set; }
     public bool IsDash { get; private set; }
 
+    public int SelectedWeapon { get; private set; }
+
 	private void Awake()
 	{
         controls = new Controls();
@@ -16,9 +18,23 @@ public class UserInput : MonoBehaviour
 
         controls.Main.Dash.performed += context => StartDash();
 		controls.Main.Dash.canceled += context => StopDash();
+
+        controls.Main.FirstWeapon.performed += context => SelectWeapon(0);
+        controls.Main.SecondWeapon.performed += context => SelectWeapon(1);
+		controls.Main.ThirdWeapon.performed += context => SelectWeapon(2);
 	}
 
-    private void StartFire()
+	private void OnEnable()
+	{
+        controls.Enable();
+	}
+
+	private void OnDisable()
+	{
+		controls.Disable();
+	}
+
+	private void StartFire()
     {
         IsStartFire = true;
         IsStopFire = false;
@@ -40,18 +56,18 @@ public class UserInput : MonoBehaviour
 		IsDash = false;
 	}
 
+    private void SelectWeapon(int number)
+    {
+		SelectedWeapon = number;
+    }
+
     public float GetValueHorizontal()
     {
-        return controls.Main.MoveLeftRight.ReadValue<float>();
+		return controls.Main.MoveLeftRight.ReadValue<float>();
     }
 
 	public float GetValueVertical()
 	{
 		return controls.Main.MoveForwardBack.ReadValue<float>();
 	}
-
-    public int GetSelectedWeapon()
-    {
-        return controls.Main.SelectWeapon.ReadValue<int>();
-    }
 }

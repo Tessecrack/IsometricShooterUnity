@@ -21,7 +21,7 @@ public class InputEventSystem : IEcsRunSystem
 
 			inputComponent.isDash = inputComponent.userInput.IsDash;
 
-			inputComponent.selectedNumberWeapon = inputComponent.userInput.GetSelectedWeapon();
+			inputComponent.selectedNumberWeapon = inputComponent.userInput.SelectedWeapon;
 		}
 	}
 }

@@ -82,9 +82,27 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SelectWeapon"",
+                    ""name"": ""FirstWeapon"",
                     ""type"": ""Button"",
-                    ""id"": ""aff0db6a-d1f5-4437-a978-2a38418a8a5e"",
+                    ""id"": ""4ca56ac1-d09c-4acf-baed-f6ff0f481195"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd0b6d4e-884a-4f10-9852-20af6d90318e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThirdWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""147c1c88-620c-4803-9510-59c59a58b2a1"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -204,89 +222,34 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""89cf83f5-e4a0-4f86-acc0-af359c99ecbf"",
+                    ""id"": ""f3f15553-327b-427a-881d-6ebd3b6badc4"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""SelectWeapon"",
+                    ""groups"": """",
+                    ""action"": ""FirstWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c9ab63ae-512d-4549-b705-86158d496637"",
+                    ""id"": ""75811a2a-71a4-4e13-a716-a7197d58fe83"",
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""SelectWeapon"",
+                    ""groups"": """",
+                    ""action"": ""SecondWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""995570c1-d0f9-4b4e-b16c-eae166ce5b17"",
+                    ""id"": ""d78e6e5d-2c47-42e4-8314-ea0f67c62f7e"",
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""SelectWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""795c2609-9258-4821-84b3-1f8e10f18912"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""SelectWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a7bbf19f-7151-41e5-80a5-795555d09531"",
-                    ""path"": ""<Keyboard>/5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""SelectWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""eafadb45-be44-4f86-9ba9-9e7a94b7593c"",
-                    ""path"": ""<Keyboard>/6"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""SelectWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0b31ff1e-82ce-4cd6-a903-c73f56608465"",
-                    ""path"": ""<Keyboard>/7"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""SelectWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b98cbaec-7756-4a8c-9cc4-e32ca323eaf9"",
-                    ""path"": ""<Keyboard>/8"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""SelectWeapon"",
+                    ""groups"": """",
+                    ""action"": ""ThirdWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -331,7 +294,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Main_MoveForwardBack = m_Main.FindAction("MoveForwardBack", throwIfNotFound: true);
         m_Main_Dash = m_Main.FindAction("Dash", throwIfNotFound: true);
         m_Main_ApplyAction = m_Main.FindAction("ApplyAction", throwIfNotFound: true);
-        m_Main_SelectWeapon = m_Main.FindAction("SelectWeapon", throwIfNotFound: true);
+        m_Main_FirstWeapon = m_Main.FindAction("FirstWeapon", throwIfNotFound: true);
+        m_Main_SecondWeapon = m_Main.FindAction("SecondWeapon", throwIfNotFound: true);
+        m_Main_ThirdWeapon = m_Main.FindAction("ThirdWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -397,7 +362,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_MoveForwardBack;
     private readonly InputAction m_Main_Dash;
     private readonly InputAction m_Main_ApplyAction;
-    private readonly InputAction m_Main_SelectWeapon;
+    private readonly InputAction m_Main_FirstWeapon;
+    private readonly InputAction m_Main_SecondWeapon;
+    private readonly InputAction m_Main_ThirdWeapon;
     public struct MainActions
     {
         private @Controls m_Wrapper;
@@ -408,7 +375,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @MoveForwardBack => m_Wrapper.m_Main_MoveForwardBack;
         public InputAction @Dash => m_Wrapper.m_Main_Dash;
         public InputAction @ApplyAction => m_Wrapper.m_Main_ApplyAction;
-        public InputAction @SelectWeapon => m_Wrapper.m_Main_SelectWeapon;
+        public InputAction @FirstWeapon => m_Wrapper.m_Main_FirstWeapon;
+        public InputAction @SecondWeapon => m_Wrapper.m_Main_SecondWeapon;
+        public InputAction @ThirdWeapon => m_Wrapper.m_Main_ThirdWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -436,9 +405,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @ApplyAction.started -= m_Wrapper.m_MainActionsCallbackInterface.OnApplyAction;
                 @ApplyAction.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnApplyAction;
                 @ApplyAction.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnApplyAction;
-                @SelectWeapon.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectWeapon;
-                @SelectWeapon.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectWeapon;
-                @SelectWeapon.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectWeapon;
+                @FirstWeapon.started -= m_Wrapper.m_MainActionsCallbackInterface.OnFirstWeapon;
+                @FirstWeapon.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnFirstWeapon;
+                @FirstWeapon.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnFirstWeapon;
+                @SecondWeapon.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSecondWeapon;
+                @SecondWeapon.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSecondWeapon;
+                @SecondWeapon.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSecondWeapon;
+                @ThirdWeapon.started -= m_Wrapper.m_MainActionsCallbackInterface.OnThirdWeapon;
+                @ThirdWeapon.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnThirdWeapon;
+                @ThirdWeapon.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnThirdWeapon;
             }
             m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
@@ -461,9 +436,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @ApplyAction.started += instance.OnApplyAction;
                 @ApplyAction.performed += instance.OnApplyAction;
                 @ApplyAction.canceled += instance.OnApplyAction;
-                @SelectWeapon.started += instance.OnSelectWeapon;
-                @SelectWeapon.performed += instance.OnSelectWeapon;
-                @SelectWeapon.canceled += instance.OnSelectWeapon;
+                @FirstWeapon.started += instance.OnFirstWeapon;
+                @FirstWeapon.performed += instance.OnFirstWeapon;
+                @FirstWeapon.canceled += instance.OnFirstWeapon;
+                @SecondWeapon.started += instance.OnSecondWeapon;
+                @SecondWeapon.performed += instance.OnSecondWeapon;
+                @SecondWeapon.canceled += instance.OnSecondWeapon;
+                @ThirdWeapon.started += instance.OnThirdWeapon;
+                @ThirdWeapon.performed += instance.OnThirdWeapon;
+                @ThirdWeapon.canceled += instance.OnThirdWeapon;
             }
         }
     }
@@ -494,6 +475,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnMoveForwardBack(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnApplyAction(InputAction.CallbackContext context);
-        void OnSelectWeapon(InputAction.CallbackContext context);
+        void OnFirstWeapon(InputAction.CallbackContext context);
+        void OnSecondWeapon(InputAction.CallbackContext context);
+        void OnThirdWeapon(InputAction.CallbackContext context);
     }
 }
