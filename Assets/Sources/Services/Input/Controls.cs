@@ -202,7 +202,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""87636d9d-ec4e-455d-b57d-872355ccd4a0"",
                     ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
                     ""action"": ""Dash"",
