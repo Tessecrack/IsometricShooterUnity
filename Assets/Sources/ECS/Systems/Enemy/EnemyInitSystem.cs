@@ -1,5 +1,4 @@
 using Leopotam.EcsLite;
-using UnityEngine;
 public class EnemyInitSystem : IEcsInitSystem
 {
 	public void Init(IEcsSystems systems)

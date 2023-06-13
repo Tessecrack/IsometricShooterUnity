@@ -1,6 +1,4 @@
 using Leopotam.EcsLite;
-using UnityEngine;
-
 public class CharacterAnimationSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)

@@ -1,17 +1,14 @@
 using UnityEngine;
 
-public class CharacterAnimationsManager : MonoBehaviour
+public class PlayerAnimationsManager : AnimationsManager
 {
-    private Animator animator;
-    private CharacterAnimationState currentAnimationState;
-    
     void Start()
     {
         animator = GetComponent<Animator>();
         currentAnimationState = new CharacterAnimationState();
     }
 
-    public void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
+    public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
     {
         SetParamsBlendTree(updatedAnimationsState);
         if (currentAnimationState.Equals(updatedAnimationsState)) 

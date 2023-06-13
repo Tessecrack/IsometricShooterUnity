@@ -1,5 +1,4 @@
 using Leopotam.EcsLite;
-using UnityEngine;
 
 public class EnemyDetectTargetSystem : IEcsRunSystem
 {
@@ -26,8 +25,6 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 			ref var targetComponent = ref targetComponents.Get(entity);
 			ref var stateComponent = ref stateComponents.Get(entity);
 			ref var eventComponent = ref inputEvents.Get(entity);
-
-			var hasTarget = aiEnemyComponent.enemyAgent.IsDetectTarget(playerPosition);
 
 			if (aiEnemyComponent.enemyAgent.IsDetectTarget(playerPosition))
 			{

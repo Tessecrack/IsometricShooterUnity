@@ -1,5 +1,5 @@
 public struct AnimatorComponent
 {
-	public CharacterAnimationsManager animationsManager;
+	public AnimationsManager animationsManager;
 	public CharacterAnimationState animationState;
 }
