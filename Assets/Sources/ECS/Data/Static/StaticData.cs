@@ -6,8 +6,8 @@ public class StaticData : ScriptableObject
 	[Header("Player prefabs")]
 	public GameObject PlayerPrefab;
 
-	[Header("Enemies prefabs")]
-	public StaticEnemies Enemies;
+	[Header("Enemies insectoids prefabs")]
+	public StaticEnemies EnemiesInsectoids;
 
 	[Header("Enemy turrets")]
 	public StaticEnemyTurret EnemyTurrets;

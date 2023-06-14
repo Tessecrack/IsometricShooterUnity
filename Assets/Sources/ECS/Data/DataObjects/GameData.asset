@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 3445261361879102271, guid: d4ba78c101baadd4b89698cf4472ee90, type: 3}
-  Enemies: {fileID: 11400000, guid: dd256aa5b8154e94584645f037018adf, type: 2}
+  EnemiesInsectoids: {fileID: 11400000, guid: dd256aa5b8154e94584645f037018adf, type: 2}
   EnemyTurrets: {fileID: 11400000, guid: ada8829a81c23c044bf6cd414adf273c, type: 2}
   FriendlyTurrets: {fileID: 11400000, guid: 1b61dcf8aa811ed408d0a74a2d6fc2e6, type: 2}
   Weapons: {fileID: 11400000, guid: dc0b9e61128f85844bc09e8dcc4352e5, type: 2}

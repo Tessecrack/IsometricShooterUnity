@@ -6,8 +6,11 @@ public class SceneData : MonoBehaviour
 	[Header("Player")]
 	public Transform PlayerSpawnPoint;
 
-	[Header("Enemies")]
-	public List<Transform> EnemySpawnPoints = new List<Transform>();
+	[Header("Enemies melee")]
+	public List<Transform> EnemyMeleeSpawnPoints = new List<Transform>();
+
+	[Header("Enemies range")]
+	public List<Transform> EnemyRangeSpawnPoints = new List<Transform>();
 
 	[Header("Enemy blue turrets")]
 	public GameObject EnemyBlueTurretsSpawnPoints;
