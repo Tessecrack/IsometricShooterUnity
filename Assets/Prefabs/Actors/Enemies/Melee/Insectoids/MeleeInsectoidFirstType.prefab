@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &313070176644070672
+--- !u!1001 &8039329769004072807
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -17,15 +17,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5594660216290705710, guid: b4253da3ef01fce47b1accb44f38395b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.75
+      value: 1.8165914
       objectReference: {fileID: 0}
     - target: {fileID: 5594660216290705710, guid: b4253da3ef01fce47b1accb44f38395b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000019073486
+      value: 0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 5594660216290705710, guid: b4253da3ef01fce47b1accb44f38395b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.84
+      value: -3.1631312
       objectReference: {fileID: 0}
     - target: {fileID: 5594660216290705710, guid: b4253da3ef01fce47b1accb44f38395b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -58,21 +58,21 @@ PrefabInstance:
     - target: {fileID: 5594660216300007104, guid: b4253da3ef01fce47b1accb44f38395b, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: f38d7202c21aea142bed706fcc70317e, type: 2}
+      objectReference: {fileID: 9100000, guid: fdf6097198362ac448cd76fc0dae40f4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4253da3ef01fce47b1accb44f38395b, type: 3}
---- !u!1 &5331143178137395230 stripped
+--- !u!1 &2464970961380106857 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5594660216290614542, guid: b4253da3ef01fce47b1accb44f38395b, type: 3}
-  m_PrefabInstance: {fileID: 313070176644070672}
+  m_PrefabInstance: {fileID: 8039329769004072807}
   m_PrefabAsset: {fileID: 0}
---- !u!143 &1251083603
+--- !u!143 &8807654197858326593
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5331143178137395230}
+  m_GameObject: {fileID: 2464970961380106857}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -84,3 +84,31 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1394399137017986411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464970961380106857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86af0ac450f31440b10ad1e64b1239a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4007720505324838642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464970961380106857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e018e23ee43d37a4b838aaa55c04c37c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSpawnWeapon: {fileID: 0}
+  characterSpeed: 6
+  maxHealth: 100
+  isMovable: 1

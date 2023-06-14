@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ea081ab6e506541b4de0a208548d8d, type: 3}
+  m_Name: EnemiesInsectoids
+  m_EditorClassIdentifier: 
+  PrefabsRangeEnemy:
+  - {fileID: 2857737251512992987, guid: bbcf01e88f7c99e4a82b53822e19d34c, type: 3}
+  - {fileID: 6756397548703371726, guid: 6c548bfc8170b3146a38c9a5988b75b5, type: 3}
+  - {fileID: 8294214000374871811, guid: 4e0891a3629da2646b0eb1420592f70c, type: 3}
+  PrefabsMeleeEnemy:
+  - {fileID: 2464970961380106857, guid: 6162fa768e358dc4fb8fe8ea90b50e81, type: 3}
+  - {fileID: 8886403118077841448, guid: 368b33fa2b303a2439c61f154438d0b2, type: 3}
