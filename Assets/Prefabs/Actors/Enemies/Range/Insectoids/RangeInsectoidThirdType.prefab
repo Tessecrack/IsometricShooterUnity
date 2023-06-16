@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8430358406747864802, guid: d4d0482adca053a45baad79ace3fb89f, type: 3}
       propertyPath: m_Name
-      value: Creature_Insect_04_Mesh
+      value: RangeInsectoidThirdType
       objectReference: {fileID: 0}
     - target: {fileID: 8430358406757240108, guid: d4d0482adca053a45baad79ace3fb89f, type: 3}
       propertyPath: m_Controller
@@ -84,6 +84,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1327391081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8294214000374871811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86af0ac450f31440b10ad1e64b1239a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1327391082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,7 +112,7 @@ MonoBehaviour:
   characterSpeed: 6
   maxHealth: 100
   isMovable: 1
---- !u!114 &1327391081
+--- !u!114 &5396729152436647665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,6 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8294214000374871811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c86af0ac450f31440b10ad1e64b1239a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d6f96998d2b85141b1d21e2083ad95c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceDetection: 5

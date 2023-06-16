@@ -22,26 +22,24 @@ public class GameStartup : MonoBehaviour
 	private EcsSystems ecsUpdateEnemySystems;
 	private EcsSystems ecsUpdateCharacterSystems;
     private EcsSystems ecsUpdateCameraSystems;
-	
+	private EcsSystems ecsEnablerSystems;
     
     private void Start()
     {
         raycaster = new Raycaster();
         raycaster.SetCamera(SceneData.Camera);
         raycaster.SetGroundLayer(StaticData.GetFloorLayer());
-
         runtimeData = new RuntimeData();
-
         ecsWorld = new EcsWorld();
 
 		InitSharedData();
-
 		InitPlayerSystem();
 		InitTurretSystem();
 		InitEnemySystem();
 		InitInputSystem();
 		InitCharacterSystem();
 		InitCameraSystem();
+		InitEnablerSystem();
 	}
 
     private void Update()
@@ -49,11 +47,18 @@ public class GameStartup : MonoBehaviour
         runtimeData.SetCursorPosition(raycaster.GetCursorPosition());
 
 		ecsUpdateInputSystems?.Run();
+
 		ecsUpdatePlayerSystems?.Run();
+
 		ecsUpdateEnemySystems?.Run();
+
 		ecsUpdateTurretSystems?.Run();
+
         ecsUpdateCharacterSystems?.Run();
+
 		ecsUpdateCameraSystems?.Run();
+		
+		ecsEnablerSystems?.Run();
 	}
 
 	private void OnDestroy()
@@ -75,6 +80,9 @@ public class GameStartup : MonoBehaviour
 
         ecsUpdateCameraSystems?.Destroy();
         ecsUpdateCameraSystems = null;
+
+		ecsEnablerSystems?.Destroy();
+		ecsEnablerSystems = null;
 
         ecsWorld?.Destroy();
         ecsWorld = null;
@@ -147,5 +155,14 @@ public class GameStartup : MonoBehaviour
 			.Add(new CameraSystem());
 
 		ecsUpdateCameraSystems.Init();
+	}
+
+	private void InitEnablerSystem()
+	{
+		ecsEnablerSystems = new EcsSystems(ecsWorld, sharedData);
+		ecsEnablerSystems 
+			.Add(new EnablerSystem());
+
+		ecsEnablerSystems.Init();
 	}
 }

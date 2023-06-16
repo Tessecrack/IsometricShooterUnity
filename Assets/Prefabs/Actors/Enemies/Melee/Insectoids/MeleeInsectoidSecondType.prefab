@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2257703518220279983, guid: 26f2a3b63ce2a3c489bf9a7033a0bbdc, type: 3}
       propertyPath: m_Name
-      value: Creature_Insect_03_Mesh
+      value: MeleeInsectoidSecondType
       objectReference: {fileID: 0}
     - target: {fileID: 6093991895878236222, guid: 26f2a3b63ce2a3c489bf9a7033a0bbdc, type: 3}
       propertyPath: m_RootOrder
@@ -57,3 +57,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26f2a3b63ce2a3c489bf9a7033a0bbdc, type: 3}
+--- !u!1 &8886403118077841448 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2257703518220279983, guid: 26f2a3b63ce2a3c489bf9a7033a0bbdc, type: 3}
+  m_PrefabInstance: {fileID: 7207485563704668295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5104371761968381573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8886403118077841448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6f96998d2b85141b1d21e2083ad95c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceDetection: 5

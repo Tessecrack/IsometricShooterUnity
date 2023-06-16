@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using UnityEngine;
 
 public class CharacterAimingSystem : IEcsRunSystem
 {
@@ -16,6 +17,10 @@ public class CharacterAimingSystem : IEcsRunSystem
 		foreach(var entity in entities)
 		{
 			ref var characterComponent = ref characterComponents.Get(entity);
+			if (!characterComponent.instance.activeSelf)
+			{ 
+				continue; 
+			}
 			ref var stateComponent = ref statesComponents.Get(entity);
 			ref var weaponComponent = ref weaponComponents.Get(entity);
 

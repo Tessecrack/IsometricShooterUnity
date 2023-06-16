@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5594660216290614542, guid: b4253da3ef01fce47b1accb44f38395b, type: 3}
       propertyPath: m_Name
-      value: Creature_Insect_01_Mesh
+      value: MeleeInsectoidFirstType
       objectReference: {fileID: 0}
     - target: {fileID: 5594660216290705710, guid: b4253da3ef01fce47b1accb44f38395b, type: 3}
       propertyPath: m_RootOrder
@@ -112,3 +112,16 @@ MonoBehaviour:
   characterSpeed: 6
   maxHealth: 100
   isMovable: 1
+--- !u!114 &7758133890415756774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464970961380106857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6f96998d2b85141b1d21e2083ad95c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceDetection: 5

@@ -18,9 +18,14 @@ public class CharacterRotationSystem : IEcsRunSystem
 
 		foreach(var entity in filter)
 		{
+			ref var characterComponent = ref characterComponents.Get(entity);
+			if (!characterComponent.instance.activeSelf)
+			{
+				continue;
+			}
+
 			ref var rotatableComponent = ref rotatableComponents.Get(entity);
 			ref var targetComponent = ref targetComponents.Get(entity);
-			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var characterState = ref characterStates.Get(entity);
 			var isStateAttack = characterState.state == CharacterState.Aiming;
 			var direction = targetComponent.target - characterComponent.characterTransform.position;

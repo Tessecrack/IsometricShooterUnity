@@ -27,6 +27,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<HealthComponent> poolHealthComponent = world.GetPool<HealthComponent>();
 		EcsPool<CharacterRigComponent> poolCharacterRigComponent = world.GetPool<CharacterRigComponent>();
 		EcsPool<TargetComponent> poolTargetComponent = world.GetPool<TargetComponent>();
+		EcsPool<EnablerComponent> poolEnablerComponent = world.GetPool<EnablerComponent>();
 
 		ref var playerComponent = ref poolPlayer.Add(entityPlayer);
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
@@ -42,13 +43,13 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var healthComponent = ref poolHealthComponent.Add(entityPlayer);
 		ref var characterRigComponent = ref poolCharacterRigComponent.Add(entityPlayer);
 		ref var targetComponent = ref poolTargetComponent.Add(entityPlayer);
+		ref var enablerComponent = ref poolEnablerComponent.Add(entityPlayer);
 
 		characterState.stateAttackTime = 3;
 		dashComponent.dashTime = 0.06f;
 		dashComponent.dashSpeed = 80.0f;
 
-		GameObject player = Object.Instantiate(staticData.PlayerPrefab, sceneData.PlayerSpawnPoint.position, Quaternion.identity);
-
+		GameObject player = sceneData.PlayerInstance;
 		inputComponent.userInput = player.GetComponent<UserInput>(); // TODO: NEED IMPROVE
 
 		runtimeData.OwnerCameraTransform = player.transform.position;
@@ -56,8 +57,9 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		var characterSettings = player.GetComponent<CharacterSettings>();
 		characterComponent.characterSettings = characterSettings;
-		player.transform.forward = staticData.GlobalForwardVector;
 
+		player.transform.forward = staticData.GlobalForwardVector;
+		characterComponent.instance = player;
 		healthComponent.damageable = player.GetComponent<Damageable>();
 		healthComponent.maxHealth = characterSettings.GetMaxHealth();
 		healthComponent.currentHealth = healthComponent.maxHealth;
@@ -80,6 +82,9 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		movableComponent.coefSmooth = 0.3f;
 		rotatableComponent.coefSmooth = 0.3f;
+
+		enablerComponent.instance = player;
+		enablerComponent.isEnabled = true;
 
 		/*NEED IMPROVE; SPOILER: OBJECT POOL*/
 		var weaponsPool = new WeaponsPool();

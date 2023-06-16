@@ -6,13 +6,23 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<AttackComponent>().Inc<StateAttackComponent>().End();
+		var filter = world.Filter<AttackComponent>()
+			.Inc<StateAttackComponent>()
+			.Inc<EnablerComponent>()
+			.End();
 
 		var attacks = world.GetPool<AttackComponent>();
 		var characterStates = world.GetPool<StateAttackComponent>();
+		var enablers = world.GetPool<EnablerComponent>();
 
 		foreach(int entity in filter)
 		{
+			ref var enabler = ref enablers.Get(entity);
+			if (!enabler.isEnabled)
+			{
+				continue;
+			}
+
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var characterState = ref characterStates.Get(entity);
 

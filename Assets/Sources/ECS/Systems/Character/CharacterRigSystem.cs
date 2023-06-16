@@ -26,8 +26,12 @@ public class CharacterRigSystem : IEcsRunSystem
 
 		foreach(var entity in entities)
 		{
-			ref var characterRigComponent = ref characterRigComponents.Get(entity);
 			ref var characterComponent = ref characterComponents.Get(entity);
+			if (!characterComponent.instance.activeSelf)
+			{
+				continue;
+			}
+			ref var characterRigComponent = ref characterRigComponents.Get(entity);
 			ref var stateComponent = ref stateComponents.Get(entity);
 			ref var movableComponent = ref movableComponents.Get(entity);
 			ref var weaponComponent = ref weaponComponents.Get(entity);

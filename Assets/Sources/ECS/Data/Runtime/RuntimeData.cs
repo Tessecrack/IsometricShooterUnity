@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class RuntimeData
 {
-	public List<byte> CurrentArsenal = new List<byte>();
-
 	public byte MaxCountWeapons { get; private set; } = 3;
 
 	public Vector3 OwnerCameraTransform { get; set; }

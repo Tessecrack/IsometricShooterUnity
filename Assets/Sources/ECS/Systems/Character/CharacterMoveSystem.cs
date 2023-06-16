@@ -26,13 +26,16 @@ public class CharacterMoveSystem : IEcsRunSystem
 		foreach(int entity in filter)
 		{
 			ref var characterComponent = ref characters.Get(entity);
+			if (!characterComponent.instance.activeSelf)
+			{
+				continue;
+			}
 			ref var inputComponent = ref inputs.Get(entity);
 			ref var movableComponent = ref movables.Get(entity);
 			ref var dashComponent = ref dashes.Get(entity);
 			ref var state = ref states.Get(entity);
 			var velocity = (staticData.GlobalForwardVector * inputComponent.inputMovement.z
 				+ staticData.GlobalRightVector * inputComponent.inputMovement.x).normalized;
-
 			movableComponent.relativeVector = Vector3.Normalize(movableComponent.transform.InverseTransformDirection(velocity));
 			dashComponent.isStartDash = inputComponent.isDash;
 			movableComponent.velocity = velocity;

@@ -9,6 +9,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			.Inc<WeaponComponent>()
 			.Inc<AttackComponent>()
 			.Inc<StateAttackComponent>()
+			.Inc<EnablerComponent>()
 			.End();
 
 		var animators = world.GetPool<AnimatorComponent>();
@@ -16,9 +17,15 @@ public class CharacterAnimationSystem : IEcsRunSystem
 		var weapons = world.GetPool<WeaponComponent>();
 		var attacks = world.GetPool<AttackComponent>();
 		var characterStates = world.GetPool<StateAttackComponent>();
+		var enablers = world.GetPool<EnablerComponent>();
 
 		foreach(int entity in filter)
 		{
+			ref var enablerComponent = ref enablers.Get(entity);
+			if (!enablerComponent.isEnabled)
+			{
+				continue;
+			}
 			ref var animatorComponent = ref animators.Get(entity);
 			ref var movableComponent = ref movables.Get(entity);
 			ref var weaponComponent = ref weapons.Get(entity);

@@ -9,6 +9,7 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 			.Inc<TargetComponent>()
 			.Inc<StateAttackComponent>()
 			.Inc<CharacterEventsComponent>()
+			.Inc<EnablerComponent>()
 			.End();
 
 		var sharedData = systems.GetShared<SharedData>();
@@ -18,9 +19,16 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 		var targetComponents = world.GetPool<TargetComponent>();
 		var stateComponents = world.GetPool<StateAttackComponent>();
 		var inputEvents = world.GetPool<CharacterEventsComponent>(); 
+		var enableComponents = world.GetPool<EnablerComponent>();
 
 		foreach(var entity in filter)
 		{
+			ref var enabler = ref enableComponents.Get(entity);
+			if (!enabler.isEnabled)
+			{
+				continue;
+			}
+
 			ref var aiEnemyComponent = ref aiEnemyComponents.Get(entity);
 			ref var targetComponent = ref targetComponents.Get(entity);
 			ref var stateComponent = ref stateComponents.Get(entity);

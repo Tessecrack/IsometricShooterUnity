@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretInitSystem : IEcsInitSystem
@@ -8,23 +9,15 @@ public class TurretInitSystem : IEcsInitSystem
 		EcsWorld world = systems.GetWorld();
 		SharedData sharedData = systems.GetShared<SharedData>();
 
-		var staticData = sharedData.StaticData;
 		var sceneData = sharedData.SceneData;
-
-		var redTurretsSpawnPoints = sceneData.RedTurretsSpawnPoints;
-		var blueTurretsSpawnPoints = sceneData.BlueTurretsSpawnPoints;
-
-		var redTurretPrefab = staticData.EnemyTurrets.PrefabRedTurrets;
-		var blueTurretPrefab = staticData.EnemyTurrets.PrefabBlueTurrets;
-
-		SpawnTurrets(world, redTurretPrefab, redTurretsSpawnPoints);
-		SpawnTurrets(world, blueTurretPrefab, blueTurretsSpawnPoints);
+		var turrets = sceneData.TurretsInstances;
+		SpawnTurrets(world, turrets);
 	}
 
 
-	private void SpawnTurrets(EcsWorld world, GameObject turretPrefab, Transform[] turretsSpawnPoints, bool isFriend = false)
+	private void SpawnTurrets(EcsWorld world, List<GameObject> turretsInstances)
 	{
-		for (int i = 1; i < turretsSpawnPoints.Length; ++i)
+		for (int i = 0; i < turretsInstances.Count; ++i)
 		{
 			int entityTurret = world.NewEntity();
 
@@ -38,6 +31,7 @@ public class TurretInitSystem : IEcsInitSystem
 			EcsPool<AttackComponent> poolAttackComponents = world.GetPool<AttackComponent>();
 			EcsPool<CharacterEventsComponent> poolEventsComponents = world.GetPool<CharacterEventsComponent>();
 			EcsPool<HealthComponent> poolHeathComponents = world.GetPool<HealthComponent>();
+			EcsPool<EnablerComponent> poolEnablerComponents = world.GetPool<EnablerComponent>();
 
 			ref var turretComponent = ref poolTurretComponents.Add(entityTurret);
 			ref var rotatableComponent = ref poolRotatableComponents.Add(entityTurret);
@@ -49,10 +43,9 @@ public class TurretInitSystem : IEcsInitSystem
 			ref var attackComponent = ref poolAttackComponents.Add(entityTurret);
 			ref var eventComponent = ref poolEventsComponents.Add(entityTurret);
 			ref var healthComponent = ref poolHeathComponents.Add(entityTurret);
+			ref var enablerComponent = ref poolEnablerComponents.Add(entityTurret);
 
-			var turretInstance = UnityEngine.Object.Instantiate(turretPrefab,
-				turretsSpawnPoints[i].position,
-				Quaternion.identity);
+			var turretInstance = turretsInstances[i];
 
 			rotatableComponent.coefSmooth = 0.05f;
 
@@ -64,6 +57,8 @@ public class TurretInitSystem : IEcsInitSystem
 			healthComponent.currentHealth = healthComponent.maxHealth;
 
 			characterComponent.instance = turretInstance;
+			enablerComponent.instance = turretInstance;
+
 			characterComponent.characterController = turretComponent.turretSettings.GetCharacterController();
 			characterComponent.characterTransform = turretComponent.turretSettings.GetTransform();
 
