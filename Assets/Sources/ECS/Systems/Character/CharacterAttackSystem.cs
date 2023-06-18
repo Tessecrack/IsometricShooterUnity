@@ -12,7 +12,7 @@ public class CharacterAttackSystem : IEcsRunSystem
 			.Inc<EnablerComponent>()
 			.End();
 
-		var inputs = world.GetPool<CharacterEventsComponent>();
+		var characterEvents = world.GetPool<CharacterEventsComponent>();
 		var attacks = world.GetPool<AttackComponent>();
 		var characters = world.GetPool<CharacterComponent>();
 		var targets = world.GetPool<TargetComponent>();
@@ -24,13 +24,13 @@ public class CharacterAttackSystem : IEcsRunSystem
 			{
 				continue;
 			}
-			ref var inputComponent = ref inputs.Get(entity);
+			ref var characterEvent = ref characterEvents.Get(entity);
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var characterComponent = ref characters.Get(entity);
 			ref var targetComponent = ref targets.Get(entity);
 
-			attackComponent.isStartAttack = inputComponent.isStartAttack;
-			attackComponent.isStopAttack = inputComponent.isStopAttack;
+			attackComponent.isStartAttack = characterEvent.isStartAttack;
+			attackComponent.isStopAttack = characterEvent.isStopAttack;
 
 			attackComponent.targetPoint = targetComponent.target;
 			attackComponent.attackerTransform = characterComponent.characterTransform;

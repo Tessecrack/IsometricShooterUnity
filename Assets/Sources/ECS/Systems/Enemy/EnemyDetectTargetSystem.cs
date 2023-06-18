@@ -42,7 +42,7 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 			}
 			else
 			{
-				stateComponent.state = CharacterState.Rest;
+				stateComponent.state = CharacterState.Idle;
 				eventComponent.isStartAttack = false;
 			}
 		}

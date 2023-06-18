@@ -14,7 +14,11 @@ public class HashCharacterAnimations
 
 	public static readonly int GunAimingRunBlendTree = Animator.StringToHash("GunAimingRun");
 
-	public static readonly int ParamHorizontal = Animator.StringToHash("Horizontal");
+	public static readonly int SwordSimpleFirstAttack = Animator.StringToHash("SwordSimpleFirstAttack");
 
-	public static readonly int ParamVertical = Animator.StringToHash("Vertical");
+	public static readonly int SwordSimpleSecondAttack = Animator.StringToHash("SwordSimpleSecondAttack");
+
+	public static readonly int SwordStrongFirstAttack = Animator.StringToHash("SwordStrongFirstAttack");
+
+	public static readonly int SwordStrongSecondAttack = Animator.StringToHash("SwordStrongSecondAttack");
 }

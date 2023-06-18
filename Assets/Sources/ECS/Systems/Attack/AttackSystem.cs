@@ -15,6 +15,9 @@ public class AttackSystem : IEcsRunSystem
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var weaponComponent = ref weapons.Get(entity);
 
+			attackComponent.typeAttack = weaponComponent.typeWeapon == TypeWeapon.MELEE ?
+				TypeAttack.Melee : TypeAttack.Range;
+
 			if (attackComponent.isStartAttack)
 			{
 				weaponComponent.weapon.StartAttack(attackComponent.attackerTransform, attackComponent.targetPoint);

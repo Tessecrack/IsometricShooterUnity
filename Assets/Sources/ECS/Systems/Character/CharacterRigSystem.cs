@@ -40,7 +40,7 @@ public class CharacterRigSystem : IEcsRunSystem
 			var characterTransform = characterComponent.characterTransform;
 
 			var angle = Vector3.Angle(characterTransform.forward, targetComponent.target - characterTransform.position);
-			if (stateComponent.state == CharacterState.Rest 
+			if (stateComponent.state == CharacterState.Idle 
 				&& movableComponent.velocity.magnitude == 0 && angle < 90)
 			{
 				characterRigComponent.characterRigController.SetTargetHeadChestRig(targetComponent.target);
@@ -52,11 +52,18 @@ public class CharacterRigSystem : IEcsRunSystem
 
 			if (weaponComponent.typeWeapon == TypeWeapon.HEAVY)
 			{
+				characterRigComponent.characterRigController.ResetRigRightArm();
 				characterRigComponent.characterRigController.SetTargetLeftArm(weaponComponent.weapon.GetAdditionalGrip().position);
+			}
+			else if (weaponComponent.typeWeapon == TypeWeapon.MELEE && stateComponent.state == CharacterState.Idle)
+			{
+				characterRigComponent.characterRigController.ResetRigLeftArm();
+				characterRigComponent.characterRigController.SetRigRightArm();
 			}
 			else
 			{
-				characterRigComponent.characterRigController.ResetRigArms();
+				characterRigComponent.characterRigController.ResetRigLeftArm();
+				characterRigComponent.characterRigController.ResetRigRightArm();
 			}
 		}
 	}

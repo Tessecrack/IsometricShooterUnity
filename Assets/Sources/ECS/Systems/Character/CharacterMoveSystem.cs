@@ -42,7 +42,7 @@ public class CharacterMoveSystem : IEcsRunSystem
 			var speedMove = dashComponent.isActiveDash ? dashComponent.dashSpeed : movableComponent.moveSpeed;
 			characterComponent.characterController.Move(velocity * speedMove * Time.deltaTime);
 
-			if (velocity.magnitude > 0 && state.state == CharacterState.Rest)
+			if (velocity.magnitude > 0 && state.state == CharacterState.Idle)
 			{
 				velocity.y = 0;
 				movableComponent.transform.forward = Vector3.Slerp(characterComponent.characterTransform.forward,

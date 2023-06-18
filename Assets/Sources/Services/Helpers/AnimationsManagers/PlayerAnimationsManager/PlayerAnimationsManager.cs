@@ -2,15 +2,36 @@ using UnityEngine;
 
 public class PlayerAnimationsManager : AnimationsManager
 {
+    private CloseCombat closeCombat;
+
+    private int[] idsAnimationsStrikes;
+
     void Start()
     {
         animator = GetComponent<Animator>();
+        closeCombat = GetComponent<CloseCombat>();
+
+        idsAnimationsStrikes = new int[closeCombat.TotalNumberStrikes];
+
+        idsAnimationsStrikes[0] = HashCharacterAnimations.SwordSimpleFirstAttack;
+        idsAnimationsStrikes[1] = HashCharacterAnimations.SwordSimpleSecondAttack;
+        idsAnimationsStrikes[2] = HashCharacterAnimations.SwordStrongFirstAttack;
+        idsAnimationsStrikes[3] = HashCharacterAnimations.SwordStrongSecondAttack;
+
         currentAnimationState = new CharacterAnimationState();
     }
 
     public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
     {
         SetParamsBlendTree(updatedAnimationsState);
+
+        if (updatedAnimationsState.CurrentTypeWeapon == TypeWeapon.MELEE &&
+            updatedAnimationsState.IsAttackState == true)
+        {
+            AnimateMeleeStrike(updatedAnimationsState);
+            return;
+        }
+
         if (currentAnimationState.Equals(updatedAnimationsState)) 
         {
             return;
@@ -30,6 +51,11 @@ public class PlayerAnimationsManager : AnimationsManager
         currentAnimationState.UpdateValuesState(updatedAnimationsState);
 	}
 
+    private void AnimateMeleeStrike(CharacterAnimationState updatedAnimationsState)
+    {
+        PlayAnimation(closeCombat.GetNextStrike());
+    }
+
     private bool ChangeAttackState(CharacterAnimationState updatedAnimationsState)
     {
         bool isChangedWeapon = updatedAnimationsState.CurrentTypeWeapon != currentAnimationState.CurrentTypeWeapon;
@@ -38,7 +64,7 @@ public class PlayerAnimationsManager : AnimationsManager
             isChangedWeapon && updatedAnimationsState.IsAttackState == true)
 		{
             ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
-            ChangeAnimationAttakRangeWeapon(updatedAnimationsState);
+            ChangeAnimationAttackWeapon(updatedAnimationsState);
             return true;
 		}
         return false;
@@ -72,7 +98,7 @@ public class PlayerAnimationsManager : AnimationsManager
             ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
 		}
 	}
-    private void ChangeAnimationAttakRangeWeapon(CharacterAnimationState animationState)
+    private void ChangeAnimationAttackWeapon(CharacterAnimationState animationState)
     {
         var typeWeapon = animationState.CurrentTypeWeapon;
         switch (typeWeapon)
@@ -113,7 +139,7 @@ public class PlayerAnimationsManager : AnimationsManager
 
     private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)
     {
-        animator.SetFloat(HashCharacterAnimations.ParamHorizontal, updatedAnimationsState.HorizontalMoveValue);
-        animator.SetFloat(HashCharacterAnimations.ParamVertical, updatedAnimationsState.VerticalMoveValue);
+        animator.SetFloat(HashParamsAnimations.Horizontal, updatedAnimationsState.HorizontalMoveValue);
+        animator.SetFloat(HashParamsAnimations.Vertical, updatedAnimationsState.VerticalMoveValue);
     }
 }

@@ -7,13 +7,18 @@ public class CharacterRigController : MonoBehaviour
 
 	[Header("Rig head/chest REST State")]
 	[SerializeField] private Transform rigHeadChestTarget;
-	[SerializeField] private Rig rigHeadChest;
 	[SerializeField] private Transform head;
+	[SerializeField] private Rig rigHeadChest;
 	
-	[Header("Rig arms Grab weapon")]
+	[Header("Rig left arm Grab weapon")]
 	[SerializeField] private Transform targetLeftArm;
 	[SerializeField] private Transform hintLeftArm;
-	[SerializeField] private Rig rigArms;
+	[SerializeField] private Rig rigLeftArm;
+
+	[Header("Rig right arm Grab melee weapon")]
+	[SerializeField] private Transform targetRightArm;
+	[SerializeField] private Transform hintRightArm;
+	[SerializeField] private Rig rigRightArm;
 
 	public void SetTargetHeadChestRig(Vector3 newTarget)
 	{
@@ -43,15 +48,25 @@ public class CharacterRigController : MonoBehaviour
 
 	public void SetTargetLeftArm(Vector3 newTarget)
 	{
-		if (rigArms.weight == 0)
+		if (rigLeftArm.weight == 0)
 		{
-			rigArms.weight = 1;
+			rigLeftArm.weight = 1;
 		}
 		targetLeftArm.position = newTarget;
 	}
 
-	public void ResetRigArms()
+	public void ResetRigLeftArm()
 	{
-		rigArms.weight = 0;
+		rigLeftArm.weight = 0;
+	}
+
+	public void SetRigRightArm()
+	{
+		rigRightArm.weight = 1;
+	}
+
+	public void ResetRigRightArm()
+	{
+		rigRightArm.weight = 0;
 	}
 }

@@ -26,6 +26,11 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var characterState = ref characterStates.Get(entity);
 
+			if (attackComponent.typeAttack == TypeAttack.Melee)
+			{
+				continue;
+			}
+
 			if (attackComponent.isStartAttack) 
 			{
 				characterState.state = CharacterState.Aiming;
@@ -39,7 +44,7 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 
 			if (characterState.passedTime >= characterState.stateAttackTime)
 			{
-				characterState.state = CharacterState.Rest;
+				characterState.state = CharacterState.Idle;
 				characterState.passedTime = 0;
 			}
 		}
