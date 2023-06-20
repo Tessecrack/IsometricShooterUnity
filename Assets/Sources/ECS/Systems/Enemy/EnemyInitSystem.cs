@@ -64,7 +64,7 @@ public class EnemyInitSystem : IEcsInitSystem
 			healthComponent.damageable = enemies[i].GetComponent<Damageable>();
 			healthComponent.maxHealth = characterSettings.GetMaxHealth();
 
-			animatorComponent.animationsManager = enemies[i].GetComponent<PlayerAnimationsManager>();
+			animatorComponent.animationsManager = new EnemyMeleeAnimationsManager(enemies[i].GetComponent<Animator>());
 			animatorComponent.animationState = new CharacterAnimationState();
 
 			movableComponent.coefSmooth = 0.3f;

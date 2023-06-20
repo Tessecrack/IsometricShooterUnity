@@ -2533,13 +2533,11 @@ GameObject:
   - component: {fileID: 3445261361879102270}
   - component: {fileID: 4652211956880066396}
   - component: {fileID: 4210835231722591443}
-  - component: {fileID: 2312547390368512797}
   - component: {fileID: 6660533328300548379}
   - component: {fileID: 1709042859659896358}
   - component: {fileID: 6340366110240624981}
   - component: {fileID: 8322615476185346409}
   - component: {fileID: 769023355603686269}
-  - component: {fileID: 5695064515538969175}
   m_Layer: 0
   m_Name: PlayerRenegadePrefabVariant
   m_TagString: Untagged
@@ -2611,6 +2609,7 @@ MonoBehaviour:
   characterSpeed: 6
   maxHealth: 100
   isMovable: 1
+  totalNumberStrikes: 4
 --- !u!143 &4210835231722591443
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2629,18 +2628,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2312547390368512797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3445261361879102271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98bfebac8cb87cf4d8017b55906734b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6660533328300548379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2779,19 +2766,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aad2e7ad7ac134298c70d9cc6c7b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5695064515538969175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3445261361879102271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d91f9bd9f0adf43bfbca75c21c3b06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalNumberStrikes: 4
 --- !u!1 &3445261361912603064
 GameObject:
   m_ObjectHideFlags: 0

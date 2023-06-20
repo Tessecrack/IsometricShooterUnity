@@ -21,4 +21,9 @@ public class HashCharacterAnimations
 	public static readonly int SwordStrongFirstAttack = Animator.StringToHash("SwordStrongFirstAttack");
 
 	public static readonly int SwordStrongSecondAttack = Animator.StringToHash("SwordStrongSecondAttack");
+
+	public static readonly int[] IdsSwordsAttack = new int[]
+	{
+		SwordSimpleFirstAttack, SwordSimpleSecondAttack, SwordStrongFirstAttack, SwordStrongSecondAttack,
+	};
 }

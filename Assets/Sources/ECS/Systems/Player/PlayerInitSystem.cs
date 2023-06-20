@@ -28,6 +28,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<CharacterRigComponent> poolCharacterRigComponent = world.GetPool<CharacterRigComponent>();
 		EcsPool<TargetComponent> poolTargetComponent = world.GetPool<TargetComponent>();
 		EcsPool<EnablerComponent> poolEnablerComponent = world.GetPool<EnablerComponent>();
+		EcsPool<CloseCombatComponent> poolCloseCombat = world.GetPool<CloseCombatComponent>();
 
 		ref var playerComponent = ref poolPlayer.Add(entityPlayer);
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
@@ -44,6 +45,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var characterRigComponent = ref poolCharacterRigComponent.Add(entityPlayer);
 		ref var targetComponent = ref poolTargetComponent.Add(entityPlayer);
 		ref var enablerComponent = ref poolEnablerComponent.Add(entityPlayer);
+		ref var closeCombatComponent = ref poolCloseCombat.Add(entityPlayer);
 
 		characterState.stateAttackTime = 3;
 		dashComponent.dashTime = 0.06f;
@@ -64,8 +66,12 @@ public class PlayerInitSystem : IEcsInitSystem
 		healthComponent.maxHealth = characterSettings.GetMaxHealth();
 		healthComponent.currentHealth = healthComponent.maxHealth;
 
-		animatorComponent.animationsManager = player.GetComponent<PlayerAnimationsManager>();
+		closeCombatComponent.closeCombat = new CloseCombat(characterSettings.TotalNumberStrikes);
+
+		animatorComponent.animationsManager = new PlayerAnimationsManager(player.GetComponent<Animator>());
+
 		animatorComponent.animationState = new CharacterAnimationState();
+
 		characterComponent.characterController = player.GetComponent<CharacterController>();
 
 		movableComponent.transform = player.transform;

@@ -2,26 +2,20 @@ using UnityEngine;
 
 public class PlayerAnimationsManager : AnimationsManager
 {
-    private CloseCombat closeCombat;
-
-    private int[] idsAnimationsStrikes;
-
-    void Start()
+    public PlayerAnimationsManager(Animator animator) : base(animator)
     {
-        animator = GetComponent<Animator>();
-        closeCombat = GetComponent<CloseCombat>();
 
-        idsAnimationsStrikes = new int[closeCombat.TotalNumberStrikes];
+	}
 
-        idsAnimationsStrikes[0] = HashCharacterAnimations.SwordSimpleFirstAttack;
-        idsAnimationsStrikes[1] = HashCharacterAnimations.SwordSimpleSecondAttack;
-        idsAnimationsStrikes[2] = HashCharacterAnimations.SwordStrongFirstAttack;
-        idsAnimationsStrikes[3] = HashCharacterAnimations.SwordStrongSecondAttack;
+	public override void InitializeCloseCombatAnimations()
+	{
+		idsAnimationsStrikes[0] = HashCharacterAnimations.SwordSimpleFirstAttack;
+		idsAnimationsStrikes[1] = HashCharacterAnimations.SwordSimpleSecondAttack;
+		idsAnimationsStrikes[2] = HashCharacterAnimations.SwordStrongFirstAttack;
+		idsAnimationsStrikes[3] = HashCharacterAnimations.SwordStrongSecondAttack;
+	}
 
-        currentAnimationState = new CharacterAnimationState();
-    }
-
-    public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
+	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
     {
         SetParamsBlendTree(updatedAnimationsState);
 
@@ -53,7 +47,7 @@ public class PlayerAnimationsManager : AnimationsManager
 
     private void AnimateMeleeStrike(CharacterAnimationState updatedAnimationsState)
     {
-        PlayAnimation(closeCombat.GetNextStrike());
+        //PlayAnimation(closeCombat.GetNextStrike());
     }
 
     private bool ChangeAttackState(CharacterAnimationState updatedAnimationsState)
