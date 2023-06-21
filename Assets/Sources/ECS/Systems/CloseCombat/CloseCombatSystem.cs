@@ -12,7 +12,12 @@ public class CloseCombatSystem : IEcsRunSystem
 
 		foreach(var entity in filter)
 		{
-
+			ref var enabler = ref enablers.Get(entity);
+			if (!enabler.isEnabled)
+			{
+				continue;
+			}
+			ref var closeCombatComponent = ref closeCombats.Get(entity);
 		}
 	}
 }
