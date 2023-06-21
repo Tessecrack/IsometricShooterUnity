@@ -13,6 +13,7 @@ public class CharacterRigSystem : IEcsRunSystem
 			.Inc<MovableComponent>()
 			.Inc<WeaponComponent>()
 			.Inc<TargetComponent>()
+			.Inc<EnablerComponent>()
 			.End();
 
 		var sharedData = systems.GetShared<SharedData>();
@@ -23,14 +24,16 @@ public class CharacterRigSystem : IEcsRunSystem
 		var movableComponents = world.GetPool<MovableComponent>();
 		var weaponComponents = world.GetPool<WeaponComponent>();
 		var targetComponents = world.GetPool<TargetComponent>();
+		var enablers = world.GetPool<EnablerComponent>();
 
 		foreach(var entity in entities)
 		{
-			ref var characterComponent = ref characterComponents.Get(entity);
-			if (!characterComponent.instance.activeSelf)
+			ref var enabler = ref enablers.Get(entity);
+			if (!enabler.isEnabled)
 			{
 				continue;
 			}
+			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var characterRigComponent = ref characterRigComponents.Get(entity);
 			ref var stateComponent = ref stateComponents.Get(entity);
 			ref var movableComponent = ref movableComponents.Get(entity);

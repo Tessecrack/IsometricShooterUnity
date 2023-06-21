@@ -61,8 +61,10 @@ public class EnemyInitSystem : IEcsInitSystem
 
 			characterComponent.characterSettings = characterSettings;
 			aiEnemyComponent.enemyAgent = enemies[i].GetComponent<AIEnemyAgent>();
+
 			healthComponent.damageable = enemies[i].GetComponent<Damageable>();
 			healthComponent.maxHealth = characterSettings.GetMaxHealth();
+			healthComponent.currentHealth = healthComponent.maxHealth;
 
 			animatorComponent.animationsManager = new EnemyMeleeAnimationsManager(enemies[i].GetComponent<Animator>());
 			animatorComponent.animationState = new CharacterAnimationState();

@@ -12,6 +12,7 @@ public class CharacterMoveSystem : IEcsRunSystem
 			.Inc<StateAttackComponent>()
 			.Inc<DashComponent>()
 			.Inc<TargetComponent>()
+			.Inc<EnablerComponent>()
 			.End();
 
 		var sharedData = systems.GetShared<SharedData>();
@@ -22,14 +23,16 @@ public class CharacterMoveSystem : IEcsRunSystem
 		var movables = world.GetPool<MovableComponent>();
 		var dashes = world.GetPool<DashComponent>();
 		var states = world.GetPool<StateAttackComponent>();
+		var enablers = world.GetPool<EnablerComponent>();
 
 		foreach(int entity in filter)
 		{
-			ref var characterComponent = ref characters.Get(entity);
-			if (!characterComponent.instance.activeSelf)
+			ref var enabler = ref enablers.Get(entity);
+			if (!enabler.isEnabled)
 			{
 				continue;
 			}
+			ref var characterComponent = ref characters.Get(entity);
 			ref var inputComponent = ref inputs.Get(entity);
 			ref var movableComponent = ref movables.Get(entity);
 			ref var dashComponent = ref dashes.Get(entity);

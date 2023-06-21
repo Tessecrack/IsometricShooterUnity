@@ -8,16 +8,23 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 		EcsFilter filter = world.Filter<CharacterEventsComponent>()
 			.Inc<WeaponComponent>()
 			.Inc<CharacterComponent>()
+			.Inc<EnablerComponent>()
 			.End();
 
 		EcsPool<CharacterEventsComponent> eventComponents = world.GetPool<CharacterEventsComponent>();
 		EcsPool<WeaponComponent> weapons = world.GetPool<WeaponComponent>();
 		EcsPool<CharacterComponent> characterComponents = world.GetPool<CharacterComponent>();
-
+		var enablers = world.GetPool<EnablerComponent>();
 		var sharedData = systems.GetShared<SharedData>();
 
 		foreach(int entity in filter)
 		{
+			ref var enabler = ref enablers.Get(entity);
+			if (!enabler.isEnabled)
+			{
+				continue;
+			}
+
 			ref var eventComponent = ref eventComponents.Get(entity);
 			ref var weaponComponent = ref weapons.Get(entity);
 			ref var characterComponent = ref characterComponents.Get(entity);

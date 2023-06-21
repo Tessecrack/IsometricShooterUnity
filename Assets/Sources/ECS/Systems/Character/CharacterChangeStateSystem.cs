@@ -28,6 +28,8 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 
 			if (attackComponent.typeAttack == TypeAttack.Melee)
 			{
+				characterState.state = CharacterState.Idle;
+				characterState.passedTime = 0;
 				continue;
 			}
 
