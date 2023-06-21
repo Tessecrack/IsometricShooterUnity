@@ -16,8 +16,6 @@ public class CharacterRigSystem : IEcsRunSystem
 			.Inc<EnablerComponent>()
 			.End();
 
-		var sharedData = systems.GetShared<SharedData>();
-
 		var characterRigComponents = world.GetPool<CharacterRigComponent>();
 		var characterComponents = world.GetPool<CharacterComponent>();
 		var stateComponents = world.GetPool<StateAttackComponent>();
@@ -33,6 +31,7 @@ public class CharacterRigSystem : IEcsRunSystem
 			{
 				continue;
 			}
+
 			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var characterRigComponent = ref characterRigComponents.Get(entity);
 			ref var stateComponent = ref stateComponents.Get(entity);

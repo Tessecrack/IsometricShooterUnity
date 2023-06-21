@@ -52,6 +52,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		dashComponent.dashSpeed = 80.0f;
 
 		GameObject player = sceneData.PlayerInstance;
+
 		inputComponent.userInput = player.GetComponent<UserInput>(); // TODO: NEED IMPROVE
 
 		runtimeData.OwnerCameraTransform = player.transform.position;
