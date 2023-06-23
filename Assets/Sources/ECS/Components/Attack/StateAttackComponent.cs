@@ -4,4 +4,6 @@ public struct StateAttackComponent
 
 	public float passedTime;
 	public int stateAttackTime;
+
+	public bool isMeleeAttack;
 }

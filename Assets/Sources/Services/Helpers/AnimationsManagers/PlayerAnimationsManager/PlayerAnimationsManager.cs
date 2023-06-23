@@ -2,13 +2,33 @@ using UnityEngine;
 
 public class PlayerAnimationsManager : AnimationsManager
 {
-    public PlayerAnimationsManager(Animator animator) : base(animator)
-    {
+    private CloseCombat closeCombat;
 
+    private bool isAnimationAttackInProgress;
+    private bool needUpdateAnimationsState;
+    public PlayerAnimationsManager(Animator animator, CloseCombat closeCombat) : base(animator)
+    {
+        this.closeCombat = closeCombat;
+        InitializeCloseCombatAnimations();
+
+        this.closeCombat.EventStartAttack += StartAttack;
+		this.closeCombat.EventEndAttack += EndAttack;
 	}
+
+    public void StartAttack()
+    {
+        isAnimationAttackInProgress = true;
+	}
+
+    public void EndAttack()
+    {
+        isAnimationAttackInProgress = false;
+        needUpdateAnimationsState = true;
+    }
 
 	public override void InitializeCloseCombatAnimations()
 	{
+        idsAnimationsStrikes = new int[closeCombat.TotalNumberStrikes];
 		idsAnimationsStrikes[0] = HashCharacterAnimations.SwordSimpleFirstAttack;
 		idsAnimationsStrikes[1] = HashCharacterAnimations.SwordSimpleSecondAttack;
 		idsAnimationsStrikes[2] = HashCharacterAnimations.SwordStrongFirstAttack;
@@ -18,19 +38,23 @@ public class PlayerAnimationsManager : AnimationsManager
 	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
     {
         SetParamsBlendTree(updatedAnimationsState);
-
-        if (updatedAnimationsState.CurrentTypeWeapon == TypeWeapon.MELEE &&
-            updatedAnimationsState.IsAttackState == true)
-        {
-            AnimateMeleeStrike(updatedAnimationsState);
-            return;
-        }
-
-        if (currentAnimationState.Equals(updatedAnimationsState)) 
+        if (isAnimationAttackInProgress)
         {
             return;
         }
 
+		if (closeCombat.NeedStrike)
+		{
+			AnimateMeleeStrike(idsAnimationsStrikes[closeCombat.GetNextStrike()]);
+            isAnimationAttackInProgress = true;
+            return;
+		}
+
+		if (currentAnimationState.Equals(updatedAnimationsState) && !needUpdateAnimationsState) 
+        {
+            return;
+        }
+        needUpdateAnimationsState = false;
         bool isChangedAttackState = ChangeAttackState(updatedAnimationsState);
 		
 		if (updatedAnimationsState.IsAttackState == false)
@@ -45,9 +69,9 @@ public class PlayerAnimationsManager : AnimationsManager
         currentAnimationState.UpdateValuesState(updatedAnimationsState);
 	}
 
-    private void AnimateMeleeStrike(CharacterAnimationState updatedAnimationsState)
+    private void AnimateMeleeStrike(int idAnimation)
     {
-        //PlayAnimation(closeCombat.GetNextStrike());
+        PlayAnimation(idAnimation);
     }
 
     private bool ChangeAttackState(CharacterAnimationState updatedAnimationsState)

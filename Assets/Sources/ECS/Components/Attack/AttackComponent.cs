@@ -8,5 +8,5 @@ public struct AttackComponent
 	public bool isStartAttack;
 	public bool isStopAttack;
 
-	public TypeAttack typeAttack;
+	public TypeWeapon typeWeapon;
 }

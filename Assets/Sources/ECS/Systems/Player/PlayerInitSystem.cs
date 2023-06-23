@@ -67,9 +67,11 @@ public class PlayerInitSystem : IEcsInitSystem
 		healthComponent.maxHealth = characterSettings.GetMaxHealth();
 		healthComponent.currentHealth = healthComponent.maxHealth;
 
-		closeCombatComponent.closeCombat = new CloseCombat(characterSettings.TotalNumberStrikes);
+		closeCombatComponent.closeCombat = player.GetComponent<CloseCombat>();
+		closeCombatComponent.closeCombat.SetTotalNumbersStrikes(characterSettings.TotalNumberStrikes);
 
-		animatorComponent.animationsManager = new PlayerAnimationsManager(player.GetComponent<Animator>());
+		animatorComponent.animationsManager = new PlayerAnimationsManager(player.GetComponent<Animator>(),
+			closeCombatComponent.closeCombat);
 
 		animatorComponent.animationState = new CharacterAnimationState();
 

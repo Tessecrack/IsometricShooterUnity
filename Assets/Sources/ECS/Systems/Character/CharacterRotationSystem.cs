@@ -31,7 +31,8 @@ public class CharacterRotationSystem : IEcsRunSystem
 			ref var targetComponent = ref targetComponents.Get(entity);
 			ref var characterState = ref characterStates.Get(entity);
 
-			var isStateAttack = characterState.state == CharacterState.Aiming;
+			var isStateAttack = characterState.state == CharacterState.Aiming
+				|| characterState.isMeleeAttack;
 
 			if (isStateAttack)
 			{

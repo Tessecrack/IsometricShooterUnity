@@ -41,9 +41,19 @@ public class CharacterMoveSystem : IEcsRunSystem
 			var velocity = (staticData.GlobalForwardVector * inputComponent.inputMovement.z
 				+ staticData.GlobalRightVector * inputComponent.inputMovement.x).normalized;
 			movableComponent.relativeVector = Vector3.Normalize(movableComponent.transform.InverseTransformDirection(velocity));
+
 			dashComponent.isStartDash = inputComponent.isDash;
+
 			movableComponent.velocity = velocity;
+
 			var speedMove = dashComponent.isActiveDash ? dashComponent.dashSpeed : movableComponent.moveSpeed;
+
+			if (state.isMeleeAttack == true)
+			{
+				characterComponent.characterController.Move(movableComponent.transform.forward * speedMove * Time.deltaTime);
+				continue;
+			}
+
 			characterComponent.characterController.Move(velocity * speedMove * Time.deltaTime);
 
 			if (velocity.magnitude > 0 && state.state == CharacterState.Idle)

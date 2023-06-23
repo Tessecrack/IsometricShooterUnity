@@ -26,11 +26,15 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var characterState = ref characterStates.Get(entity);
 
-			if (attackComponent.typeAttack == TypeAttack.Melee)
+			if (characterState.isMeleeAttack)
+			{
+				continue;
+			}
+
+			if (attackComponent.typeWeapon == TypeWeapon.MELEE)
 			{
 				characterState.state = CharacterState.Idle;
 				characterState.passedTime = 0;
-				continue;
 			}
 
 			if (attackComponent.isStartAttack) 
