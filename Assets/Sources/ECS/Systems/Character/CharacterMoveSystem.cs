@@ -50,8 +50,8 @@ public class CharacterMoveSystem : IEcsRunSystem
 
 			if (state.isMeleeAttack == true)
 			{
-				characterComponent.characterController.Move(movableComponent.transform.forward * speedMove * Time.deltaTime);
-				continue;
+				//characterComponent.characterController.Move(movableComponent.transform.forward * speedMove * Time.deltaTime);
+				//continue;
 			}
 
 			characterComponent.characterController.Move(velocity * speedMove * Time.deltaTime);
