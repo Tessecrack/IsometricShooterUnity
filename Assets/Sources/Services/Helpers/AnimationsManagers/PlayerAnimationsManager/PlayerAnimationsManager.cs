@@ -152,7 +152,7 @@ public class PlayerAnimationsManager : AnimationsManager
 
     private void PlayAnimation(int hashId)
     {
-		animator.CrossFade(hashId, 0.05f);
+		animator.CrossFade(hashId, 0.02f);
 	}
 
     private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)

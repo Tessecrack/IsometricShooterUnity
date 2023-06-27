@@ -12,5 +12,4 @@ public struct WeaponComponent
 	public string name;
 	public int currentNumberWeapon;
 	public int damage;
-	public int speedAttack;
 }

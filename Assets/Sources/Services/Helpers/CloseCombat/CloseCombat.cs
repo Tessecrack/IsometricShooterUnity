@@ -23,6 +23,7 @@ public class CloseCombat : MonoBehaviour
 
 	public event Action EventEndApplyDamage;
 
+
 	public int GetNextStrike()
 	{
 		if (CurrentNumberStrike >= TotalNumberStrikes)

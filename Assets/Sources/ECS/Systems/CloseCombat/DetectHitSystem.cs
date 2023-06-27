@@ -37,10 +37,18 @@ public class DetectHitSystem : IEcsRunSystem
 			var distanceToPlayer = Vector3.Distance(characterComponent.characterController.transform.position, 
 				runtimeData.PlayerPosition);
 			
-			if (distanceToPlayer <= 2 && runtimeData.IsPlayerCloseCombatAttack)
+			if (distanceToPlayer <= 2)
 			{
-				Debug.Log(distanceToPlayer);
-				hitComponent.isHitMe = true; 
+				if (runtimeData.PlayerActions.IsPlayerCloseCombatAttack)
+				{
+					hitComponent.isHitMe = true;
+					hitComponent.damageHit = runtimeData.PlayerActions.DamageCloseCombat;
+				}
+				else
+				{
+					hitComponent.isHitMe = false;
+					hitComponent.wasAppliedDamage = false;
+				}
 			}
 		}
 	}

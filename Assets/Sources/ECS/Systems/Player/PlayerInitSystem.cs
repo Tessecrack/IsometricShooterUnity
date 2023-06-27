@@ -95,8 +95,8 @@ public class PlayerInitSystem : IEcsInitSystem
 		enablerComponent.instance = player;
 		enablerComponent.isEnabled = true;
 
-		closeCombatComponent.closeCombat.EventStartApplyDamage += runtimeData.PlayerCloseCombatStart;
-		closeCombatComponent.closeCombat.EventEndApplyDamage += runtimeData.PlayerCloseCombatEnd;
+		closeCombatComponent.closeCombat.EventStartApplyDamage += runtimeData.PlayerActions.HandlerPlayerCloseCombatStart;
+		closeCombatComponent.closeCombat.EventEndApplyDamage += runtimeData.PlayerActions.HandlerPlayerCloseCombatEnd;
 
 		/*NEED IMPROVE; SPOILER: OBJECT POOL*/
 		var weaponsPool = new WeaponsPool();

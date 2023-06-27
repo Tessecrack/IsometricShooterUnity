@@ -17,7 +17,7 @@ public class Damageable : MonoBehaviour
 	public int ApplyDamage(int currentHealth)
 	{
 		int result = currentHealth - damage;
-		if (result < 0)
+		if (result <= 0)
 		{
 			result = 0;
 			IsDeath = true;

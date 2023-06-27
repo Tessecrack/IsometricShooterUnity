@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Mono.Cecil.Cil;
 
 public class CharacterSelectWeaponSystem : IEcsRunSystem
 {
@@ -14,6 +15,8 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 		EcsPool<CharacterEventsComponent> eventComponents = world.GetPool<CharacterEventsComponent>();
 		EcsPool<WeaponComponent> weapons = world.GetPool<WeaponComponent>();
 		EcsPool<CharacterComponent> characterComponents = world.GetPool<CharacterComponent>();
+		EcsPool<StateAttackComponent> states = world.GetPool<StateAttackComponent>();
+
 		var enablers = world.GetPool<EnablerComponent>();
 		var sharedData = systems.GetShared<SharedData>();
 
@@ -28,11 +31,13 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 			ref var eventComponent = ref eventComponents.Get(entity);
 			ref var weaponComponent = ref weapons.Get(entity);
 			ref var characterComponent = ref characterComponents.Get(entity);
+			ref var state = ref states.Get(entity);
 
 			int amountWeapons = sharedData.StaticData.Weapons.WeaponsPrefabs.Count;
 
 			if (eventComponent.selectedNumberWeapon < amountWeapons
-				&& eventComponent.selectedNumberWeapon != weaponComponent.currentNumberWeapon)
+				&& eventComponent.selectedNumberWeapon != weaponComponent.currentNumberWeapon
+				&& !state.isMeleeAttack)
 			{
 				weaponComponent.weaponsPool.Disable(weaponComponent.currentNumberWeapon);	
 
@@ -42,6 +47,7 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 				weaponComponent.weapon = currentInstanceWeapon.weapon;
 				weaponComponent.typeWeapon = weaponComponent.weapon.GetTypeWeapon();
 				weaponComponent.currentNumberWeapon = eventComponent.selectedNumberWeapon;
+				weaponComponent.damage = currentInstanceWeapon.weapon.Damage;
 			}
 		}
 	}

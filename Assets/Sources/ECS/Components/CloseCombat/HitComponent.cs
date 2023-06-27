@@ -4,5 +4,7 @@ using UnityEngine;
 
 public struct HitComponent
 {
+	public bool wasAppliedDamage;
 	public bool isHitMe;
+	public int damageHit;
 }

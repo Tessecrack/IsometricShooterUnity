@@ -28,6 +28,7 @@ public abstract class Weapon : MonoBehaviour
 	public Transform GetGripWeapon() => gripWeapon;
 
 	public Transform GetAdditionalGrip() => additionalGrip;
+	public int Damage => damage;
 
 	private void Start()
 	{

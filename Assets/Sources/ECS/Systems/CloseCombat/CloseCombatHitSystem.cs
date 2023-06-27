@@ -1,7 +1,4 @@
 using Leopotam.EcsLite;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class CloseCombatHitSystem : IEcsRunSystem
 {
@@ -28,9 +25,11 @@ public class CloseCombatHitSystem : IEcsRunSystem
 			ref var healthComponent = ref healths.Get(entity);
 			ref var hit = ref hits.Get(entity);
 
-			if (hit.isHitMe)
+			if (hit.isHitMe && !hit.wasAppliedDamage)
 			{
-				healthComponent.damageable.HitDamage(50, healthComponent.currentHealth);
+				healthComponent.damageable.HitDamage(hit.damageHit, healthComponent.currentHealth);
+				hit.wasAppliedDamage = true;
+				hit.isHitMe = false;
 			}
 		}
 	}

@@ -34,6 +34,8 @@ public class GameStartup : MonoBehaviour
         runtimeData = new RuntimeData();
         ecsWorld = new EcsWorld();
 
+		runtimeData.InitPlayerActions();
+
 		InitSharedData();
 		InitPlayerSystem();
 		InitTurretSystem();
@@ -117,7 +119,7 @@ public class GameStartup : MonoBehaviour
 			.Add(new PlayerInitSystem())
 			.Add(new PlayerInputSystem())
 			.Add(new PlayerDetectTargetSystem())
-			.Add(new PlayerRuntimePositionSystem());
+			.Add(new PlayerRuntimeActionSystem());
 		ecsUpdatePlayerSystems.Init();
 	}
 
