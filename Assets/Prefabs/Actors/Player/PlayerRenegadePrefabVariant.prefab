@@ -2608,8 +2608,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointSpawnWeapon: {fileID: 1001549539155377157}
   characterSpeed: 6
-  maxHealth: 100
+  speedCloseCombatMove: 30
   isMovable: 1
+  dashSpeed: 80
+  dashTime: 0.06
+  maxHealth: 100
   totalNumberStrikes: 4
 --- !u!143 &4210835231722591443
 CharacterController:

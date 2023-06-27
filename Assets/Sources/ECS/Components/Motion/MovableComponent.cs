@@ -6,6 +6,6 @@ public struct MovableComponent
 	public float moveSpeed;
 	public Vector3 relativeVector;
 	public Vector3 velocity;
-
+	public bool isActiveDash;
 	public float coefSmooth;
 }

@@ -48,8 +48,6 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var closeCombatComponent = ref poolCloseCombat.Add(entityPlayer);
 
 		characterState.stateAttackTime = 3;
-		dashComponent.dashTime = 0.06f;
-		dashComponent.dashSpeed = 80.0f;
 
 		GameObject player = sceneData.PlayerInstance;
 
@@ -60,6 +58,8 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		var characterSettings = player.GetComponent<CharacterSettings>();
 		characterComponent.characterSettings = characterSettings;
+		dashComponent.dashTime = characterSettings.DashTime;
+		dashComponent.dashSpeed = characterSettings.DashSpeed;
 
 		player.transform.forward = staticData.GlobalForwardVector;
 		characterComponent.instance = player;
@@ -94,6 +94,9 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		enablerComponent.instance = player;
 		enablerComponent.isEnabled = true;
+
+		closeCombatComponent.closeCombat.EventStartApplyDamage += runtimeData.PlayerCloseCombatStart;
+		closeCombatComponent.closeCombat.EventEndApplyDamage += runtimeData.PlayerCloseCombatEnd;
 
 		/*NEED IMPROVE; SPOILER: OBJECT POOL*/
 		var weaponsPool = new WeaponsPool();

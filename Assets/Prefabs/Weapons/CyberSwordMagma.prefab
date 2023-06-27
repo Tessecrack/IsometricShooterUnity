@@ -50,7 +50,7 @@ MonoBehaviour:
   delayBetweenAttack: 1
   gripWeapon: {fileID: 0}
   additionalGrip: {fileID: 0}
-  damage: 25
+  damage: 50
 --- !u!1 &2440359980800291065
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,5 +18,17 @@ public class RuntimeData
 
 	public Vector3 GetModifyCursorPosition() => new Vector3(CursorPosition.x, OwnerCameraTransform.y, CursorPosition.z);
 
-	public bool IsPlayerDeath { get; set; }
+	public void PlayerCloseCombatStart()
+	{
+		IsPlayerCloseCombatAttack = true;
+	}
+
+	public void PlayerCloseCombatEnd()
+	{
+		IsPlayerCloseCombatAttack = false;
+	}
+
+	public bool IsPlayerCloseCombatAttack { get; private set; }
+
+	public bool IsPlayerDeath { get; private set; }
 }

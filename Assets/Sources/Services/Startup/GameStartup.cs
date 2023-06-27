@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using System;
 using UnityEngine;
 
 public class GameStartup : MonoBehaviour
@@ -22,6 +23,7 @@ public class GameStartup : MonoBehaviour
 	private EcsSystems ecsUpdateEnemySystems;
 	private EcsSystems ecsUpdateCharacterSystems;
     private EcsSystems ecsUpdateCameraSystems;
+	private EcsSystems ecsCloseCombatSystems;
 	private EcsSystems ecsEnablerSystems;
     
     private void Start()
@@ -38,11 +40,12 @@ public class GameStartup : MonoBehaviour
 		InitEnemySystem();
 		InitInputSystem();
 		InitCharacterSystem();
+		InitCloseCombatSystems();
 		InitCameraSystem();
 		InitEnablerSystem();
 	}
 
-    private void Update()
+	private void Update()
     {
         runtimeData.SetCursorPosition(raycaster.GetCursorPosition());
 
@@ -55,6 +58,8 @@ public class GameStartup : MonoBehaviour
 		ecsUpdateTurretSystems?.Run();
 
         ecsUpdateCharacterSystems?.Run();
+
+		ecsCloseCombatSystems?.Run();
 
 		ecsUpdateCameraSystems?.Run();
 		
@@ -83,6 +88,9 @@ public class GameStartup : MonoBehaviour
 
 		ecsEnablerSystems?.Destroy();
 		ecsEnablerSystems = null;
+
+		ecsCloseCombatSystems?.Destroy();
+		ecsCloseCombatSystems = null;
 
         ecsWorld?.Destroy();
         ecsWorld = null;
@@ -143,13 +151,23 @@ public class GameStartup : MonoBehaviour
 			.Add(new CharacterChangeStateSystem())
 			.Add(new CharacterAnimationSystem())
 			.Add(new AttackSystem())
-			.Add(new CloseCombatSystem())
 			.Add(new CharacterRigSystem())
 			.Add(new DamageSystem());
 		ecsUpdateCharacterSystems.Init();
 	}
 
-    private void InitCameraSystem()
+	private void InitCloseCombatSystems()
+	{
+		ecsCloseCombatSystems = new EcsSystems(ecsWorld,sharedData);
+		ecsCloseCombatSystems
+			.Add(new CloseCombatSystem())
+			.Add(new CloseCombatMoveSystem())
+			.Add(new DetectHitSystem())
+			.Add(new CloseCombatHitSystem());
+		ecsCloseCombatSystems.Init();
+	}
+
+	private void InitCameraSystem()
     {
 		ecsUpdateCameraSystems = new EcsSystems(ecsWorld, sharedData);
 		ecsUpdateCameraSystems

@@ -47,11 +47,15 @@ public class CharacterMoveSystem : IEcsRunSystem
 			movableComponent.velocity = velocity;
 
 			var speedMove = dashComponent.isActiveDash ? dashComponent.dashSpeed : movableComponent.moveSpeed;
+			movableComponent.isActiveDash = dashComponent.isActiveDash;
 
 			if (state.isMeleeAttack == true)
 			{
-				//characterComponent.characterController.Move(movableComponent.transform.forward * speedMove * Time.deltaTime);
-				//continue;
+				if (dashComponent.isActiveDash)
+				{
+					characterComponent.characterController.Move(velocity * speedMove * Time.deltaTime);
+				}
+				continue;
 			}
 
 			characterComponent.characterController.Move(velocity * speedMove * Time.deltaTime);

@@ -26,6 +26,11 @@ public class Damageable : MonoBehaviour
 		return result;
 	}
 
+	public void HitDamage(int damage, int currentHealth)
+	{
+		TakeDamage(damage);
+	}
+
 	public void DisableObject()
 	{
 		Destroy(gameObject);

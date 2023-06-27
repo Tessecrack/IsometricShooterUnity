@@ -43,7 +43,7 @@ public class PlayerAnimationsManager : AnimationsManager
             return;
         }
 
-		if (closeCombat.NeedStrike)
+		if (closeCombat.IsStartAttack)
 		{
 			AnimateMeleeStrike(idsAnimationsStrikes[closeCombat.GetNextStrike()]);
             isAnimationAttackInProgress = true;
@@ -152,7 +152,7 @@ public class PlayerAnimationsManager : AnimationsManager
 
     private void PlayAnimation(int hashId)
     {
-		animator.CrossFade(hashId, 0.02f);
+		animator.CrossFade(hashId, 0.05f);
 	}
 
     private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)

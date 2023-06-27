@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class CloseCombat : MonoBehaviour
 {
-	private int totalNumberStrikes;
-
-	private int currentNumberStrike;
-
-	public bool IsAttacking { get; private set; }
-	public bool NeedStrike { get; private set; }
+	public bool AttackInProccess { get; private set; }
+	public bool IsStartAttack { get; private set; }
 	public bool IsEndAttack { get; private set; }
-	public int TotalNumberStrikes => totalNumberStrikes;
-	public int CurrentNumberStrike => currentNumberStrike;
+
+	public int TotalNumberStrikes { get; private set; }
+	public int CurrentNumberStrike { get; private set; }
+
+	public bool IsApplyDamage { get; private set; }
+	public bool NeedForwardMove { get; private set; }
+
+	public float DistanceAttack => 2;
 
 	public event Action EventStartAttack;
 
@@ -21,30 +23,29 @@ public class CloseCombat : MonoBehaviour
 
 	public event Action EventEndApplyDamage;
 
-
 	public int GetNextStrike()
 	{
-		if (currentNumberStrike >= totalNumberStrikes)
+		if (CurrentNumberStrike >= TotalNumberStrikes)
 		{
-			currentNumberStrike = 0;
+			CurrentNumberStrike = 0;
 		}
-		return currentNumberStrike++;
+		return CurrentNumberStrike++;
 	}
 
 	public void SetNeedStrike()
 	{
-		NeedStrike = true;
+		IsStartAttack = true;
 	}
 
 	public void SetTotalNumbersStrikes(int totalNumberStrikes)
 	{
-		this.totalNumberStrikes = totalNumberStrikes;
+		this.TotalNumberStrikes = totalNumberStrikes;
 	}
 
 	/*Handlers events from animators*/
 	public void HandlerStartAttack()
 	{
-		if (IsAttacking)
+		if (AttackInProccess)
 		{
 			return;
 		}
@@ -55,19 +56,31 @@ public class CloseCombat : MonoBehaviour
 	public void HandlerEndAttack()
 	{
 		EventEndAttack?.Invoke();
-		NeedStrike = false;
-		IsAttacking = false;
+		IsStartAttack = false;
+		AttackInProccess = false;
 		IsEndAttack = true;
 	}
 
 	public void HandlerStartApplyDamage()
 	{
+		IsApplyDamage = true;
 		EventStartApplyDamage?.Invoke();
 	}
 
 	public void HandlerEndApplyDamage()
 	{
+		IsApplyDamage = false;
 		EventEndApplyDamage?.Invoke();
 	}	
+
+	public void HandlerStartForwardMove()
+	{
+		NeedForwardMove = true;
+	}
+
+	public void HandlerEndForwardMove()
+	{
+		NeedForwardMove = false;
+	}
 	/*----------------*/
 }
