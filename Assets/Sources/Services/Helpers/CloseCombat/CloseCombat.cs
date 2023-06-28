@@ -13,7 +13,7 @@ public class CloseCombat : MonoBehaviour
 	public bool IsApplyDamage { get; private set; }
 	public bool NeedForwardMove { get; private set; }
 
-	public float DistanceAttack => 2;
+	public float DistanceAttack => 1.5f;
 
 	public event Action EventStartAttack;
 
