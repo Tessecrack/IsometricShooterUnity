@@ -31,7 +31,7 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 				continue;
 			}
 
-			if (attackComponent.typeWeapon == TypeWeapon.MELEE)
+			if (attackComponent.typeAttack == TypeAttack.Melee)
 			{
 				characterState.state = CharacterState.Idle;
 				characterState.passedTime = 0;

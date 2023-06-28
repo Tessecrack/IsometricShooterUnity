@@ -28,7 +28,7 @@ public class CloseCombatSystem : IEcsRunSystem
 			ref var closeCombatComponent = ref closeCombats.Get(entity);
 			ref var stateAttack = ref stateAttackComponents.Get(entity);
 
-			if (attackComponent.isStartAttack && attackComponent.typeWeapon == TypeWeapon.MELEE)
+			if (attackComponent.isStartAttack && attackComponent.typeAttack == TypeAttack.Melee)
 			{
 				closeCombatComponent.closeCombat.SetNeedStrike();
 				stateAttack.isMeleeAttack = true;

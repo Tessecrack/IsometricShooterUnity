@@ -29,6 +29,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<TargetComponent> poolTargetComponent = world.GetPool<TargetComponent>();
 		EcsPool<EnablerComponent> poolEnablerComponent = world.GetPool<EnablerComponent>();
 		EcsPool<CloseCombatComponent> poolCloseCombat = world.GetPool<CloseCombatComponent>();
+		EcsPool<ArsenalComponent> poolArsenal = world.GetPool<ArsenalComponent>();
 
 		ref var playerComponent = ref poolPlayer.Add(entityPlayer);
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
@@ -46,6 +47,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var targetComponent = ref poolTargetComponent.Add(entityPlayer);
 		ref var enablerComponent = ref poolEnablerComponent.Add(entityPlayer);
 		ref var closeCombatComponent = ref poolCloseCombat.Add(entityPlayer);
+		ref var arsenal = ref poolArsenal.Add(entityPlayer);
 
 		characterState.stateAttackTime = 3;
 
@@ -57,37 +59,35 @@ public class PlayerInitSystem : IEcsInitSystem
 		characterComponent.characterTransform = player.transform;
 
 		var characterSettings = player.GetComponent<CharacterSettings>();
+		healthComponent.damageable = player.GetComponent<Damageable>();
+		closeCombatComponent.closeCombat = player.GetComponent<CloseCombat>();
+		characterRigComponent.characterRigController = player.GetComponent<CharacterRigController>();
+		characterComponent.characterController = player.GetComponent<CharacterController>();
+		animatorComponent.animationsManager = new PlayerAnimationsManager(player.GetComponent<Animator>(),
+			closeCombatComponent.closeCombat);
+
+		arsenal.arsenal = player.GetComponent<Arsenal>();
+		arsenal.currentNumberWeapon = -1;
+
 		characterComponent.characterSettings = characterSettings;
 		dashComponent.dashTime = characterSettings.DashTime;
 		dashComponent.dashSpeed = characterSettings.DashSpeed;
 
 		player.transform.forward = staticData.GlobalForwardVector;
-		characterComponent.instance = player;
-		healthComponent.damageable = player.GetComponent<Damageable>();
+		
 		healthComponent.maxHealth = characterSettings.GetMaxHealth();
 		healthComponent.currentHealth = healthComponent.maxHealth;
 
-		closeCombatComponent.closeCombat = player.GetComponent<CloseCombat>();
-		closeCombatComponent.closeCombat.SetTotalNumbersStrikes(characterSettings.TotalNumberStrikes);
-
-		animatorComponent.animationsManager = new PlayerAnimationsManager(player.GetComponent<Animator>(),
-			closeCombatComponent.closeCombat);
-
 		animatorComponent.animationState = new CharacterAnimationState();
 
-		characterComponent.characterController = player.GetComponent<CharacterController>();
-
 		movableComponent.transform = player.transform;
-
-		characterRigComponent.characterRigController = player.GetComponent<CharacterRigController>();
 
 		movableComponent.moveSpeed = characterSettings.GetCharacterSpeed();
 
 		targetComponent.target = runtimeData.CursorPosition;
 
 		weaponComponent.pointSpawnWeapon = characterSettings.GetPointSpawnWeapon();
-
-		weaponComponent.currentNumberWeapon = -1;
+		arsenal.arsenal.InitArsenal(staticData.Weapons.WeaponsPrefabs, weaponComponent.pointSpawnWeapon);
 
 		movableComponent.coefSmooth = 0.3f;
 		rotatableComponent.coefSmooth = 0.3f;
@@ -97,11 +97,5 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		closeCombatComponent.closeCombat.EventStartApplyDamage += runtimeData.PlayerActions.HandlerPlayerCloseCombatStart;
 		closeCombatComponent.closeCombat.EventEndApplyDamage += runtimeData.PlayerActions.HandlerPlayerCloseCombatEnd;
-
-		/*NEED IMPROVE; SPOILER: OBJECT POOL*/
-		var weaponsPool = new WeaponsPool();
-		weaponsPool.InitWeapons(staticData.Weapons.WeaponsPrefabs, weaponComponent.pointSpawnWeapon);
-
-		weaponComponent.weaponsPool = weaponsPool; // TODO: NEED IMPROVE
 	}
 }

@@ -21,9 +21,9 @@ public class PlayerRuntimeActionSystem : IEcsRunSystem
 			sharedData.RuntimeData.PlayerPosition = movable.transform.position;
 			sharedData.RuntimeData.OwnerCameraTransform = movable.transform.position;
 
-			if (weapon.typeWeapon == TypeWeapon.MELEE)
+			if (weapon.weapon != null && weapon.weapon.TypeWeapon == TypeWeapon.MELEE)
 			{
-				sharedData.RuntimeData.PlayerActions.SetDamageCloseCombat(weapon.damage);
+				sharedData.RuntimeData.PlayerActions.SetDamageCloseCombat(weapon.weapon.Damage);
 			}
 		}
 	}

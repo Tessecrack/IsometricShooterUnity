@@ -52,22 +52,19 @@ public class EnemyInitSystem : IEcsInitSystem
 			ref var eventComponent = ref poolEventsComponents.Add(entityEnemy);
 			ref var animatorComponent = ref poolAnimatorComponents.Add(entityEnemy);
 			ref var hitComponent = ref poolHitComponents.Add(entityEnemy);
-
-			characterComponent.instance = enemies[i];
+			
 			enablerComponent.instance = enemies[i];
 			characterComponent.characterController = enemies[i].GetComponent<CharacterController>();
-			characterComponent.characterTransform = enemies[i].transform;
-
 			var characterSettings = enemies[i].GetComponent<CharacterSettings>();
-
-			characterComponent.characterSettings = characterSettings;
 			aiEnemyComponent.enemyAgent = enemies[i].GetComponent<AIEnemyAgent>();
-
 			healthComponent.damageable = enemies[i].GetComponent<Damageable>();
+			animatorComponent.animationsManager = new EnemyMeleeAnimationsManager(enemies[i].GetComponent<Animator>());
+
+			characterComponent.characterTransform = enemies[i].transform;
+			characterComponent.characterSettings = characterSettings;
 			healthComponent.maxHealth = characterSettings.GetMaxHealth();
 			healthComponent.currentHealth = healthComponent.maxHealth;
 
-			animatorComponent.animationsManager = new EnemyMeleeAnimationsManager(enemies[i].GetComponent<Animator>());
 			animatorComponent.animationState = new CharacterAnimationState();
 
 			movableComponent.coefSmooth = 0.3f;

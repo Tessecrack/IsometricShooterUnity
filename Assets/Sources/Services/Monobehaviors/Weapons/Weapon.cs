@@ -23,11 +23,10 @@ public abstract class Weapon : MonoBehaviour
 	public abstract void StartAttack(Transform startTrasform, Vector3 targetPosition);
 
 	public abstract void StopAttack();
-	public TypeWeapon GetTypeWeapon() => typeWeapon;
 
-	public Transform GetGripWeapon() => gripWeapon;
 
-	public Transform GetAdditionalGrip() => additionalGrip;
+	public TypeWeapon TypeWeapon => typeWeapon;	
+	public Transform AdditionalGrip => additionalGrip;
 	public int Damage => damage;
 
 	private void Start()

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class CloseCombat : MonoBehaviour
 {
+	[SerializeField] private int totalNumberStrikes = 0;
+
 	public bool AttackInProccess { get; private set; }
 	public bool IsStartAttack { get; private set; }
 	public bool IsEndAttack { get; private set; }
-
-	public int TotalNumberStrikes { get; private set; }
 	public int CurrentNumberStrike { get; private set; }
 
 	public bool IsApplyDamage { get; private set; }
@@ -23,10 +23,11 @@ public class CloseCombat : MonoBehaviour
 
 	public event Action EventEndApplyDamage;
 
+	public int TotalNumberStrikes => totalNumberStrikes;
 
 	public int GetNextStrike()
 	{
-		if (CurrentNumberStrike >= TotalNumberStrikes)
+		if (CurrentNumberStrike >= totalNumberStrikes)
 		{
 			CurrentNumberStrike = 0;
 		}
@@ -36,11 +37,6 @@ public class CloseCombat : MonoBehaviour
 	public void SetNeedStrike()
 	{
 		IsStartAttack = true;
-	}
-
-	public void SetTotalNumbersStrikes(int totalNumberStrikes)
-	{
-		this.TotalNumberStrikes = totalNumberStrikes;
 	}
 
 	/*Handlers events from animators*/

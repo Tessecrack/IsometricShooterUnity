@@ -1,6 +1,6 @@
 using Leopotam.EcsLite;
 
-public class AttackSystem : IEcsRunSystem
+public class AttackWeaponRangeSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
@@ -15,7 +15,15 @@ public class AttackSystem : IEcsRunSystem
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var weaponComponent = ref weapons.Get(entity);
 
-			attackComponent.typeWeapon = weaponComponent.typeWeapon;
+			if (weaponComponent.weapon.TypeWeapon == TypeWeapon.MELEE)
+			{
+				attackComponent.typeAttack = TypeAttack.Melee;
+				continue;
+			}
+			else
+			{
+				attackComponent.typeAttack = TypeAttack.Range;
+			}
 
 			if (attackComponent.isStartAttack)
 			{

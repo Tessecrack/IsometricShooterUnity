@@ -14,7 +14,6 @@ public class TurretInitSystem : IEcsInitSystem
 		SpawnTurrets(world, turrets);
 	}
 
-
 	private void SpawnTurrets(EcsWorld world, List<GameObject> turretsInstances)
 	{
 		for (int i = 0; i < turretsInstances.Count; ++i)
@@ -33,6 +32,7 @@ public class TurretInitSystem : IEcsInitSystem
 			EcsPool<HealthComponent> poolHeathComponents = world.GetPool<HealthComponent>();
 			EcsPool<EnablerComponent> poolEnablerComponents = world.GetPool<EnablerComponent>();
 			EcsPool<HitComponent> poolHitComponents = world.GetPool<HitComponent>();
+			EcsPool<EnemyComponent> poolEnemyComponents = world.GetPool<EnemyComponent>();
 
 			ref var turretComponent = ref poolTurretComponents.Add(entityTurret);
 			ref var rotatableComponent = ref poolRotatableComponents.Add(entityTurret);
@@ -46,6 +46,7 @@ public class TurretInitSystem : IEcsInitSystem
 			ref var healthComponent = ref poolHeathComponents.Add(entityTurret);
 			ref var enablerComponent = ref poolEnablerComponents.Add(entityTurret);
 			ref var hitComponent = ref poolHitComponents.Add(entityTurret);
+			ref var enemyComponent = ref poolEnemyComponents.Add(entityTurret);
 
 			var turretInstance = turretsInstances[i];
 
@@ -57,18 +58,16 @@ public class TurretInitSystem : IEcsInitSystem
 			healthComponent.damageable = turretComponent.turretSettings.GetDamageable();
 			healthComponent.maxHealth = turretComponent.turretSettings.GetMaxHealth();
 			healthComponent.currentHealth = healthComponent.maxHealth;
-
-			characterComponent.instance = turretInstance;
 			enablerComponent.instance = turretInstance;
 
 			characterComponent.characterController = turretComponent.turretSettings.GetCharacterController();
 			characterComponent.characterTransform = turretComponent.turretSettings.GetTransform();
 
-			weaponComponent.currentNumberWeapon = 0;
 			weaponComponent.pointSpawnWeapon = null;
 			weaponComponent.weapon = turretComponent.turretSettings.GetWeapon();
 
 			attackComponent.attackerTransform = turretInstance.transform;
+			attackComponent.typeAttack = TypeAttack.Range;
 		}
 	}
 }

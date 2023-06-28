@@ -53,12 +53,13 @@ public class CharacterRigSystem : IEcsRunSystem
 				characterRigComponent.characterRigController.ResetRigHeadChest(true);
 			}
 
-			if (weaponComponent.typeWeapon == TypeWeapon.HEAVY)
+			if (weaponComponent.weapon.TypeWeapon == TypeWeapon.HEAVY)
 			{
 				characterRigComponent.characterRigController.ResetRigRightArm();
-				characterRigComponent.characterRigController.SetTargetLeftArm(weaponComponent.weapon.GetAdditionalGrip().position);
+				characterRigComponent.characterRigController.SetTargetLeftArm(weaponComponent.weapon.AdditionalGrip.position);
 			}
-			else if (weaponComponent.typeWeapon == TypeWeapon.MELEE && stateComponent.state == CharacterState.Idle)
+			else if (weaponComponent.weapon.TypeWeapon == TypeWeapon.MELEE 
+				&& stateComponent.state == CharacterState.Idle)
 			{
 				characterRigComponent.characterRigController.ResetRigLeftArm();
 				characterRigComponent.characterRigController.SetRigRightArm();

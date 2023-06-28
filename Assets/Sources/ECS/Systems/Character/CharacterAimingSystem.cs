@@ -33,7 +33,7 @@ public class CharacterAimingSystem : IEcsRunSystem
 
 			var weaponSpawnPoint = characterComponent.characterSettings.GetPointSpawnWeapon();
 			if (stateComponent.state == CharacterState.Aiming 
-				&& weaponComponent.typeWeapon != TypeWeapon.MELEE)
+				&& weaponComponent.weapon.TypeWeapon != TypeWeapon.MELEE)
 			{
 				weaponSpawnPoint.forward = characterComponent.characterTransform.forward;
 			}

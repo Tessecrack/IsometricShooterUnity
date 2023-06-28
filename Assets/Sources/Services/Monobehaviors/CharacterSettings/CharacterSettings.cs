@@ -17,14 +17,10 @@ public class CharacterSettings : MonoBehaviour
 	[Header("Health")]
 	[SerializeField] private int maxHealth = 100;
 
-	[Header("Close combat")]
-	[SerializeField] private int totalNumberStrikes = 4;
-
 	public Transform GetPointSpawnWeapon() => pointSpawnWeapon;
 	public float GetCharacterSpeed() => characterSpeed;
 	public int GetMaxHealth() => maxHealth;
 	public bool IsMovable() => isMovable;
-	public int TotalNumberStrikes => totalNumberStrikes;
 	public float SpeedCloseCombatMove => speedCloseCombatMove;
 	public float DashSpeed => dashSpeed;
 	public float DashTime => dashTime;

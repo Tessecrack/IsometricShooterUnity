@@ -7,18 +7,19 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 	{
 		EcsWorld world = systems.GetWorld();
 		EcsFilter filter = world.Filter<CharacterEventsComponent>()
+			.Inc<ArsenalComponent>()
 			.Inc<WeaponComponent>()
 			.Inc<CharacterComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
 		EcsPool<CharacterEventsComponent> eventComponents = world.GetPool<CharacterEventsComponent>();
+		EcsPool<ArsenalComponent> arsenals = world.GetPool<ArsenalComponent>();
 		EcsPool<WeaponComponent> weapons = world.GetPool<WeaponComponent>();
 		EcsPool<CharacterComponent> characterComponents = world.GetPool<CharacterComponent>();
 		EcsPool<StateAttackComponent> states = world.GetPool<StateAttackComponent>();
 
 		var enablers = world.GetPool<EnablerComponent>();
-		var sharedData = systems.GetShared<SharedData>();
 
 		foreach(int entity in filter)
 		{
@@ -29,25 +30,21 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 			}
 
 			ref var eventComponent = ref eventComponents.Get(entity);
-			ref var weaponComponent = ref weapons.Get(entity);
+			ref var arsenal = ref arsenals.Get(entity);
 			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var state = ref states.Get(entity);
+			ref var weaponComponent = ref weapons.Get(entity);
 
-			int amountWeapons = sharedData.StaticData.Weapons.WeaponsPrefabs.Count;
-
-			if (eventComponent.selectedNumberWeapon < amountWeapons
-				&& eventComponent.selectedNumberWeapon != weaponComponent.currentNumberWeapon
+			if (eventComponent.selectedNumberWeapon != arsenal.currentNumberWeapon
 				&& !state.isMeleeAttack)
 			{
-				weaponComponent.weaponsPool.Disable(weaponComponent.currentNumberWeapon);	
+				arsenal.arsenal.HideWeapon(arsenal.currentNumberWeapon);	
 
-				var currentInstanceWeapon = weaponComponent.weaponsPool.Enable(eventComponent.selectedNumberWeapon);
-				
-				weaponComponent.weaponInstance = currentInstanceWeapon.instance;
+				var currentInstanceWeapon = arsenal.arsenal.GetWeapon(eventComponent.selectedNumberWeapon);
+
+				arsenal.currentNumberWeapon = eventComponent.selectedNumberWeapon;
+
 				weaponComponent.weapon = currentInstanceWeapon.weapon;
-				weaponComponent.typeWeapon = weaponComponent.weapon.GetTypeWeapon();
-				weaponComponent.currentNumberWeapon = eventComponent.selectedNumberWeapon;
-				weaponComponent.damage = currentInstanceWeapon.weapon.Damage;
 			}
 		}
 	}
