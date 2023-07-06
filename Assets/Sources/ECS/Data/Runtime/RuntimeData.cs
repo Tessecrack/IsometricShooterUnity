@@ -3,13 +3,6 @@ using UnityEngine;
 
 public class RuntimeData
 {
-	public void InitPlayerActions()
-	{
-		PlayerActions = new RuntimePlayerAction();
-	}
-
-	public RuntimePlayerAction PlayerActions { get; private set; }
-
 	public byte MaxCountWeapons { get; private set; } = 3;
 
 	public Vector3 OwnerCameraTransform { get; set; }

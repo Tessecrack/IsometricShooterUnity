@@ -1,6 +1,4 @@
 using Leopotam.EcsLite;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CloseCombatMoveSystem : IEcsRunSystem
@@ -37,9 +35,7 @@ public class CloseCombatMoveSystem : IEcsRunSystem
 
 			if (combatComponent.closeCombat.NeedForwardMove)
 			{
-				var characterSettings = characterComponent.characterSettings;
-
-				var speedMove = characterSettings.SpeedCloseCombatMove;
+				var speedMove = combatComponent.closeCombat.SpeedMoveForwardInStrike;
 
 				characterComponent.characterController.Move(characterComponent.characterController.transform.forward
 					* speedMove * Time.deltaTime);

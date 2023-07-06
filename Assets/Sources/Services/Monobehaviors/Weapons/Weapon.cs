@@ -19,7 +19,6 @@ public abstract class Weapon : MonoBehaviour
 	protected float speedAttack = 40;
 
 	protected float passedTime = 0.0f;
-
 	public abstract void StartAttack(Transform startTrasform, Vector3 targetPosition);
 
 	public abstract void StopAttack();

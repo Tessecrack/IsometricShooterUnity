@@ -32,7 +32,6 @@ public class AttackEventSystem : IEcsRunSystem
 			attackComponent.isStartAttack = characterEvent.isStartAttack;
 			attackComponent.isStopAttack = characterEvent.isStopAttack;
 
-			attackComponent.targetPoint = targetComponent.target;
 			attackComponent.attackerTransform = characterComponent.characterTransform;
 		}
 	}

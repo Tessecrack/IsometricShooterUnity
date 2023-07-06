@@ -30,7 +30,7 @@ public class EnemyInitSystem : IEcsInitSystem
 			EcsPool<AIEnemyComponent> poolAIEnemyComponents = world.GetPool<AIEnemyComponent>();
 			EcsPool<HealthComponent> poolHeathComponents = world.GetPool<HealthComponent>();
 			EcsPool<EnablerComponent> poolEnablerComponents = world.GetPool<EnablerComponent>();
-			EcsPool<HitComponent> poolHitComponents = world.GetPool<HitComponent>();
+			EcsPool<HitMeComponent> poolHitComponents = world.GetPool<HitMeComponent>();
 			EcsPool<TargetComponent> poolTargetComponents = world.GetPool<TargetComponent>();
 			EcsPool<StateAttackComponent> poolStateAttackComponents = world.GetPool<StateAttackComponent>();
 			EcsPool<CharacterComponent> poolCharacterComponents = world.GetPool<CharacterComponent>();

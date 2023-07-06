@@ -12,4 +12,6 @@ public class Arsenal : MonoBehaviour
 	}
 	public (GameObject instance, Weapon weapon) GetWeapon(int numberSelectedWeapon) => weaponsPool.Enable(numberSelectedWeapon);
 	public void HideWeapon(int numberSelectedWeapon) => weaponsPool.Disable(numberSelectedWeapon);
+
+	public Weapon CurrentMeleeWeapon => weaponsPool.CurrentMeleeWeapon;
 }

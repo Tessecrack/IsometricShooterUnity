@@ -24,6 +24,7 @@ public class GameStartup : MonoBehaviour
 	private EcsSystems ecsUpdateCharacterSystems;
     private EcsSystems ecsUpdateCameraSystems;
 	private EcsSystems ecsCloseCombatSystems;
+	private EcsSystems ecsDamageSystems;
 	private EcsSystems ecsEnablerSystems;
     
     private void Start()
@@ -34,8 +35,6 @@ public class GameStartup : MonoBehaviour
         runtimeData = new RuntimeData();
         ecsWorld = new EcsWorld();
 
-		runtimeData.InitPlayerActions();
-
 		InitSharedData();
 		InitPlayerSystem();
 		InitTurretSystem();
@@ -43,6 +42,7 @@ public class GameStartup : MonoBehaviour
 		InitInputSystem();
 		InitCharacterSystem();
 		InitCloseCombatSystems();
+		InitDamageSystem();
 		InitCameraSystem();
 		InitEnablerSystem();
 	}
@@ -62,6 +62,8 @@ public class GameStartup : MonoBehaviour
         ecsUpdateCharacterSystems?.Run();
 
 		ecsCloseCombatSystems?.Run();
+
+		ecsDamageSystems?.Run();
 
 		ecsUpdateCameraSystems?.Run();
 		
@@ -93,6 +95,9 @@ public class GameStartup : MonoBehaviour
 
 		ecsCloseCombatSystems?.Destroy();
 		ecsCloseCombatSystems = null;
+
+		ecsDamageSystems?.Destroy();
+		ecsDamageSystems = null;
 
         ecsWorld?.Destroy();
         ecsWorld = null;
@@ -153,8 +158,7 @@ public class GameStartup : MonoBehaviour
 			.Add(new CharacterChangeStateSystem())
 			.Add(new CharacterAnimationSystem())
 			.Add(new AttackWeaponRangeSystem())
-			.Add(new CharacterRigSystem())
-			.Add(new DamageSystem());
+			.Add(new CharacterRigSystem());
 		ecsUpdateCharacterSystems.Init();
 	}
 
@@ -163,10 +167,18 @@ public class GameStartup : MonoBehaviour
 		ecsCloseCombatSystems = new EcsSystems(ecsWorld,sharedData);
 		ecsCloseCombatSystems
 			.Add(new CloseCombatSystem())
-			.Add(new CloseCombatMoveSystem())
-			.Add(new DetectHitSystem())
-			.Add(new CloseCombatHitSystem());
+			.Add(new CloseCombatMoveSystem());
 		ecsCloseCombatSystems.Init();
+	}
+
+	private void InitDamageSystem()
+	{
+		ecsDamageSystems = new EcsSystems(ecsWorld, sharedData);
+		ecsDamageSystems
+			.Add(new CloseCombatDamageSystem())
+			.Add(new DamageHitSystem())
+			.Add(new DamageSystem());
+		ecsDamageSystems.Init();
 	}
 
 	private void InitCameraSystem()

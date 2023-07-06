@@ -34,9 +34,10 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 			ref var stateComponent = ref stateComponents.Get(entity);
 			ref var eventComponent = ref inputEvents.Get(entity);
 
+			targetComponent.target = playerPosition;
+
 			if (aiEnemyComponent.enemyAgent.IsDetectTarget(playerPosition))
 			{
-				targetComponent.target = playerPosition;
 				stateComponent.state = CharacterState.Aiming;
 				eventComponent.isStartAttack = true;
 			}

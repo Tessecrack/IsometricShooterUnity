@@ -48,7 +48,7 @@ MonoBehaviour:
   nameWeapon: CyberSwordMagma
   typeWeapon: 0
   delayBetweenAttack: 1
-  gripWeapon: {fileID: 0}
+  gripWeapon: {fileID: 9178608111123063064}
   additionalGrip: {fileID: 0}
   damage: 50
 --- !u!1 &2440359980800291065

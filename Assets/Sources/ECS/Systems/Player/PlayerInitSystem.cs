@@ -30,6 +30,8 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<EnablerComponent> poolEnablerComponent = world.GetPool<EnablerComponent>();
 		EcsPool<CloseCombatComponent> poolCloseCombat = world.GetPool<CloseCombatComponent>();
 		EcsPool<ArsenalComponent> poolArsenal = world.GetPool<ArsenalComponent>();
+		EcsPool<HitRangeComponent> poolRangeHit = world.GetPool<HitRangeComponent>();
+		EcsPool<DamageComponent> poolDamage = world.GetPool<DamageComponent>();
 
 		ref var playerComponent = ref poolPlayer.Add(entityPlayer);
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
@@ -48,6 +50,8 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var enablerComponent = ref poolEnablerComponent.Add(entityPlayer);
 		ref var closeCombatComponent = ref poolCloseCombat.Add(entityPlayer);
 		ref var arsenal = ref poolArsenal.Add(entityPlayer);
+		ref var rangeHit = ref poolRangeHit.Add(entityPlayer);
+		ref var damage = ref poolDamage.Add(entityPlayer);
 
 		characterState.stateAttackTime = 3;
 
@@ -95,7 +99,6 @@ public class PlayerInitSystem : IEcsInitSystem
 		enablerComponent.instance = player;
 		enablerComponent.isEnabled = true;
 
-		closeCombatComponent.closeCombat.EventStartApplyDamage += runtimeData.PlayerActions.HandlerPlayerCloseCombatStart;
-		closeCombatComponent.closeCombat.EventEndApplyDamage += runtimeData.PlayerActions.HandlerPlayerCloseCombatEnd;
+		rangeHit.rangeHit = 1.5f;
 	}
 }

@@ -4,16 +4,18 @@ using UnityEngine;
 public class CloseCombat : MonoBehaviour
 {
 	[SerializeField] private int totalNumberStrikes = 0;
+	[SerializeField] private int speedMoveForwardInStrike = 30;
+	[SerializeField] private float rangeAttack = 1.5f;
+
+	private float passedTimeLastStrike = 0;
+	private readonly float timeReset = 0.4f;
 
 	public bool AttackInProccess { get; private set; }
 	public bool IsStartAttack { get; private set; }
 	public bool IsEndAttack { get; private set; }
 	public int CurrentNumberStrike { get; private set; }
-
 	public bool IsApplyDamage { get; private set; }
 	public bool NeedForwardMove { get; private set; }
-
-	public float DistanceAttack => 1.5f;
 
 	public event Action EventStartAttack;
 
@@ -24,7 +26,7 @@ public class CloseCombat : MonoBehaviour
 	public event Action EventEndApplyDamage;
 
 	public int TotalNumberStrikes => totalNumberStrikes;
-
+	public int SpeedMoveForwardInStrike => speedMoveForwardInStrike;
 	public int GetNextStrike()
 	{
 		if (CurrentNumberStrike >= totalNumberStrikes)
@@ -39,7 +41,24 @@ public class CloseCombat : MonoBehaviour
 		IsStartAttack = true;
 	}
 
-	/*Handlers events from animators*/
+	private void Update()
+	{
+		if (IsEndAttack)
+		{
+			passedTimeLastStrike += Time.deltaTime;
+		}
+		if (IsStartAttack)
+		{
+			passedTimeLastStrike = 0;
+		}
+		if (passedTimeLastStrike >= timeReset)
+		{
+			passedTimeLastStrike = 0;
+			CurrentNumberStrike = 0;
+		}
+	}
+
+	/*Handlers events from animator*/
 	public void HandlerStartAttack()
 	{
 		if (AttackInProccess)

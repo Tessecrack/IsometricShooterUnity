@@ -1,5 +1,4 @@
 using Leopotam.EcsLite;
-using Mono.Cecil.Cil;
 
 public class CharacterSelectWeaponSystem : IEcsRunSystem
 {
@@ -10,6 +9,7 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 			.Inc<ArsenalComponent>()
 			.Inc<WeaponComponent>()
 			.Inc<CharacterComponent>()
+			.Inc<DamageComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
@@ -20,6 +20,7 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 		EcsPool<StateAttackComponent> states = world.GetPool<StateAttackComponent>();
 
 		var enablers = world.GetPool<EnablerComponent>();
+		var damageComponents = world.GetPool<DamageComponent>();
 
 		foreach(int entity in filter)
 		{
@@ -34,7 +35,7 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var state = ref states.Get(entity);
 			ref var weaponComponent = ref weapons.Get(entity);
-
+			ref var damageComponent = ref damageComponents.Get(entity);
 			if (eventComponent.selectedNumberWeapon != arsenal.currentNumberWeapon
 				&& !state.isMeleeAttack)
 			{
@@ -45,6 +46,7 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 				arsenal.currentNumberWeapon = eventComponent.selectedNumberWeapon;
 
 				weaponComponent.weapon = currentInstanceWeapon.weapon;
+				damageComponent.damage = weaponComponent.weapon.Damage;
 			}
 		}
 	}

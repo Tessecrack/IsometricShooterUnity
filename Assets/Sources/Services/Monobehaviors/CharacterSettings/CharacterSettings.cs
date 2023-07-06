@@ -7,7 +7,6 @@ public class CharacterSettings : MonoBehaviour
 
 	[Header("Motion")]
 	[SerializeField] private float characterSpeed = 6.0f;
-	[SerializeField] private float speedCloseCombatMove = 30.0f;
 	[SerializeField] private bool isMovable = true;
 
 	[Header("Dash")]
@@ -21,7 +20,6 @@ public class CharacterSettings : MonoBehaviour
 	public float GetCharacterSpeed() => characterSpeed;
 	public int GetMaxHealth() => maxHealth;
 	public bool IsMovable() => isMovable;
-	public float SpeedCloseCombatMove => speedCloseCombatMove;
 	public float DashSpeed => dashSpeed;
 	public float DashTime => dashTime;
 

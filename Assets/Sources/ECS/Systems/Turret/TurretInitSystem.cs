@@ -31,7 +31,7 @@ public class TurretInitSystem : IEcsInitSystem
 			EcsPool<CharacterEventsComponent> poolEventsComponents = world.GetPool<CharacterEventsComponent>();
 			EcsPool<HealthComponent> poolHeathComponents = world.GetPool<HealthComponent>();
 			EcsPool<EnablerComponent> poolEnablerComponents = world.GetPool<EnablerComponent>();
-			EcsPool<HitComponent> poolHitComponents = world.GetPool<HitComponent>();
+			EcsPool<HitMeComponent> poolHitComponents = world.GetPool<HitMeComponent>();
 			EcsPool<EnemyComponent> poolEnemyComponents = world.GetPool<EnemyComponent>();
 
 			ref var turretComponent = ref poolTurretComponents.Add(entityTurret);

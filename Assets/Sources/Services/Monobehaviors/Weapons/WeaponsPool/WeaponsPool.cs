@@ -6,12 +6,18 @@ public class WeaponsPool
 	private static List<(GameObject instance, Weapon weaponComponent)> weaponPool
 		= new List<(GameObject instance, Weapon weaponComponent)>();
 
+	private Weapon currentMeleeWeapon;
+
 	public void InitWeapons(List<GameObject> weaponPrefabs, Transform pointSpawnWeapon)
 	{
 		foreach (var weapon in weaponPrefabs)
 		{
 			var instance = UnityEngine.Object.Instantiate(weapon, pointSpawnWeapon, false);
 			var weaponComponent = instance.GetComponent<Weapon>();
+			if (weaponComponent.TypeWeapon == TypeWeapon.MELEE)
+			{
+				currentMeleeWeapon = weaponComponent;
+			}
 			instance.SetActive(false);
 			weaponComponent.enabled = false;
 			weaponPool.Add((instance, weaponComponent));
@@ -38,4 +44,6 @@ public class WeaponsPool
 		weaponPool[numberSelectedWeapon].instance.SetActive(false);
 		weaponPool[numberSelectedWeapon].weaponComponent.enabled = false;
 	}
+
+	public Weapon CurrentMeleeWeapon => currentMeleeWeapon;
 }

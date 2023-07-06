@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
-	[HideInInspector]
 	public bool IsTakedDamage { get; private set; }
-	[HideInInspector]
 	public bool IsDeath { get; private set; }
 
 	private int damage;
@@ -24,11 +22,6 @@ public class Damageable : MonoBehaviour
 		}
 		Reset();
 		return result;
-	}
-
-	public void HitDamage(int damage, int currentHealth)
-	{
-		TakeDamage(damage);
 	}
 
 	public void DisableObject()
