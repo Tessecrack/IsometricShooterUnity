@@ -9,9 +9,16 @@ public class CharacterDashTimerSystem : IEcsRunSystem
 		var filter = world.Filter<DashComponent>().End();
 
 		var dashes = world.GetPool<DashComponent>();
+		var enablers = world.GetPool<EnablerComponent>();
 
 		foreach(int entity in filter)
 		{
+			ref var enabler = ref enablers.Get(entity);
+			if (enabler.isEnabled == false)
+			{
+				continue;
+			}
+
 			ref var dashComponent = ref dashes.Get(entity);
 
 			if (dashComponent.isStartDash)

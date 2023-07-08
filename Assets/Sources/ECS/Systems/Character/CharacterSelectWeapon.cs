@@ -25,7 +25,7 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 		foreach(int entity in filter)
 		{
 			ref var enabler = ref enablers.Get(entity);
-			if (!enabler.isEnabled)
+			if (enabler.isEnabled == false)
 			{
 				continue;
 			}

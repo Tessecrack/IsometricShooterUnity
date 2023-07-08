@@ -27,7 +27,7 @@ public class CharacterRigSystem : IEcsRunSystem
 		foreach(var entity in entities)
 		{
 			ref var enabler = ref enablers.Get(entity);
-			if (!enabler.isEnabled)
+			if (enabler.isEnabled == false)
 			{
 				continue;
 			}

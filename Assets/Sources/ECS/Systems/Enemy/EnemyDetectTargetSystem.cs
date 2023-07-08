@@ -24,7 +24,7 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 		foreach(var entity in filter)
 		{
 			ref var enabler = ref enableComponents.Get(entity);
-			if (!enabler.isEnabled)
+			if (enabler.isEnabled == false)
 			{
 				continue;
 			}

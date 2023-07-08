@@ -21,7 +21,7 @@ public class CharacterAimingSystem : IEcsRunSystem
 		{
 			ref var enabler = ref enablerComponents.Get(entity);
 
-			if (!enabler.isEnabled)
+			if (enabler.isEnabled == false)
 			{ 
 				continue; 
 			}

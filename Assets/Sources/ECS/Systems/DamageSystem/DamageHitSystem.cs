@@ -8,13 +8,21 @@ public class DamageHitSystem : IEcsRunSystem
 
 		var filter = world.Filter<HealthComponent>()
 			.Inc<HitMeComponent>()
+			.Inc<EnablerComponent>()
 			.End();
 
 		var healths = world.GetPool<HealthComponent>();
 		var hitMeComponents = world.GetPool<HitMeComponent>();
+		var enablers = world.GetPool<EnablerComponent>();
 
 		foreach (var entity in filter)
 		{
+			ref var enabler = ref enablers.Get(entity);
+			if (enabler.isEnabled)
+			{
+				continue;
+			}
+
 			ref var health = ref healths.Get(entity);
 			ref var hitMe = ref hitMeComponents.Get(entity);
 
