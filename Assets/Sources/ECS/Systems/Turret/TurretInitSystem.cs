@@ -63,7 +63,6 @@ public class TurretInitSystem : IEcsInitSystem
 			characterComponent.characterController = turretComponent.turretSettings.GetCharacterController();
 			characterComponent.characterTransform = turretComponent.turretSettings.GetTransform();
 
-			weaponComponent.pointSpawnWeapon = null;
 			weaponComponent.weapon = turretComponent.turretSettings.GetWeapon();
 
 			attackComponent.attackerTransform = turretInstance.transform;

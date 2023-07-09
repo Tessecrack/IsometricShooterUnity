@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class CharacterSettings : MonoBehaviour
 {
-	[Header("Weapon")]
-	[SerializeField] private Transform pointSpawnWeapon;
-
 	[Header("Motion")]
 	[SerializeField] private float characterSpeed = 6.0f;
 	[SerializeField] private bool isMovable = true;
@@ -16,7 +13,6 @@ public class CharacterSettings : MonoBehaviour
 	[Header("Health")]
 	[SerializeField] private int maxHealth = 100;
 
-	public Transform GetPointSpawnWeapon() => pointSpawnWeapon;
 	public float GetCharacterSpeed() => characterSpeed;
 	public int GetMaxHealth() => maxHealth;
 	public bool IsMovable() => isMovable;

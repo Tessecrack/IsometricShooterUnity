@@ -9,6 +9,7 @@ public class CharacterAimingSystem : IEcsRunSystem
 			.Inc<StateAttackComponent>()
 			.Inc<WeaponComponent>()
 			.Inc<EnablerComponent>()
+			.Inc<WeaponSpawnPointComponent>()
 			.Exc<TurretComponent>()
 			.End();
 
@@ -16,25 +17,24 @@ public class CharacterAimingSystem : IEcsRunSystem
 		var statesComponents = world.GetPool<StateAttackComponent>();
 		var weaponComponents = world.GetPool<WeaponComponent>();
 		var enablerComponents = world.GetPool<EnablerComponent>();
+		var weaponSpawnPoints = world.GetPool<WeaponSpawnPointComponent>();
 
 		foreach(var entity in entities)
 		{
 			ref var enabler = ref enablerComponents.Get(entity);
-
 			if (enabler.isEnabled == false)
 			{ 
 				continue; 
 			}
-
+			ref var pointSpawnWeapon = ref weaponSpawnPoints.Get(entity);
 			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var stateComponent = ref statesComponents.Get(entity);
 			ref var weaponComponent = ref weaponComponents.Get(entity);
 
-			var weaponSpawnPoint = characterComponent.characterSettings.GetPointSpawnWeapon();
 			if (stateComponent.state == CharacterState.Aiming 
 				&& weaponComponent.weapon.TypeWeapon != TypeWeapon.MELEE)
 			{
-				weaponSpawnPoint.forward = characterComponent.characterTransform.forward;
+				pointSpawnWeapon.weaponSpawPoint.forward = characterComponent.characterTransform.forward;
 			}
 		}
 	}

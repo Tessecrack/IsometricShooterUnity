@@ -11,9 +11,4 @@ public class EnemyMeleeAnimationsManager : AnimationsManager
 	{
 		
 	}
-
-	public override void InitializeCloseCombatAnimations()
-	{
-
-	}
 }

@@ -32,6 +32,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<ArsenalComponent> poolArsenal = world.GetPool<ArsenalComponent>();
 		EcsPool<HitRangeComponent> poolRangeHit = world.GetPool<HitRangeComponent>();
 		EcsPool<DamageComponent> poolDamage = world.GetPool<DamageComponent>();
+		EcsPool<WeaponSpawnPointComponent> poolWeaponSpawnPoint = world.GetPool<WeaponSpawnPointComponent>();
 
 		ref var playerComponent = ref poolPlayer.Add(entityPlayer);
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
@@ -52,6 +53,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var arsenal = ref poolArsenal.Add(entityPlayer);
 		ref var rangeHit = ref poolRangeHit.Add(entityPlayer);
 		ref var damage = ref poolDamage.Add(entityPlayer);
+		ref var weaponSpawnPoint = ref poolWeaponSpawnPoint.Add(entityPlayer);
 
 		characterState.stateAttackTime = 3;
 
@@ -69,6 +71,8 @@ public class PlayerInitSystem : IEcsInitSystem
 		characterComponent.characterController = player.GetComponent<CharacterController>();
 		animatorComponent.animationsManager = new PlayerAnimationsManager(player.GetComponent<Animator>(),
 			closeCombatComponent.closeCombat);
+
+		weaponSpawnPoint.weaponSpawPoint = player.GetComponent<WeaponSpawnPoint>().WeaponPointSpawn;
 
 		arsenal.arsenal = player.GetComponent<Arsenal>();
 		arsenal.currentNumberWeapon = -1;
@@ -90,8 +94,7 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		targetComponent.target = runtimeData.CursorPosition;
 
-		weaponComponent.pointSpawnWeapon = characterSettings.GetPointSpawnWeapon();
-		arsenal.arsenal.InitArsenal(staticData.Weapons.WeaponsPrefabs, weaponComponent.pointSpawnWeapon);
+		arsenal.arsenal.InitArsenal(staticData.Weapons.WeaponsPrefabs, weaponSpawnPoint.weaponSpawPoint);
 
 		movableComponent.coefSmooth = 0.3f;
 		rotatableComponent.coefSmooth = 0.3f;

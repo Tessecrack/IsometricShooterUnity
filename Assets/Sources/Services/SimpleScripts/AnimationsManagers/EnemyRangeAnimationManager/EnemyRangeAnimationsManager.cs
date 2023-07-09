@@ -10,9 +10,4 @@ public class EnemyRangeAnimationsManager : AnimationsManager
 	{
 		
 	}
-
-	public override void InitializeCloseCombatAnimations()
-	{
-		
-	}
 }

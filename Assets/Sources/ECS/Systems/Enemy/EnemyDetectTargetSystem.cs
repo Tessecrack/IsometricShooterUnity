@@ -5,15 +5,20 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<AIEnemyComponent>()
+		var filterEnemy = world.Filter<AIEnemyComponent>()
 			.Inc<TargetComponent>()
 			.Inc<StateAttackComponent>()
 			.Inc<CharacterEventsComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
-		var sharedData = systems.GetShared<SharedData>();
-		var playerPosition = sharedData.RuntimeData.PlayerPosition;
+		var filterPlayer = world.Filter<PlayerComponent>()
+			.Inc<CharacterComponent>()
+			.Inc<EnablerComponent>()
+			.End();
+
+		var playerCharacterComponents = world.GetPool<CharacterComponent>();
+		var playerEnablers = world.GetPool<EnablerComponent>();
 
 		var aiEnemyComponents = world.GetPool<AIEnemyComponent>();
 		var targetComponents = world.GetPool<TargetComponent>();
@@ -21,30 +26,42 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 		var inputEvents = world.GetPool<CharacterEventsComponent>(); 
 		var enableComponents = world.GetPool<EnablerComponent>();
 
-		foreach(var entity in filter)
+		foreach (var entityPlayer in filterPlayer)
 		{
-			ref var enabler = ref enableComponents.Get(entity);
-			if (enabler.isEnabled == false)
+			ref var playerEnabler = ref playerEnablers.Get(entityPlayer);
+			if (playerEnabler.isEnabled == false)
 			{
 				continue;
 			}
 
-			ref var aiEnemyComponent = ref aiEnemyComponents.Get(entity);
-			ref var targetComponent = ref targetComponents.Get(entity);
-			ref var stateComponent = ref stateComponents.Get(entity);
-			ref var eventComponent = ref inputEvents.Get(entity);
+			ref var playerCharacterComponent = ref playerCharacterComponents.Get(entityPlayer);
+			var playerPosition = playerCharacterComponent.characterTransform.position;
 
-			targetComponent.target = playerPosition;
+			foreach (var entity in filterEnemy)
+			{
+				ref var enabler = ref enableComponents.Get(entity);
+				if (enabler.isEnabled == false)
+				{
+					continue;
+				}
 
-			if (aiEnemyComponent.enemyAgent.IsDetectTarget(playerPosition))
-			{
-				stateComponent.state = CharacterState.Aiming;
-				eventComponent.isStartAttack = true;
-			}
-			else
-			{
-				stateComponent.state = CharacterState.Idle;
-				eventComponent.isStartAttack = false;
+				ref var aiEnemyComponent = ref aiEnemyComponents.Get(entity);
+				ref var targetComponent = ref targetComponents.Get(entity);
+				ref var stateComponent = ref stateComponents.Get(entity);
+				ref var eventComponent = ref inputEvents.Get(entity);
+
+				targetComponent.target = playerPosition;
+
+				if (aiEnemyComponent.enemyAgent.IsDetectTarget(playerPosition))
+				{
+					stateComponent.state = CharacterState.Aiming;
+					eventComponent.isStartAttack = true;
+				}
+				else
+				{
+					stateComponent.state = CharacterState.Idle;
+					eventComponent.isStartAttack = false;
+				}
 			}
 		}
 	}

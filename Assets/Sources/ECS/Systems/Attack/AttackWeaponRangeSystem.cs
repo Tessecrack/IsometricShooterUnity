@@ -23,6 +23,7 @@ public class AttackWeaponRangeSystem : IEcsRunSystem
 			{
 				continue;
 			}
+
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var weaponComponent = ref weapons.Get(entity);
 			ref var targetComponent = ref targets.Get(entity);

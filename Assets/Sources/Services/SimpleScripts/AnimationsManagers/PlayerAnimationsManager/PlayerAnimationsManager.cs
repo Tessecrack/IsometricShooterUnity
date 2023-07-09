@@ -6,7 +6,9 @@ public class PlayerAnimationsManager : AnimationsManager
 
     private bool isAnimationAttackInProgress;
     private bool needUpdateAnimationsState;
-    public PlayerAnimationsManager(Animator animator, CloseCombat closeCombat) : base(animator)
+	private int[] idsAnimationsStrikes;
+
+	public PlayerAnimationsManager(Animator animator, CloseCombat closeCombat) : base(animator)
     {
         this.closeCombat = closeCombat;
         InitializeCloseCombatAnimations();
@@ -26,7 +28,7 @@ public class PlayerAnimationsManager : AnimationsManager
         needUpdateAnimationsState = true;
     }
 
-	public override void InitializeCloseCombatAnimations()
+	public void InitializeCloseCombatAnimations()
 	{
         idsAnimationsStrikes = new int[closeCombat.TotalNumberStrikes];
 		idsAnimationsStrikes[0] = HashCharacterAnimations.SwordSimpleFirstAttack;
