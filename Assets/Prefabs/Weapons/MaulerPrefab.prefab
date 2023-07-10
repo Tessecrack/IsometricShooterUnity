@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3117943624818531093}
   - component: {fileID: 878182022349127962}
   m_Layer: 0
-  m_Name: Mauler
+  m_Name: MaulerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

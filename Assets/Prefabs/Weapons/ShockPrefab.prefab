@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 6058485054601600099}
   - component: {fileID: 8081845845796826073}
   m_Layer: 0
-  m_Name: Shock
+  m_Name: ShockPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

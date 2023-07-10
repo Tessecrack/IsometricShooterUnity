@@ -8,7 +8,8 @@ public abstract class Weapon : MonoBehaviour
 
 	[SerializeField] protected Transform gripWeapon;
 
-	[SerializeField] protected Transform additionalGrip; // only for HEAVY weapon
+	[Header("Only for heavy type weapon")]
+	[SerializeField] protected Transform additionalGrip;
 
 	[SerializeField] protected int damage = 25;
 

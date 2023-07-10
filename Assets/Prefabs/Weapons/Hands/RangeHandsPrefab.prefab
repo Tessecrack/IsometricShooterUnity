@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 885447048998626174}
   - component: {fileID: 4391507627947298173}
   m_Layer: 0
-  m_Name: RangeHands
+  m_Name: RangeHandsPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

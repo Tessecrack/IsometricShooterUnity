@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 698929899725621801}
   - component: {fileID: 2146172532214736324}
   m_Layer: 0
-  m_Name: Archtronic
+  m_Name: ArchtronicPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

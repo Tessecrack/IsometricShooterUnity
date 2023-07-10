@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4507521308707620322}
   - component: {fileID: 4507521308707620323}
   m_Layer: 0
-  m_Name: MeleeHands
+  m_Name: MeleeHandsPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

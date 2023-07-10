@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1265623051290208936}
   - component: {fileID: 7886360006371798170}
   m_Layer: 0
-  m_Name: CyberSwordMagma
+  m_Name: CyberSwordMagmaPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7189654407823598392}
   - component: {fileID: 5072940561321136100}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: GunPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
