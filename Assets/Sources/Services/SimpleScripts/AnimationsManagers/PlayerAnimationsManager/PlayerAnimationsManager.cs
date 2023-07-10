@@ -31,10 +31,10 @@ public class PlayerAnimationsManager : AnimationsManager
 	public void InitializeCloseCombatAnimations()
 	{
         idsAnimationsStrikes = new int[closeCombat.TotalNumberStrikes];
-		idsAnimationsStrikes[0] = HashCharacterAnimations.SwordSimpleFirstAttack;
-		idsAnimationsStrikes[1] = HashCharacterAnimations.SwordSimpleSecondAttack;
-		idsAnimationsStrikes[2] = HashCharacterAnimations.SwordStrongFirstAttack;
-		idsAnimationsStrikes[3] = HashCharacterAnimations.SwordStrongSecondAttack;
+		idsAnimationsStrikes[0] = HashCharacterAnimations.MeleeSimpleFirstAttack;
+		idsAnimationsStrikes[1] = HashCharacterAnimations.MeleeSimpleSecondAttack;
+		idsAnimationsStrikes[2] = HashCharacterAnimations.MeleeStrongFirstAttack;
+		idsAnimationsStrikes[3] = HashCharacterAnimations.MeleeStrongSecondAttack;
 	}
 
 	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)

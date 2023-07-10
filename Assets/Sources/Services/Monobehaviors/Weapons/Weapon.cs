@@ -6,8 +6,6 @@ public abstract class Weapon : MonoBehaviour
 
 	[SerializeField] protected TypeWeapon typeWeapon;
 
-	[SerializeField] protected float delayBetweenAttack = 1.0f;
-
 	[SerializeField] protected Transform gripWeapon;
 
 	[SerializeField] protected Transform additionalGrip; // only for HEAVY weapon

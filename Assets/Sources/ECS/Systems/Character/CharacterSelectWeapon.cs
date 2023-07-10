@@ -41,11 +41,11 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 			{
 				arsenal.arsenal.HideWeapon(arsenal.currentNumberWeapon);	
 
-				var currentInstanceWeapon = arsenal.arsenal.GetWeapon(eventComponent.selectedNumberWeapon);
+				var currentWeapon = arsenal.arsenal.GetWeapon(eventComponent.selectedNumberWeapon);
 
 				arsenal.currentNumberWeapon = eventComponent.selectedNumberWeapon;
 
-				weaponComponent.weapon = currentInstanceWeapon.weapon;
+				weaponComponent.weapon = currentWeapon;
 				damageComponent.damage = weaponComponent.weapon.Damage;
 			}
 		}

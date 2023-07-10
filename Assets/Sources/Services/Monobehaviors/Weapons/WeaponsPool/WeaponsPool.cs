@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class WeaponsPool
 {
-	private static List<(GameObject instance, Weapon weaponComponent)> weaponPool
-		= new List<(GameObject instance, Weapon weaponComponent)>();
+	private static List<Weapon> weaponPool = new List<Weapon>();
 
 	private Weapon currentMeleeWeapon;
 
@@ -20,18 +19,18 @@ public class WeaponsPool
 			}
 			instance.SetActive(false);
 			weaponComponent.enabled = false;
-			weaponPool.Add((instance, weaponComponent));
+			weaponPool.Add(weaponComponent);
 		}
 	}
 
-	public (GameObject instance, Weapon weapon) Enable(int numberSelectedWeapon)
+	public Weapon Enable(int numberSelectedWeapon)
 	{
 		if (numberSelectedWeapon < 0 || numberSelectedWeapon >= weaponPool.Count)
 		{
 			return weaponPool[weaponPool.Count - 1];
 		}
-		weaponPool[numberSelectedWeapon].instance.SetActive(true);
-		weaponPool[numberSelectedWeapon].weaponComponent.enabled = true;
+		weaponPool[numberSelectedWeapon].gameObject.SetActive(true);
+		weaponPool[numberSelectedWeapon].enabled = true;
 		return weaponPool[numberSelectedWeapon];
 	}
 
@@ -41,8 +40,8 @@ public class WeaponsPool
 		{
 			return;
 		}
-		weaponPool[numberSelectedWeapon].instance.SetActive(false);
-		weaponPool[numberSelectedWeapon].weaponComponent.enabled = false;
+		weaponPool[numberSelectedWeapon].gameObject.SetActive(false);
+		weaponPool[numberSelectedWeapon].enabled = false;
 	}
 
 	public Weapon CurrentMeleeWeapon => currentMeleeWeapon;
