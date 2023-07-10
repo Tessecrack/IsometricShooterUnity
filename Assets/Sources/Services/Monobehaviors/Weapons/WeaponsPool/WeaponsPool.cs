@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class WeaponsPool
 {
-	private static List<Weapon> weaponPool = new List<Weapon>();
+	private List<Weapon> currentWeaponsPool = new List<Weapon>();
 
 	private Weapon currentMeleeWeapon;
+
+	private Weapon currentGunWeapon;
+
+	private Weapon currentHeavyWeapon;
 
 	public void InitWeapons(List<GameObject> weaponPrefabs, Transform pointSpawnWeapon)
 	{
@@ -13,36 +17,46 @@ public class WeaponsPool
 		{
 			var instance = UnityEngine.Object.Instantiate(weapon, pointSpawnWeapon, false);
 			var weaponComponent = instance.GetComponent<Weapon>();
+			instance.SetActive(false);
+			weaponComponent.enabled = false;
+			currentWeaponsPool.Add(weaponComponent);
 			if (weaponComponent.TypeWeapon == TypeWeapon.MELEE)
 			{
 				currentMeleeWeapon = weaponComponent;
 			}
-			instance.SetActive(false);
-			weaponComponent.enabled = false;
-			weaponPool.Add(weaponComponent);
+			else if (weaponComponent.TypeWeapon == TypeWeapon.GUN)
+			{
+				currentGunWeapon = weaponComponent;
+			}
+			else if (weaponComponent.TypeWeapon == TypeWeapon.HEAVY)
+			{
+				currentHeavyWeapon = weaponComponent;
+			}
 		}
 	}
 
 	public Weapon Enable(int numberSelectedWeapon)
 	{
-		if (numberSelectedWeapon < 0 || numberSelectedWeapon >= weaponPool.Count)
+		if (numberSelectedWeapon < 0 || numberSelectedWeapon >= currentWeaponsPool.Count)
 		{
-			return weaponPool[weaponPool.Count - 1];
+			return currentWeaponsPool[currentWeaponsPool.Count - 1];
 		}
-		weaponPool[numberSelectedWeapon].gameObject.SetActive(true);
-		weaponPool[numberSelectedWeapon].enabled = true;
-		return weaponPool[numberSelectedWeapon];
+		currentWeaponsPool[numberSelectedWeapon].gameObject.SetActive(true);
+		currentWeaponsPool[numberSelectedWeapon].enabled = true;
+		return currentWeaponsPool[numberSelectedWeapon];
 	}
 
 	public void Disable(int numberSelectedWeapon)
 	{
-		if (numberSelectedWeapon < 0 || numberSelectedWeapon >= weaponPool.Count)
+		if (numberSelectedWeapon < 0 || numberSelectedWeapon >= currentWeaponsPool.Count)
 		{
 			return;
 		}
-		weaponPool[numberSelectedWeapon].gameObject.SetActive(false);
-		weaponPool[numberSelectedWeapon].enabled = false;
+		currentWeaponsPool[numberSelectedWeapon].gameObject.SetActive(false);
+		currentWeaponsPool[numberSelectedWeapon].enabled = false;
 	}
 
 	public Weapon CurrentMeleeWeapon => currentMeleeWeapon;
+	public Weapon CurrentGunWeapon => currentGunWeapon;
+	public Weapon CurrentHeavyWeapon => currentHeavyWeapon;
 }

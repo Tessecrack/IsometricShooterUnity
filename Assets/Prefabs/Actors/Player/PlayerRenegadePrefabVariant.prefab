@@ -2608,7 +2608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e018e23ee43d37a4b838aaa55c04c37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointSpawnWeapon: {fileID: 1001549539155377157}
   characterSpeed: 6
   isMovable: 1
   dashSpeed: 80
@@ -2797,7 +2796,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4ecb25f556389499dca77ae27bfb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: []
+  weapons:
+  - {fileID: 1265623051290208937, guid: dc85440dc2994264eb4c5bd3fc59f730, type: 3}
+  - {fileID: 2573588440891244318, guid: 83b749b4de13f9c4fa04d1df363a3327, type: 3}
+  - {fileID: 683177085907495255, guid: b4c29fe74a4814040accfb833977a605, type: 3}
 --- !u!114 &4173451954542426855
 MonoBehaviour:
   m_ObjectHideFlags: 0

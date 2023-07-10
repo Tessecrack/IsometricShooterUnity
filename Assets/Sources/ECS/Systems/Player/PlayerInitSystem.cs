@@ -94,7 +94,7 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		targetComponent.target = runtimeData.CursorPosition;
 
-		arsenal.arsenal.InitArsenal(staticData.Weapons.WeaponsPrefabs, weaponSpawnPoint.weaponSpawPoint);
+		arsenal.arsenal.InitArsenal(weaponSpawnPoint.weaponSpawPoint);
 
 		movableComponent.coefSmooth = 0.3f;
 		rotatableComponent.coefSmooth = 0.3f;

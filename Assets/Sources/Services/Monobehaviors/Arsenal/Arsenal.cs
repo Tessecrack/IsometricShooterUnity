@@ -3,21 +3,19 @@ using UnityEngine;
 
 public class Arsenal : MonoBehaviour
 {
-	[SerializeField] private List<Weapon> weapons;
+	[SerializeField]
+	private List<GameObject> weapons;
+
 	private WeaponsPool weaponsPool = new WeaponsPool();
-	public void InitArsenal(List<GameObject> weaponPrefabs, Transform pointSpawnWeapon)
+
+	private readonly int maxCountWeapons = 3;
+
+	public void InitArsenal(Transform pointSpawnWeapon)
 	{
-		if (weapons == null || weapons.Count == 0)
-		{
-			weaponsPool.InitWeapons(weaponPrefabs, pointSpawnWeapon);
-		}
+		weaponsPool.InitWeapons(weapons, pointSpawnWeapon);
 	}
 	public Weapon GetWeapon(int numberSelectedWeapon)
 	{
-		if (weapons.Count != 0)
-		{
-			
-		}
 		return weaponsPool.Enable(numberSelectedWeapon);
 	}
 	public void HideWeapon(int numberSelectedWeapon)
