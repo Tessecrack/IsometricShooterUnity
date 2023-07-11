@@ -64,5 +64,4 @@ public abstract class RangeWeapon : Weapon
 		}
 		yield break;
 	}
-
 }
