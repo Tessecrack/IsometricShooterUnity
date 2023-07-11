@@ -16,6 +16,8 @@ public class AIAgent : MonoBehaviour
 	public bool CanAttack(Vector3 target)
 	{
 		var distance = target - transform.position;
-		return canAttack = rangeAttack >= target.magnitude;
+		return canAttack = rangeAttack >= distance.magnitude;
 	}
+
+	public float RangeAttack => rangeAttack;
 }

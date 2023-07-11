@@ -71,11 +71,6 @@ public class PlayerAnimationsManager : AnimationsManager
         currentAnimationState.UpdateValuesState(updatedAnimationsState);
 	}
 
-    private void AnimateMeleeStrike(int idAnimation)
-    {
-        PlayAnimation(idAnimation);
-    }
-
     private bool ChangeAttackState(CharacterAnimationState updatedAnimationsState)
     {
         bool isChangedWeapon = updatedAnimationsState.CurrentTypeWeapon != currentAnimationState.CurrentTypeWeapon;
@@ -140,21 +135,6 @@ public class PlayerAnimationsManager : AnimationsManager
     private void SetBlendTreeHeavyAttack()
     {
 		PlayAnimation(HashCharacterAnimations.HeavyAimingRunBlendTree);
-	}
-
-    private void SetLayer(int idLayer)
-    {
-		animator.SetLayerWeight(idLayer, 1.0f);
-	}
-
-    private void ResetLayer(int idLayer)
-    {
-        animator.SetLayerWeight(idLayer, 0.0f);
-    }
-
-    private void PlayAnimation(int hashId)
-    {
-		animator.CrossFade(hashId, 0.02f);
 	}
 
     private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)

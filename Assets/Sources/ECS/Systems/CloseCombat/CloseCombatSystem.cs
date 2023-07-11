@@ -37,6 +37,7 @@ public class CloseCombatSystem : IEcsRunSystem
 			if (closeCombatComponent.closeCombat.IsEndAttack)
 			{
 				stateAttack.isMeleeAttack = false;
+				//attackComponent.isStartAttack = false;
 			}
 		}
 	}

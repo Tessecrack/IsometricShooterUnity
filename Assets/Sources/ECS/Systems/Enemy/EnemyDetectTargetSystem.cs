@@ -10,6 +10,7 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 			.Inc<StateAttackComponent>()
 			.Inc<CharacterEventsComponent>()
 			.Inc<EnablerComponent>()
+			.Inc<WeaponComponent>()
 			.End();
 
 		var filterPlayer = world.Filter<PlayerComponent>()
@@ -25,6 +26,7 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 		var stateComponents = world.GetPool<StateAttackComponent>();
 		var inputEvents = world.GetPool<CharacterEventsComponent>(); 
 		var enableComponents = world.GetPool<EnablerComponent>();
+		var enemyWeapons = world.GetPool<WeaponComponent>();
 
 		foreach (var entityPlayer in filterPlayer)
 		{
@@ -49,13 +51,15 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 				ref var targetComponent = ref targetComponents.Get(entity);
 				ref var stateComponent = ref stateComponents.Get(entity);
 				ref var eventComponent = ref inputEvents.Get(entity);
-
+				ref var weapon = ref enemyWeapons.Get(entity);
 				targetComponent.target = playerPosition;
 
 				if (aiEnemyComponent.enemyAgent.IsDetectTarget(playerPosition))
 				{
 					stateComponent.state = CharacterState.Aiming;
-					eventComponent.isStartAttack = true;
+					var canAttack = aiEnemyComponent.enemyAgent.CanAttack(playerPosition);
+					eventComponent.isStartAttack = canAttack;
+					eventComponent.isStopAttack = !canAttack;
 				}
 				else
 				{

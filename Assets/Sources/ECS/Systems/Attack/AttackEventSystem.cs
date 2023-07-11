@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using UnityEngine;
 
 public class AttackEventSystem : IEcsRunSystem
 {
@@ -20,7 +21,7 @@ public class AttackEventSystem : IEcsRunSystem
 		foreach (int entity in filter)
 		{
 			ref var enablerComponent = ref enablers.Get(entity);
-			if (!enablerComponent.isEnabled)
+			if (enablerComponent.isEnabled == false)
 			{
 				continue;
 			}

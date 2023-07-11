@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceDetection: 6
+  rangeAttack: 6
 --- !u!114 &4288745909804998896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,6 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretMount: {fileID: 4063601410245638835}
+  maxHealth: 100
 --- !u!1 &4063601410245638835 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7358169665846217091, guid: bcbca6aa0b7bb6c42afce1f1a86c0851, type: 3}
@@ -261,8 +263,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameWeapon: TurretWeaponRed
   typeWeapon: 2
-  delayBetweenAttack: 0.2
   gripWeapon: {fileID: 0}
+  damage: 25
   additionalGrip: {fileID: 0}
   prefabProjectTile: {fileID: 9086379581574355896, guid: 481d0ea200b455a4ba32af9db099767f, type: 3}
   muzzles:
@@ -273,6 +275,7 @@ MonoBehaviour:
   quantityOneShotBullet: 1
   projectile: {fileID: 6773687861171711744, guid: 481d0ea200b455a4ba32af9db099767f, type: 3}
   isAttackFromOneMuzzle: 1
+  delayBetweenAttack: 0.2
 --- !u!114 &4563321229096513212
 MonoBehaviour:
   m_ObjectHideFlags: 0

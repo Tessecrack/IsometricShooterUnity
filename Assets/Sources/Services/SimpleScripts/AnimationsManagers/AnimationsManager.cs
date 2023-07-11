@@ -11,4 +11,24 @@ public abstract class AnimationsManager
 	}
 
 	public abstract void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState);
+
+	protected void PlayAnimation(int hashId)
+	{
+		animator.CrossFade(hashId, 0.02f);
+	}
+
+	protected void SetLayer(int idLayer)
+	{
+		animator.SetLayerWeight(idLayer, 1.0f);
+	}
+
+	protected void ResetLayer(int idLayer)
+	{
+		animator.SetLayerWeight(idLayer, 0.0f);
+	}
+
+	protected void AnimateMeleeStrike(int idAnimation)
+	{
+		PlayAnimation(idAnimation);
+	}
 }

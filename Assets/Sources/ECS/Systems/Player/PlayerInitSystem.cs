@@ -33,6 +33,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<HitRangeComponent> poolRangeHit = world.GetPool<HitRangeComponent>();
 		EcsPool<DamageComponent> poolDamage = world.GetPool<DamageComponent>();
 		EcsPool<WeaponSpawnPointComponent> poolWeaponSpawnPoint = world.GetPool<WeaponSpawnPointComponent>();
+		EcsPool<HitMeComponent> poolHitMeComponents = world.GetPool<HitMeComponent>();
 
 		ref var playerComponent = ref poolPlayer.Add(entityPlayer);
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);

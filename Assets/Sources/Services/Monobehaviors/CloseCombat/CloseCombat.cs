@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CloseCombat : MonoBehaviour
 {
-	[SerializeField] private int totalNumberStrikes = 0;
+	[SerializeField] private int totalNumberStrikes = 4;
 	[SerializeField] private int speedMoveForwardInStrike = 30;
 	[SerializeField] private float rangeAttack = 1.5f;
 
@@ -34,6 +34,13 @@ public class CloseCombat : MonoBehaviour
 			CurrentNumberStrike = 0;
 		}
 		return CurrentNumberStrike++;
+	}
+
+	public int GetNextRandomStrike()
+	{
+		var randomNumber = UnityEngine.Random.Range(0, totalNumberStrikes);
+		Debug.Log(randomNumber);
+		return randomNumber;
 	}
 
 	public void SetNeedStrike()
