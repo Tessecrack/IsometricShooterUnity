@@ -39,7 +39,6 @@ public class CloseCombat : MonoBehaviour
 	public int GetNextRandomStrike()
 	{
 		var randomNumber = UnityEngine.Random.Range(0, totalNumberStrikes);
-		Debug.Log(randomNumber);
 		return randomNumber;
 	}
 

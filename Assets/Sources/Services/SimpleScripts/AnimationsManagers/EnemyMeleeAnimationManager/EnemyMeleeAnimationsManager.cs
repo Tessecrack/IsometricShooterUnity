@@ -44,16 +44,20 @@ public class EnemyMeleeAnimationsManager : AnimationsManager
 		{
 			return;
 		}
+
 		if (closeCombat.IsStartAttack)
 		{
-			AnimateMeleeStrike(idsAnimationsStrikes[closeCombat.GetNextRandomStrike()]);
+			AnimateMeleeStrike(idsAnimationsStrikes[closeCombat.GetNextStrike()]);
 			isAnimationAttackInProgress = true;
 			return;
 		}
-		if (currentAnimationState.Equals(updatedAnimationsState))
+
+		if (currentAnimationState.Equals(updatedAnimationsState) && !needUpdateAnimationsState)
 		{
 			return;
 		}
+		needUpdateAnimationsState = false;
+		PlayAnimation(HashCharacterAnimations.LocomotionRun);
 		currentAnimationState.UpdateValuesState(updatedAnimationsState);
 	}
 

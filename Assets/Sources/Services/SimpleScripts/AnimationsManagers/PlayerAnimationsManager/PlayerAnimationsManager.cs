@@ -89,11 +89,11 @@ public class PlayerAnimationsManager : AnimationsManager
     {
 		if (updatedAnimationsState.IsMoving == true)
 		{
-			PlayAnimation(HashCharacterAnimations.Run);
+			PlayAnimation(HashCharacterAnimations.LocomotionRun);
 		}
 		else
 		{
-			PlayAnimation(HashCharacterAnimations.Idle);
+			PlayAnimation(HashCharacterAnimations.LocomotionIdle);
 		}
 	}
 

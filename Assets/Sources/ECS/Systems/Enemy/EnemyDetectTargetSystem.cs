@@ -57,15 +57,13 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 				if (aiEnemyComponent.enemyAgent.IsDetectTarget(playerPosition))
 				{
 					stateComponent.state = CharacterState.Aiming;
-					var canAttack = aiEnemyComponent.enemyAgent.CanAttack(playerPosition);
-					eventComponent.isStartAttack = canAttack;
-					eventComponent.isStopAttack = !canAttack;
 				}
 				else
 				{
 					stateComponent.state = CharacterState.Idle;
-					eventComponent.isStartAttack = false;
 				}
+				eventComponent.isStartAttack = aiEnemyComponent.enemyAgent.CanAttack(playerPosition);
+				eventComponent.isStopAttack = !eventComponent.isStartAttack;
 			}
 		}
 	}

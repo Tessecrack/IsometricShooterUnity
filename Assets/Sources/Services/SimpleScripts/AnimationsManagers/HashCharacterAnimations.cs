@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class HashCharacterAnimations
 {
-	public static readonly int Idle = Animator.StringToHash("LocomotionIdle");
+	public static readonly int LocomotionIdle = Animator.StringToHash("LocomotionIdle");
 
-	public static readonly int Run = Animator.StringToHash("LocomotionRun");
+	public static readonly int LocomotionRun = Animator.StringToHash("LocomotionRun");
 
 	public static readonly int HeavyAimingIdle = Animator.StringToHash("HeavyAimingIdle");
 
