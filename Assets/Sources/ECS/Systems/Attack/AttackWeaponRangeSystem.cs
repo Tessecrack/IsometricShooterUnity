@@ -27,14 +27,9 @@ public class AttackWeaponRangeSystem : IEcsRunSystem
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var weaponComponent = ref weapons.Get(entity);
 			ref var targetComponent = ref targets.Get(entity);
-			if (weaponComponent.weapon.TypeWeapon == TypeWeapon.MELEE)
-			{
-				attackComponent.typeAttack = TypeAttack.Melee;
+			if (attackComponent.typeAttack == TypeAttack.Melee)
+			{	
 				continue;
-			}
-			else
-			{
-				attackComponent.typeAttack = TypeAttack.Range;
 			}
 
 			if (attackComponent.isStartAttack)
