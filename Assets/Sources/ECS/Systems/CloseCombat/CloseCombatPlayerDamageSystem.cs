@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using UnityEngine;
 
-public class CloseCombatDamageSystem : IEcsRunSystem
+public class CloseCombatPlayerDamageSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
@@ -40,6 +40,11 @@ public class CloseCombatDamageSystem : IEcsRunSystem
 			}
 
 			ref var playerCloseCombat = ref playerCloseCombats.Get(entityPlayer);
+			if (playerCloseCombat.closeCombat.AttackInProccess == false)
+			{
+				continue;
+			}
+			
 			ref var playerRangeHit = ref playerHitRanges.Get(entityPlayer);
 			ref var playerCharacter = ref playerCharacters.Get(entityPlayer);
 			ref var playerDamage = ref playerHitDamages.Get(entityPlayer);
@@ -55,22 +60,24 @@ public class CloseCombatDamageSystem : IEcsRunSystem
 				}
 
 				ref var enemyCharacter = ref enemyCharacters.Get(entityEnemy);
-				ref var enemyHit = ref enemyHits.Get(entityEnemy);
-
 				var positionEnemy = enemyCharacter.characterTransform.position;
-
 				var distanceToEnemy = Vector3.Distance(positionPlayer, positionEnemy);
 
-				if (playerRangeHit.rangeHit >= distanceToEnemy
-					&& playerCloseCombat.closeCombat.IsApplyDamage
-					&& enemyHit.isHitMe == false)
+				if (playerRangeHit.rangeHit < distanceToEnemy)
+				{
+					continue;
+				}
+
+				ref var enemyHit = ref enemyHits.Get(entityEnemy);
+
+				if (playerCloseCombat.closeCombat.IsApplyDamage == true && enemyHit.isHitMe == false)
 				{
 					enemyHit.isHitMe = true;
 					enemyHit.wasAppliedDamageMe = false;
 					enemyHit.damageToMe = playerDamage.damage;
 				}
 
-				if (playerCloseCombat.closeCombat.IsEndAttack)
+				if (playerCloseCombat.closeCombat.IsApplyDamage == false)
 				{
 					enemyHit.isHitMe = false;
 					enemyHit.wasAppliedDamageMe = false;

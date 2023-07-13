@@ -55,6 +55,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var rangeHit = ref poolRangeHit.Add(entityPlayer);
 		ref var damage = ref poolDamage.Add(entityPlayer);
 		ref var weaponSpawnPoint = ref poolWeaponSpawnPoint.Add(entityPlayer);
+		ref var hitMeComponent = ref poolHitMeComponents.Add(entityPlayer);
 
 		characterState.stateAttackTime = 3;
 

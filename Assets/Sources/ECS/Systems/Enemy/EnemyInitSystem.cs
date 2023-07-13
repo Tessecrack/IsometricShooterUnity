@@ -78,6 +78,7 @@ public class EnemyInitSystem : IEcsInitSystem
 			healthComponent.damageable = enemies[i].GetComponent<Damageable>();
 			closeCombat.closeCombat = enemies[i].GetComponent<CloseCombat>();
 			arsenal.arsenal = enemies[i].GetComponent<Arsenal>();
+
 			arsenal.currentNumberWeapon = -1;
 
 			arsenal.arsenal.InitArsenal(weaponSpawnPoint.weaponSpawPoint);

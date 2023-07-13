@@ -175,7 +175,8 @@ public class GameStartup : MonoBehaviour
 	{
 		ecsDamageSystems = new EcsSystems(ecsWorld, sharedData);
 		ecsDamageSystems
-			.Add(new CloseCombatDamageSystem())
+			.Add(new CloseCombatPlayerDamageSystem())
+			.Add(new CloseCombatEnemyDamageSystem())
 			.Add(new DamageHitSystem())
 			.Add(new DamageSystem());
 		ecsDamageSystems.Init();

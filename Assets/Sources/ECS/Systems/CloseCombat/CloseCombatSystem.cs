@@ -30,7 +30,7 @@ public class CloseCombatSystem : IEcsRunSystem
 
 			if (attackComponent.isStartAttack && attackComponent.typeAttack == TypeAttack.Melee)
 			{
-				closeCombatComponent.closeCombat.SetNeedStrike();
+				closeCombatComponent.closeCombat.StartAttack();
 				stateAttack.isMeleeAttack = true;
 			}
 

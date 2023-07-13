@@ -42,7 +42,7 @@ public class CloseCombat : MonoBehaviour
 		return randomNumber;
 	}
 
-	public void SetNeedStrike()
+	public void StartAttack()
 	{
 		IsStartAttack = true;
 	}
@@ -67,19 +67,16 @@ public class CloseCombat : MonoBehaviour
 	/*Handlers events from animator*/
 	public void HandlerStartAttack()
 	{
-		if (AttackInProccess)
-		{
-			return;
-		}
+		AttackInProccess = true;
 		EventStartAttack?.Invoke();
 		IsEndAttack = false;
 	}
 
 	public void HandlerEndAttack()
 	{
+		AttackInProccess = false;
 		EventEndAttack?.Invoke();
 		IsStartAttack = false;
-		AttackInProccess = false;
 		IsEndAttack = true;
 	}
 
