@@ -14,16 +14,20 @@ public class HashCharacterAnimations
 
 	public static readonly int GunAimingRunBlendTree = Animator.StringToHash("GunAimingRun");
 
-	public static readonly int MeleeSimpleFirstAttack = Animator.StringToHash("MeleeSimpleFirstAttack");
+	public static readonly int MeleeFirstAttack = Animator.StringToHash("MeleeFirstAttack");
 
-	public static readonly int MeleeSimpleSecondAttack = Animator.StringToHash("MeleeSimpleSecondAttack");
+	public static readonly int MeleeSecondAttack = Animator.StringToHash("MeleeSecondAttack");
 
-	public static readonly int MeleeStrongFirstAttack = Animator.StringToHash("MeleeStrongFirstAttack");
+	public static readonly int MeleeThirdAttack = Animator.StringToHash("MeleeThirdAttack");
 
-	public static readonly int MeleeStrongSecondAttack = Animator.StringToHash("MeleeStrongSecondAttack");
+	public static readonly int MeleeFourthAttack = Animator.StringToHash("MeleeFourthAttack");
+
+	public static readonly int MeleeFifthAttack = Animator.StringToHash("MeleeFifthAttack");
+
+	public static readonly int MeleeSixthAttack = Animator.StringToHash("MeleeSixthAttack");
 
 	public static readonly int[] IdsMeleeAttacks = new int[]
 	{
-		MeleeSimpleFirstAttack, MeleeSimpleSecondAttack, MeleeStrongFirstAttack, MeleeStrongSecondAttack
+		MeleeFirstAttack, MeleeSecondAttack, MeleeThirdAttack, MeleeFourthAttack
 	};
 }

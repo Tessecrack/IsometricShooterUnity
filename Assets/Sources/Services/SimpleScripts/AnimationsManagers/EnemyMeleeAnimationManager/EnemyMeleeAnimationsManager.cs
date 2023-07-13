@@ -20,10 +20,12 @@ public class EnemyMeleeAnimationsManager : AnimationsManager
 	public void InitializeCloseCombatAnimations()
 	{
 		idsAnimationsStrikes = new int[closeCombat.TotalNumberStrikes];
-		idsAnimationsStrikes[0] = HashCharacterAnimations.MeleeSimpleFirstAttack;
-		idsAnimationsStrikes[1] = HashCharacterAnimations.MeleeSimpleSecondAttack;
-		idsAnimationsStrikes[2] = HashCharacterAnimations.MeleeStrongFirstAttack;
-		idsAnimationsStrikes[3] = HashCharacterAnimations.MeleeStrongSecondAttack;
+		idsAnimationsStrikes[0] = HashCharacterAnimations.MeleeFirstAttack;
+		idsAnimationsStrikes[1] = HashCharacterAnimations.MeleeSecondAttack;
+		idsAnimationsStrikes[2] = HashCharacterAnimations.MeleeThirdAttack;
+		idsAnimationsStrikes[3] = HashCharacterAnimations.MeleeFourthAttack;
+		idsAnimationsStrikes[4] = HashCharacterAnimations.MeleeFifthAttack;
+		idsAnimationsStrikes[5] = HashCharacterAnimations.MeleeSixthAttack;
 	}
 
 	public void StartAttack()

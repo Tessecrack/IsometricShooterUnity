@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d91f9bd9f0adf43bfbca75c21c3b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalNumberStrikes: 4
+  totalNumberStrikes: 6
   speedMoveForwardInStrike: 30
   rangeAttack: 1.5
 --- !u!114 &1187552090255704016
@@ -161,6 +161,19 @@ MonoBehaviour:
   dashSpeed: 80
   dashTime: 0.06
   maxHealth: 100
+--- !u!114 &3381895881592425248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6756397548703371726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf409dc241b38134987a227c65cdc41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSpawPoint: {fileID: 8956093895160164203}
 --- !u!114 &4879854655442945627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,19 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86af0ac450f31440b10ad1e64b1239a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3381895881592425248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6756397548703371726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf409dc241b38134987a227c65cdc41b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponSpawPoint: {fileID: 8956093895160164203}
 --- !u!4 &6756397548703796734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4472622733564780818, guid: 99fee238bb89c2e4182df99efbc6a3f8, type: 3}
