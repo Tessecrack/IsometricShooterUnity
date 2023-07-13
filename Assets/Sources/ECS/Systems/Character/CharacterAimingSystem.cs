@@ -26,14 +26,22 @@ public class CharacterAimingSystem : IEcsRunSystem
 			{ 
 				continue; 
 			}
-			ref var pointSpawnWeapon = ref weaponSpawnPoints.Get(entity);
-			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var stateComponent = ref statesComponents.Get(entity);
+			if (stateComponent.state != CharacterState.Aiming)
+			{
+				continue;
+			}
 			ref var weaponComponent = ref weaponComponents.Get(entity);
+			if (weaponComponent.weapon.TypeWeapon == TypeWeapon.MELEE)
+			{
+				continue;
+			}
 
 			if (stateComponent.state == CharacterState.Aiming 
 				&& weaponComponent.weapon.TypeWeapon != TypeWeapon.MELEE)
 			{
+				ref var pointSpawnWeapon = ref weaponSpawnPoints.Get(entity);
+				ref var characterComponent = ref characterComponents.Get(entity);
 				pointSpawnWeapon.weaponSpawPoint.forward = characterComponent.characterTransform.forward;
 			}
 		}

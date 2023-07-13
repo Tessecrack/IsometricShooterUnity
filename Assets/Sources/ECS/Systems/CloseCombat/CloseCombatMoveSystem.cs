@@ -25,21 +25,21 @@ public class CloseCombatMoveSystem : IEcsRunSystem
 			}
 
 			ref var combatComponent = ref combatComponents.Get(entity);
-			ref var characterComponent = ref characterComponents.Get(entity);
-			ref var movable = ref movableComponents.Get(entity);
+			if (combatComponent.closeCombat.NeedForwardMove == false)
+			{
+				continue;
+			}
 
+			ref var movable = ref movableComponents.Get(entity);
 			if (movable.isActiveDash)
 			{
 				continue;
 			}
 
-			if (combatComponent.closeCombat.NeedForwardMove)
-			{
-				var speedMove = combatComponent.closeCombat.SpeedMoveForwardInStrike;
-
-				characterComponent.characterController.Move(characterComponent.characterController.transform.forward
-					* speedMove * Time.deltaTime);
-			}
+			var speedMove = combatComponent.closeCombat.SpeedMoveForwardInStrike;
+			ref var characterComponent = ref characterComponents.Get(entity);
+			characterComponent.characterController.Move(characterComponent.characterController.transform.forward
+				* speedMove * Time.deltaTime);
 		}
 	}
 }

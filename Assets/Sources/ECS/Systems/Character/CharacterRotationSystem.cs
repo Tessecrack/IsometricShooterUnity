@@ -25,10 +25,6 @@ public class CharacterRotationSystem : IEcsRunSystem
 			{
 				continue;
 			}
-
-			ref var characterComponent = ref characterComponents.Get(entity);
-			ref var rotatableComponent = ref rotatableComponents.Get(entity);
-			ref var targetComponent = ref targetComponents.Get(entity);
 			ref var characterState = ref characterStates.Get(entity);
 
 			var isStateAttack = characterState.state == CharacterState.Aiming
@@ -36,6 +32,9 @@ public class CharacterRotationSystem : IEcsRunSystem
 
 			if (isStateAttack)
 			{
+				ref var characterComponent = ref characterComponents.Get(entity);
+				ref var rotatableComponent = ref rotatableComponents.Get(entity);
+				ref var targetComponent = ref targetComponents.Get(entity);
 				var direction = targetComponent.target - characterComponent.characterTransform.position;
 				direction.y = 0;
 				characterComponent.characterTransform.forward = Vector3.Slerp(characterComponent.characterTransform.forward,
