@@ -67,6 +67,8 @@ public class TurretInitSystem : IEcsInitSystem
 
 			attackComponent.attackerTransform = turretInstance.transform;
 			attackComponent.typeAttack = TypeAttack.Range;
+
+			aiEnemyComponent.enemyAgent.SetTypeAttack(attackComponent.typeAttack);
 		}
 	}
 }

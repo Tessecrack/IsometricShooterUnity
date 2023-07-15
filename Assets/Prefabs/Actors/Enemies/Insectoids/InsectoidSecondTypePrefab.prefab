@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1517830063146988750
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1652510784417254267}
-  m_Layer: 0
-  m_Name: weapon_point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1652510784417254267
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1517830063146988750}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1445697450843743512}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7207485563704668295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -88,17 +57,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26f2a3b63ce2a3c489bf9a7033a0bbdc, type: 3}
---- !u!4 &1445697450843743512 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8076651515540264351, guid: 26f2a3b63ce2a3c489bf9a7033a0bbdc, type: 3}
-  m_PrefabInstance: {fileID: 7207485563704668295}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8886403118077841448 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2257703518220279983, guid: 26f2a3b63ce2a3c489bf9a7033a0bbdc, type: 3}
   m_PrefabInstance: {fileID: 7207485563704668295}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &366403635501427079
+--- !u!114 &-1327261268309655147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,38 +71,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8886403118077841448}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b4ecb25f556389499dca77ae27bfb4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 65382a43c6ed2d34a8408376868b12c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 4507521308707620332, guid: 4cdbc1a4de1e4ba4ca6679eb38a3f309, type: 3}
---- !u!114 &5104371761968381573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8886403118077841448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d6f96998d2b85141b1d21e2083ad95c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceDetection: 5
-  rangeAttack: 2
---- !u!114 &6309901427598749985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8886403118077841448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf409dc241b38134987a227c65cdc41b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponSpawPoint: {fileID: 1652510784417254267}
+  typeEnemy: 0
+  meleeDamage: 25
+  rangeDamage: 25
+  rangeDetectTarget: 10
+  rangeMeleeAttack: 2
+  distanceRangeAttack: 10
 --- !u!114 &2548888902086905799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +93,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countAnimationAttacks: 6
+--- !u!114 &5104371761968381573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8886403118077841448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6f96998d2b85141b1d21e2083ad95c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

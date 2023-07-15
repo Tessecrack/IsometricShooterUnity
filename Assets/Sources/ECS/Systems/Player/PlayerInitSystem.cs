@@ -34,6 +34,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<DamageComponent> poolDamage = world.GetPool<DamageComponent>();
 		EcsPool<WeaponSpawnPointComponent> poolWeaponSpawnPoint = world.GetPool<WeaponSpawnPointComponent>();
 		EcsPool<HitMeComponent> poolHitMeComponents = world.GetPool<HitMeComponent>();
+		EcsPool<WeaponTypeComponent> poolTypeWeapon = world.GetPool<WeaponTypeComponent>();
 
 		ref var playerComponent = ref poolPlayer.Add(entityPlayer);
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
@@ -56,6 +57,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var damage = ref poolDamage.Add(entityPlayer);
 		ref var weaponSpawnPoint = ref poolWeaponSpawnPoint.Add(entityPlayer);
 		ref var hitMeComponent = ref poolHitMeComponents.Add(entityPlayer);
+		ref var weaponType = ref poolTypeWeapon.Add(entityPlayer);
 
 		playerComponent.numberPlayer = 0;
 

@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using System.Diagnostics;
 
 public class CloseCombatEnemyDamageSystem : IEcsRunSystem
 {
@@ -54,7 +55,7 @@ public class CloseCombatEnemyDamageSystem : IEcsRunSystem
 					continue; 
 				}
 				ref var playerCharacter = ref playerCharacters.Get(playerEntity);
-				if (enemyAI.enemyAgent.CanAttack(playerCharacter.characterTransform.position) == false)
+				if (enemyAI.enemyAgent.CanMeleeAttack(playerCharacter.characterTransform.position) == false)
 				{
 					continue;
 				}
@@ -68,6 +69,7 @@ public class CloseCombatEnemyDamageSystem : IEcsRunSystem
 					hitMeComponent.isHitMe = true;
 					hitMeComponent.wasAppliedDamageMe = false;
 					hitMeComponent.damageToMe = enemyDamage.damage;
+					UnityEngine.Debug.Log(enemyDamage.damage);
 					enemyHitList.hitList.Add(player.numberPlayer);
 				}
 

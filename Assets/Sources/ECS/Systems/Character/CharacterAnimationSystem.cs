@@ -7,7 +7,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 		var world = systems.GetWorld();
 		var filter = world.Filter<AnimatorComponent>()
 			.Inc<MovableComponent>()
-			.Inc<WeaponComponent>()
+			.Inc<WeaponTypeComponent>()
 			.Inc<AttackComponent>()
 			.Inc<StateAttackComponent>()
 			.Inc<EnablerComponent>()
@@ -15,7 +15,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 
 		var animators = world.GetPool<AnimatorComponent>();
 		var movables = world.GetPool<MovableComponent>();
-		var weapons = world.GetPool<WeaponComponent>();
+		var weaponTypes = world.GetPool<WeaponTypeComponent>();
 		var attacks = world.GetPool<AttackComponent>();
 		var attackStates = world.GetPool<StateAttackComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
@@ -29,14 +29,14 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			}
 			ref var animatorComponent = ref animators.Get(entity);
 			ref var movableComponent = ref movables.Get(entity);
-			ref var weaponComponent = ref weapons.Get(entity);
+			ref var weaponType = ref weaponTypes.Get(entity);
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var attackState = ref attackStates.Get(entity);
 
 			var currentState = attackState.state;
 
 			animatorComponent.animationState.IsMoving = movableComponent.velocity.z != 0 || movableComponent.velocity.x != 0;
-			animatorComponent.animationState.CurrentTypeWeapon = weaponComponent.weapon.TypeWeapon;
+			animatorComponent.animationState.CurrentTypeWeapon = weaponType.typeWeapon;
 			animatorComponent.animationState.VerticalMoveValue = movableComponent.relativeVector.z;
 			animatorComponent.animationState.HorizontalMoveValue = movableComponent.relativeVector.x;
 			animatorComponent.animationState.IsAimingState = currentState == CharacterState.Aiming;

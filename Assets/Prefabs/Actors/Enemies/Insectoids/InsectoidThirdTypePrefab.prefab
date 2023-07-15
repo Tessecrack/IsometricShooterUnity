@@ -61,11 +61,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be7866c2d643aeb4d9d7dda0afeaeec0, type: 3}
---- !u!4 &2857737251512834283 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7202275613661220051, guid: be7866c2d643aeb4d9d7dda0afeaeec0, type: 3}
-  m_PrefabInstance: {fileID: 4925573916357727288}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2857737251512992987 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7202275613661188323, guid: be7866c2d643aeb4d9d7dda0afeaeec0, type: 3}
@@ -89,7 +84,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &-8601734943356874365
+--- !u!114 &-7053699576074369294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,11 +93,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2857737251512992987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b4ecb25f556389499dca77ae27bfb4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 65382a43c6ed2d34a8408376868b12c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 4507521308707620332, guid: 4cdbc1a4de1e4ba4ca6679eb38a3f309, type: 3}
+  typeEnemy: 0
+  meleeDamage: 25
+  rangeDamage: 25
+  rangeDetectTarget: 10
+  rangeMeleeAttack: 2
+  distanceRangeAttack: 10
 --- !u!114 &1940186401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,33 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86af0ac450f31440b10ad1e64b1239a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1273586492991016441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2857737251512992987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf409dc241b38134987a227c65cdc41b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponSpawPoint: {fileID: 2857737251512834283}
---- !u!114 &4796224809951374153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2857737251512992987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d6f96998d2b85141b1d21e2083ad95c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceDetection: 5
-  rangeAttack: 2
 --- !u!114 &4159637538809406516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,3 +144,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countAnimationAttacks: 6
+--- !u!114 &4796224809951374153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857737251512992987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6f96998d2b85141b1d21e2083ad95c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

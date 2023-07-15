@@ -9,9 +9,7 @@ public class EnemyInitSystem : IEcsInitSystem
 		EcsWorld world = systems.GetWorld();
 		SharedData sharedData = systems.GetShared<SharedData>();
 
-		var staticData = sharedData.StaticData;
 		var sceneData = sharedData.SceneData;
-		var runtimeData = sharedData.RuntimeData;
 
 		var enemies = sceneData.EnemmiesInstances;
 
@@ -30,7 +28,7 @@ public class EnemyInitSystem : IEcsInitSystem
 			EcsPool<MovableComponent> poolMovableComponents = world.GetPool<MovableComponent>();
 			EcsPool<RotatableComponent> poolRotatableComponents = world.GetPool<RotatableComponent>();
 			EcsPool<AnimatorComponent> poolAnimatorComponents = world.GetPool<AnimatorComponent>();
-			EcsPool<WeaponComponent> poolWeapons = world.GetPool<WeaponComponent>();
+			
 			EcsPool<AttackComponent> poolAttackComponent = world.GetPool<AttackComponent>();
 			EcsPool<StateAttackComponent> poolStateAttackComponents = world.GetPool<StateAttackComponent>();
 			EcsPool<DashComponent> poolDashComponent = world.GetPool<DashComponent>();
@@ -38,14 +36,31 @@ public class EnemyInitSystem : IEcsInitSystem
 			EcsPool<TargetComponent> poolTargetComponents = world.GetPool<TargetComponent>();
 			EcsPool<EnablerComponent> poolEnablerComponents = world.GetPool<EnablerComponent>();
 			EcsPool<CloseCombatComponent> poolCloseCombats = world.GetPool<CloseCombatComponent>();
-			EcsPool<ArsenalComponent> poolArsenals = world.GetPool<ArsenalComponent>();
+			
 			EcsPool<DamageComponent> poolDamage = world.GetPool<DamageComponent>();
-			EcsPool<WeaponSpawnPointComponent> poolWeaponSpawnPoint = world.GetPool<WeaponSpawnPointComponent>();
 			EcsPool<AIEnemyComponent> poolAIEnemyComponents = world.GetPool<AIEnemyComponent>();
 
 			EcsPool<HitRangeComponent> poolRangeHit = world.GetPool<HitRangeComponent>();
 			EcsPool<HitMeComponent> poolHitComponents = world.GetPool<HitMeComponent>();
 			EcsPool<HitListComponent> poolHitList = world.GetPool<HitListComponent>();
+			EcsPool<WeaponTypeComponent> poolWeaponTypes = world.GetPool<WeaponTypeComponent>();
+
+			bool hasArsenal = false;
+
+			if (enemies[i].TryGetComponent<Arsenal>(out Arsenal enemyArsenal))
+			{
+				EcsPool<WeaponComponent> poolWeapons = world.GetPool<WeaponComponent>();
+				EcsPool<ArsenalComponent> poolArsenals = world.GetPool<ArsenalComponent>();
+				EcsPool<WeaponSpawnPointComponent> poolWeaponSpawnPoint = world.GetPool<WeaponSpawnPointComponent>();
+
+				ref var arsenal = ref poolArsenals.Add(entityEnemy);
+				ref var weapon = ref poolWeapons.Add(entityEnemy);
+				ref var weaponSpawnPoint = ref poolWeaponSpawnPoint.Add(entityEnemy);
+				arsenal.arsenal = enemyArsenal;
+				arsenal.currentNumberWeapon = -1;
+				arsenal.arsenal.InitArsenal(weaponSpawnPoint.weaponSpawPoint);
+				hasArsenal = true;
+			}
 
 			ref var enemyComponent = ref poolEnemyComponents.Add(entityEnemy);
 			ref var movableComponent = ref poolMovableComponents.Add(entityEnemy);
@@ -53,28 +68,24 @@ public class EnemyInitSystem : IEcsInitSystem
 			ref var aiEnemyComponent = ref poolAIEnemyComponents.Add(entityEnemy);
 			ref var healthComponent = ref poolHeathComponents.Add(entityEnemy);
 			ref var enablerComponent = ref poolEnablerComponents.Add(entityEnemy);
-
 			ref var targetComponent = ref poolTargetComponents.Add(entityEnemy);
 			ref var stateAttackComponent = ref poolStateAttackComponents.Add(entityEnemy);
 			ref var characterComponent = ref poolCharacterComponents.Add(entityEnemy);
-
 			ref var eventComponent = ref poolEventsComponents.Add(entityEnemy);
 			ref var animatorComponent = ref poolAnimatorComponents.Add(entityEnemy);
 			ref var hitComponent = ref poolHitComponents.Add(entityEnemy);
-			
 			ref var closeCombat = ref poolCloseCombats.Add(entityEnemy);
-
-			ref var arsenal = ref poolArsenals.Add(entityEnemy);
-			ref var weapon = ref poolWeapons.Add(entityEnemy);
 			ref var attackComponent = ref poolAttackComponent.Add(entityEnemy);
 			ref var dashComponent = ref poolDashComponent.Add(entityEnemy);
 			ref var rangeHit = ref poolRangeHit.Add(entityEnemy);
-
 			ref var damage = ref poolDamage.Add(entityEnemy);
-			ref var weaponSpawnPoint = ref poolWeaponSpawnPoint.Add(entityEnemy);
 			ref var hitList = ref poolHitList.Add(entityEnemy);
+			ref var weaponType = ref poolWeaponTypes.Add(entityEnemy);
 
 			enablerComponent.instance = enemies[i];
+
+			enemyComponent.enemySettings = enemies[i].GetComponent<EnemySettings>();
+
 			var animEvents = enemies[i].GetComponent<AnimationEvents>();
 			animEvents.Init();
 			characterComponent.characterController = enemies[i].GetComponent<CharacterController>();
@@ -82,12 +93,7 @@ public class EnemyInitSystem : IEcsInitSystem
 			aiEnemyComponent.enemyAgent = enemies[i].GetComponent<AIEnemyAgent>();
 			healthComponent.damageable = enemies[i].GetComponent<Damageable>();
 			closeCombat.closeCombat = new CloseCombat(animEvents);
-			arsenal.arsenal = enemies[i].GetComponent<Arsenal>();
-
-			arsenal.currentNumberWeapon = -1;
-
-			arsenal.arsenal.InitArsenal(weaponSpawnPoint.weaponSpawPoint);
-
+			
 			animatorComponent.animationsManager = new EnemyMeleeAnimationsManager(enemies[i].GetComponent<Animator>(), animEvents);
 
 			characterComponent.characterTransform = enemies[i].transform;
@@ -105,6 +111,21 @@ public class EnemyInitSystem : IEcsInitSystem
 			rangeHit.rangeHit = aiEnemyComponent.enemyAgent.RangeAttack;
 
 			hitList.hitList = new List<int>(4);
+
+			aiEnemyComponent.enemyAgent.SetDistanceRangeAttack(enemyComponent.enemySettings.DistanceRangeAttack);
+			aiEnemyComponent.enemyAgent.SetRangeDetection(enemyComponent.enemySettings.RangeDetectTarget);
+			aiEnemyComponent.enemyAgent.SetRangeMeleeAttack(enemyComponent.enemySettings.RangeMeleeAttack);
+			aiEnemyComponent.enemyAgent.SetTypeAttack(enemyComponent.enemySettings.TypeEnemy == TypeEnemy.Melee ?
+				TypeAttack.Melee : TypeAttack.Range);
+
+			if (hasArsenal == false)
+			{
+				weaponType.typeWeapon = enemyComponent.enemySettings.TypeEnemy == TypeEnemy.Melee ?
+				TypeWeapon.MELEE : TypeWeapon.GUN;
+
+				damage.damage = enemyComponent.enemySettings.MeleeDamage;
+				Debug.Log(damage.damage);
+			}
 		}
 	}
 }
