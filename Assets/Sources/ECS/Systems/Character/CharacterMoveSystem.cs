@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class CharacterMoveSystem : IEcsRunSystem
 {
@@ -45,7 +46,10 @@ public class CharacterMoveSystem : IEcsRunSystem
 			dashComponent.isStartDash = inputComponent.isDash;
 
 			movableComponent.velocity = velocity;
-
+			if (velocity.magnitude == 0)
+			{
+				continue;
+			}
 			var speedMove = dashComponent.isActiveDash ? dashComponent.dashSpeed : movableComponent.moveSpeed;
 			movableComponent.isActiveDash = dashComponent.isActiveDash;
 

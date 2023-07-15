@@ -98,21 +98,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2257703518220279983, guid: 26f2a3b63ce2a3c489bf9a7033a0bbdc, type: 3}
   m_PrefabInstance: {fileID: 7207485563704668295}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-7903083890987614492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8886403118077841448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d91f9bd9f0adf43bfbca75c21c3b06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalNumberStrikes: 6
-  speedMoveForwardInStrike: 30
-  rangeAttack: 1.5
 --- !u!114 &366403635501427079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,3 +139,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSpawPoint: {fileID: 1652510784417254267}
+--- !u!114 &2548888902086905799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8886403118077841448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d9191daa1265c47a4d80d81d980e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countAnimationAttacks: 6

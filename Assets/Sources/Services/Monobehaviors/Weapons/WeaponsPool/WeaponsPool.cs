@@ -17,6 +17,7 @@ public class WeaponsPool
 		{
 			var instance = UnityEngine.Object.Instantiate(weapon, pointSpawnWeapon, false);
 			var weaponComponent = instance.GetComponent<Weapon>();
+			weaponComponent.SetGripWeapon();
 			instance.SetActive(false);
 			weaponComponent.enabled = false;
 			currentWeaponsPool.Add(weaponComponent);

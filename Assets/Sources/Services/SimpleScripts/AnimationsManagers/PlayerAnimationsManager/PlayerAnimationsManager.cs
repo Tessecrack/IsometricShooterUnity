@@ -2,19 +2,18 @@ using UnityEngine;
 
 public class PlayerAnimationsManager : AnimationsManager
 {
-    private CloseCombat closeCombat;
-
     private bool isAnimationAttackInProgress;
     private bool needUpdateAnimationsState;
 	private int[] idsAnimationsStrikes;
 
-	public PlayerAnimationsManager(Animator animator, CloseCombat closeCombat) : base(animator)
+	public PlayerAnimationsManager(Animator animator, AnimationEvents animationEvents) : base(animator)
     {
-        this.closeCombat = closeCombat;
+        this.animationCounterAttacks = animationEvents.CounterAnimations;
+
         InitializeCloseCombatAnimations();
 
-        this.closeCombat.EventStartAttack += StartAttack;
-		this.closeCombat.EventEndAttack += EndAttack;
+        animationEvents.OnStartAttack += StartAttack;
+		animationEvents.OnEndAttack += EndAttack;
 	}
 
     public void StartAttack()
@@ -30,7 +29,7 @@ public class PlayerAnimationsManager : AnimationsManager
 
 	public void InitializeCloseCombatAnimations()
 	{
-        idsAnimationsStrikes = new int[closeCombat.TotalNumberStrikes];
+        idsAnimationsStrikes = new int[this.animationCounterAttacks.TotalNumberAttacks];
 		idsAnimationsStrikes[0] = HashCharacterAnimations.MeleeFirstAttack;
 		idsAnimationsStrikes[1] = HashCharacterAnimations.MeleeSecondAttack;
 		idsAnimationsStrikes[2] = HashCharacterAnimations.MeleeThirdAttack;
@@ -41,13 +40,13 @@ public class PlayerAnimationsManager : AnimationsManager
     {
         SetParamsBlendTree(updatedAnimationsState);
         if (isAnimationAttackInProgress)
-        {
+        {            
             return;
         }
 
-		if (closeCombat.IsStartAttack)
+		if (updatedAnimationsState.IsMeleeAttack == true)
 		{
-			AnimateMeleeStrike(idsAnimationsStrikes[closeCombat.GetNextStrike()]);
+			AnimateMeleeAttack(idsAnimationsStrikes[this.animationCounterAttacks.CurrentNumberAnimation]);
             isAnimationAttackInProgress = true;
             return;
 		}
@@ -59,7 +58,7 @@ public class PlayerAnimationsManager : AnimationsManager
         needUpdateAnimationsState = false;
         bool isChangedAttackState = ChangeAttackState(updatedAnimationsState);
 		
-		if (updatedAnimationsState.IsAttackState == false)
+		if (updatedAnimationsState.IsAimingState == false)
         {
 			ChangeLayerArmsHeavyNoAttack(updatedAnimationsState, isChangedAttackState);
 			if (currentAnimationState.IsMoving != updatedAnimationsState.IsMoving || isChangedAttackState)
@@ -75,8 +74,8 @@ public class PlayerAnimationsManager : AnimationsManager
     {
         bool isChangedWeapon = updatedAnimationsState.CurrentTypeWeapon != currentAnimationState.CurrentTypeWeapon;
 
-		if (currentAnimationState.IsAttackState != updatedAnimationsState.IsAttackState || 
-            isChangedWeapon && updatedAnimationsState.IsAttackState == true)
+		if (currentAnimationState.IsAimingState != updatedAnimationsState.IsAimingState || 
+            isChangedWeapon && updatedAnimationsState.IsAimingState == true)
 		{
             ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
             ChangeAnimationAttackWeapon(updatedAnimationsState);

@@ -1,5 +1,4 @@
 using Leopotam.EcsLite;
-using System.Diagnostics;
 
 public class CloseCombatEnemyDamageSystem : IEcsRunSystem
 {
@@ -11,6 +10,7 @@ public class CloseCombatEnemyDamageSystem : IEcsRunSystem
 			.Inc<CloseCombatComponent>()
 			.Inc<EnablerComponent>()
 			.Inc<DamageComponent>()
+			.Inc<HitListComponent>()
 			.End();
 
 		var filterPlayer = world.Filter<PlayerComponent>()
@@ -23,7 +23,9 @@ public class CloseCombatEnemyDamageSystem : IEcsRunSystem
 		var enemyCombats = world.GetPool<CloseCombatComponent>();
 		var enemyEnablers = world.GetPool<EnablerComponent>();
 		var enemyDamages = world.GetPool<DamageComponent>();
+		var enemyHitLists = world.GetPool<HitListComponent>();
 
+		var players = world.GetPool<PlayerComponent>();
 		var playerHits = world.GetPool<HitMeComponent>();
 		var playerCharacters = world.GetPool<CharacterComponent>();
 		var playerEnablers = world.GetPool<EnablerComponent>();
@@ -42,6 +44,8 @@ public class CloseCombatEnemyDamageSystem : IEcsRunSystem
 			}
 			ref var enemyAI = ref enemiesAI.Get(enemyEntity);
 			ref var enemyDamage = ref enemyDamages.Get(enemyEntity);
+			ref var enemyHitList = ref enemyHitLists.Get(enemyEntity);
+
 			foreach (var playerEntity in filterPlayer)
 			{
 				ref var enablerPlayer = ref playerEnablers.Get(playerEntity);
@@ -55,16 +59,21 @@ public class CloseCombatEnemyDamageSystem : IEcsRunSystem
 					continue;
 				}
 				ref var hitMeComponent = ref playerHits.Get(playerEntity);
+				ref var player = ref players.Get(playerEntity);
 
-				if (enemyCombat.closeCombat.IsApplyDamage == true && hitMeComponent.isHitMe == false)
+				if (enemyCombat.closeCombat.IsApplyDamage == true 
+					&& hitMeComponent.isHitMe == false
+					&& enemyHitList.hitList.Contains(player.numberPlayer) == false)
 				{
 					hitMeComponent.isHitMe = true;
 					hitMeComponent.wasAppliedDamageMe = false;
 					hitMeComponent.damageToMe = enemyDamage.damage;
+					enemyHitList.hitList.Add(player.numberPlayer);
 				}
 
 				if (enemyCombat.closeCombat.IsApplyDamage == false)
 				{
+					enemyHitList.hitList.Clear();
 					hitMeComponent.isHitMe = false;
 					hitMeComponent.wasAppliedDamageMe = false;
 				}

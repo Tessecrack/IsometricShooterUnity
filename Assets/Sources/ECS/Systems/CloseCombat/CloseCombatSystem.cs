@@ -1,5 +1,4 @@
 using Leopotam.EcsLite;
-using UnityEngine;
 
 public class CloseCombatSystem : IEcsRunSystem
 {
@@ -25,16 +24,28 @@ public class CloseCombatSystem : IEcsRunSystem
 				continue;
 			}
 			ref var attackComponent = ref attackComponents.Get(entity);
-			ref var closeCombatComponent = ref closeCombats.Get(entity);
+			if (attackComponent.typeAttack == TypeAttack.Range)
+			{
+				continue;
+			}
 			ref var stateAttack = ref stateAttackComponents.Get(entity);
+			if (stateAttack.state == CharacterState.Idle)
+			{
+				continue;
+			}
+			ref var closeCombatComponent = ref closeCombats.Get(entity);
+			if (closeCombatComponent.closeCombat.AttackInProccess)
+			{
+				continue;
+			}
 
-			if (attackComponent.isStartAttack && attackComponent.typeAttack == TypeAttack.Melee)
+			if (attackComponent.isStartAttack)
 			{
 				closeCombatComponent.closeCombat.StartAttack();
 				stateAttack.isMeleeAttack = true;
 			}
 
-			if (closeCombatComponent.closeCombat.IsEndAttack)
+			if (closeCombatComponent.closeCombat.AttackInProccess == false)
 			{
 				stateAttack.isMeleeAttack = false;
 			}

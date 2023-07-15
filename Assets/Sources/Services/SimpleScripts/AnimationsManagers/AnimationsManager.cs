@@ -4,6 +4,8 @@ public abstract class AnimationsManager
 {
 	protected Animator animator;
 	protected CharacterAnimationState currentAnimationState;
+	protected AnimationCounterAttacks animationCounterAttacks;
+
 	public AnimationsManager(Animator animator)
 	{
 		this.animator = animator;
@@ -27,7 +29,7 @@ public abstract class AnimationsManager
 		animator.SetLayerWeight(idLayer, 0.0f);
 	}
 
-	protected void AnimateMeleeStrike(int idAnimation)
+	protected void AnimateMeleeAttack(int idAnimation)
 	{
 		PlayAnimation(idAnimation);
 	}

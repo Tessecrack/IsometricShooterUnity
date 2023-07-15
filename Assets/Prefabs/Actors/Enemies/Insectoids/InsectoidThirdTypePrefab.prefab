@@ -159,7 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceDetection: 5
   rangeAttack: 2
---- !u!114 &7163376434837624875
+--- !u!114 &4159637538809406516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,9 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2857737251512992987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d91f9bd9f0adf43bfbca75c21c3b06, type: 3}
+  m_Script: {fileID: 11500000, guid: 78d9191daa1265c47a4d80d81d980e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalNumberStrikes: 6
-  speedMoveForwardInStrike: 30
-  rangeAttack: 1.5
+  countAnimationAttacks: 6

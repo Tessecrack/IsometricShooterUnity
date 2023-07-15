@@ -2,24 +2,21 @@ using UnityEngine;
 
 public class EnemyMeleeAnimationsManager : AnimationsManager
 {
-	private CloseCombat closeCombat;
-
 	private bool isAnimationAttackInProgress;
 	private bool needUpdateAnimationsState;
 	private int[] idsAnimationsStrikes;
-
-	public EnemyMeleeAnimationsManager(Animator animator, CloseCombat closeCombat) : base(animator)
+	public EnemyMeleeAnimationsManager(Animator animator, AnimationEvents animationEvents) : base(animator)
 	{
-		this.closeCombat = closeCombat;
+		this.animationCounterAttacks = animationEvents.CounterAnimations;
 		InitializeCloseCombatAnimations();
 
-		this.closeCombat.EventStartAttack += StartAttack;
-		this.closeCombat.EventEndAttack += EndAttack;
+		animationEvents.OnStartAttack += StartAttack;
+		animationEvents.OnEndAttack += EndAttack;
 	}
 
 	public void InitializeCloseCombatAnimations()
 	{
-		idsAnimationsStrikes = new int[closeCombat.TotalNumberStrikes];
+		idsAnimationsStrikes = new int[this.animationCounterAttacks.TotalNumberAttacks];
 		idsAnimationsStrikes[0] = HashCharacterAnimations.MeleeFirstAttack;
 		idsAnimationsStrikes[1] = HashCharacterAnimations.MeleeSecondAttack;
 		idsAnimationsStrikes[2] = HashCharacterAnimations.MeleeThirdAttack;
@@ -47,10 +44,9 @@ public class EnemyMeleeAnimationsManager : AnimationsManager
 			return;
 		}
 
-		if (closeCombat.IsStartAttack)
+		if (updatedAnimationsState.IsMeleeAttack)
 		{
-			AnimateMeleeStrike(idsAnimationsStrikes[closeCombat.GetNextStrike()]);
-			isAnimationAttackInProgress = true;
+			AnimateMeleeAttack(idsAnimationsStrikes[this.animationCounterAttacks.CurrentNumberAnimation]);			
 			return;
 		}
 

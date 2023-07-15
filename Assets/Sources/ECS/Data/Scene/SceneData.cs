@@ -6,10 +6,11 @@ public class SceneData : MonoBehaviour
 	public Camera Camera { get; private set; }
 	public Spawner Spawner { get; private set; }
 
-	private void Awake()
+	public void Init()
 	{
 		Camera = Camera.main;
 		Spawner = GetComponent<Spawner>();
+		Spawner.Init();
 	}
 
 	public GameObject PlayerInstance => Spawner.GetPlayerInstance();

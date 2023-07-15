@@ -1,5 +1,4 @@
 using Leopotam.EcsLite;
-using System;
 using UnityEngine;
 
 public class GameStartup : MonoBehaviour
@@ -29,7 +28,9 @@ public class GameStartup : MonoBehaviour
     
     private void Start()
     {
-        raycaster = new Raycaster();
+		SceneData.Init();
+
+		raycaster = new Raycaster();
         raycaster.SetCamera(SceneData.Camera);
         raycaster.SetGroundLayer(StaticData.GetFloorLayer());
         runtimeData = new RuntimeData();
@@ -59,9 +60,9 @@ public class GameStartup : MonoBehaviour
 
 		ecsUpdateTurretSystems?.Run();
 
-        ecsUpdateCharacterSystems?.Run();
-
 		ecsCloseCombatSystems?.Run();
+
+		ecsUpdateCharacterSystems?.Run();
 
 		ecsDamageSystems?.Run();
 
@@ -105,7 +106,7 @@ public class GameStartup : MonoBehaviour
 
 	private void InitSharedData()
 	{
-		sharedData.InitSharedData(StaticData, SceneData, runtimeData);
+		sharedData.Init(StaticData, SceneData, runtimeData);
 	}
 
 	private void InitInputSystem()

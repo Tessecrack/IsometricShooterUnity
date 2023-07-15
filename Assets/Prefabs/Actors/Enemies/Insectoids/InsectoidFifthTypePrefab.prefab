@@ -115,21 +115,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &-1790793476618268485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8294214000374871811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d91f9bd9f0adf43bfbca75c21c3b06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalNumberStrikes: 6
-  speedMoveForwardInStrike: 30
-  rangeAttack: 1.5
 --- !u!114 &1327391081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +185,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceDetection: 5
   rangeAttack: 2
+--- !u!114 &8825279074720380362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8294214000374871811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d9191daa1265c47a4d80d81d980e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countAnimationAttacks: 6
 --- !u!4 &8294214000375098163 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8430358406747431634, guid: d4d0482adca053a45baad79ace3fb89f, type: 3}

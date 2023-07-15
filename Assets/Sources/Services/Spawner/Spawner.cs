@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
 	private bool isTurretsSpawned = false;
 	private bool isEnemiesSpawned = false;
 
-	void Start()
+	public void Init()
     {
 		playerInstance = playerSpawnPoint.Spawn(true);
 		for (int i = 0; i < enemiesSpawnPoints.Count; ++i)

@@ -2538,9 +2538,9 @@ GameObject:
   - component: {fileID: 6340366110240624981}
   - component: {fileID: 8322615476185346409}
   - component: {fileID: 769023355603686269}
-  - component: {fileID: 4447934199009345276}
   - component: {fileID: 5064463964796563112}
   - component: {fileID: 4173451954542426855}
+  - component: {fileID: 4154911256120508500}
   m_Layer: 0
   m_Name: PlayerRenegadePrefabVariant
   m_TagString: Untagged
@@ -2769,21 +2769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aad2e7ad7ac134298c70d9cc6c7b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4447934199009345276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3445261361879102271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d91f9bd9f0adf43bfbca75c21c3b06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalNumberStrikes: 4
-  speedMoveForwardInStrike: 30
-  rangeAttack: 1.5
 --- !u!114 &5064463964796563112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2813,6 +2798,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSpawPoint: {fileID: 1001549539155377157}
+--- !u!114 &4154911256120508500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3445261361879102271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d9191daa1265c47a4d80d81d980e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countAnimationAttacks: 4
 --- !u!1 &3445261361912603064
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ public class SharedData
 	public SceneData SceneData { get; private set; }
 	public RuntimeData RuntimeData { get; private set; }
 
-	public void InitSharedData(StaticData staticData, SceneData sceneData, RuntimeData runtimeData)
+	public void Init(StaticData staticData, SceneData sceneData, RuntimeData runtimeData)
 	{
 		StaticData = staticData;
 		SceneData = sceneData;

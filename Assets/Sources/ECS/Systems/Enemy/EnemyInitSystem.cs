@@ -39,11 +39,13 @@ public class EnemyInitSystem : IEcsInitSystem
 			EcsPool<EnablerComponent> poolEnablerComponents = world.GetPool<EnablerComponent>();
 			EcsPool<CloseCombatComponent> poolCloseCombats = world.GetPool<CloseCombatComponent>();
 			EcsPool<ArsenalComponent> poolArsenals = world.GetPool<ArsenalComponent>();
-			EcsPool<HitRangeComponent> poolRangeHit = world.GetPool<HitRangeComponent>();
-			EcsPool<HitMeComponent> poolHitComponents = world.GetPool<HitMeComponent>();
 			EcsPool<DamageComponent> poolDamage = world.GetPool<DamageComponent>();
 			EcsPool<WeaponSpawnPointComponent> poolWeaponSpawnPoint = world.GetPool<WeaponSpawnPointComponent>();
 			EcsPool<AIEnemyComponent> poolAIEnemyComponents = world.GetPool<AIEnemyComponent>();
+
+			EcsPool<HitRangeComponent> poolRangeHit = world.GetPool<HitRangeComponent>();
+			EcsPool<HitMeComponent> poolHitComponents = world.GetPool<HitMeComponent>();
+			EcsPool<HitListComponent> poolHitList = world.GetPool<HitListComponent>();
 
 			ref var enemyComponent = ref poolEnemyComponents.Add(entityEnemy);
 			ref var movableComponent = ref poolMovableComponents.Add(entityEnemy);
@@ -70,20 +72,23 @@ public class EnemyInitSystem : IEcsInitSystem
 
 			ref var damage = ref poolDamage.Add(entityEnemy);
 			ref var weaponSpawnPoint = ref poolWeaponSpawnPoint.Add(entityEnemy);
+			ref var hitList = ref poolHitList.Add(entityEnemy);
 
 			enablerComponent.instance = enemies[i];
+			var animEvents = enemies[i].GetComponent<AnimationEvents>();
+			animEvents.Init();
 			characterComponent.characterController = enemies[i].GetComponent<CharacterController>();
 			var characterSettings = enemies[i].GetComponent<CharacterSettings>();
 			aiEnemyComponent.enemyAgent = enemies[i].GetComponent<AIEnemyAgent>();
 			healthComponent.damageable = enemies[i].GetComponent<Damageable>();
-			closeCombat.closeCombat = enemies[i].GetComponent<CloseCombat>();
+			closeCombat.closeCombat = new CloseCombat(animEvents);
 			arsenal.arsenal = enemies[i].GetComponent<Arsenal>();
 
 			arsenal.currentNumberWeapon = -1;
 
 			arsenal.arsenal.InitArsenal(weaponSpawnPoint.weaponSpawPoint);
 
-			animatorComponent.animationsManager = new EnemyMeleeAnimationsManager(enemies[i].GetComponent<Animator>(), closeCombat.closeCombat);
+			animatorComponent.animationsManager = new EnemyMeleeAnimationsManager(enemies[i].GetComponent<Animator>(), animEvents);
 
 			characterComponent.characterTransform = enemies[i].transform;
 			characterComponent.characterSettings = characterSettings;
@@ -98,6 +103,8 @@ public class EnemyInitSystem : IEcsInitSystem
 
 			rotatableComponent.coefSmooth = 0.3f;
 			rangeHit.rangeHit = aiEnemyComponent.enemyAgent.RangeAttack;
+
+			hitList.hitList = new List<int>(4);
 		}
 	}
 }

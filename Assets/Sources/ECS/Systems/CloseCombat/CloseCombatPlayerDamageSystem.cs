@@ -62,7 +62,7 @@ public class CloseCombatPlayerDamageSystem : IEcsRunSystem
 				ref var enemyCharacter = ref enemyCharacters.Get(entityEnemy);
 				var positionEnemy = enemyCharacter.characterTransform.position;
 				var distanceToEnemy = Vector3.Distance(positionPlayer, positionEnemy);
-
+				
 				if (playerRangeHit.rangeHit < distanceToEnemy)
 				{
 					continue;

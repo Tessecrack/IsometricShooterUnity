@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using System.Diagnostics;
 
 public class CharacterSelectWeaponSystem : IEcsRunSystem
 {
@@ -22,7 +23,7 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 		var enablers = world.GetPool<EnablerComponent>();
 		var damageComponents = world.GetPool<DamageComponent>();
 
-		foreach(int entity in filter)
+		foreach (int entity in filter)
 		{
 			ref var enabler = ref enablers.Get(entity);
 			if (enabler.isEnabled == false)
@@ -32,22 +33,27 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 
 			ref var eventComponent = ref eventComponents.Get(entity);
 			ref var arsenal = ref arsenals.Get(entity);
-			ref var characterComponent = ref characterComponents.Get(entity);
+			if (eventComponent.selectedNumberWeapon == arsenal.currentNumberWeapon)
+			{
+				continue;
+			}
+
 			ref var state = ref states.Get(entity);
+			if (state.isMeleeAttack)
+			{
+				continue;
+			}
+
+			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var weaponComponent = ref weapons.Get(entity);
 			ref var damageComponent = ref damageComponents.Get(entity);
-			if (eventComponent.selectedNumberWeapon != arsenal.currentNumberWeapon
-				&& !state.isMeleeAttack)
-			{
-				arsenal.arsenal.HideWeapon(arsenal.currentNumberWeapon);	
+			
+			arsenal.arsenal.HideWeapon(arsenal.currentNumberWeapon);
+			var currentWeapon = arsenal.arsenal.GetWeapon(eventComponent.selectedNumberWeapon);
+			arsenal.currentNumberWeapon = eventComponent.selectedNumberWeapon;
+			weaponComponent.weapon = currentWeapon;
+			damageComponent.damage = weaponComponent.weapon.Damage;
 
-				var currentWeapon = arsenal.arsenal.GetWeapon(eventComponent.selectedNumberWeapon);
-
-				arsenal.currentNumberWeapon = eventComponent.selectedNumberWeapon;
-
-				weaponComponent.weapon = currentWeapon;
-				damageComponent.damage = weaponComponent.weapon.Damage;
-			}
 		}
 	}
 }

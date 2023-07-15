@@ -57,10 +57,13 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var weaponSpawnPoint = ref poolWeaponSpawnPoint.Add(entityPlayer);
 		ref var hitMeComponent = ref poolHitMeComponents.Add(entityPlayer);
 
+		playerComponent.numberPlayer = 0;
+
 		characterState.stateAttackTime = 3;
 
 		GameObject player = sceneData.PlayerInstance;
-
+		var animEvents = player.GetComponent<AnimationEvents>();
+		animEvents.Init();
 		inputComponent.userInput = player.GetComponent<UserInput>(); // TODO: NEED IMPROVE
 
 		runtimeData.OwnerCameraTransform = player.transform.position;
@@ -68,12 +71,11 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		var characterSettings = player.GetComponent<CharacterSettings>();
 		healthComponent.damageable = player.GetComponent<Damageable>();
-		closeCombatComponent.closeCombat = player.GetComponent<CloseCombat>();
 		characterRigComponent.characterRigController = player.GetComponent<CharacterRigController>();
 		characterComponent.characterController = player.GetComponent<CharacterController>();
 		animatorComponent.animationsManager = new PlayerAnimationsManager(player.GetComponent<Animator>(),
-			closeCombatComponent.closeCombat);
-
+			animEvents);
+		closeCombatComponent.closeCombat = new CloseCombat(animEvents);
 		weaponSpawnPoint.weaponSpawPoint = player.GetComponent<WeaponSpawnPoint>().WeaponPointSpawn;
 
 		arsenal.arsenal = player.GetComponent<Arsenal>();

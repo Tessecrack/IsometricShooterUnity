@@ -120,21 +120,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &-5858858904512418372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2464970961380106857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d91f9bd9f0adf43bfbca75c21c3b06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalNumberStrikes: 6
-  speedMoveForwardInStrike: 30
-  rangeAttack: 1.5
 --- !u!114 &1136838879011205452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,3 +190,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceDetection: 5
   rangeAttack: 2
+--- !u!114 &8439969958070380588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464970961380106857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d9191daa1265c47a4d80d81d980e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countAnimationAttacks: 6

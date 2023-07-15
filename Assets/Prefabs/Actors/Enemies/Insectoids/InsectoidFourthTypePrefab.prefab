@@ -115,21 +115,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &-8947739312875510625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6756397548703371726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d91f9bd9f0adf43bfbca75c21c3b06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalNumberStrikes: 6
-  speedMoveForwardInStrike: 30
-  rangeAttack: 1.5
 --- !u!114 &1187552090255704016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +159,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSpawPoint: {fileID: 8956093895160164203}
+--- !u!114 &4797776258321573448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6756397548703371726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d9191daa1265c47a4d80d81d980e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countAnimationAttacks: 6
 --- !u!114 &4879854655442945627
 MonoBehaviour:
   m_ObjectHideFlags: 0
