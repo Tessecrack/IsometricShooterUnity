@@ -24,7 +24,7 @@ public class HashCharacterAnimations
 
 	public static readonly int MeleeFifthAttack = Animator.StringToHash("MeleeFifthAttack");
 
-	public static readonly int MeleeSixthAttack = Animator.StringToHash("MeleeSixthAttack");
+	public static readonly int RangeFirstAttack = Animator.StringToHash("RangeFirstAttack");
 
 	public static readonly int[] IdsMeleeAttacks = new int[]
 	{

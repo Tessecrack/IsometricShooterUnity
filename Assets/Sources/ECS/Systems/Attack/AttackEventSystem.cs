@@ -35,6 +35,7 @@ public class AttackEventSystem : IEcsRunSystem
 			ref var weaponType = ref weaponTypes.Get(entity);
 
 			attackComponent.isStartAttack = characterEvent.isStartAttack;
+			
 			attackComponent.isStopAttack = characterEvent.isStopAttack;
 
 			attackComponent.attackerTransform = characterComponent.characterTransform;

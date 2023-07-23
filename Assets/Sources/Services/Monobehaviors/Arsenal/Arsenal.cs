@@ -10,7 +10,7 @@ public class Arsenal : MonoBehaviour
 
 	private readonly int maxCountWeapons = 3;
 
-	public void InitArsenal(Transform pointSpawnWeapon)
+	public void Init(Transform pointSpawnWeapon)
 	{
 		weaponsPool.InitWeapons(weapons, pointSpawnWeapon);
 	}

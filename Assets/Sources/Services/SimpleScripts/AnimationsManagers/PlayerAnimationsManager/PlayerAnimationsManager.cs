@@ -38,7 +38,11 @@ public class PlayerAnimationsManager : AnimationsManager
 
 	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
     {
-        SetParamsBlendTree(updatedAnimationsState);
+        if (currentAnimationState.EqualsBlendTreeParams(updatedAnimationsState) == false)
+        {
+            SetParamsBlendTree(updatedAnimationsState);
+        }
+
         if (isAnimationAttackInProgress)
         {            
             return;

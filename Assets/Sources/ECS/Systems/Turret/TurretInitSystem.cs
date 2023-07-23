@@ -33,6 +33,7 @@ public class TurretInitSystem : IEcsInitSystem
 			EcsPool<EnablerComponent> poolEnablerComponents = world.GetPool<EnablerComponent>();
 			EcsPool<HitMeComponent> poolHitComponents = world.GetPool<HitMeComponent>();
 			EcsPool<EnemyComponent> poolEnemyComponents = world.GetPool<EnemyComponent>();
+			EcsPool<WeaponTypeComponent> poolWeaponTypeComponents = world.GetPool<WeaponTypeComponent>();
 
 			ref var turretComponent = ref poolTurretComponents.Add(entityTurret);
 			ref var rotatableComponent = ref poolRotatableComponents.Add(entityTurret);
@@ -47,13 +48,18 @@ public class TurretInitSystem : IEcsInitSystem
 			ref var enablerComponent = ref poolEnablerComponents.Add(entityTurret);
 			ref var hitComponent = ref poolHitComponents.Add(entityTurret);
 			ref var enemyComponent = ref poolEnemyComponents.Add(entityTurret);
+			ref var weaponTypeComponent = ref poolWeaponTypeComponents.Add(entityTurret);
 
 			var turretInstance = turretsInstances[i];
 
 			rotatableComponent.coefSmooth = 0.05f;
 
 			turretComponent.turretSettings = turretInstance.GetComponent<TurretSettings>();
-			aiEnemyComponent.enemyAgent = turretInstance.GetComponent<AIEnemyAgent>();
+
+			turretComponent.turretSettings.Init();
+
+			aiEnemyComponent.enemyAgent = new AIEnemyAgent();
+			aiEnemyComponent.enemyAgent.SetTransform(turretInstance.transform);
 
 			healthComponent.damageable = turretComponent.turretSettings.GetDamageable();
 			healthComponent.maxHealth = turretComponent.turretSettings.GetMaxHealth();
@@ -68,7 +74,11 @@ public class TurretInitSystem : IEcsInitSystem
 			attackComponent.attackerTransform = turretInstance.transform;
 			attackComponent.typeAttack = TypeAttack.Range;
 
+			weaponTypeComponent.typeWeapon = TypeWeapon.HEAVY;
+
 			aiEnemyComponent.enemyAgent.SetTypeAttack(attackComponent.typeAttack);
+			aiEnemyComponent.enemyAgent.SetRangeDetection(turretComponent.turretSettings.RangeDetection);
+			aiEnemyComponent.enemyAgent.SetDistanceRangeAttack(turretComponent.turretSettings.RangeDetection);
 		}
 	}
 }

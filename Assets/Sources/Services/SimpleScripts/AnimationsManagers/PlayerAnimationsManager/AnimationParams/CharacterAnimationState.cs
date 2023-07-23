@@ -22,8 +22,12 @@ public class CharacterAnimationState
 		return CurrentTypeWeapon == other.CurrentTypeWeapon &&
 			IsMoving == other.IsMoving &&
 			IsAimingState == other.IsAimingState &&
-			HorizontalMoveValue == other.HorizontalMoveValue &&
-			VerticalMoveValue == other.VerticalMoveValue &&
 			IsMeleeAttack == other.IsMeleeAttack;
+	}
+
+	public bool EqualsBlendTreeParams(CharacterAnimationState other)
+	{
+		return HorizontalMoveValue == other.HorizontalMoveValue &&
+			VerticalMoveValue == other.VerticalMoveValue;
 	}
 }

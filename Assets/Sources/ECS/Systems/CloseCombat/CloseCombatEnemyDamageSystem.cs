@@ -69,7 +69,6 @@ public class CloseCombatEnemyDamageSystem : IEcsRunSystem
 					hitMeComponent.isHitMe = true;
 					hitMeComponent.wasAppliedDamageMe = false;
 					hitMeComponent.damageToMe = enemyDamage.damage;
-					UnityEngine.Debug.Log(enemyDamage.damage);
 					enemyHitList.hitList.Add(player.numberPlayer);
 				}
 

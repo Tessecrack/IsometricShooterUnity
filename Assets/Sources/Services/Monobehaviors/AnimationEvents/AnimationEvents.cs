@@ -14,6 +14,8 @@ public class AnimationEvents : MonoBehaviour
 	public event Action OnStartForwardMove;
 	public event Action OnEndForwardMove;
 
+	public event Action OnShotProjectile;
+
 	private float passedTimeLastAttack = 0;
 	private readonly float timeReset = 0.4f;
 
@@ -59,6 +61,11 @@ public class AnimationEvents : MonoBehaviour
 		isEndAnimationAttack = true;
 
 		OnEndAttack?.Invoke();
+	}
+
+	public void HandlerShotprojectile()
+	{
+		OnShotProjectile?.Invoke();
 	}
 
 	public void HandlerStartApplyDamage()

@@ -102,18 +102,6 @@ MonoBehaviour:
   rangeDetectTarget: 10
   rangeMeleeAttack: 2
   distanceRangeAttack: 10
---- !u!114 &1187552090255704016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6756397548703371726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d6f96998d2b85141b1d21e2083ad95c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1618529843802240964
 MonoBehaviour:
   m_ObjectHideFlags: 0

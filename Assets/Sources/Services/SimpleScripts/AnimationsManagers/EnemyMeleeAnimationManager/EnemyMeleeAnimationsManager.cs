@@ -22,7 +22,6 @@ public class EnemyMeleeAnimationsManager : AnimationsManager
 		idsAnimationsStrikes[2] = HashCharacterAnimations.MeleeThirdAttack;
 		idsAnimationsStrikes[3] = HashCharacterAnimations.MeleeFourthAttack;
 		idsAnimationsStrikes[4] = HashCharacterAnimations.MeleeFifthAttack;
-		idsAnimationsStrikes[5] = HashCharacterAnimations.MeleeSixthAttack;
 	}
 
 	public void StartAttack()
@@ -38,7 +37,11 @@ public class EnemyMeleeAnimationsManager : AnimationsManager
 
 	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
 	{
-		SetParamsBlendTree(updatedAnimationsState);
+		if (currentAnimationState.EqualsBlendTreeParams(updatedAnimationsState) == false)
+		{
+			SetParamsBlendTree(updatedAnimationsState);
+		}
+		
 		if (isAnimationAttackInProgress)
 		{
 			return;

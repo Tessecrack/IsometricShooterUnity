@@ -58,7 +58,7 @@ public class EnemyInitSystem : IEcsInitSystem
 				ref var weaponSpawnPoint = ref poolWeaponSpawnPoint.Add(entityEnemy);
 				arsenal.arsenal = enemyArsenal;
 				arsenal.currentNumberWeapon = -1;
-				arsenal.arsenal.InitArsenal(weaponSpawnPoint.weaponSpawPoint);
+				arsenal.arsenal.Init(weaponSpawnPoint.weaponSpawPoint);
 				hasArsenal = true;
 			}
 
@@ -90,10 +90,12 @@ public class EnemyInitSystem : IEcsInitSystem
 			animEvents.Init();
 			characterComponent.characterController = enemies[i].GetComponent<CharacterController>();
 			var characterSettings = enemies[i].GetComponent<CharacterSettings>();
-			aiEnemyComponent.enemyAgent = enemies[i].GetComponent<AIEnemyAgent>();
 			healthComponent.damageable = enemies[i].GetComponent<Damageable>();
+
 			closeCombat.closeCombat = new CloseCombat(animEvents);
-			
+			aiEnemyComponent.enemyAgent = new AIEnemyAgent();
+			aiEnemyComponent.enemyAgent.SetTransform(enemies[i].transform);
+
 			animatorComponent.animationsManager = new EnemyMeleeAnimationsManager(enemies[i].GetComponent<Animator>(), animEvents);
 
 			characterComponent.characterTransform = enemies[i].transform;
@@ -124,7 +126,6 @@ public class EnemyInitSystem : IEcsInitSystem
 				TypeWeapon.MELEE : TypeWeapon.GUN;
 
 				damage.damage = enemyComponent.enemySettings.MeleeDamage;
-				Debug.Log(damage.damage);
 			}
 		}
 	}

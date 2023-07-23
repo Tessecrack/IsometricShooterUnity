@@ -33,7 +33,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MeleeSixthAttack
+  m_Name: MeleeFifthAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -78,14 +78,14 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-3796334641671693762
+--- !u!1102 &-4704446895839254335
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MeleeFourthAttack
+  m_Name: RangeFirstAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -98,7 +98,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1754e5fdaf1acac45bcad0a5cdd70ad1, type: 2}
+  m_Motion: {fileID: 7400000, guid: 725e51fd263a65a4984afc9a1073ab70, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -333,7 +333,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MeleeFifthAttack
+  m_Name: MeleeFourthAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -406,14 +406,14 @@ AnimatorStateMachine:
     m_State: {fileID: -954412928379764669}
     m_Position: {x: -180, y: 300, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -3796334641671693762}
+    m_State: {fileID: 4101031574693728118}
     m_Position: {x: -180, y: 350, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 4101031574693728118}
+    m_State: {fileID: -6996823175091628029}
     m_Position: {x: -180, y: 400, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -6996823175091628029}
-    m_Position: {x: -180, y: 450, z: 0}
+    m_State: {fileID: -4704446895839254335}
+    m_Position: {x: 30, y: 300, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

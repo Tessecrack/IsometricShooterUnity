@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using UnityEngine;
 
 public class EnemyDetectTargetSystem : IEcsRunSystem
 {
@@ -62,7 +63,6 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 				}
 				eventComponent.isStartAttack = aiEnemyComponent.enemyAgent.CanMeleeAttack(playerPosition) ||
 					aiEnemyComponent.enemyAgent.CanRangeAttack(playerPosition);
-
 				eventComponent.isStopAttack = !eventComponent.isStartAttack;
 			}
 		}
