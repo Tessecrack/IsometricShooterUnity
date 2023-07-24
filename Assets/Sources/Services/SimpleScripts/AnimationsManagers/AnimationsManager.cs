@@ -29,7 +29,7 @@ public abstract class AnimationsManager
 		animator.SetLayerWeight(idLayer, 0.0f);
 	}
 
-	protected void AnimateMeleeAttack(int idAnimation)
+	protected void AnimateAttack(int idAnimation)
 	{
 		PlayAnimation(idAnimation);
 	}

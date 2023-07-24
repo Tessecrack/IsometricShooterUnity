@@ -5,6 +5,9 @@ public class EnemyMeleeAnimationsManager : AnimationsManager
 	private bool isAnimationAttackInProgress;
 	private bool needUpdateAnimationsState;
 	private int[] idsAnimationsStrikes;
+
+	private bool canPlayRangeAttack;
+
 	public EnemyMeleeAnimationsManager(Animator animator, AnimationEvents animationEvents) : base(animator)
 	{
 		this.animationCounterAttacks = animationEvents.CounterAnimations;
@@ -49,7 +52,14 @@ public class EnemyMeleeAnimationsManager : AnimationsManager
 
 		if (updatedAnimationsState.IsMeleeAttack)
 		{
-			AnimateMeleeAttack(idsAnimationsStrikes[this.animationCounterAttacks.RandomNumberAnimation]);			
+			AnimateAttack(idsAnimationsStrikes[this.animationCounterAttacks.RandomNumberAnimation]);			
+			return;
+		}
+
+		if (updatedAnimationsState.IsRangeAttack && canPlayRangeAttack)
+		{
+			canPlayRangeAttack = false;
+			AnimateAttack(HashCharacterAnimations.RangeFirstAttack);
 			return;
 		}
 
@@ -59,7 +69,9 @@ public class EnemyMeleeAnimationsManager : AnimationsManager
 		}
 		needUpdateAnimationsState = false;
 		PlayAnimation(HashCharacterAnimations.LocomotionRun);
+		canPlayRangeAttack = true;
 		currentAnimationState.UpdateValuesState(updatedAnimationsState);
+		
 	}
 
 	private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)

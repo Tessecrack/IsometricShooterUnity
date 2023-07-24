@@ -12,7 +12,7 @@ public class GameStartup : MonoBehaviour
     private Raycaster raycaster;
     private RuntimeData runtimeData;
 
-	private SharedData sharedData = new SharedData();
+	private SharedData sharedData = new();
 
     private EcsWorld ecsWorld;
 
@@ -22,7 +22,7 @@ public class GameStartup : MonoBehaviour
 	private EcsSystems ecsUpdateEnemySystems;
 	private EcsSystems ecsUpdateCharacterSystems;
     private EcsSystems ecsUpdateCameraSystems;
-	private EcsSystems ecsCloseCombatSystems;
+	private EcsSystems ecsAttackSystems;
 	private EcsSystems ecsDamageSystems;
 	private EcsSystems ecsEnablerSystems;
     
@@ -42,7 +42,7 @@ public class GameStartup : MonoBehaviour
 		InitEnemySystem();
 		InitInputSystem();
 		InitCharacterSystem();
-		InitCloseCombatSystems();
+		InitAttacksSystems();
 		InitDamageSystem();
 		InitCameraSystem();
 		InitEnablerSystem();
@@ -60,7 +60,7 @@ public class GameStartup : MonoBehaviour
 
 		ecsUpdateTurretSystems?.Run();
 
-		ecsCloseCombatSystems?.Run();
+		ecsAttackSystems?.Run();
 
 		ecsUpdateCharacterSystems?.Run();
 
@@ -94,8 +94,8 @@ public class GameStartup : MonoBehaviour
 		ecsEnablerSystems?.Destroy();
 		ecsEnablerSystems = null;
 
-		ecsCloseCombatSystems?.Destroy();
-		ecsCloseCombatSystems = null;
+		ecsAttackSystems?.Destroy();
+		ecsAttackSystems = null;
 
 		ecsDamageSystems?.Destroy();
 		ecsDamageSystems = null;
@@ -163,21 +163,21 @@ public class GameStartup : MonoBehaviour
 		ecsUpdateCharacterSystems.Init();
 	}
 
-	private void InitCloseCombatSystems()
+	private void InitAttacksSystems()
 	{
-		ecsCloseCombatSystems = new EcsSystems(ecsWorld,sharedData);
-		ecsCloseCombatSystems
-			.Add(new CloseCombatSystem())
-			.Add(new CloseCombatMoveSystem());
-		ecsCloseCombatSystems.Init();
+		ecsAttackSystems = new EcsSystems(ecsWorld,sharedData);
+		ecsAttackSystems
+			.Add(new MeleeAttackSystem())
+			.Add(new MeleeAttackMoveSystem());
+		ecsAttackSystems.Init();
 	}
 
 	private void InitDamageSystem()
 	{
 		ecsDamageSystems = new EcsSystems(ecsWorld, sharedData);
 		ecsDamageSystems
-			.Add(new CloseCombatPlayerDamageSystem())
-			.Add(new CloseCombatEnemyDamageSystem())
+			.Add(new MeleeAttackPlayerDamageSystem())
+			.Add(new MeleeAttackEnemyDamageSystem())
 			.Add(new DamageHitSystem())
 			.Add(new DamageSystem());
 		ecsDamageSystems.Init();

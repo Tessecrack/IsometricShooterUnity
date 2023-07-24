@@ -50,7 +50,7 @@ public class PlayerAnimationsManager : AnimationsManager
 
 		if (updatedAnimationsState.IsMeleeAttack == true)
 		{
-			AnimateMeleeAttack(idsAnimationsStrikes[this.animationCounterAttacks.CurrentNumberAnimation]);
+			AnimateAttack(idsAnimationsStrikes[this.animationCounterAttacks.CurrentNumberAnimation]);
             isAnimationAttackInProgress = true;
             return;
 		}

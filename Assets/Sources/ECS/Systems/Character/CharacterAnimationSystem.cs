@@ -41,7 +41,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			animatorComponent.animationState.HorizontalMoveValue = movableComponent.relativeVector.x;
 			animatorComponent.animationState.IsAimingState = currentState == CharacterState.Aiming;
 			animatorComponent.animationState.IsMeleeAttack = attackState.isMeleeAttack;
-
+			animatorComponent.animationState.IsRangeAttack = attackState.isRangeAttack;
 			animatorComponent.animationsManager.ChangeAnimationsState(animatorComponent.animationState);
 		}
 	}

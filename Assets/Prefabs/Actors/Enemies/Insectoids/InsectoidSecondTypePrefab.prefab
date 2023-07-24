@@ -74,11 +74,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65382a43c6ed2d34a8408376868b12c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeEnemy: 0
+  hasArsenal: 0
+  hasMeleeAttack: 1
+  hasRangeAttack: 0
   meleeDamage: 25
   rangeDamage: 25
   rangeDetectTarget: 10
-  rangeMeleeAttack: 2
+  distanceMeleeAttack: 1.5
   distanceRangeAttack: 10
 --- !u!114 &2548888902086905799
 MonoBehaviour:

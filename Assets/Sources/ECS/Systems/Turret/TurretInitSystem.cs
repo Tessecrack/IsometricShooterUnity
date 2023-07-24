@@ -76,7 +76,7 @@ public class TurretInitSystem : IEcsInitSystem
 
 			weaponTypeComponent.typeWeapon = TypeWeapon.HEAVY;
 
-			aiEnemyComponent.enemyAgent.SetTypeAttack(attackComponent.typeAttack);
+			aiEnemyComponent.enemyAgent.SetRangeAttack(true);
 			aiEnemyComponent.enemyAgent.SetRangeDetection(turretComponent.turretSettings.RangeDetection);
 			aiEnemyComponent.enemyAgent.SetDistanceRangeAttack(turretComponent.turretSettings.RangeDetection);
 		}

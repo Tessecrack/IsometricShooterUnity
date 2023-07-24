@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &681465308186509844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8172591896439073134}
+  m_Layer: 0
+  m_Name: point_range_attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8172591896439073134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681465308186509844}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.033, y: -0.1754, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6756397548703796730}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7192945059287297260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96,11 +127,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65382a43c6ed2d34a8408376868b12c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeEnemy: 0
+  hasArsenal: 0
+  hasMeleeAttack: 0
+  hasRangeAttack: 1
   meleeDamage: 25
   rangeDamage: 25
   rangeDetectTarget: 10
-  rangeMeleeAttack: 2
+  distanceMeleeAttack: 1.5
   distanceRangeAttack: 10
 --- !u!114 &1618529843802240964
 MonoBehaviour:
@@ -132,6 +165,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countAnimationAttacks: 6
+--- !u!114 &6179544920620665351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6756397548703371726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0654021836a768448b65ff679f380caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSpawnProjectile: {fileID: 8172591896439073134}
+  projectilePrefab: {fileID: 5212988438947693026, guid: 86ab7c6e98e1c394ca31622302f3e588, type: 3}
+  speedProjectile: 8
 --- !u!114 &7282486051642759480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,3 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86af0ac450f31440b10ad1e64b1239a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &6756397548703796730 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4472622733564780822, guid: 99fee238bb89c2e4182df99efbc6a3f8, type: 3}
+  m_PrefabInstance: {fileID: 7192945059287297260}
+  m_PrefabAsset: {fileID: 0}

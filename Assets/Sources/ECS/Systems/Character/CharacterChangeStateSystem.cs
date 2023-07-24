@@ -23,7 +23,8 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 				continue;
 			}
 			ref var characterState = ref characterStates.Get(entity);
-			if (characterState.isMeleeAttack)
+
+			if (characterState.isMeleeAttack || characterState.isRangeAttack)
 			{
 				continue;
 			}

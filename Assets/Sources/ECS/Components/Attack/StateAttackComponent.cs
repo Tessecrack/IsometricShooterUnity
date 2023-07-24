@@ -6,4 +6,5 @@ public struct StateAttackComponent
 	public int stateAttackTime;
 
 	public bool isMeleeAttack;
+	public bool isRangeAttack;
 }

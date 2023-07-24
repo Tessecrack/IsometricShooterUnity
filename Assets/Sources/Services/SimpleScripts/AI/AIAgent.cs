@@ -3,7 +3,10 @@ using UnityEngine;
 public class AIAgent
 {
 	private Transform transform;
-	private TypeAttack typeAttack;
+	
+	private bool hasArsenal;
+	private bool hasRangeAttack;
+	private bool hasMeleeAttack;
 
 	private float rangeDetection = 5.0f;
 	private float rangeMeleeAttack = 1.5f;
@@ -12,14 +15,24 @@ public class AIAgent
 	private bool isTargetDetected;
 	private bool canAttack;
 
+	public void SetHasArsenal(bool hasArsenal)
+	{
+		this.hasArsenal = hasArsenal;
+	}
+
+	public void SetRangeAttack(bool hasRangeAttack)
+	{
+		this.hasRangeAttack = hasRangeAttack;
+	}
+
+	public void SetMeleeAttack(bool hasMeleeAttack)
+	{
+		this.hasMeleeAttack = hasMeleeAttack;
+	}
+
 	public void SetTransform(Transform transform)
 	{
 		this.transform = transform;
-	}
-
-	public void SetTypeAttack(TypeAttack typeAttack)
-	{
-		this.typeAttack = typeAttack;
 	}
 
 	public void SetRangeDetection(float rangeDetection)
@@ -27,7 +40,7 @@ public class AIAgent
 		this.rangeDetection = rangeDetection;
 	}
 
-	public void SetRangeMeleeAttack(float rangeMeleeAttack)
+	public void SetDistanceMeleeAttack(float rangeMeleeAttack)
 	{
 		this.rangeMeleeAttack = rangeMeleeAttack;
 	}
@@ -45,7 +58,7 @@ public class AIAgent
 
 	public bool CanMeleeAttack(Vector3 target)
 	{
-		if (typeAttack == TypeAttack.Melee)
+		if (hasMeleeAttack)
 		{
 			var distance = target - transform.position;
 			return canAttack = rangeMeleeAttack >= distance.magnitude;
@@ -55,7 +68,7 @@ public class AIAgent
 
 	public bool CanRangeAttack(Vector3 target)
 	{
-		if (typeAttack == TypeAttack.Range)
+		if (hasRangeAttack)
 		{
 			var distance = target - transform.position;
 			return canAttack = distanceRangeAttack >= distance.magnitude;

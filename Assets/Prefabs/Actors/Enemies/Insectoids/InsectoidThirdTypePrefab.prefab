@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2168802241847215295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2190763721736081712}
+  m_Layer: 0
+  m_Name: point_range_attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2190763721736081712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168802241847215295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0461, y: -0.1788, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2857737251512834287}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4925573916357727288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61,6 +92,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be7866c2d643aeb4d9d7dda0afeaeec0, type: 3}
+--- !u!4 &2857737251512834287 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7202275613661220055, guid: be7866c2d643aeb4d9d7dda0afeaeec0, type: 3}
+  m_PrefabInstance: {fileID: 4925573916357727288}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2857737251512992987 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7202275613661188323, guid: be7866c2d643aeb4d9d7dda0afeaeec0, type: 3}
@@ -96,11 +132,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65382a43c6ed2d34a8408376868b12c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeEnemy: 0
+  hasArsenal: 0
+  hasMeleeAttack: 0
+  hasRangeAttack: 1
   meleeDamage: 25
   rangeDamage: 25
   rangeDetectTarget: 10
-  rangeMeleeAttack: 2
+  distanceMeleeAttack: 1.5
   distanceRangeAttack: 10
 --- !u!114 &1940186401
 MonoBehaviour:
@@ -131,6 +169,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86af0ac450f31440b10ad1e64b1239a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3619211601003568153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857737251512992987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0654021836a768448b65ff679f380caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSpawnProjectile: {fileID: 2190763721736081712}
+  projectilePrefab: {fileID: 8932127953273655131, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
+  speedProjectile: 9
 --- !u!114 &4159637538809406516
 MonoBehaviour:
   m_ObjectHideFlags: 0

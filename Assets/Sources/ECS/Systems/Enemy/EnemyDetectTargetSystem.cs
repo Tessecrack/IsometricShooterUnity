@@ -61,8 +61,13 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 				{
 					stateComponent.state = CharacterState.Idle;
 				}
-				eventComponent.isStartAttack = aiEnemyComponent.enemyAgent.CanMeleeAttack(playerPosition) ||
-					aiEnemyComponent.enemyAgent.CanRangeAttack(playerPosition);
+
+				bool canMeleeAttack = aiEnemyComponent.enemyAgent.CanMeleeAttack(playerPosition);
+				bool canRangeAttack = aiEnemyComponent.enemyAgent.CanRangeAttack(playerPosition);
+
+				eventComponent.isStartAttack = canMeleeAttack || canRangeAttack;
+				stateComponent.isRangeAttack = canRangeAttack;
+
 				eventComponent.isStopAttack = !eventComponent.isStartAttack;
 			}
 		}
