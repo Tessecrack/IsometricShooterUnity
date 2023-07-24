@@ -49,7 +49,7 @@ public class EnemyMeleeAnimationsManager : AnimationsManager
 
 		if (updatedAnimationsState.IsMeleeAttack)
 		{
-			AnimateMeleeAttack(idsAnimationsStrikes[this.animationCounterAttacks.CurrentNumberAnimation]);			
+			AnimateMeleeAttack(idsAnimationsStrikes[this.animationCounterAttacks.RandomNumberAnimation]);			
 			return;
 		}
 
