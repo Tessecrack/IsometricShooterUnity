@@ -22,7 +22,7 @@ public class TurretInitSystem : IEcsInitSystem
 
 			EcsPool<TurretComponent> poolTurretComponents = world.GetPool<TurretComponent>();
 			EcsPool<RotatableComponent> poolRotatableComponents = world.GetPool<RotatableComponent>();
-			EcsPool<AIEnemyComponent> poolAIEnemyComponents = world.GetPool<AIEnemyComponent>();
+			EcsPool<AIComponent> poolAIEnemyComponents = world.GetPool<AIComponent>();
 			EcsPool<TargetComponent> poolTargetComponents = world.GetPool<TargetComponent>();
 			EcsPool<StateAttackComponent> poolStateAttackComponents = world.GetPool<StateAttackComponent>();
 			EcsPool<CharacterComponent> poolCharacterComponents = world.GetPool<CharacterComponent>();
@@ -58,8 +58,8 @@ public class TurretInitSystem : IEcsInitSystem
 
 			turretComponent.turretSettings.Init();
 
-			aiEnemyComponent.enemyAgent = new AIEnemyAgent();
-			aiEnemyComponent.enemyAgent.SetTransform(turretInstance.transform);
+			aiEnemyComponent.aiAgent = new AIEnemyAgent();
+			aiEnemyComponent.aiAgent.SetTransform(turretInstance.transform);
 
 			healthComponent.damageable = turretComponent.turretSettings.GetDamageable();
 			healthComponent.maxHealth = turretComponent.turretSettings.GetMaxHealth();
@@ -76,9 +76,9 @@ public class TurretInitSystem : IEcsInitSystem
 
 			weaponTypeComponent.typeWeapon = TypeWeapon.HEAVY;
 
-			aiEnemyComponent.enemyAgent.SetRangeAttack(true);
-			aiEnemyComponent.enemyAgent.SetRangeDetection(turretComponent.turretSettings.RangeDetection);
-			aiEnemyComponent.enemyAgent.SetDistanceRangeAttack(turretComponent.turretSettings.RangeDetection);
+			aiEnemyComponent.aiAgent.SetRangeAttack(true);
+			aiEnemyComponent.aiAgent.SetRangeDetection(turretComponent.turretSettings.RangeDetection);
+			aiEnemyComponent.aiAgent.SetDistanceRangeAttack(turretComponent.turretSettings.RangeDetection);
 		}
 	}
 }

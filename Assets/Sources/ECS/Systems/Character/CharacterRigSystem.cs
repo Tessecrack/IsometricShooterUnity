@@ -14,6 +14,7 @@ public class CharacterRigSystem : IEcsRunSystem
 			.Inc<WeaponComponent>()
 			.Inc<TargetComponent>()
 			.Inc<EnablerComponent>()
+			.Inc<VelocityComponent>()
 			.End();
 
 		var characterRigComponents = world.GetPool<CharacterRigComponent>();
@@ -23,6 +24,7 @@ public class CharacterRigSystem : IEcsRunSystem
 		var weaponComponents = world.GetPool<WeaponComponent>();
 		var targetComponents = world.GetPool<TargetComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
+		var velocityComponents = world.GetPool<VelocityComponent>();
 
 		foreach(var entity in entities)
 		{
@@ -38,13 +40,14 @@ public class CharacterRigSystem : IEcsRunSystem
 			ref var movableComponent = ref movableComponents.Get(entity);
 			ref var weaponComponent = ref weaponComponents.Get(entity);
 			ref var targetComponent = ref targetComponents.Get(entity);
+			ref var velocityComponent = ref velocityComponents.Get(entity);
 
 			var characterTransform = characterComponent.characterTransform;
 
 			var angle = Vector3.Angle(characterTransform.forward, targetComponent.target - characterTransform.position);
 
 			if (stateComponent.state == CharacterState.Idle 
-				&& movableComponent.velocity.magnitude == 0 && angle < 90)
+				&& velocityComponent.velocity.magnitude == 0 && angle < 90)
 			{
 				characterRigComponent.characterRigController.SetTargetHeadChestRig(targetComponent.target);
 			}

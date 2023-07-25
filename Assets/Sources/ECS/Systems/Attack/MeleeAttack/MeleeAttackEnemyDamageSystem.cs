@@ -6,7 +6,7 @@ public class MeleeAttackEnemyDamageSystem : IEcsRunSystem
 	{
 		var world = systems.GetWorld();
 
-		var filterEnemy = world.Filter<AIEnemyComponent>()
+		var filterEnemy = world.Filter<AIComponent>()
 			.Inc<MeleeAttackComponent>()
 			.Inc<EnablerComponent>()
 			.Inc<DamageComponent>()
@@ -19,7 +19,7 @@ public class MeleeAttackEnemyDamageSystem : IEcsRunSystem
 			.Inc<CharacterComponent>()
 			.End();
 
-		var enemiesAI = world.GetPool<AIEnemyComponent>();
+		var enemiesAI = world.GetPool<AIComponent>();
 		var enemyMeleeAttacks = world.GetPool<MeleeAttackComponent>();
 		var enemyEnablers = world.GetPool<EnablerComponent>();
 		var enemyDamages = world.GetPool<DamageComponent>();
@@ -54,7 +54,7 @@ public class MeleeAttackEnemyDamageSystem : IEcsRunSystem
 					continue; 
 				}
 				ref var playerCharacter = ref playerCharacters.Get(playerEntity);
-				if (enemyAI.enemyAgent.CanMeleeAttack(playerCharacter.characterTransform.position) == false)
+				if (enemyAI.aiAgent.CanMeleeAttack(playerCharacter.characterTransform.position) == false)
 				{
 					continue;
 				}

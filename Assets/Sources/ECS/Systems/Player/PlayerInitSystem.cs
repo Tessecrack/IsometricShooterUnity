@@ -35,7 +35,9 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<WeaponSpawnPointComponent> poolWeaponSpawnPoint = world.GetPool<WeaponSpawnPointComponent>();
 		EcsPool<HitMeComponent> poolHitMeComponents = world.GetPool<HitMeComponent>();
 		EcsPool<WeaponTypeComponent> poolTypeWeapon = world.GetPool<WeaponTypeComponent>();
+		EcsPool<VelocityComponent> poolVelocities = world.GetPool<VelocityComponent>();
 
+		ref var velocity = ref poolVelocities.Add(entityPlayer);
 		ref var playerComponent = ref poolPlayer.Add(entityPlayer);
 		ref var characterComponent = ref poolCharacterComponent.Add(entityPlayer);
 		ref var characterEventsComponent = ref poolCharacterEventComponent.Add(entityPlayer);

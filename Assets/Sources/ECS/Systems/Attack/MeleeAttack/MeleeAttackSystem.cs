@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 
+
 public class MeleeAttackSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
@@ -28,13 +29,20 @@ public class MeleeAttackSystem : IEcsRunSystem
 			{
 				continue;
 			}
+
 			ref var stateAttack = ref stateAttackComponents.Get(entity);
-			if (stateAttack.state == CharacterState.Idle)
+			ref var meleeAttack = ref meleeAttacks.Get(entity);
+
+			if (meleeAttack.meleeAttack.AttackInProcess)
 			{
 				continue;
 			}
-			ref var meleeAttack = ref meleeAttacks.Get(entity);
-			if (meleeAttack.meleeAttack.AttackInProcess)
+			else
+			{
+				stateAttack.isMeleeAttack = false;
+			}
+
+			if (stateAttack.state == CharacterState.Idle)
 			{
 				continue;
 			}
@@ -43,11 +51,6 @@ public class MeleeAttackSystem : IEcsRunSystem
 			{
 				meleeAttack.meleeAttack.StartAttack();
 				stateAttack.isMeleeAttack = true;
-			}
-
-			if (meleeAttack.meleeAttack.AttackInProcess == false)
-			{
-				stateAttack.isMeleeAttack = false;
 			}
 		}
 	}

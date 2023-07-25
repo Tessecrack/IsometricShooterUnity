@@ -11,6 +11,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			.Inc<AttackComponent>()
 			.Inc<StateAttackComponent>()
 			.Inc<EnablerComponent>()
+			.Inc<VelocityComponent>()
 			.End();
 
 		var animators = world.GetPool<AnimatorComponent>();
@@ -19,6 +20,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 		var attacks = world.GetPool<AttackComponent>();
 		var attackStates = world.GetPool<StateAttackComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
+		var velocityComponents = world.GetPool<VelocityComponent>();
 
 		foreach(int entity in filter)
 		{
@@ -32,10 +34,10 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			ref var weaponType = ref weaponTypes.Get(entity);
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var attackState = ref attackStates.Get(entity);
-
+			ref var velocityComponent = ref velocityComponents.Get(entity);
 			var currentState = attackState.state;
 
-			animatorComponent.animationState.IsMoving = movableComponent.velocity.z != 0 || movableComponent.velocity.x != 0;
+			animatorComponent.animationState.IsMoving = velocityComponent.velocity.z != 0 || velocityComponent.velocity.x != 0;
 			animatorComponent.animationState.CurrentTypeWeapon = weaponType.typeWeapon;
 			animatorComponent.animationState.VerticalMoveValue = movableComponent.relativeVector.z;
 			animatorComponent.animationState.HorizontalMoveValue = movableComponent.relativeVector.x;

@@ -38,13 +38,15 @@ public class EnemyInitSystem : IEcsInitSystem
 			EcsPool<MeleeAttackComponent> poolMeleeAttacks = world.GetPool<MeleeAttackComponent>();
 			
 			EcsPool<DamageComponent> poolDamage = world.GetPool<DamageComponent>();
-			EcsPool<AIEnemyComponent> poolAIEnemyComponents = world.GetPool<AIEnemyComponent>();
+			EcsPool<AIComponent> poolAIEnemyComponents = world.GetPool<AIComponent>();
 
 			EcsPool<HitRangeComponent> poolRangeHit = world.GetPool<HitRangeComponent>();
 			EcsPool<HitMeComponent> poolHitComponents = world.GetPool<HitMeComponent>();
 			EcsPool<HitListComponent> poolHitList = world.GetPool<HitListComponent>();
 			EcsPool<WeaponTypeComponent> poolWeaponTypes = world.GetPool<WeaponTypeComponent>();
+			EcsPool<VelocityComponent> poolVelocities = world.GetPool<VelocityComponent>();
 
+			ref var velocity = ref poolVelocities.Add(entityEnemy);
 			ref var enemyComponent = ref poolEnemyComponents.Add(entityEnemy);
 			ref var enablerComponent = ref poolEnablerComponents.Add(entityEnemy);
 
@@ -90,8 +92,8 @@ public class EnemyInitSystem : IEcsInitSystem
 			healthComponent.damageable = enemies[i].GetComponent<Damageable>();
 
 			meleeAttack.meleeAttack = new MeleeAttack(animEvents);
-			aiEnemyComponent.enemyAgent = new AIEnemyAgent();
-			aiEnemyComponent.enemyAgent.SetTransform(enemies[i].transform);
+			aiEnemyComponent.aiAgent = new AIEnemyAgent();
+			aiEnemyComponent.aiAgent.SetTransform(enemies[i].transform);
 
 			animatorComponent.animationsManager = new EnemyMeleeAnimationsManager(enemies[i].GetComponent<Animator>(), animEvents);
 
@@ -107,17 +109,17 @@ public class EnemyInitSystem : IEcsInitSystem
 			movableComponent.moveSpeed = characterSettings.GetCharacterSpeed();
 
 			rotatableComponent.coefSmooth = 0.3f;
-			rangeHit.rangeHit = aiEnemyComponent.enemyAgent.RangeAttack;
+			rangeHit.rangeHit = aiEnemyComponent.aiAgent.DistanceAttack;
 
 			hitList.hitList = new List<int>(4);
 
-			aiEnemyComponent.enemyAgent.SetDistanceRangeAttack(enemyComponent.enemySettings.DistanceRangeAttack);
-			aiEnemyComponent.enemyAgent.SetDistanceMeleeAttack(enemyComponent.enemySettings.DistanceMeleeAttack);
-			aiEnemyComponent.enemyAgent.SetRangeDetection(enemyComponent.enemySettings.RangeDetectTarget);
+			aiEnemyComponent.aiAgent.SetDistanceRangeAttack(enemyComponent.enemySettings.DistanceRangeAttack);
+			aiEnemyComponent.aiAgent.SetDistanceMeleeAttack(enemyComponent.enemySettings.DistanceMeleeAttack);
+			aiEnemyComponent.aiAgent.SetRangeDetection(enemyComponent.enemySettings.RangeDetectTarget);
 			
-			aiEnemyComponent.enemyAgent.SetHasArsenal(enemyComponent.enemySettings.HasArsenal);
-			aiEnemyComponent.enemyAgent.SetMeleeAttack(enemyComponent.enemySettings.HasMeleeAttack);
-			aiEnemyComponent.enemyAgent.SetRangeAttack(enemyComponent.enemySettings.HasRangeAttack);
+			aiEnemyComponent.aiAgent.SetHasArsenal(enemyComponent.enemySettings.HasArsenal);
+			aiEnemyComponent.aiAgent.SetMeleeAttack(enemyComponent.enemySettings.HasMeleeAttack);
+			aiEnemyComponent.aiAgent.SetRangeAttack(enemyComponent.enemySettings.HasRangeAttack);
 
 			if (enemyComponent.enemySettings.HasArsenal == false)
 			{

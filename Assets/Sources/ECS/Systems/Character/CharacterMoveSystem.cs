@@ -14,10 +14,10 @@ public class CharacterMoveSystem : IEcsRunSystem
 			.Inc<DashComponent>()
 			.Inc<TargetComponent>()
 			.Inc<EnablerComponent>()
+			.Inc<VelocityComponent>()
 			.End();
 
-		var sharedData = systems.GetShared<SharedData>();
-		var staticData = sharedData.StaticData;
+
 
 		var characters = world.GetPool<CharacterComponent>();
 		var inputs = world.GetPool<CharacterEventsComponent>();
@@ -25,6 +25,7 @@ public class CharacterMoveSystem : IEcsRunSystem
 		var dashes = world.GetPool<DashComponent>();
 		var states = world.GetPool<StateAttackComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
+		var velocityComponents = world.GetPool<VelocityComponent>();
 
 		foreach(int entity in filter)
 		{
@@ -39,13 +40,17 @@ public class CharacterMoveSystem : IEcsRunSystem
 			ref var movableComponent = ref movables.Get(entity);
 			ref var dashComponent = ref dashes.Get(entity);
 			ref var state = ref states.Get(entity);
-			var velocity = (staticData.GlobalForwardVector * inputComponent.inputMovement.z
-				+ staticData.GlobalRightVector * inputComponent.inputMovement.x).normalized;
+			ref var velocityComponent = ref velocityComponents.Get(entity);
+
+			var velocity = velocityComponent.velocity;
+
 			movableComponent.relativeVector = Vector3.Normalize(movableComponent.transform.InverseTransformDirection(velocity));
+
+			Debug.DrawLine(characterComponent.characterController.transform.position,
+				characterComponent.characterController.transform.position + velocity * 5);
 
 			dashComponent.isStartDash = inputComponent.isDash;
 
-			movableComponent.velocity = velocity;
 			if (velocity.magnitude == 0)
 			{
 				continue;

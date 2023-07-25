@@ -1,12 +1,11 @@
 using Leopotam.EcsLite;
-using UnityEngine;
 
 public class EnemyDetectTargetSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filterEnemy = world.Filter<AIEnemyComponent>()
+		var filterEnemy = world.Filter<AIComponent>()
 			.Inc<TargetComponent>()
 			.Inc<StateAttackComponent>()
 			.Inc<CharacterEventsComponent>()
@@ -21,12 +20,12 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 		var playerCharacterComponents = world.GetPool<CharacterComponent>();
 		var playerEnablers = world.GetPool<EnablerComponent>();
 
-		var aiEnemyComponents = world.GetPool<AIEnemyComponent>();
+		var aiEnemyComponents = world.GetPool<AIComponent>();
 		var targetComponents = world.GetPool<TargetComponent>();
 		var stateComponents = world.GetPool<StateAttackComponent>();
 		var inputEvents = world.GetPool<CharacterEventsComponent>(); 
 		var enableComponents = world.GetPool<EnablerComponent>();
-
+		
 		foreach (var entityPlayer in filterPlayer)
 		{
 			ref var playerEnabler = ref playerEnablers.Get(entityPlayer);
@@ -53,7 +52,7 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 
 				targetComponent.target = playerPosition;
 
-				if (aiEnemyComponent.enemyAgent.IsDetectTarget(playerPosition))
+				if (aiEnemyComponent.aiAgent.IsDetectTarget(playerPosition))
 				{
 					stateComponent.state = CharacterState.Aiming;
 				}
@@ -61,9 +60,8 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 				{
 					stateComponent.state = CharacterState.Idle;
 				}
-
-				bool canMeleeAttack = aiEnemyComponent.enemyAgent.CanMeleeAttack(playerPosition);
-				bool canRangeAttack = aiEnemyComponent.enemyAgent.CanRangeAttack(playerPosition);
+				bool canMeleeAttack = aiEnemyComponent.aiAgent.CanMeleeAttack(playerPosition);
+				bool canRangeAttack = aiEnemyComponent.aiAgent.CanRangeAttack(playerPosition);
 
 				eventComponent.isStartAttack = canMeleeAttack || canRangeAttack;
 				stateComponent.isRangeAttack = canRangeAttack;

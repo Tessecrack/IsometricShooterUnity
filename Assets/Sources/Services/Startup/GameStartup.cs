@@ -134,7 +134,8 @@ public class GameStartup : MonoBehaviour
 		ecsUpdateEnemySystems = new EcsSystems(ecsWorld, sharedData);
 		ecsUpdateEnemySystems
 			.Add(new EnemyInitSystem())
-			.Add(new EnemyDetectTargetSystem());
+			.Add(new EnemyDetectTargetSystem())
+			.Add(new AIMotionSystem());
 		ecsUpdateEnemySystems.Init();
 	}
 
