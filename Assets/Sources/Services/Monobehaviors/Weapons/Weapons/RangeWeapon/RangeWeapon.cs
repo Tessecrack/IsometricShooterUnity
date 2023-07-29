@@ -31,11 +31,11 @@ public abstract class RangeWeapon : Weapon
 		}
 	}
 
-	protected void Attack(Transform startTransform, Vector3 targetPosition)
+	protected void Shoot(Transform startTransform, Vector3 targetPosition)
 	{
 		if (isAttackFromOneMuzzle)
 		{
-			AttackFromOneMuzzle(startTransform, targetPosition);
+			ShootFromOneMuzzle(startTransform, targetPosition);
 			return;
 		}
 
@@ -46,7 +46,7 @@ public abstract class RangeWeapon : Weapon
 		}
 	}
 
-	protected void AttackFromOneMuzzle(Transform startTransform, Vector3 targetPosition)
+	protected void ShootFromOneMuzzle(Transform startTransform, Vector3 targetPosition)
 	{
 		var muzzle = muzzles[currentMuzzle++];
 		var instanceProjectile = Instantiate<Projectile>(projectile, muzzle.transform.position, muzzle.transform.rotation);
@@ -59,7 +59,7 @@ public abstract class RangeWeapon : Weapon
 		var partBullets = quantityOneShotBullet / 2;
 		for (int i = -partBullets; i <= partBullets; ++i)
 		{
-			Attack(ownerTransform, targetPosition + i * ownerTransform.right.normalized);
+			Shoot(ownerTransform, targetPosition + i * ownerTransform.right.normalized);
 			yield return new WaitForFixedUpdate();
 		}
 		yield break;

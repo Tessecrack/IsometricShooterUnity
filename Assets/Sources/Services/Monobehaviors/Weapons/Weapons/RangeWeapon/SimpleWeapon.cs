@@ -9,7 +9,7 @@ public class SimpleWeapon : RangeWeapon
 		{
 			if (quantityOneShotBullet == 1)
 			{
-				Attack(startTrasform, targetPosition);
+				Shoot(startTrasform, targetPosition);
 			}
 			else
 			{

@@ -6,7 +6,7 @@ public class AutomaticWeapon : RangeWeapon
 	{
 		if (canAttack)
 		{
-			Attack(startTrasform, targetPosition);
+			Shoot(startTrasform, targetPosition);
 			canAttack = false;
 		}
 	}
