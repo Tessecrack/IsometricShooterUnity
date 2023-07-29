@@ -64,6 +64,7 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 				bool canRangeAttack = aiEnemyComponent.aiAgent.CanRangeAttack(playerPosition);
 
 				eventComponent.isStartAttack = canMeleeAttack || canRangeAttack;
+
 				stateComponent.isRangeAttack = canRangeAttack;
 
 				eventComponent.isStopAttack = !eventComponent.isStartAttack;

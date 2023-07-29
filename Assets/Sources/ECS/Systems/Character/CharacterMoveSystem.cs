@@ -17,8 +17,6 @@ public class CharacterMoveSystem : IEcsRunSystem
 			.Inc<VelocityComponent>()
 			.End();
 
-
-
 		var characters = world.GetPool<CharacterComponent>();
 		var inputs = world.GetPool<CharacterEventsComponent>();
 		var movables = world.GetPool<MovableComponent>();
@@ -45,9 +43,6 @@ public class CharacterMoveSystem : IEcsRunSystem
 			var velocity = velocityComponent.velocity;
 
 			movableComponent.relativeVector = Vector3.Normalize(movableComponent.transform.InverseTransformDirection(velocity));
-
-			Debug.DrawLine(characterComponent.characterController.transform.position,
-				characterComponent.characterController.transform.position + velocity * 5);
 
 			dashComponent.isStartDash = inputComponent.isDash;
 
