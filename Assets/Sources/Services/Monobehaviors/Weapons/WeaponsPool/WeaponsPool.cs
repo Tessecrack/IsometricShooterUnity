@@ -36,7 +36,7 @@ public class WeaponsPool
 		}
 	}
 
-	public Weapon Enable(int numberSelectedWeapon)
+	public Weapon Enable(in int numberSelectedWeapon)
 	{
 		if (numberSelectedWeapon < 0 || numberSelectedWeapon >= currentWeaponsPool.Count)
 		{
@@ -47,7 +47,7 @@ public class WeaponsPool
 		return currentWeaponsPool[numberSelectedWeapon];
 	}
 
-	public void Disable(int numberSelectedWeapon)
+	public void Disable(in int numberSelectedWeapon)
 	{
 		if (numberSelectedWeapon < 0 || numberSelectedWeapon >= currentWeaponsPool.Count)
 		{

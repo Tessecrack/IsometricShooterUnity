@@ -34,7 +34,7 @@ public class CharacterRigController : MonoBehaviour
 		rigHeadChestTarget.position = newTarget;
 	}
 
-	public void ResetRigHeadChest(bool withSmooth)
+	public void ResetRigHeadChest(in bool withSmooth)
 	{
 		if (withSmooth)
 		{
@@ -46,7 +46,7 @@ public class CharacterRigController : MonoBehaviour
 		}
 	}
 
-	public void SetTargetLeftArm(Vector3 newTarget)
+	public void SetTargetLeftArm(in Vector3 newTarget)
 	{
 		if (rigLeftArm.weight == 0)
 		{

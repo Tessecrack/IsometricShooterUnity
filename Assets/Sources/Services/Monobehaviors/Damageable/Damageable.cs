@@ -7,12 +7,12 @@ public class Damageable : MonoBehaviour
 
 	private int damage;
 
-	public void TakeDamage(int damage)
+	public void TakeDamage(in int damage)
 	{
 		IsTakedDamage = true;
 		this.damage = damage;
 	}
-	public int ApplyDamage(int currentHealth)
+	public int ApplyDamage(in int currentHealth)
 	{
 		int result = currentHealth - damage;
 		if (result <= 0)

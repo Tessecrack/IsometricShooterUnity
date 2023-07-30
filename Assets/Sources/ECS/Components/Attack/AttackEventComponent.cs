@@ -1,4 +1,5 @@
-public struct AttackEventComponent
+/*public struct AttackEventComponent
 {
 	public AttackEvent attackEvent;
 }
+*/

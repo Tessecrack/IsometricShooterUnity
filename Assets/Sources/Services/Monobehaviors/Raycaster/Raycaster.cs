@@ -6,12 +6,12 @@ public class Raycaster
 	private Camera camera;
 	private int groundLayer;
 
-	public void SetCamera(Camera camera)
+	public void SetCamera(in Camera camera)
 	{
 		this.camera = camera;
 	}
 
-	public void SetGroundLayer(int groundLayer)
+	public void SetGroundLayer(in int groundLayer)
 	{
 		this.groundLayer = groundLayer;
 	}

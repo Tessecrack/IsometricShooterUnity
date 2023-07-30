@@ -9,7 +9,7 @@ public class MeleeAttackPlayerDamageSystem : IEcsRunSystem
 
 		var filterPlayer = world.Filter<PlayerComponent>()
 			.Inc<CharacterComponent>()
-			.Inc<AttackEventComponent>()
+			.Inc<MeleeAttackComponent>()
 			.Inc<EnablerComponent>()
 			.Inc<DamageComponent>()
 			.Inc<HitRangeComponent>()
@@ -21,7 +21,7 @@ public class MeleeAttackPlayerDamageSystem : IEcsRunSystem
 			.Inc<HitMeComponent>()
 			.End();
 
-		var playerAttackEvents = world.GetPool<AttackEventComponent>();
+		var playerAttackEvents = world.GetPool<MeleeAttackComponent>();
 		var playerEnablers = world.GetPool<EnablerComponent>();
 		var playerHitRanges = world.GetPool<HitRangeComponent>();
 		var playerCharacters = world.GetPool<CharacterComponent>();
@@ -40,8 +40,8 @@ public class MeleeAttackPlayerDamageSystem : IEcsRunSystem
 			}
 
 			ref var playerAttackEvent = ref playerAttackEvents.Get(entityPlayer);
-			if (playerAttackEvent.attackEvent.IsAttackInProcess == false 
-				|| playerAttackEvent.attackEvent.TypeAttack == TypeAttack.Range)
+			if (playerAttackEvent.meleeAttack.IsAttackInProcess == false 
+				|| playerAttackEvent.meleeAttack.TypeAttack == TypeAttack.Range)
 			{
 				continue;
 			}
@@ -71,14 +71,14 @@ public class MeleeAttackPlayerDamageSystem : IEcsRunSystem
 
 				ref var enemyHit = ref enemyHits.Get(entityEnemy);
 
-				if (playerAttackEvent.attackEvent.IsApplyDamage == true && enemyHit.isHitMe == false)
+				if (playerAttackEvent.meleeAttack.IsApplyDamage == true && enemyHit.isHitMe == false)
 				{
 					enemyHit.isHitMe = true;
 					enemyHit.wasAppliedDamageMe = false;
 					enemyHit.damageToMe = playerDamage.damage;
 				}
 
-				if (playerAttackEvent.attackEvent.IsApplyDamage == false)
+				if (playerAttackEvent.meleeAttack.IsApplyDamage == false)
 				{
 					enemyHit.isHitMe = false;
 					enemyHit.wasAppliedDamageMe = false;

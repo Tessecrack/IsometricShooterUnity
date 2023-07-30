@@ -1,17 +1,17 @@
 using Leopotam.EcsLite;
 
-public class AttackEventSystem : IEcsRunSystem
+public class MeleeAttackEventSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<AttackEventComponent>()
+		var filter = world.Filter<MeleeAttackComponent>()
 			.Inc<AttackComponent>()
 			.Inc<StateAttackComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
-		var attackEvents = world.GetPool<AttackEventComponent>(); 
+		var attackEvents = world.GetPool<MeleeAttackComponent>(); 
 		var attackComponents = world.GetPool<AttackComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
 		var stateAttackComponents = world.GetPool<StateAttackComponent>();
@@ -24,26 +24,20 @@ public class AttackEventSystem : IEcsRunSystem
 				continue;
 			}
 			ref var attackComponent = ref attackComponents.Get(entity);
+			if (attackComponent.typeAttack == TypeAttack.Range)
+			{
+				continue;
+			}
 			ref var stateAttack = ref stateAttackComponents.Get(entity);
 			ref var attackEvent = ref attackEvents.Get(entity);
 
-			var isMeleeAttackType = attackEvent.attackEvent.TypeAttack == TypeAttack.Melee;
-			var isRangeAttackType = attackEvent.attackEvent.TypeAttack == TypeAttack.Range;
-
-			if (attackEvent.attackEvent.IsAttackInProcess)
+			if (attackEvent.meleeAttack.IsAttackInProcess)
 			{
 				continue;
 			}
 			else
 			{
-				if (isMeleeAttackType)
-				{
-					stateAttack.isMeleeAttack = false;
-				}
-				else if (isRangeAttackType)
-				{
-					stateAttack.isRangeAttack = false;
-				}
+				stateAttack.isMeleeAttack = false;
 			}
 
 			if (stateAttack.state == CharacterState.Idle)
@@ -53,8 +47,7 @@ public class AttackEventSystem : IEcsRunSystem
 
 			if (attackComponent.isStartAttack)
 			{
-				stateAttack.isMeleeAttack = isMeleeAttackType;
-				stateAttack.isRangeAttack = isRangeAttackType;
+				stateAttack.isMeleeAttack = true;
 			}
 		}
 	}

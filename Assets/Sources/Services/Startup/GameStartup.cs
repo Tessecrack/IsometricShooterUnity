@@ -168,8 +168,9 @@ public class GameStartup : MonoBehaviour
 	{
 		ecsAttackSystems = new EcsSystems(ecsWorld,sharedData);
 		ecsAttackSystems
-			.Add(new AttackEventSystem())
-			.Add(new MeleeAttackMoveSystem());
+			.Add(new MeleeAttackEventSystem())
+			.Add(new MeleeAttackMoveSystem())
+			.Add(new RangeAttackEventSystem());
 		ecsAttackSystems.Init();
 	}
 

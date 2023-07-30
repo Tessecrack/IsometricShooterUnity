@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AutomaticWeapon : RangeWeapon
 {
-	public override void StartAttack(Transform startTrasform, Vector3 targetPosition)
+	public override void StartAttack(in Transform startTrasform, in Vector3 targetPosition)
 	{
 		if (canAttack)
 		{

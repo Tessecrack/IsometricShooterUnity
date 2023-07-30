@@ -14,22 +14,22 @@ public abstract class AnimationsManager
 
 	public abstract void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState);
 
-	protected void PlayAnimation(int hashId)
+	protected void PlayAnimation(in int hashId)
 	{
 		animator.CrossFade(hashId, 0.02f);
 	}
 
-	protected void SetLayer(int idLayer)
+	protected void SetLayer(in int idLayer)
 	{
 		animator.SetLayerWeight(idLayer, 1.0f);
 	}
 
-	protected void ResetLayer(int idLayer)
+	protected void ResetLayer(in int idLayer)
 	{
 		animator.SetLayerWeight(idLayer, 0.0f);
 	}
 
-	protected void AnimateAttack(int idAnimation)
+	protected void AnimateAttack(in int idAnimation)
 	{
 		PlayAnimation(idAnimation);
 	}

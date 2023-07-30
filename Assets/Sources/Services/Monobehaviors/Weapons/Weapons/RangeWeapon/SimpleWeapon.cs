@@ -3,7 +3,7 @@ using UnityEngine;
 public class SimpleWeapon : RangeWeapon
 {
 	private bool needClickTrigger = false;
-	public override void StartAttack(Transform startTrasform, Vector3 targetPosition)
+	public override void StartAttack(in Transform startTrasform, in Vector3 targetPosition)
 	{
 		if (canAttack && !needClickTrigger)
 		{

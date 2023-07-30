@@ -15,48 +15,48 @@ public class AIAgent
 	private bool isTargetDetected;
 	private bool canAttack;
 
-	public void SetHasArsenal(bool hasArsenal)
+	public void SetHasArsenal(in bool hasArsenal)
 	{
 		this.hasArsenal = hasArsenal;
 	}
 
-	public void SetRangeAttack(bool hasRangeAttack)
+	public void SetRangeAttack(in bool hasRangeAttack)
 	{
 		this.hasRangeAttack = hasRangeAttack;
 	}
 
-	public void SetMeleeAttack(bool hasMeleeAttack)
+	public void SetMeleeAttack(in bool hasMeleeAttack)
 	{
 		this.hasMeleeAttack = hasMeleeAttack;
 	}
 
-	public void SetTransform(Transform transform)
+	public void SetTransform(in Transform transform)
 	{
 		this.transform = transform;
 	}
 
-	public void SetRangeDetection(float rangeDetection)
+	public void SetRangeDetection(in float rangeDetection)
 	{
 		this.rangeDetection = rangeDetection;
 	}
 
-	public void SetDistanceMeleeAttack(float rangeMeleeAttack)
+	public void SetDistanceMeleeAttack(in float rangeMeleeAttack)
 	{
 		this.distanceMeleeAttack = rangeMeleeAttack;
 	}
 
-	public void SetDistanceRangeAttack(float distanceRangeAttack)
+	public void SetDistanceRangeAttack(in float distanceRangeAttack)
 	{
 		this.distanceRangeAttack = distanceRangeAttack;
 	}
 
-	public bool IsDetectTarget(Vector3 target)
+	public bool IsDetectTarget(in Vector3 target)
 	{
 		var distance = target - transform.position;
 		return isTargetDetected = rangeDetection >= distance.magnitude;
 	}
 
-	public bool CanMeleeAttack(Vector3 target)
+	public bool CanMeleeAttack(in Vector3 target)
 	{
 		if (hasMeleeAttack)
 		{
@@ -67,7 +67,7 @@ public class AIAgent
 		return false;
 	}
 
-	public bool CanRangeAttack(Vector3 target)
+	public bool CanRangeAttack(in Vector3 target)
 	{
 		if (hasRangeAttack)
 		{
@@ -78,7 +78,7 @@ public class AIAgent
 		return false;
 	}
 
-	public Vector3 MoveToTarget(Vector3 target)
+	public Vector3 MoveToTarget(in Vector3 target)
 	{
 		if (isTargetDetected)
 		{
