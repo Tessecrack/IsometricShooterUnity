@@ -1,46 +1,61 @@
 using Leopotam.EcsLite;
-using UnityEngine;
 
 public class AttackEventSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<CharacterEventsComponent>()
+		var filter = world.Filter<AttackEventComponent>()
 			.Inc<AttackComponent>()
-			.Inc<CharacterComponent>()
-			.Inc<TargetComponent>()
+			.Inc<StateAttackComponent>()
 			.Inc<EnablerComponent>()
-			.Inc<WeaponTypeComponent>()
 			.End();
 
-		var characterEvents = world.GetPool<CharacterEventsComponent>();
-		var attacks = world.GetPool<AttackComponent>();
-		var characters = world.GetPool<CharacterComponent>();
-		var targets = world.GetPool<TargetComponent>();
+		var attackEvents = world.GetPool<AttackEventComponent>(); 
+		var attackComponents = world.GetPool<AttackComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
-		var weaponTypes = world.GetPool<WeaponTypeComponent>();
+		var stateAttackComponents = world.GetPool<StateAttackComponent>();
 
-		foreach (int entity in filter)
+		foreach(var entity in filter)
 		{
-			ref var enablerComponent = ref enablers.Get(entity);
-			if (enablerComponent.isEnabled == false)
+			ref var enabler = ref enablers.Get(entity);
+			if (enabler.isEnabled == false)
 			{
 				continue;
 			}
-			ref var characterEvent = ref characterEvents.Get(entity);
-			ref var attackComponent = ref attacks.Get(entity);
-			ref var characterComponent = ref characters.Get(entity);
-			ref var targetComponent = ref targets.Get(entity);
-			ref var weaponType = ref weaponTypes.Get(entity);
+			ref var attackComponent = ref attackComponents.Get(entity);
+			ref var stateAttack = ref stateAttackComponents.Get(entity);
+			ref var attackEvent = ref attackEvents.Get(entity);
 
-			attackComponent.isStartAttack = characterEvent.isStartAttack;
-			
-			attackComponent.isStopAttack = characterEvent.isStopAttack;
+			var isMeleeAttackType = attackEvent.attackEvent.TypeAttack == TypeAttack.Melee;
+			var isRangeAttackType = attackEvent.attackEvent.TypeAttack == TypeAttack.Range;
 
-			attackComponent.attackerTransform = characterComponent.characterTransform;
+			if (attackEvent.attackEvent.IsAttackInProcess)
+			{
+				continue;
+			}
+			else
+			{
+				if (isMeleeAttackType)
+				{
+					stateAttack.isMeleeAttack = false;
+				}
+				else if (isRangeAttackType)
+				{
+					stateAttack.isRangeAttack = false;
+				}
+			}
 
-			attackComponent.typeAttack = weaponType.typeWeapon == TypeWeapon.MELEE ? TypeAttack.Melee : TypeAttack.Range;
+			if (stateAttack.state == CharacterState.Idle)
+			{
+				continue;
+			}
+
+			if (attackComponent.isStartAttack)
+			{
+				stateAttack.isMeleeAttack = isMeleeAttackType;
+				stateAttack.isRangeAttack = isRangeAttackType;
+			}
 		}
 	}
 }

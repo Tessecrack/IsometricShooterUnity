@@ -7,7 +7,7 @@ public class MeleeAttackEnemyDamageSystem : IEcsRunSystem
 		var world = systems.GetWorld();
 
 		var filterEnemy = world.Filter<AIComponent>()
-			.Inc<MeleeAttackComponent>()
+			.Inc<AttackEventComponent>()
 			.Inc<EnablerComponent>()
 			.Inc<DamageComponent>()
 			.Inc<HitListComponent>()
@@ -20,7 +20,7 @@ public class MeleeAttackEnemyDamageSystem : IEcsRunSystem
 			.End();
 
 		var enemiesAI = world.GetPool<AIComponent>();
-		var enemyMeleeAttacks = world.GetPool<MeleeAttackComponent>();
+		var attackEvents = world.GetPool<AttackEventComponent>();
 		var enemyEnablers = world.GetPool<EnablerComponent>();
 		var enemyDamages = world.GetPool<DamageComponent>();
 		var enemyHitLists = world.GetPool<HitListComponent>();
@@ -37,8 +37,15 @@ public class MeleeAttackEnemyDamageSystem : IEcsRunSystem
 			{
 				continue;
 			}
-			ref var enemyAttack = ref enemyMeleeAttacks.Get(enemyEntity);
-			if (enemyAttack.meleeAttack.AttackInProcess == false)
+
+			ref var enemyAttack = ref attackEvents.Get(enemyEntity);
+
+			if (enemyAttack.attackEvent.TypeAttack == TypeAttack.Range)
+			{
+				continue;
+			}
+
+			if (enemyAttack.attackEvent.IsAttackInProcess == false)
 			{
 				continue;
 			}
@@ -61,7 +68,7 @@ public class MeleeAttackEnemyDamageSystem : IEcsRunSystem
 				ref var hitMeComponent = ref playerHits.Get(playerEntity);
 				ref var player = ref players.Get(playerEntity);
 
-				if (enemyAttack.meleeAttack.IsApplyDamage == true 
+				if (enemyAttack.attackEvent.IsApplyDamage == true 
 					&& hitMeComponent.isHitMe == false
 					&& enemyHitList.hitList.Contains(player.numberPlayer) == false)
 				{
@@ -71,7 +78,7 @@ public class MeleeAttackEnemyDamageSystem : IEcsRunSystem
 					enemyHitList.hitList.Add(player.numberPlayer);
 				}
 
-				if (enemyAttack.meleeAttack.IsApplyDamage == false)
+				if (enemyAttack.attackEvent.IsApplyDamage == false)
 				{
 					enemyHitList.hitList.Clear();
 					hitMeComponent.isHitMe = false;

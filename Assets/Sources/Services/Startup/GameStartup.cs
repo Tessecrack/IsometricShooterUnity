@@ -156,7 +156,7 @@ public class GameStartup : MonoBehaviour
 			.Add(new CharacterMoveSystem())
 			.Add(new CharacterRotationSystem())
 			.Add(new CharacterSelectWeaponSystem())
-			.Add(new AttackEventSystem())
+			.Add(new CharacterAttackSystem())
 			.Add(new CharacterChangeStateSystem())
 			.Add(new CharacterAnimationSystem())
 			.Add(new AttackWeaponRangeSystem())
@@ -168,7 +168,7 @@ public class GameStartup : MonoBehaviour
 	{
 		ecsAttackSystems = new EcsSystems(ecsWorld,sharedData);
 		ecsAttackSystems
-			.Add(new MeleeAttackSystem())
+			.Add(new AttackEventSystem())
 			.Add(new MeleeAttackMoveSystem());
 		ecsAttackSystems.Init();
 	}

@@ -1,4 +1,4 @@
 public struct RangeAttackComponent
 {
-	public RangeAttack rangeAttack;
+	public RangeAttackEvent rangeAttack;
 }

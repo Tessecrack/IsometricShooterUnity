@@ -1,6 +1,5 @@
 using Leopotam.EcsLite;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 public class CharacterMoveSystem : IEcsRunSystem
 {
@@ -53,16 +52,15 @@ public class CharacterMoveSystem : IEcsRunSystem
 			var speedMove = dashComponent.isActiveDash ? dashComponent.dashSpeed : movableComponent.moveSpeed;
 			movableComponent.isActiveDash = dashComponent.isActiveDash;
 
-			if (state.isMeleeAttack == true)
+			if (state.isMeleeAttack == true || state.isRangeAttack == true)
 			{
 				if (dashComponent.isActiveDash)
 				{
-					characterComponent.characterController.Move(velocity * speedMove * Time.deltaTime);
+					characterComponent.characterController.Move(speedMove * Time.deltaTime * velocity);
 				}
 				continue;
 			}
-
-			characterComponent.characterController.Move(velocity * speedMove * Time.deltaTime);
+			characterComponent.characterController.Move(speedMove * Time.deltaTime * velocity);
 
 			if (velocity.magnitude > 0 && state.state == CharacterState.Idle)
 			{

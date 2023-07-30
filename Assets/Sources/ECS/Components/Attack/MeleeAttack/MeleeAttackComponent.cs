@@ -1,4 +1,4 @@
 public struct MeleeAttackComponent
 {
-	public MeleeAttack meleeAttack;
+	public MeleeAttackEvent meleeAttack;
 }

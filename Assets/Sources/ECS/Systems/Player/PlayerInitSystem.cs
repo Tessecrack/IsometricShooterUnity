@@ -28,7 +28,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<CharacterRigComponent> poolCharacterRigComponent = world.GetPool<CharacterRigComponent>();
 		EcsPool<TargetComponent> poolTargetComponent = world.GetPool<TargetComponent>();
 		EcsPool<EnablerComponent> poolEnablerComponent = world.GetPool<EnablerComponent>();
-		EcsPool<MeleeAttackComponent> poolCloseCombat = world.GetPool<MeleeAttackComponent>();
+		EcsPool<AttackEventComponent> poolAttackEvents = world.GetPool<AttackEventComponent>();
 		EcsPool<ArsenalComponent> poolArsenal = world.GetPool<ArsenalComponent>();
 		EcsPool<HitRangeComponent> poolRangeHit = world.GetPool<HitRangeComponent>();
 		EcsPool<DamageComponent> poolDamage = world.GetPool<DamageComponent>();
@@ -53,7 +53,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var characterRigComponent = ref poolCharacterRigComponent.Add(entityPlayer);
 		ref var targetComponent = ref poolTargetComponent.Add(entityPlayer);
 		ref var enablerComponent = ref poolEnablerComponent.Add(entityPlayer);
-		ref var closeCombatComponent = ref poolCloseCombat.Add(entityPlayer);
+		ref var attackEventComponent = ref poolAttackEvents.Add(entityPlayer);
 		ref var arsenal = ref poolArsenal.Add(entityPlayer);
 		ref var rangeHit = ref poolRangeHit.Add(entityPlayer);
 		ref var damage = ref poolDamage.Add(entityPlayer);
@@ -79,7 +79,8 @@ public class PlayerInitSystem : IEcsInitSystem
 		characterComponent.characterController = player.GetComponent<CharacterController>();
 		animatorComponent.animationsManager = new PlayerAnimationsManager(player.GetComponent<Animator>(),
 			animEvents);
-		closeCombatComponent.meleeAttack = new MeleeAttack(animEvents);
+
+		attackEventComponent.attackEvent = new MeleeAttackEvent(animEvents);
 		weaponSpawnPoint.weaponSpawPoint = player.GetComponent<WeaponSpawnPoint>().WeaponPointSpawn;
 
 		arsenal.arsenal = player.GetComponent<Arsenal>();

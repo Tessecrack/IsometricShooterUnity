@@ -1,34 +1,22 @@
 using UnityEngine;
 
-public class RangeAttack
+public class RangeAttackEvent : AttackEvent
 {
 	private Transform pointSpawn;
 	private Transform owner;
 
 	private Projectile prefabProjectile;
-
-	private bool isAttackInProcess;
 	private int damage;
 	private float speedProjectile;
 
-	public RangeAttack(AnimationEvents animationEvents, Transform pointSpawn, Projectile prefabProjectile)
+	public RangeAttackEvent(AnimationEvents animationEvents, Transform pointSpawn, Projectile prefabProjectile) : base(animationEvents)
 	{
-		animationEvents.OnStartAttack += StartAttack;
-		animationEvents.OnEndAttack += EndAttack;
 		animationEvents.OnShot += Shot;
+
+		TypeAttack = TypeAttack.Range;
 
 		this.pointSpawn = pointSpawn;
 		this.prefabProjectile = prefabProjectile;
-	}
-
-	public void StartAttack()
-	{
-		isAttackInProcess = true;
-	}
-
-	public void EndAttack()
-	{
-		isAttackInProcess = false;
 	}
 
 	public void SetOwner(Transform owner)
@@ -46,7 +34,7 @@ public class RangeAttack
 		this.speedProjectile = speedProjectile;
 	}
 
-	public void Shot()
+	private void Shot()
 	{
 		var instanceProjectile = Object.Instantiate<Projectile>(prefabProjectile, 
 			pointSpawn.transform.position, pointSpawn.transform.rotation);
@@ -54,6 +42,4 @@ public class RangeAttack
 		instanceProjectile.StartFire(owner,
 			owner.transform.position + owner.transform.forward * 2, speedProjectile, damage);
 	}
-
-	public bool AttackInProcess => isAttackInProcess;
 }

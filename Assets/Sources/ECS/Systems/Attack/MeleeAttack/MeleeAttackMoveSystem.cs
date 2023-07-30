@@ -6,13 +6,13 @@ public class MeleeAttackMoveSystem : IEcsRunSystem
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<MeleeAttackComponent>()
+		var filter = world.Filter<AttackEventComponent>()
 			.Inc<CharacterComponent>()
 			.Inc<MovableComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
-		var attackComponents = world.GetPool<MeleeAttackComponent>();
+		var attackEvents = world.GetPool<AttackEventComponent>();
 		var characterComponents = world.GetPool<CharacterComponent>();
 		var movableComponents = world.GetPool<MovableComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
@@ -24,8 +24,13 @@ public class MeleeAttackMoveSystem : IEcsRunSystem
 				continue;
 			}
 
-			ref var attackComponent = ref attackComponents.Get(entity);
-			if (attackComponent.meleeAttack.NeedForwardMove == false)
+			ref var attackEvent = ref attackEvents.Get(entity);
+			if (attackEvent.attackEvent.TypeAttack == TypeAttack.Range)
+			{
+				continue;
+			}
+
+			if (attackEvent.attackEvent.NeedForwardMove == false)
 			{
 				continue;
 			}
@@ -36,7 +41,7 @@ public class MeleeAttackMoveSystem : IEcsRunSystem
 				continue;
 			}
 
-			var speedMove = attackComponent.meleeAttack.SpeedMoveForwardInStrike;
+			var speedMove = attackEvent.attackEvent.SpeedMoveForwardInStrike;
 			ref var characterComponent = ref characterComponents.Get(entity);
 			characterComponent.characterController.Move(characterComponent.characterController.transform.forward
 				* speedMove * Time.deltaTime);
