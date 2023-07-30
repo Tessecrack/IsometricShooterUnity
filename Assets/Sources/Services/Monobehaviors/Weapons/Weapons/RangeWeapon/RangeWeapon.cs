@@ -31,7 +31,7 @@ public abstract class RangeWeapon : Weapon
 		}
 	}
 
-	protected void Shoot(Transform startTransform, Vector3 targetPosition)
+	protected void Shoot(in Transform startTransform, in Vector3 targetPosition)
 	{
 		if (isAttackFromOneMuzzle)
 		{
@@ -46,7 +46,7 @@ public abstract class RangeWeapon : Weapon
 		}
 	}
 
-	protected void ShootFromOneMuzzle(Transform startTransform, Vector3 targetPosition)
+	protected void ShootFromOneMuzzle(in Transform startTransform, in Vector3 targetPosition)
 	{
 		var muzzle = muzzles[currentMuzzle++];
 		var instanceProjectile = Instantiate<Projectile>(projectile, muzzle.transform.position, muzzle.transform.rotation);

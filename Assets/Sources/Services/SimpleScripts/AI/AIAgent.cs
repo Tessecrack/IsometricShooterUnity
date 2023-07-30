@@ -15,17 +15,17 @@ public class AIAgent
 	private bool isTargetDetected;
 	private bool canAttack;
 
-	public void SetHasArsenal(in bool hasArsenal)
+	public void SetHasArsenal(bool hasArsenal)
 	{
 		this.hasArsenal = hasArsenal;
 	}
 
-	public void SetRangeAttack(in bool hasRangeAttack)
+	public void SetRangeAttack(bool hasRangeAttack)
 	{
 		this.hasRangeAttack = hasRangeAttack;
 	}
 
-	public void SetMeleeAttack(in bool hasMeleeAttack)
+	public void SetMeleeAttack(bool hasMeleeAttack)
 	{
 		this.hasMeleeAttack = hasMeleeAttack;
 	}
@@ -35,17 +35,17 @@ public class AIAgent
 		this.transform = transform;
 	}
 
-	public void SetRangeDetection(in float rangeDetection)
+	public void SetRangeDetection(float rangeDetection)
 	{
 		this.rangeDetection = rangeDetection;
 	}
 
-	public void SetDistanceMeleeAttack(in float rangeMeleeAttack)
+	public void SetDistanceMeleeAttack(float rangeMeleeAttack)
 	{
 		this.distanceMeleeAttack = rangeMeleeAttack;
 	}
 
-	public void SetDistanceRangeAttack(in float distanceRangeAttack)
+	public void SetDistanceRangeAttack(float distanceRangeAttack)
 	{
 		this.distanceRangeAttack = distanceRangeAttack;
 	}

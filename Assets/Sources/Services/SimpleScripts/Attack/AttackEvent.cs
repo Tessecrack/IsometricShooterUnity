@@ -12,7 +12,7 @@ public abstract class AttackEvent
 	public int SpeedMoveForwardInStrike => speedMoveForwardInStrike;
 
 	public TypeAttack TypeAttack { get; protected set; }
-	public AttackEvent(AnimationEvents animationEvents)
+	public AttackEvent(in AnimationEvents animationEvents)
 	{
 		animationEvents.OnStartAttack += HandlerStartAttack;
 		animationEvents.OnEndAttack += HandlerEndAttack;

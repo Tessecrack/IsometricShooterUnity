@@ -34,7 +34,7 @@ public class CharacterRigController : MonoBehaviour
 		rigHeadChestTarget.position = newTarget;
 	}
 
-	public void ResetRigHeadChest(in bool withSmooth)
+	public void ResetRigHeadChest(bool withSmooth)
 	{
 		if (withSmooth)
 		{

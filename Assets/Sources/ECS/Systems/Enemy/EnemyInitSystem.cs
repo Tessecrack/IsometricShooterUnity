@@ -92,7 +92,7 @@ public class EnemyInitSystem : IEcsInitSystem
 			aiEnemyComponent.aiAgent = new AIEnemyAgent();
 			aiEnemyComponent.aiAgent.SetTransform(enemies[i].transform);
 
-			animatorComponent.animationsManager = new EnemyMeleeAnimationsManager(enemies[i].GetComponent<Animator>(), animEvents);
+			animatorComponent.animationsManager = new EnemyAnimationsManager(enemies[i].GetComponent<Animator>(), animEvents);
 
 			characterComponent.characterTransform = enemies[i].transform;
 			characterComponent.characterSettings = characterSettings;

@@ -1,6 +1,6 @@
 public class MeleeAttackEvent : AttackEvent
 {
-	public MeleeAttackEvent(AnimationEvents animationEvents) : base(animationEvents)
+	public MeleeAttackEvent(in AnimationEvents animationEvents) : base(animationEvents)
 	{
 		this.totalNumberStrikes = animationEvents.CounterAnimations.TotalNumberAttacks;
 

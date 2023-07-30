@@ -6,7 +6,7 @@ public class PlayerAnimationsManager : AnimationsManager
     private bool needUpdateAnimationsState;
 	private int[] idsAnimationsStrikes;
 
-	public PlayerAnimationsManager(Animator animator, AnimationEvents animationEvents) : base(animator)
+	public PlayerAnimationsManager(in Animator animator, in AnimationEvents animationEvents) : base(animator)
     {
         this.animationCounterAttacks = animationEvents.CounterAnimations;
 

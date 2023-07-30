@@ -11,7 +11,7 @@ public class Raycaster
 		this.camera = camera;
 	}
 
-	public void SetGroundLayer(in int groundLayer)
+	public void SetGroundLayer(int groundLayer)
 	{
 		this.groundLayer = groundLayer;
 	}

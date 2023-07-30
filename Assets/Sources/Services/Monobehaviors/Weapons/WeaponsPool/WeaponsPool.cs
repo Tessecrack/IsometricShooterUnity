@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WeaponsPool
 {
-	private List<Weapon> currentWeaponsPool = new List<Weapon>();
+	private List<Weapon> currentWeaponsPool = new();
 
 	private Weapon currentMeleeWeapon;
 
@@ -11,11 +11,11 @@ public class WeaponsPool
 
 	private Weapon currentHeavyWeapon;
 
-	public void InitWeapons(List<GameObject> weaponPrefabs, Transform pointSpawnWeapon)
+	public void InitWeapons(in List<GameObject> weaponPrefabs, in Transform pointSpawnWeapon)
 	{
 		foreach (var weapon in weaponPrefabs)
 		{
-			var instance = UnityEngine.Object.Instantiate(weapon, pointSpawnWeapon, false);
+			var instance = Object.Instantiate(weapon, pointSpawnWeapon, false);
 			var weaponComponent = instance.GetComponent<Weapon>();
 			weaponComponent.SetGripWeapon();
 			instance.SetActive(false);
@@ -36,7 +36,7 @@ public class WeaponsPool
 		}
 	}
 
-	public Weapon Enable(in int numberSelectedWeapon)
+	public Weapon Enable(int numberSelectedWeapon)
 	{
 		if (numberSelectedWeapon < 0 || numberSelectedWeapon >= currentWeaponsPool.Count)
 		{
@@ -47,7 +47,7 @@ public class WeaponsPool
 		return currentWeaponsPool[numberSelectedWeapon];
 	}
 
-	public void Disable(in int numberSelectedWeapon)
+	public void Disable(int numberSelectedWeapon)
 	{
 		if (numberSelectedWeapon < 0 || numberSelectedWeapon >= currentWeaponsPool.Count)
 		{

@@ -49,8 +49,6 @@ public class RangeAttackEventSystem : IEcsRunSystem
 			{
 				stateAttack.isRangeAttack = true;
 			}
-
-
 		}
 	}
 }

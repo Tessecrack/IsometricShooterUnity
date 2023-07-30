@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
 	private int ignoreCollisionBulletLayer = 3;
 	private int lifeTime = 2;
 
-	public void StartFire(in Transform owner, in Vector3 target, in float speed, in int damage)
+	public void StartFire(in Transform owner, in Vector3 target, float speed, int damage)
 	{
 		this.gameObject.layer = ignoreCollisionBulletLayer;
 		characterController = GetComponent<CharacterController>();

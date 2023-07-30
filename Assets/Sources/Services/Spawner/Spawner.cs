@@ -24,11 +24,6 @@ public class Spawner : MonoBehaviour
 		playerInstance = playerSpawnPoint.Spawn(true);
 		for (int i = 0; i < enemiesSpawnPoints.Count; ++i)
 		{
-			if (enemiesSpawnPoints[i] == null)
-			{
-				continue;
-			}
-
 			enemyInstances.Add(enemiesSpawnPoints[i].Spawn(false));
 		}
 		for (int i = 0; i < turretsSpawnPoints.Count; ++i)

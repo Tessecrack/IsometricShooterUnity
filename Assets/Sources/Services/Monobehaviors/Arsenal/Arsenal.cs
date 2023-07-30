@@ -14,11 +14,11 @@ public class Arsenal : MonoBehaviour
 	{
 		weaponsPool.InitWeapons(weapons, pointSpawnWeapon);
 	}
-	public Weapon GetWeapon(in int numberSelectedWeapon)
+	public Weapon GetWeapon(int numberSelectedWeapon)
 	{
 		return weaponsPool.Enable(numberSelectedWeapon);
 	}
-	public void HideWeapon(in int numberSelectedWeapon)
+	public void HideWeapon(int numberSelectedWeapon)
 	{
 		weaponsPool.Disable(numberSelectedWeapon);
 	}

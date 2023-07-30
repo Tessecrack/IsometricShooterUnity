@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class RangeAttackEvent : AttackEvent
 {
-	private Transform pointSpawn;
+	private readonly Transform pointSpawn;
 	private Transform owner;
 
 	private Projectile prefabProjectile;
 	private int damage;
 	private float speedProjectile;
 
-	public RangeAttackEvent(AnimationEvents animationEvents, Transform pointSpawn, Projectile prefabProjectile) : base(animationEvents)
+	public RangeAttackEvent(in AnimationEvents animationEvents, in Transform pointSpawn, in Projectile prefabProjectile) 
+		: base(animationEvents)
 	{
 		animationEvents.OnShot += Shot;
 

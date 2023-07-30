@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyMeleeAnimationsManager : AnimationsManager
+public class EnemyAnimationsManager : AnimationsManager
 {
 	private bool isAnimationAttackInProgress;
 	private bool needUpdateAnimationsState;
@@ -8,7 +8,7 @@ public class EnemyMeleeAnimationsManager : AnimationsManager
 
 	private bool canPlayRangeAttack;
 
-	public EnemyMeleeAnimationsManager(Animator animator, AnimationEvents animationEvents) : base(animator)
+	public EnemyAnimationsManager(in Animator animator, in AnimationEvents animationEvents) : base(animator)
 	{
 		this.animationCounterAttacks = animationEvents.CounterAnimations;
 		InitializeCloseCombatAnimations();

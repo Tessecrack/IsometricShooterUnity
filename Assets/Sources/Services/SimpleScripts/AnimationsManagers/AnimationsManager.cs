@@ -6,7 +6,7 @@ public abstract class AnimationsManager
 	protected CharacterAnimationState currentAnimationState;
 	protected AnimationCounterAttacks animationCounterAttacks;
 
-	public AnimationsManager(Animator animator)
+	public AnimationsManager(in Animator animator)
 	{
 		this.animator = animator;
 		currentAnimationState = new CharacterAnimationState();
@@ -14,22 +14,22 @@ public abstract class AnimationsManager
 
 	public abstract void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState);
 
-	protected void PlayAnimation(in int hashId)
+	protected void PlayAnimation(int hashId)
 	{
 		animator.CrossFade(hashId, 0.02f);
 	}
 
-	protected void SetLayer(in int idLayer)
+	protected void SetLayer(int idLayer)
 	{
 		animator.SetLayerWeight(idLayer, 1.0f);
 	}
 
-	protected void ResetLayer(in int idLayer)
+	protected void ResetLayer(int idLayer)
 	{
 		animator.SetLayerWeight(idLayer, 0.0f);
 	}
 
-	protected void AnimateAttack(in int idAnimation)
+	protected void AnimateAttack(int idAnimation)
 	{
 		PlayAnimation(idAnimation);
 	}
