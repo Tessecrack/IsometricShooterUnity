@@ -25,6 +25,7 @@ public class GameStartup : MonoBehaviour
 	private EcsSystems ecsAttackSystems;
 	private EcsSystems ecsDamageSystems;
 	private EcsSystems ecsEnablerSystems;
+	private EcsSystems ecsAnimationSystems;
     
     private void Start()
     {
@@ -46,6 +47,7 @@ public class GameStartup : MonoBehaviour
 		InitDamageSystem();
 		InitCameraSystem();
 		InitEnablerSystem();
+		InitAnimationSystem();
 	}
 
 	private void Update()
@@ -69,6 +71,11 @@ public class GameStartup : MonoBehaviour
 		ecsUpdateCameraSystems?.Run();
 		
 		ecsEnablerSystems?.Run();
+	}
+
+	private void LateUpdate()
+	{
+		ecsAnimationSystems?.Run();
 	}
 
 	private void OnDestroy()
@@ -99,6 +106,9 @@ public class GameStartup : MonoBehaviour
 
 		ecsDamageSystems?.Destroy();
 		ecsDamageSystems = null;
+
+		ecsAnimationSystems?.Destroy();
+		ecsAnimationSystems = null;
 
         ecsWorld?.Destroy();
         ecsWorld = null;
@@ -158,10 +168,16 @@ public class GameStartup : MonoBehaviour
 			.Add(new CharacterSelectWeaponSystem())
 			.Add(new CharacterAttackSystem())
 			.Add(new CharacterChangeStateSystem())
-			.Add(new CharacterAnimationSystem())
 			.Add(new AttackWeaponRangeSystem())
 			.Add(new CharacterRigSystem());
 		ecsUpdateCharacterSystems.Init();
+	}
+
+	private void InitAnimationSystem()
+	{
+		ecsAnimationSystems = new EcsSystems(ecsWorld);
+		ecsAnimationSystems.Add(new CharacterAnimationSystem());
+		ecsAnimationSystems.Init();
 	}
 
 	private void InitAttacksSystems()
