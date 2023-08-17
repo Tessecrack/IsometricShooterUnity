@@ -243,7 +243,7 @@ MonoBehaviour:
   nameWeapon: TurretWeaponBlue
   typeWeapon: 2
   gripWeapon: {fileID: 0}
-  damage: 25
+  damage: 5
   additionalGrip: {fileID: 0}
   prefabProjectTile: {fileID: 1924134549938743637, guid: 6ca21177d8de8244b8ff64d4952ffb2e, type: 3}
   muzzles:

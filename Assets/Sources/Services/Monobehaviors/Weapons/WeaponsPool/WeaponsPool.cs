@@ -15,7 +15,7 @@ public class WeaponsPool
 	{
 		foreach (var weapon in weaponPrefabs)
 		{
-			var instance = Object.Instantiate(weapon, pointSpawnWeapon, false);
+			var instance = Factory.CreateObject(weapon, pointSpawnWeapon, false);
 			var weaponComponent = instance.GetComponent<Weapon>();
 			weaponComponent.SetGripWeapon();
 			instance.SetActive(false);

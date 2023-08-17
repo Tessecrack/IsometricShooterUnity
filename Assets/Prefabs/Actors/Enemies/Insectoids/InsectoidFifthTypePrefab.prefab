@@ -130,8 +130,8 @@ MonoBehaviour:
   hasArsenal: 0
   hasMeleeAttack: 0
   hasRangeAttack: 1
-  meleeDamage: 25
-  rangeDamage: 25
+  meleeDamage: 10
+  rangeDamage: 10
   rangeDetectTarget: 10
   distanceMeleeAttack: 1.5
   distanceRangeAttack: 10

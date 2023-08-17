@@ -37,8 +37,8 @@ public class RangeAttackEvent : AttackEvent
 
 	private void Shot()
 	{
-		var instanceProjectile = Object.Instantiate<Projectile>(prefabProjectile, 
-			pointSpawn.transform.position, pointSpawn.transform.rotation);
+		var instanceProjectile = Factory.CreateObject<Projectile>(prefabProjectile, pointSpawn.transform.position,
+			pointSpawn.transform.rotation);
 
 		instanceProjectile.StartFire(owner,
 			owner.transform.position + owner.transform.forward * 2, speedProjectile, damage);

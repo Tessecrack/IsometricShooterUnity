@@ -47,14 +47,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameWeapon: ArchtronicWeapon
   typeWeapon: 2
-  delayBetweenAttack: 1
   gripWeapon: {fileID: 7862365968625852998}
+  damage: 25
   additionalGrip: {fileID: 7584301927993249292}
   prefabProjectTile: {fileID: 9086379581574355896, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
   muzzles:
   - {fileID: 7835177241112050848}
   quantityOneShotBullet: 1
   projectile: {fileID: 8932127953273655131, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
+  isAttackFromOneMuzzle: 0
+  delayBetweenAttack: 0.1
 --- !u!1 &5816102397648751032
 GameObject:
   m_ObjectHideFlags: 0

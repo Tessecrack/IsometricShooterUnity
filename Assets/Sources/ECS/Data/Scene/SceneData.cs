@@ -16,6 +16,4 @@ public class SceneData : MonoBehaviour
 	public GameObject PlayerInstance => Spawner.GetPlayerInstance();
 	public List<GameObject> EnemmiesInstances => Spawner.GetEnemyInstances();
 	public List<GameObject> TurretsInstances => Spawner.GetTurretsInstances();
-
-	public bool IsReadyScene => Spawner.IsSpawnedObjects;
 }

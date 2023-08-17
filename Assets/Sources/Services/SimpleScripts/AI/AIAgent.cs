@@ -3,8 +3,6 @@ using UnityEngine;
 public class AIAgent
 {
 	private Transform transform;
-
-	private bool hasArsenal;
 	private bool hasRangeAttack;
 	private bool hasMeleeAttack;
 
@@ -15,10 +13,6 @@ public class AIAgent
 	private bool isTargetDetected;
 	private bool canAttack;
 
-	public void SetHasArsenal(bool hasArsenal)
-	{
-		this.hasArsenal = hasArsenal;
-	}
 
 	public void SetRangeAttack(bool hasRangeAttack)
 	{

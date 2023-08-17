@@ -14,7 +14,7 @@ public abstract class RangeWeapon : Weapon
 
 	[SerializeField] protected bool isAttackFromOneMuzzle = false;
 
-	[SerializeField] protected float delayBetweenAttack = 1.0f;
+	[SerializeField] protected float delayBetweenAttack = 0.05f;
 
 	private int currentMuzzle = 0;
 
