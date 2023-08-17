@@ -69,13 +69,10 @@ public class GameStartup : MonoBehaviour
 		ecsDamageSystems?.Run();
 
 		ecsUpdateCameraSystems?.Run();
-		
-		ecsEnablerSystems?.Run();
-	}
 
-	private void LateUpdate()
-	{
 		ecsAnimationSystems?.Run();
+
+		ecsEnablerSystems?.Run();
 	}
 
 	private void OnDestroy()
