@@ -17,6 +17,7 @@ public class WeaponsPool
 		{
 			var instance = Factory.CreateObject(weapon, pointSpawnWeapon, false);
 			var weaponComponent = instance.GetComponent<Weapon>();
+			weaponComponent.Init();
 			weaponComponent.SetGripWeapon();
 			instance.SetActive(false);
 			weaponComponent.enabled = false;

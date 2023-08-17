@@ -40,8 +40,7 @@ public class MeleeAttackPlayerDamageSystem : IEcsRunSystem
 			}
 
 			ref var playerAttackEvent = ref playerAttackEvents.Get(entityPlayer);
-			if (playerAttackEvent.meleeAttack.IsAttackInProcess == false 
-				|| playerAttackEvent.meleeAttack.TypeAttack == TypeAttack.Range)
+			if (playerAttackEvent.meleeAttack.IsAttackInProcess == false)
 			{
 				continue;
 			}

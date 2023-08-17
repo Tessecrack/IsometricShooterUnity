@@ -18,6 +18,16 @@ public abstract class RangeWeapon : Weapon
 
 	private int currentMuzzle = 0;
 
+	private RangeAttack rangeAttack;
+
+	public override void Init()
+	{
+		rangeAttack = new RangeAttack(muzzles[0].transform, muzzles[0].transform);
+		rangeAttack.SetPrefabProjectile(projectile);
+		rangeAttack.SetDamage(damage);
+		rangeAttack.SetSpeedProjectile(speedAttack);
+	}
+
 	private void FixedUpdate()
 	{
 		if (passedTime >= delayBetweenAttack)
@@ -41,16 +51,14 @@ public abstract class RangeWeapon : Weapon
 
 		foreach (var muzzle in muzzles)
 		{
-			var instanceProjectile = Factory.CreateObject<Projectile>(projectile, muzzle.transform.position, muzzle.transform.rotation);
-			instanceProjectile.StartFire(startTransform, targetPosition, speedAttack, damage);
+			rangeAttack.Shot(muzzle.transform, targetPosition);
 		}
 	}
 
 	protected void ShootFromOneMuzzle(in Transform startTransform, in Vector3 targetPosition)
 	{
 		var muzzle = muzzles[currentMuzzle++];
-		var instanceProjectile = Factory.CreateObject<Projectile>(projectile, muzzle.transform.position, muzzle.transform.rotation);
-		instanceProjectile.StartFire(startTransform, targetPosition, speedAttack, damage);
+		rangeAttack.Shot(muzzle.transform, targetPosition);
 		currentMuzzle %= muzzles.Count;
 	}
 

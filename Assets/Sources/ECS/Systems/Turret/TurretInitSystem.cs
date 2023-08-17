@@ -70,6 +70,7 @@ public class TurretInitSystem : IEcsInitSystem
 			characterComponent.characterTransform = turretComponent.turretSettings.GetTransform();
 
 			weaponComponent.weapon = turretComponent.turretSettings.GetWeapon();
+			weaponComponent.weapon.Init();
 
 			attackComponent.attackerTransform = turretInstance.transform;
 			attackComponent.typeAttack = TypeAttack.Range;

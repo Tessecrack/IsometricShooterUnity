@@ -110,9 +110,8 @@ public class EnemyInitSystem : IEcsInitSystem
 				var rangeSettings = enemies[i].GetComponent<EnemyRangeSettings>();
 
 				rangeAttack.rangeAttack = new RangeAttackEvent(animEvents,
-					rangeSettings.PointSpawnProjectile, rangeSettings.ProjectilePrefab);
-
-				rangeAttack.rangeAttack.SetOwner(enemies[i].transform);
+					rangeSettings.PointSpawnProjectile, enemies[i].transform);
+				rangeAttack.rangeAttack.SetPrefabProjectile(rangeSettings.ProjectilePrefab);
 				rangeAttack.rangeAttack.SetDamage(enemyComponent.enemySettings.RangeDamage);
 				rangeAttack.rangeAttack.SetSpeedProjectile(rangeSettings.SpeedProjectile);
 				weaponType.typeWeapon = TypeWeapon.HEAVY;

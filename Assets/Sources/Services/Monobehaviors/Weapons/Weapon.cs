@@ -27,6 +27,11 @@ public abstract class Weapon : MonoBehaviour
 	public TypeWeapon TypeWeapon => typeWeapon;	
 	public int Damage => damage;
 
+	public virtual void Init()
+	{
+
+	}
+
 	public void SetGripWeapon()
 	{
 		if (gripWeapon != null)
