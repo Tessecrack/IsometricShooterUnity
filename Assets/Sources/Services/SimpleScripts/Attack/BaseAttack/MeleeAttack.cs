@@ -15,10 +15,12 @@ public class MeleeAttack : IAttack
 	public void StartAttack()
 	{
 		IsStartAttack = true;
+		IsAttackInProcess = true;
 	}
 
 	public void EndAttack()
 	{
 		IsStartAttack = false;
+		IsAttackInProcess = false;
 	}
 }
