@@ -16,7 +16,7 @@ public class MeleeWeapon : Weapon
 	{
 		if (!meleeAttack.IsAttackInProcess)
 		{
-			// meleeAttack.EndAttack();
+			// meleeAttack.EndAttack(); TODO: need to improve
 		}
 	}
 }
