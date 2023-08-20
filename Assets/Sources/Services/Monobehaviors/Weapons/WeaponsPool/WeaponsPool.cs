@@ -5,7 +5,7 @@ public class WeaponsPool
 {
 	private List<Weapon> currentWeaponsPool = new();
 
-	private Weapon currentMeleeWeapon;
+	private MeleeWeapon currentMeleeWeapon;
 
 	private Weapon currentGunWeapon;
 
@@ -24,7 +24,7 @@ public class WeaponsPool
 			currentWeaponsPool.Add(weaponComponent);
 			if (weaponComponent.TypeWeapon == TypeWeapon.MELEE)
 			{
-				currentMeleeWeapon = weaponComponent;
+				currentMeleeWeapon = (MeleeWeapon)weaponComponent;
 			}
 			else if (weaponComponent.TypeWeapon == TypeWeapon.GUN)
 			{
@@ -58,7 +58,7 @@ public class WeaponsPool
 		currentWeaponsPool[numberSelectedWeapon].enabled = false;
 	}
 
-	public Weapon CurrentMeleeWeapon => currentMeleeWeapon;
+	public MeleeWeapon CurrentMeleeWeapon => currentMeleeWeapon;
 	public Weapon CurrentGunWeapon => currentGunWeapon;
 	public Weapon CurrentHeavyWeapon => currentHeavyWeapon;
 }

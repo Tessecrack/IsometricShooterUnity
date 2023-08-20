@@ -19,10 +19,7 @@ public abstract class Weapon : MonoBehaviour
 
 	protected float passedTime = 0.0f;
 
-	public abstract void StartAttack(in Transform startTrasform, in Vector3 targetPosition);
-
-	public abstract void StopAttack();
-
+	public BaseAttack BaseAttack { get; protected set; }
 
 	public TypeWeapon TypeWeapon => typeWeapon;	
 	public int Damage => damage;
@@ -42,4 +39,9 @@ public abstract class Weapon : MonoBehaviour
 	}
 
 	public Transform AdditionalGrip => additionalGrip;
+
+	private void FixedUpdate()
+	{
+		BaseAttack.UpdateStateAttack(Time.fixedDeltaTime);
+	}
 }

@@ -34,6 +34,7 @@ public class TurretInitSystem : IEcsInitSystem
 			EcsPool<HitMeComponent> poolHitComponents = world.GetPool<HitMeComponent>();
 			EcsPool<EnemyComponent> poolEnemyComponents = world.GetPool<EnemyComponent>();
 			EcsPool<WeaponTypeComponent> poolWeaponTypeComponents = world.GetPool<WeaponTypeComponent>();
+			EcsPool<BaseAttackComponent> poolBaseAttacks = world.GetPool<BaseAttackComponent>();
 
 			ref var turretComponent = ref poolTurretComponents.Add(entityTurret);
 			ref var rotatableComponent = ref poolRotatableComponents.Add(entityTurret);
@@ -49,6 +50,7 @@ public class TurretInitSystem : IEcsInitSystem
 			ref var hitComponent = ref poolHitComponents.Add(entityTurret);
 			ref var enemyComponent = ref poolEnemyComponents.Add(entityTurret);
 			ref var weaponTypeComponent = ref poolWeaponTypeComponents.Add(entityTurret);
+			ref var baseAttack = ref poolBaseAttacks.Add(entityTurret);
 
 			var turretInstance = turretsInstances[i];
 
@@ -71,6 +73,7 @@ public class TurretInitSystem : IEcsInitSystem
 
 			weaponComponent.weapon = turretComponent.turretSettings.GetWeapon();
 			weaponComponent.weapon.Init();
+			baseAttack.baseAttack = weaponComponent.weapon.BaseAttack;
 
 			attackComponent.attackerTransform = turretInstance.transform;
 			attackComponent.typeAttack = TypeAttack.Range;

@@ -11,6 +11,7 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 			.Inc<CharacterComponent>()
 			.Inc<DamageComponent>()
 			.Inc<EnablerComponent>()
+			.Inc<BaseAttackComponent>()
 			.End();
 
 		EcsPool<CharacterEventsComponent> eventComponents = world.GetPool<CharacterEventsComponent>();
@@ -19,6 +20,7 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 		EcsPool<CharacterComponent> characterComponents = world.GetPool<CharacterComponent>();
 		EcsPool<StateAttackComponent> states = world.GetPool<StateAttackComponent>();
 		EcsPool<WeaponTypeComponent> weaponTypes = world.GetPool<WeaponTypeComponent>();
+		EcsPool<BaseAttackComponent> baseAttacks = world.GetPool<BaseAttackComponent>();
 
 		var enablers = world.GetPool<EnablerComponent>();
 		var damageComponents = world.GetPool<DamageComponent>();
@@ -49,10 +51,18 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 			ref var damageComponent = ref damageComponents.Get(entity);
 			ref var weaponTypeComponent = ref weaponTypes.Get(entity);
 
+			ref var baseAttack = ref baseAttacks.Get(entity);
+
 			arsenal.arsenal.HideWeapon(arsenal.currentNumberWeapon);
 			var currentWeapon = arsenal.arsenal.GetWeapon(eventComponent.selectedNumberWeapon);
 			arsenal.currentNumberWeapon = eventComponent.selectedNumberWeapon;
 			weaponComponent.weapon = currentWeapon;
+			if (currentWeapon.BaseAttack == null)
+			{
+				UnityEngine.Debug.Log("NOOOOOOOOOO");
+			}
+			baseAttack.baseAttack = currentWeapon.BaseAttack;
+
 			damageComponent.damage = weaponComponent.weapon.Damage;
 			weaponTypeComponent.typeWeapon = weaponComponent.weapon.TypeWeapon;
 		}

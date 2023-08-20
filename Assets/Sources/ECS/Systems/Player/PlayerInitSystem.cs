@@ -28,7 +28,6 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<CharacterRigComponent> poolCharacterRigComponent = world.GetPool<CharacterRigComponent>();
 		EcsPool<TargetComponent> poolTargetComponent = world.GetPool<TargetComponent>();
 		EcsPool<EnablerComponent> poolEnablerComponent = world.GetPool<EnablerComponent>();
-		EcsPool<MeleeAttackComponent> poolMeleeAttack = world.GetPool<MeleeAttackComponent>();
 		EcsPool<ArsenalComponent> poolArsenal = world.GetPool<ArsenalComponent>();
 		EcsPool<HitRangeComponent> poolRangeHit = world.GetPool<HitRangeComponent>();
 		EcsPool<DamageComponent> poolDamage = world.GetPool<DamageComponent>();
@@ -36,6 +35,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<HitMeComponent> poolHitMeComponents = world.GetPool<HitMeComponent>();
 		EcsPool<WeaponTypeComponent> poolTypeWeapon = world.GetPool<WeaponTypeComponent>();
 		EcsPool<VelocityComponent> poolVelocities = world.GetPool<VelocityComponent>();
+		EcsPool<BaseAttackComponent> poolBaseAttacks = world.GetPool<BaseAttackComponent>();
 
 		ref var velocity = ref poolVelocities.Add(entityPlayer);
 		ref var playerComponent = ref poolPlayer.Add(entityPlayer);
@@ -53,16 +53,16 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var characterRigComponent = ref poolCharacterRigComponent.Add(entityPlayer);
 		ref var targetComponent = ref poolTargetComponent.Add(entityPlayer);
 		ref var enablerComponent = ref poolEnablerComponent.Add(entityPlayer);
-		ref var meleeAttack = ref poolMeleeAttack.Add(entityPlayer);
 		ref var arsenal = ref poolArsenal.Add(entityPlayer);
 		ref var rangeHit = ref poolRangeHit.Add(entityPlayer);
 		ref var damage = ref poolDamage.Add(entityPlayer);
 		ref var weaponSpawnPoint = ref poolWeaponSpawnPoint.Add(entityPlayer);
 		ref var hitMeComponent = ref poolHitMeComponents.Add(entityPlayer);
 		ref var weaponType = ref poolTypeWeapon.Add(entityPlayer);
+		ref var baseAttack = ref poolBaseAttacks.Add(entityPlayer);
 
 		playerComponent.numberPlayer = 0;
-
+		
 		characterState.stateAttackTime = 3;
 
 		GameObject player = sceneData.PlayerInstance;
@@ -80,7 +80,6 @@ public class PlayerInitSystem : IEcsInitSystem
 		animatorComponent.animationsManager = new PlayerAnimationsManager(player.GetComponent<Animator>(),
 			animEvents);
 
-		meleeAttack.meleeAttack = new MeleeAttackEvent(animEvents);
 		weaponSpawnPoint.weaponSpawPoint = player.GetComponent<WeaponSpawnPoint>().WeaponPointSpawn;
 
 		arsenal.arsenal = player.GetComponent<Arsenal>();
@@ -104,6 +103,9 @@ public class PlayerInitSystem : IEcsInitSystem
 		targetComponent.target = runtimeData.CursorPosition;
 
 		arsenal.arsenal.Init(weaponSpawnPoint.weaponSpawPoint);
+		arsenal.arsenal.GetMeleeWeapon().SetMeleeAttackEvent(animEvents); // TODO: need to improve
+
+		baseAttack.baseAttack = arsenal.arsenal.GetMeleeWeapon().BaseAttack;
 
 		movableComponent.coefSmooth = 0.3f;
 		rotatableComponent.coefSmooth = 0.3f;

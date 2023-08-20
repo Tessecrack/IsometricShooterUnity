@@ -1,6 +1,6 @@
 using Leopotam.EcsLite;
 
-public class CharacterAttackSystem : IEcsRunSystem
+public class CharacterInputAttackSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{

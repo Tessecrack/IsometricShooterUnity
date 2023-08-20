@@ -1,63 +1,37 @@
 using UnityEngine;
 
-public class RangeAttack : IAttack
+public class RangeAttack : BaseAttack
 {
-	protected readonly Transform pointSpawn;
-	protected readonly Transform owner;
+	protected Vector3 targetPosition;
 
-	protected Projectile prefabProjectile;
-	protected int damage;
-	protected float speedProjectile;
+	protected Shooter shooter;
 
-	public bool IsStartAttack { get; protected set; }
-	public bool IsAttackInProcess { get; protected set; }
-	public RangeAttack(Transform pointSpawn, Transform owner)
+	protected float passedTime;
+
+	protected bool canAttack;
+
+	protected float delayBetweenAttack = 0.05f;
+
+	public RangeAttack(Shooter shooter)
 	{
-		this.pointSpawn = pointSpawn;
-		this.owner = owner;
+		this.shooter = shooter;
 	}
 
-	public void StartAttack()
+	public void SetTarget(Vector3 targetPosition)
+	{
+		this.targetPosition = targetPosition;
+	}
+
+	public override void StartAttack()
 	{
 		IsStartAttack = true;
 		IsAttackInProcess = true;
-		Shot();
+		shooter.Shot(this.targetPosition);
 	}
 
-	public void EndAttack()
+	public override void EndAttack()
 	{
 		IsAttackInProcess = false;
 		IsStartAttack = false;
-	}
-
-	public void SetDamage(int damage)
-	{
-		this.damage = damage;
-	}
-
-	public void SetPrefabProjectile(Projectile projectile)
-	{
-		this.prefabProjectile = projectile;
-	}
-
-	public void SetSpeedProjectile(float speedProjectile)
-	{
-		this.speedProjectile = speedProjectile;
-	}
-
-	protected void Shot()
-	{
-		Shot(owner.transform.position + owner.transform.forward * 2);
-	}
-
-	public void Shot(Vector3 targetPosition)
-	{
-		Shot(pointSpawn, targetPosition);
-	}
-
-	public void Shot(Transform spawnPointTransform, Vector3 targetPosition)
-	{
-		var instanceProjectile = Factory.CreateObject<Projectile>(prefabProjectile, spawnPointTransform.position, spawnPointTransform.rotation);
-		instanceProjectile.StartFire(owner, targetPosition, speedProjectile, damage);
 	}
 }

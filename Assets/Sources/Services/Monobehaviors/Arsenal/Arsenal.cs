@@ -22,4 +22,9 @@ public class Arsenal : MonoBehaviour
 	{
 		weaponsPool.Disable(numberSelectedWeapon);
 	}
+	public MeleeWeapon GetMeleeWeapon()
+	{
+		return weaponsPool.CurrentMeleeWeapon;
+	}
+
 }

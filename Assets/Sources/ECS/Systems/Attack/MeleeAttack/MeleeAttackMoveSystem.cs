@@ -6,13 +6,13 @@ public class MeleeAttackMoveSystem : IEcsRunSystem
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<MeleeAttackComponent>()
+		var filter = world.Filter<BaseAttackComponent>()
 			.Inc<CharacterComponent>()
 			.Inc<MovableComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
-		var attackEvents = world.GetPool<MeleeAttackComponent>();
+		var attackEvents = world.GetPool<BaseAttackComponent>();
 		var characterComponents = world.GetPool<CharacterComponent>();
 		var movableComponents = world.GetPool<MovableComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
@@ -26,7 +26,7 @@ public class MeleeAttackMoveSystem : IEcsRunSystem
 
 			ref var attackEvent = ref attackEvents.Get(entity);
 
-			if (attackEvent.meleeAttack.NeedForwardMove == false)
+			if (attackEvent.baseAttack.NeedForwardMove == false)
 			{
 				continue;
 			}
@@ -37,7 +37,8 @@ public class MeleeAttackMoveSystem : IEcsRunSystem
 				continue;
 			}
 
-			var speedMove = attackEvent.meleeAttack.SpeedMoveForwardInStrike;
+			var speedMove = 40; // TODO: need to improve
+
 			ref var characterComponent = ref characterComponents.Get(entity);
 			characterComponent.characterController.Move(characterComponent.characterController.transform.forward
 				* speedMove * Time.deltaTime);

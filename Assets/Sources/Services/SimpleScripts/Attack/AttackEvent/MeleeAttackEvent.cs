@@ -4,6 +4,8 @@ public class MeleeAttackEvent : MeleeAttack
 	{
 		this.totalNumberStrikes = animationEvents.CounterAnimations.TotalNumberAttacks;
 
+		IsEventAttack = true;
+
 		animationEvents.OnStartAttack += StartAttack;
 		animationEvents.OnEndAttack += EndAttack;
 
@@ -12,25 +14,5 @@ public class MeleeAttackEvent : MeleeAttack
 
 		animationEvents.OnStartForwardMove += HandlerStartForwardMove;
 		animationEvents.OnEndForwardMove += HandlerEndForwardMove;
-	}
-
-	private void HandlerStartApplyMeleeDamage()
-	{
-		IsApplyDamage = true;
-	}
-
-	private void HandlerEndApplyMeleeDamage()
-	{
-		IsApplyDamage = false;
-	}	
-
-	private void HandlerStartForwardMove()
-	{
-		NeedForwardMove = true;
-	}
-
-	private void HandlerEndForwardMove()
-	{
-		NeedForwardMove = false;
 	}
 }

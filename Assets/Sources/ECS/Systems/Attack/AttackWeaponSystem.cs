@@ -1,5 +1,5 @@
 using Leopotam.EcsLite;
-public class AttackWeaponRangeSystem : IEcsRunSystem
+public class AttackWeaponSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
@@ -29,11 +29,11 @@ public class AttackWeaponRangeSystem : IEcsRunSystem
 
 			if (attackComponent.isStartAttack)
 			{
-				weaponComponent.weapon.StartAttack(attackComponent.attackerTransform, targetComponent.target);
+				//weaponComponent.weapon.StartAttack(attackComponent.attackerTransform, targetComponent.target);
 			}
 			if (attackComponent.isStopAttack)
 			{
-				weaponComponent.weapon.StopAttack();
+				//weaponComponent.weapon.StopAttack();
 			}	
 		}
 	}

@@ -1,4 +1,4 @@
-public struct RangeAttackComponent
+/*public struct RangeAttackComponent
 {
 	public RangeAttackEvent rangeAttack;
-}
+}*/

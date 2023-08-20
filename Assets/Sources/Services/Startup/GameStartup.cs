@@ -163,9 +163,9 @@ public class GameStartup : MonoBehaviour
 			.Add(new CharacterMoveSystem())
 			.Add(new CharacterRotationSystem())
 			.Add(new CharacterSelectWeaponSystem())
-			.Add(new CharacterAttackSystem())
+			.Add(new CharacterInputAttackSystem())
 			.Add(new CharacterChangeStateSystem())
-			.Add(new AttackWeaponRangeSystem())
+			.Add(new AttackWeaponSystem())
 			.Add(new CharacterRigSystem());
 		ecsUpdateCharacterSystems.Init();
 	}

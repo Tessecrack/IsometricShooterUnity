@@ -1,4 +1,4 @@
-public class MeleeAttack : IAttack
+public class MeleeAttack : BaseAttack
 {
 	protected int totalNumberStrikes = 4;
 	protected readonly int speedMoveForwardInStrike = 30;
@@ -6,21 +6,35 @@ public class MeleeAttack : IAttack
 	public int TotalNumberStrikes => totalNumberStrikes;
 	public int SpeedMoveForwardInStrike => speedMoveForwardInStrike;
 
-	public int CurrentNumberStrike { get; protected set; }
-	public bool IsApplyDamage { get; protected set; }
-	public bool NeedForwardMove { get; protected set; }
-	public bool IsStartAttack { get; protected set; }
-	public bool IsAttackInProcess { get; protected set; }
-
-	public void StartAttack()
+	public override void StartAttack()
 	{
 		IsStartAttack = true;
 		IsAttackInProcess = true;
 	}
 
-	public void EndAttack()
+	public override void EndAttack()
 	{
 		IsStartAttack = false;
 		IsAttackInProcess = false;
+	}
+
+	protected void HandlerStartApplyMeleeDamage()
+	{
+		IsApplyDamage = true;
+	}
+
+	protected void HandlerEndApplyMeleeDamage()
+	{
+		IsApplyDamage = false;
+	}
+
+	protected void HandlerStartForwardMove()
+	{
+		NeedForwardMove = true;
+	}
+
+	protected void HandlerEndForwardMove()
+	{
+		NeedForwardMove = false;
 	}
 }

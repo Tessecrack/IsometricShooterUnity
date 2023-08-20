@@ -1,17 +1,18 @@
 using Leopotam.EcsLite;
+using UnityEngine;
 
 public class MeleeAttackEventSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<MeleeAttackComponent>()
+		var filter = world.Filter<BaseAttackComponent>()
 			.Inc<AttackComponent>()
 			.Inc<StateAttackComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
-		var attackEvents = world.GetPool<MeleeAttackComponent>(); 
+		var attackEvents = world.GetPool<BaseAttackComponent>(); 
 		var attackComponents = world.GetPool<AttackComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
 		var stateAttackComponents = world.GetPool<StateAttackComponent>();
@@ -31,7 +32,13 @@ public class MeleeAttackEventSystem : IEcsRunSystem
 			ref var stateAttack = ref stateAttackComponents.Get(entity);
 			ref var attackEvent = ref attackEvents.Get(entity);
 
-			if (attackEvent.meleeAttack.IsAttackInProcess)
+			if (attackEvent.baseAttack == null)
+			{
+				Debug.Log("uuuuuuuuuuu");
+				continue;
+			}
+
+			if (attackEvent.baseAttack.IsAttackInProcess)
 			{
 				continue;
 			}

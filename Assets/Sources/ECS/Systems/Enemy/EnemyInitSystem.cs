@@ -44,6 +44,7 @@ public class EnemyInitSystem : IEcsInitSystem
 			EcsPool<HitListComponent> poolHitList = world.GetPool<HitListComponent>();
 			EcsPool<WeaponTypeComponent> poolWeaponTypes = world.GetPool<WeaponTypeComponent>();
 			EcsPool<VelocityComponent> poolVelocities = world.GetPool<VelocityComponent>();
+			EcsPool<BaseAttackComponent> poolBaseAttacks = world.GetPool<BaseAttackComponent>();
 
 			ref var velocity = ref poolVelocities.Add(entityEnemy);
 			ref var enemyComponent = ref poolEnemyComponents.Add(entityEnemy);
@@ -68,6 +69,7 @@ public class EnemyInitSystem : IEcsInitSystem
 			ref var damage = ref poolDamage.Add(entityEnemy);
 			ref var hitList = ref poolHitList.Add(entityEnemy);
 			ref var weaponType = ref poolWeaponTypes.Add(entityEnemy);
+			ref var baseAttack = ref poolBaseAttacks.Add(entityEnemy);
 
 			var animEvents = enemies[i].GetComponent<AnimationEvents>();
 			animEvents.Init();
@@ -105,25 +107,29 @@ public class EnemyInitSystem : IEcsInitSystem
 
 			if (enemyComponent.enemySettings.HasRangeAttack)
 			{
-				EcsPool<RangeAttackComponent> poolRangeAttack = world.GetPool<RangeAttackComponent>();
-				ref var rangeAttack = ref poolRangeAttack.Add(entityEnemy);
 				var rangeSettings = enemies[i].GetComponent<EnemyRangeSettings>();
 
-				rangeAttack.rangeAttack = new RangeAttackEvent(animEvents,
-					rangeSettings.PointSpawnProjectile, enemies[i].transform);
-				rangeAttack.rangeAttack.SetPrefabProjectile(rangeSettings.ProjectilePrefab);
-				rangeAttack.rangeAttack.SetDamage(enemyComponent.enemySettings.RangeDamage);
-				rangeAttack.rangeAttack.SetSpeedProjectile(rangeSettings.SpeedProjectile);
+				var shooter = new SingleShooter();
+				shooter.SetProjectile(rangeSettings.ProjectilePrefab);
+				shooter.SetQuantityOneShotProjectile(1);
+				shooter.SetSpawnPointsShot(new Transform[] { rangeSettings.PointSpawnProjectile });
+				shooter.SetSpeedProjectile(rangeSettings.SpeedProjectile);
+				shooter.SetDamage(enemyComponent.enemySettings.RangeDamage);
+
+				var rangeAttack = new RangeAttackEvent(animEvents, shooter);
+
+				baseAttack.baseAttack = rangeAttack;
+
 				weaponType.typeWeapon = TypeWeapon.HEAVY;
 				damage.damage = enemyComponent.enemySettings.RangeDamage;
 			}
 			else
 			{
-				EcsPool<MeleeAttackComponent> poolMeleeAttack = world.GetPool<MeleeAttackComponent>();
-				ref var meleeAttack = ref poolMeleeAttack.Add(entityEnemy);
-				meleeAttack.meleeAttack = new MeleeAttackEvent(animEvents);
+				var meleeAttack = new MeleeAttackEvent(animEvents);
 				weaponType.typeWeapon = TypeWeapon.MELEE;
 				damage.damage = enemyComponent.enemySettings.MeleeDamage;
+
+				baseAttack.baseAttack = meleeAttack;
 			}
 		}
 	}

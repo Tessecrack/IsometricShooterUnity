@@ -1,18 +1,27 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AutomaticWeapon : RangeWeapon
 {
-	public override void StartAttack(in Transform startTrasform, in Vector3 targetPosition)
+	public override void Init()
 	{
-		if (canAttack)
+		Shooter shooter;
+		if (quantityOneShotBullet == 1)
 		{
-			Shoot(startTrasform, targetPosition);
-			canAttack = false;
+			shooter = new SingleShooter();
 		}
-	}
+		else
+		{
+			shooter = new SpreadShooter();
+		}
 
-	public override void StopAttack()
-	{
-		canAttack = true;
+		shooter.SetProjectile(projectile);
+		shooter.SetQuantityOneShotProjectile(quantityOneShotBullet);
+		shooter.SetSpawnPointsShot(muzzles.Select(m => m.transform).ToArray());
+		shooter.SetSpeedProjectile(speedAttack);
+		shooter.SetDamage(damage);
+
+		BaseAttack = new RangeAutomaticAttack(shooter);
 	}
 }

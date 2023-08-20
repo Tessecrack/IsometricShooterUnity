@@ -5,13 +5,13 @@ public class RangeAttackEventSystem : IEcsRunSystem
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<RangeAttackComponent>()
+		var filter = world.Filter<BaseAttackComponent>()
 			.Inc<AttackComponent>()
 			.Inc<StateAttackComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
-		var attackEvents = world.GetPool<RangeAttackComponent>();
+		var attackEvents = world.GetPool<BaseAttackComponent>();
 		var attackComponents = world.GetPool<AttackComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
 		var stateAttackComponents = world.GetPool<StateAttackComponent>();
@@ -31,7 +31,7 @@ public class RangeAttackEventSystem : IEcsRunSystem
 			ref var stateAttack = ref stateAttackComponents.Get(entity);
 			ref var attackEvent = ref attackEvents.Get(entity);
 
-			if (attackEvent.rangeAttack.IsAttackInProcess)
+			if (attackEvent.baseAttack.IsAttackInProcess)
 			{
 				continue;
 			}

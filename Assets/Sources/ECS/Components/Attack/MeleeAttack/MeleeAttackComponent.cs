@@ -1,4 +1,5 @@
-public struct MeleeAttackComponent
+/*public struct MeleeAttackComponent
 {
 	public MeleeAttackEvent meleeAttack;
 }
+*/

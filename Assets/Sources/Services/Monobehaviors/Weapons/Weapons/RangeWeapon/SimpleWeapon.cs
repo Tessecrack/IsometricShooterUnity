@@ -1,27 +1,26 @@
+using System.Linq;
 using UnityEngine;
 
 public class SimpleWeapon : RangeWeapon
 {
-	private bool needClickTrigger = false;
-	public override void StartAttack(in Transform startTrasform, in Vector3 targetPosition)
+	public override void Init()
 	{
-		if (canAttack && !needClickTrigger)
+		Shooter shooter;
+		if (quantityOneShotBullet == 1)
 		{
-			if (quantityOneShotBullet == 1)
-			{
-				Shoot(startTrasform, targetPosition);
-			}
-			else
-			{
-				StartCoroutine(GenerateSpreadBullets(startTrasform, targetPosition));
-			}
-			canAttack = false;
-			needClickTrigger = true;
+			shooter = new SingleShooter();
 		}
-	}
+		else
+		{
+			shooter = new SpreadShooter();
+		}
 
-	public override void StopAttack()
-	{
-		needClickTrigger = false;
+		shooter.SetProjectile(projectile);
+		shooter.SetQuantityOneShotProjectile(quantityOneShotBullet);
+		shooter.SetSpawnPointsShot(muzzles.Select(m => m.transform).ToArray());
+		shooter.SetSpeedProjectile(speedAttack);
+		shooter.SetDamage(damage);
+
+		BaseAttack = new RangeSimpleAttack(shooter);
 	}
 }

@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class RangeAttackEvent : RangeAttack
 {
-	public RangeAttackEvent(in AnimationEvents animationEvents, in Transform pointSpawn, in Transform owner) :
-		base(pointSpawn, owner)
+	public RangeAttackEvent(in AnimationEvents animationEvents, in Shooter shooter) :
+		base(shooter)
 	{
+		IsEventAttack = true;
+
 		animationEvents.OnStartAttack += StartAttack;
 		animationEvents.OnEndAttack += EndAttack;
 
-		animationEvents.OnShot += Shot;
+		animationEvents.OnShot += shooter.Shot;
 	}
 }
