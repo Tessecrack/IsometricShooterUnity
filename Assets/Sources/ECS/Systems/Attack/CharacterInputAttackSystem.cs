@@ -6,7 +6,7 @@ public class CharacterInputAttackSystem : IEcsRunSystem
 	{
 		var world = systems.GetWorld();
 		var filter = world.Filter<CharacterEventsComponent>()
-			.Inc<AttackComponent>()
+			.Inc<InputAttackComponent>()
 			.Inc<CharacterComponent>()
 			.Inc<TargetComponent>()
 			.Inc<EnablerComponent>()
@@ -14,7 +14,7 @@ public class CharacterInputAttackSystem : IEcsRunSystem
 			.End();
 
 		var characterEvents = world.GetPool<CharacterEventsComponent>();
-		var attacks = world.GetPool<AttackComponent>();
+		var attacks = world.GetPool<InputAttackComponent>();
 		var characters = world.GetPool<CharacterComponent>();
 		var targets = world.GetPool<TargetComponent>();
 		var enablers = world.GetPool<EnablerComponent>();

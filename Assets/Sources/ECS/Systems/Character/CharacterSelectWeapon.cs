@@ -57,10 +57,6 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 			var currentWeapon = arsenal.arsenal.GetWeapon(eventComponent.selectedNumberWeapon);
 			arsenal.currentNumberWeapon = eventComponent.selectedNumberWeapon;
 			weaponComponent.weapon = currentWeapon;
-			if (currentWeapon.BaseAttack == null)
-			{
-				UnityEngine.Debug.Log("NOOOOOOOOOO");
-			}
 			baseAttack.baseAttack = currentWeapon.BaseAttack;
 
 			damageComponent.damage = weaponComponent.weapon.Damage;

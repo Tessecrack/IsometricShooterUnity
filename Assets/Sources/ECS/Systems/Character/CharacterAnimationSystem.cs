@@ -8,7 +8,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 		var filter = world.Filter<AnimatorComponent>()
 			.Inc<MovableComponent>()
 			.Inc<WeaponTypeComponent>()
-			.Inc<AttackComponent>()
+			.Inc<InputAttackComponent>()
 			.Inc<StateAttackComponent>()
 			.Inc<EnablerComponent>()
 			.Inc<VelocityComponent>()
@@ -17,7 +17,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 		var animators = world.GetPool<AnimatorComponent>();
 		var movables = world.GetPool<MovableComponent>();
 		var weaponTypes = world.GetPool<WeaponTypeComponent>();
-		var attacks = world.GetPool<AttackComponent>();
+		var attacks = world.GetPool<InputAttackComponent>();
 		var attackStates = world.GetPool<StateAttackComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
 		var velocityComponents = world.GetPool<VelocityComponent>();

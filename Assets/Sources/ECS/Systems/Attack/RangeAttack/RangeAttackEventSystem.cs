@@ -6,13 +6,13 @@ public class RangeAttackEventSystem : IEcsRunSystem
 	{
 		var world = systems.GetWorld();
 		var filter = world.Filter<BaseAttackComponent>()
-			.Inc<AttackComponent>()
+			.Inc<InputAttackComponent>()
 			.Inc<StateAttackComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
 		var attackEvents = world.GetPool<BaseAttackComponent>();
-		var attackComponents = world.GetPool<AttackComponent>();
+		var attackComponents = world.GetPool<InputAttackComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
 		var stateAttackComponents = world.GetPool<StateAttackComponent>();
 

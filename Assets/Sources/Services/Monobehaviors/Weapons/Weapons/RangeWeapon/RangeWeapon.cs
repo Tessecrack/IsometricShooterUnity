@@ -17,21 +17,4 @@ public abstract class RangeWeapon : Weapon
 	[SerializeField] protected float delayBetweenAttack = 0.05f;
 
 	private RangeAttack rangeAttack;
-
-	public override void Init()
-	{
-		Shooter shooter;
-
-		if (quantityOneShotBullet > 1)
-		{
-			shooter = new SingleShooter();
-		}
-		else
-		{
-			shooter = new SpreadShooter();
-		}
-
-		rangeAttack = new RangeAttack(shooter);
-		BaseAttack = rangeAttack;
-	}
 }

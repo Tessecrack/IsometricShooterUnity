@@ -4,13 +4,13 @@ public class AttackWeaponSystem : IEcsRunSystem
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<AttackComponent>()
+		var filter = world.Filter<InputAttackComponent>()
 			.Inc<WeaponComponent>()
 			.Inc<TargetComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
-		var attacks = world.GetPool<AttackComponent>();
+		var attacks = world.GetPool<InputAttackComponent>();
 		var weapons = world.GetPool<WeaponComponent>();
 		var targets = world.GetPool<TargetComponent>();
 		var enablers = world.GetPool<EnablerComponent>();

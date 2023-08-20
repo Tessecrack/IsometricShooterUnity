@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public struct AttackComponent
+public struct InputAttackComponent
 {
 	public Transform attackerTransform;
 

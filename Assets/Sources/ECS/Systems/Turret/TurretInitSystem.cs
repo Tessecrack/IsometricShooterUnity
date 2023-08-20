@@ -27,7 +27,7 @@ public class TurretInitSystem : IEcsInitSystem
 			EcsPool<StateAttackComponent> poolStateAttackComponents = world.GetPool<StateAttackComponent>();
 			EcsPool<CharacterComponent> poolCharacterComponents = world.GetPool<CharacterComponent>();
 			EcsPool<WeaponComponent> poolWeaponComponents = world.GetPool<WeaponComponent>();
-			EcsPool<AttackComponent> poolAttackComponents = world.GetPool<AttackComponent>();
+			EcsPool<InputAttackComponent> poolAttackComponents = world.GetPool<InputAttackComponent>();
 			EcsPool<CharacterEventsComponent> poolEventsComponents = world.GetPool<CharacterEventsComponent>();
 			EcsPool<HealthComponent> poolHeathComponents = world.GetPool<HealthComponent>();
 			EcsPool<EnablerComponent> poolEnablerComponents = world.GetPool<EnablerComponent>();

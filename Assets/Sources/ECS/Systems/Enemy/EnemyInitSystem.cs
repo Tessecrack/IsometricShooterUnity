@@ -29,7 +29,7 @@ public class EnemyInitSystem : IEcsInitSystem
 			EcsPool<RotatableComponent> poolRotatableComponents = world.GetPool<RotatableComponent>();
 			EcsPool<AnimatorComponent> poolAnimatorComponents = world.GetPool<AnimatorComponent>();
 
-			EcsPool<AttackComponent> poolAttackComponent = world.GetPool<AttackComponent>();
+			EcsPool<InputAttackComponent> poolAttackComponent = world.GetPool<InputAttackComponent>();
 			EcsPool<StateAttackComponent> poolStateAttackComponents = world.GetPool<StateAttackComponent>();
 			EcsPool<DashComponent> poolDashComponent = world.GetPool<DashComponent>();
 			EcsPool<HealthComponent> poolHeathComponents = world.GetPool<HealthComponent>();
