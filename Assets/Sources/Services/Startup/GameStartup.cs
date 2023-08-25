@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using System;
 using UnityEngine;
 
 public class GameStartup : MonoBehaviour
@@ -26,7 +27,9 @@ public class GameStartup : MonoBehaviour
 	private EcsSystems ecsDamageSystems;
 	private EcsSystems ecsEnablerSystems;
 	private EcsSystems ecsAnimationSystems;
-    
+
+	private EcsSystems ecsFixedUpdateSystems;
+
     private void Start()
     {
 		SceneData.Init();
@@ -48,11 +51,13 @@ public class GameStartup : MonoBehaviour
 		InitCameraSystem();
 		InitEnablerSystem();
 		InitAnimationSystem();
+
+		InitFixedUpdateSystems();
 	}
 
 	private void Update()
-    {
-        runtimeData.SetCursorPosition(raycaster.GetCursorPosition());
+	{
+		runtimeData.SetCursorPosition(raycaster.GetCursorPosition());
 
 		ecsUpdateInputSystems?.Run();
 
@@ -73,6 +78,11 @@ public class GameStartup : MonoBehaviour
 		ecsAnimationSystems?.Run();
 
 		ecsEnablerSystems?.Run();
+	}
+
+	private void FixedUpdate()
+	{
+		ecsFixedUpdateSystems?.Run();
 	}
 
 	private void OnDestroy()
@@ -106,6 +116,9 @@ public class GameStartup : MonoBehaviour
 
 		ecsAnimationSystems?.Destroy();
 		ecsAnimationSystems = null;
+
+		ecsFixedUpdateSystems?.Destroy();
+		ecsFixedUpdateSystems = null;
 
         ecsWorld?.Destroy();
         ecsWorld = null;
@@ -154,18 +167,26 @@ public class GameStartup : MonoBehaviour
 		ecsUpdateTurretSystems.Init();
 	}
 
+	private void InitFixedUpdateSystems()
+	{
+		ecsFixedUpdateSystems = new EcsSystems(ecsWorld, sharedData);
+		ecsFixedUpdateSystems
+			.Add(new CharacterAimingSystem());
+		ecsFixedUpdateSystems.Init();
+	}
+
 	private void InitCharacterSystem()
 	{
 		ecsUpdateCharacterSystems = new EcsSystems(ecsWorld, sharedData);
 		ecsUpdateCharacterSystems
-			.Add(new CharacterAimingSystem())
+			.Add(new CharacterAligmentWeaponSystem())
 			.Add(new CharacterDashTimerSystem())
 			.Add(new CharacterMoveSystem())
 			.Add(new CharacterRotationSystem())
 			.Add(new CharacterSelectWeaponSystem())
 			.Add(new CharacterInputAttackSystem())
 			.Add(new CharacterChangeStateSystem())
-			.Add(new AttackWeaponSystem())
+			.Add(new BaseAttackSystem())
 			.Add(new CharacterRigSystem());
 		ecsUpdateCharacterSystems.Init();
 	}
@@ -181,9 +202,8 @@ public class GameStartup : MonoBehaviour
 	{
 		ecsAttackSystems = new EcsSystems(ecsWorld,sharedData);
 		ecsAttackSystems
-			.Add(new MeleeAttackEventSystem())
-			.Add(new MeleeAttackMoveSystem())
-			.Add(new RangeAttackEventSystem());
+			.Add(new BaseAttackSystem())
+			.Add(new MeleeAttackMoveSystem());
 		ecsAttackSystems.Init();
 	}
 

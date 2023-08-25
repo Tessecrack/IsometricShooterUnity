@@ -9,7 +9,8 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			.Inc<MovableComponent>()
 			.Inc<WeaponTypeComponent>()
 			.Inc<InputAttackComponent>()
-			.Inc<StateAttackComponent>()
+			.Inc<AimStateComponent>()
+			.Inc<CharacterStateComponent>()
 			.Inc<EnablerComponent>()
 			.Inc<VelocityComponent>()
 			.End();
@@ -18,9 +19,10 @@ public class CharacterAnimationSystem : IEcsRunSystem
 		var movables = world.GetPool<MovableComponent>();
 		var weaponTypes = world.GetPool<WeaponTypeComponent>();
 		var attacks = world.GetPool<InputAttackComponent>();
-		var attackStates = world.GetPool<StateAttackComponent>();
+		var aimStates = world.GetPool<AimStateComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
 		var velocityComponents = world.GetPool<VelocityComponent>();
+		var characterStates = world.GetPool<CharacterStateComponent>();
 
 		foreach(int entity in filter)
 		{
@@ -33,17 +35,21 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			ref var movableComponent = ref movables.Get(entity);
 			ref var weaponType = ref weaponTypes.Get(entity);
 			ref var attackComponent = ref attacks.Get(entity);
-			ref var attackState = ref attackStates.Get(entity);
+			ref var aimState = ref aimStates.Get(entity);
 			ref var velocityComponent = ref velocityComponents.Get(entity);
-			var currentState = attackState.state;
+			ref var characterState = ref characterStates.Get(entity);
 
-			animatorComponent.animationState.IsMoving = velocityComponent.velocity.z != 0 || velocityComponent.velocity.x != 0;
 			animatorComponent.animationState.CurrentTypeWeapon = weaponType.typeWeapon;
+			animatorComponent.animationState.TypeAttack = attackComponent.typeAttack;
+			animatorComponent.animationState.CharacterState = characterState.characterState;
+			
+			animatorComponent.animationState.AimState = aimState.aimState;
+
 			animatorComponent.animationState.VerticalMoveValue = movableComponent.relativeVector.z;
 			animatorComponent.animationState.HorizontalMoveValue = movableComponent.relativeVector.x;
-			animatorComponent.animationState.IsAimingState = currentState == CharacterState.Aiming;
-			animatorComponent.animationState.IsMeleeAttack = attackState.isMeleeAttack;
-			animatorComponent.animationState.IsRangeAttack = attackState.isRangeAttack;
+
+			animatorComponent.animationState.IsAttack = attackComponent.isStartAttack;
+			
 			animatorComponent.animationsManager.ChangeAnimationsState(animatorComponent.animationState);
 		}
 	}

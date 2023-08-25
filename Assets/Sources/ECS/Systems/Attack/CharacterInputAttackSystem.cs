@@ -10,7 +10,7 @@ public class CharacterInputAttackSystem : IEcsRunSystem
 			.Inc<CharacterComponent>()
 			.Inc<TargetComponent>()
 			.Inc<EnablerComponent>()
-			.Inc<WeaponTypeComponent>()
+			.Inc<BaseAttackComponent>()
 			.End();
 
 		var characterEvents = world.GetPool<CharacterEventsComponent>();
@@ -18,7 +18,7 @@ public class CharacterInputAttackSystem : IEcsRunSystem
 		var characters = world.GetPool<CharacterComponent>();
 		var targets = world.GetPool<TargetComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
-		var weaponTypes = world.GetPool<WeaponTypeComponent>();
+		var baseAttacks = world.GetPool<BaseAttackComponent>();
 
 		foreach (int entity in filter)
 		{
@@ -31,7 +31,7 @@ public class CharacterInputAttackSystem : IEcsRunSystem
 			ref var attackComponent = ref attacks.Get(entity);
 			ref var characterComponent = ref characters.Get(entity);
 			ref var targetComponent = ref targets.Get(entity);
-			ref var weaponType = ref weaponTypes.Get(entity);
+			ref var baseAttack = ref baseAttacks.Get(entity);
 
 			attackComponent.isStartAttack = characterEvent.isStartAttack;
 			
@@ -39,7 +39,7 @@ public class CharacterInputAttackSystem : IEcsRunSystem
 
 			attackComponent.attackerTransform = characterComponent.characterTransform;
 
-			attackComponent.typeAttack = weaponType.typeWeapon == TypeWeapon.MELEE ? TypeAttack.Melee : TypeAttack.Range;
+			attackComponent.typeAttack = baseAttack.baseAttack.TypeAttack;
 		}
 	}
 }

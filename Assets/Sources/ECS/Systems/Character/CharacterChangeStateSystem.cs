@@ -6,13 +6,13 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<InputAttackComponent>()
-			.Inc<StateAttackComponent>()
+		var filter = world.Filter<VelocityComponent>()
+			.Inc<CharacterStateComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
-		var attacks = world.GetPool<InputAttackComponent>();
-		var characterStates = world.GetPool<StateAttackComponent>();
+		var velocityComponents = world.GetPool<VelocityComponent>();
+		var characterStates = world.GetPool<CharacterStateComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
 
 		foreach(int entity in filter)
@@ -22,35 +22,16 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 			{
 				continue;
 			}
+			ref var velocity = ref velocityComponents.Get(entity);
 			ref var characterState = ref characterStates.Get(entity);
 
-			if (characterState.isMeleeAttack || characterState.isRangeAttack)
+			if (velocity.velocity == Vector3.zero)
 			{
-				continue;
+				characterState.characterState = CharacterState.IDLE;
 			}
-
-			ref var attackComponent = ref attacks.Get(entity);
-			if (attackComponent.typeAttack == TypeAttack.Melee)
+			else
 			{
-				characterState.state = CharacterState.Idle;
-				characterState.passedTime = 0;
-			}
-
-			if (attackComponent.isStartAttack) 
-			{
-				characterState.state = CharacterState.Aiming;
-				characterState.passedTime = 0;
-			}
-
-			if (characterState.state == CharacterState.Aiming) 
-			{
-				characterState.passedTime += Time.deltaTime;
-			}
-
-			if (characterState.passedTime >= characterState.stateAttackTime)
-			{
-				characterState.state = CharacterState.Idle;
-				characterState.passedTime = 0;
+				characterState.characterState = CharacterState.RUN;
 			}
 		}
 	}

@@ -7,9 +7,32 @@ public class RangeAttackEvent : RangeAttack
 	{
 		IsEventAttack = true;
 
-		animationEvents.OnStartAttack += StartAttack;
-		animationEvents.OnEndAttack += EndAttack;
+		animationEvents.OnStartAttack += HandlerStartAttackEvent;
+		animationEvents.OnEndAttack += HandlerEndAttackEvent;
 
 		animationEvents.OnShot += shooter.Shot;
+	}
+
+	public void HandlerStartAttackEvent()
+	{
+		if (IsAttackInProcess)
+		{
+			return;
+		}
+		base.StartAttack();
+	}
+
+	public void HandlerEndAttackEvent()
+	{
+		base.EndAttack();
+	}
+
+	public override void StartAttack()
+	{
+		
+	}
+	public override void EndAttack()
+	{
+		
 	}
 }

@@ -7,7 +7,7 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 		var world = systems.GetWorld();
 		var filterEnemy = world.Filter<AIComponent>()
 			.Inc<TargetComponent>()
-			.Inc<StateAttackComponent>()
+			.Inc<AimStateComponent>()
 			.Inc<CharacterEventsComponent>()
 			.Inc<EnablerComponent>()
 			.End();
@@ -22,7 +22,7 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 
 		var aiEnemyComponents = world.GetPool<AIComponent>();
 		var targetComponents = world.GetPool<TargetComponent>();
-		var stateComponents = world.GetPool<StateAttackComponent>();
+		var aimStates = world.GetPool<AimStateComponent>();
 		var inputEvents = world.GetPool<CharacterEventsComponent>(); 
 		var enableComponents = world.GetPool<EnablerComponent>();
 		
@@ -47,18 +47,18 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 
 				ref var aiEnemyComponent = ref aiEnemyComponents.Get(entity);
 				ref var targetComponent = ref targetComponents.Get(entity);
-				ref var stateComponent = ref stateComponents.Get(entity);
+				ref var aimState = ref aimStates.Get(entity);
 				ref var eventComponent = ref inputEvents.Get(entity);
 
 				targetComponent.target = playerPosition;
 
 				if (aiEnemyComponent.aiAgent.IsDetectTarget(playerPosition))
 				{
-					stateComponent.state = CharacterState.Aiming;
+					aimState.aimState = AimState.AIM;
 				}
 				else
 				{
-					stateComponent.state = CharacterState.Idle;
+					aimState.aimState = AimState.NO_AIM;
 				}
 				bool canMeleeAttack = aiEnemyComponent.aiAgent.CanMeleeAttack(playerPosition);
 				bool canRangeAttack = aiEnemyComponent.aiAgent.CanRangeAttack(playerPosition);

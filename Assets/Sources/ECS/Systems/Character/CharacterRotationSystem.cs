@@ -7,15 +7,16 @@ public class CharacterRotationSystem : IEcsRunSystem
 		var world = systems.GetWorld();
 		var filter = world.Filter<RotatableComponent>()
 			.Inc<CharacterComponent>()
+			.Inc<CharacterStateComponent>()
 			.Inc<TargetComponent>()
-			.Inc<StateAttackComponent>()
+			.Inc<AimStateComponent>()
 			.Inc<EnablerComponent>()
 			.End();
 
 		var rotatableComponents = world.GetPool<RotatableComponent>();
 		var targetComponents = world.GetPool<TargetComponent>();
 		var characterComponents = world.GetPool<CharacterComponent>();
-		var characterStates = world.GetPool<StateAttackComponent>();
+		var aimStates = world.GetPool<AimStateComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
 
 		foreach(var entity in filter)
@@ -25,12 +26,10 @@ public class CharacterRotationSystem : IEcsRunSystem
 			{
 				continue;
 			}
-			ref var characterState = ref characterStates.Get(entity);
 
-			var isStateAttack = characterState.state == CharacterState.Aiming
-				|| characterState.isMeleeAttack;
+			ref var aimState = ref aimStates.Get(entity);
 
-			if (isStateAttack)
+			if (aimState.aimState == AimState.AIM)
 			{
 				ref var characterComponent = ref characterComponents.Get(entity);
 				ref var rotatableComponent = ref rotatableComponents.Get(entity);

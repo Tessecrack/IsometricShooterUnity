@@ -6,8 +6,6 @@ public class EnemyAnimationsManager : AnimationsManager
 	private bool needUpdateAnimationsState;
 	private int[] idsAnimationsStrikes;
 
-	private bool canPlayRangeAttack;
-
 	public EnemyAnimationsManager(in Animator animator, in AnimationEvents animationEvents) : base(animator)
 	{
 		this.animationCounterAttacks = animationEvents.CounterAnimations;
@@ -50,17 +48,19 @@ public class EnemyAnimationsManager : AnimationsManager
 			return;
 		}
 
-		if (updatedAnimationsState.IsMeleeAttack)
+		if (updatedAnimationsState.IsAttack)
 		{
-			AnimateAttack(idsAnimationsStrikes[this.animationCounterAttacks.RandomNumberAnimation]);			
-			return;
-		}
+			if (updatedAnimationsState.TypeAttack == TypeAttack.MELEE)
+			{
+				AnimateAttack(idsAnimationsStrikes[this.animationCounterAttacks.RandomNumberAnimation]);
+				return;
+			}
 
-		if (updatedAnimationsState.IsRangeAttack && canPlayRangeAttack)
-		{
-			canPlayRangeAttack = false;
-			AnimateAttack(HashCharacterAnimations.RangeFirstAttack);
-			return;
+			if (updatedAnimationsState.TypeAttack == TypeAttack.RANGE)
+			{
+				AnimateAttack(HashCharacterAnimations.RangeFirstAttack);
+				return;
+			}
 		}
 
 		if (currentAnimationState.Equals(updatedAnimationsState) && !needUpdateAnimationsState)
@@ -69,7 +69,6 @@ public class EnemyAnimationsManager : AnimationsManager
 		}
 		needUpdateAnimationsState = false;
 		PlayAnimation(HashCharacterAnimations.LocomotionRun);
-		canPlayRangeAttack = true;
 		currentAnimationState.UpdateValuesState(updatedAnimationsState);
 		
 	}
@@ -80,3 +79,4 @@ public class EnemyAnimationsManager : AnimationsManager
 		animator.SetFloat(HashParamsAnimations.Vertical, updatedAnimationsState.VerticalMoveValue);
 	}
 }
+

@@ -6,6 +6,11 @@ public class MeleeAttack : BaseAttack
 	public int TotalNumberStrikes => totalNumberStrikes;
 	public int SpeedMoveForwardInStrike => speedMoveForwardInStrike;
 
+	public MeleeAttack()
+	{
+		TypeAttack = TypeAttack.MELEE;
+	}
+
 	public override void StartAttack()
 	{
 		IsStartAttack = true;

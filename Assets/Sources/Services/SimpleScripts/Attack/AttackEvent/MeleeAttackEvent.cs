@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public class MeleeAttackEvent : MeleeAttack
 {
 	public MeleeAttackEvent(in AnimationEvents animationEvents)
@@ -6,13 +8,37 @@ public class MeleeAttackEvent : MeleeAttack
 
 		IsEventAttack = true;
 
-		animationEvents.OnStartAttack += StartAttack;
-		animationEvents.OnEndAttack += EndAttack;
+		animationEvents.OnStartAttack += HandlerStartAttackEvent;
+		animationEvents.OnEndAttack += HandlerEndAttackEvent;
 
 		animationEvents.OnStartApplyDamage += HandlerStartApplyMeleeDamage;
 		animationEvents.OnEndApplyDamage += HandlerEndApplyMeleeDamage;
 
 		animationEvents.OnStartForwardMove += HandlerStartForwardMove;
 		animationEvents.OnEndForwardMove += HandlerEndForwardMove;
+	}
+
+	public void HandlerStartAttackEvent()
+	{
+		if (IsAttackInProcess)
+		{
+			return;
+		}
+		base.StartAttack();
+	}
+
+	public void HandlerEndAttackEvent()
+	{
+		base.EndAttack();
+	}
+
+	public override void StartAttack()
+	{
+		
+	}
+
+	public override void EndAttack()
+	{
+		
 	}
 }

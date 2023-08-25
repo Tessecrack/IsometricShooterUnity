@@ -1,5 +1,5 @@
 public enum TypeAttack
 {
-	Melee,
-	Range
+	MELEE,
+	RANGE
 }

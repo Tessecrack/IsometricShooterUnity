@@ -9,22 +9,26 @@ public class CharacterRigSystem : IEcsRunSystem
 
 		var entities = world.Filter<CharacterRigComponent>()
 			.Inc<CharacterComponent>()
-			.Inc<StateAttackComponent>()
+			.Inc<CharacterStateComponent>()
+			.Inc<AimStateComponent>()
 			.Inc<MovableComponent>()
 			.Inc<WeaponComponent>()
 			.Inc<TargetComponent>()
 			.Inc<EnablerComponent>()
 			.Inc<VelocityComponent>()
+			.Inc<BaseAttackComponent>()
 			.End();
 
 		var characterRigComponents = world.GetPool<CharacterRigComponent>();
 		var characterComponents = world.GetPool<CharacterComponent>();
-		var stateComponents = world.GetPool<StateAttackComponent>();
+		var characterStates = world.GetPool<CharacterStateComponent>();
+		var aimStates = world.GetPool<AimStateComponent>();
 		var movableComponents = world.GetPool<MovableComponent>();
 		var weaponComponents = world.GetPool<WeaponComponent>();
 		var targetComponents = world.GetPool<TargetComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
 		var velocityComponents = world.GetPool<VelocityComponent>();
+		var baseAttackComponents = world.GetPool<BaseAttackComponent>();
 
 		foreach(var entity in entities)
 		{
@@ -36,18 +40,21 @@ public class CharacterRigSystem : IEcsRunSystem
 
 			ref var characterComponent = ref characterComponents.Get(entity);
 			ref var characterRigComponent = ref characterRigComponents.Get(entity);
-			ref var stateComponent = ref stateComponents.Get(entity);
+			ref var aimState = ref aimStates.Get(entity);
 			ref var movableComponent = ref movableComponents.Get(entity);
 			ref var weaponComponent = ref weaponComponents.Get(entity);
 			ref var targetComponent = ref targetComponents.Get(entity);
 			ref var velocityComponent = ref velocityComponents.Get(entity);
+			ref var characterState = ref characterStates.Get(entity);
+			ref var baseAttack = ref baseAttackComponents.Get(entity);
 
 			var characterTransform = characterComponent.characterTransform;
 
 			var angle = Vector3.Angle(characterTransform.forward, targetComponent.target - characterTransform.position);
 
-			if (stateComponent.state == CharacterState.Idle 
-				&& velocityComponent.velocity.magnitude == 0 && angle < 90)
+			if (characterState.characterState == CharacterState.IDLE 
+				&& velocityComponent.velocity.magnitude == 0 && angle < 90 
+				&& aimState.aimState == AimState.NO_AIM)
 			{
 				characterRigComponent.characterRigController.SetTargetHeadChestRig(targetComponent.target);
 			}
@@ -61,16 +68,18 @@ public class CharacterRigSystem : IEcsRunSystem
 				characterRigComponent.characterRigController.ResetRigRightArm();
 				characterRigComponent.characterRigController.SetTargetLeftArm(weaponComponent.weapon.AdditionalGrip.position);
 			}
-			else if (weaponComponent.weapon.TypeWeapon == TypeWeapon.MELEE 
-				&& stateComponent.state == CharacterState.Idle)
+			else if (weaponComponent.weapon.TypeWeapon == TypeWeapon.MELEE)
 			{
-				characterRigComponent.characterRigController.ResetRigLeftArm();
-				characterRigComponent.characterRigController.SetRigRightArm();
-			}
-			else
-			{
-				characterRigComponent.characterRigController.ResetRigLeftArm();
-				characterRigComponent.characterRigController.ResetRigRightArm();
+				if (baseAttack.baseAttack.IsAttackInProcess)
+				{
+					characterRigComponent.characterRigController.ResetRigLeftArm();
+					characterRigComponent.characterRigController.ResetRigRightArm();
+				}
+				else
+				{
+					characterRigComponent.characterRigController.ResetRigLeftArm();
+					characterRigComponent.characterRigController.SetRigRightArm();
+				}
 			}
 		}
 	}

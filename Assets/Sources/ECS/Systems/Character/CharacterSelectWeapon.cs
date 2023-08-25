@@ -18,7 +18,6 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 		EcsPool<ArsenalComponent> arsenals = world.GetPool<ArsenalComponent>();
 		EcsPool<WeaponComponent> weapons = world.GetPool<WeaponComponent>();
 		EcsPool<CharacterComponent> characterComponents = world.GetPool<CharacterComponent>();
-		EcsPool<StateAttackComponent> states = world.GetPool<StateAttackComponent>();
 		EcsPool<WeaponTypeComponent> weaponTypes = world.GetPool<WeaponTypeComponent>();
 		EcsPool<BaseAttackComponent> baseAttacks = world.GetPool<BaseAttackComponent>();
 
@@ -36,12 +35,6 @@ public class CharacterSelectWeaponSystem : IEcsRunSystem
 			ref var eventComponent = ref eventComponents.Get(entity);
 			ref var arsenal = ref arsenals.Get(entity);
 			if (eventComponent.selectedNumberWeapon == arsenal.currentNumberWeapon)
-			{
-				continue;
-			}
-
-			ref var state = ref states.Get(entity);
-			if (state.isMeleeAttack)
 			{
 				continue;
 			}

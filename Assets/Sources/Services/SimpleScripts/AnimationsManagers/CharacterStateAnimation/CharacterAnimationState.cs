@@ -1,30 +1,30 @@
 public class CharacterAnimationState
 {
 	public TypeWeapon CurrentTypeWeapon { get; set; }
-	public bool IsMoving { get; set; }
-	public bool IsAimingState { get; set; }
+	public TypeAttack TypeAttack { get; set; }
+	public CharacterState CharacterState { get; set; }
+	public AimState AimState { get; set; }
 	public float HorizontalMoveValue { get; set; }
 	public float VerticalMoveValue { get; set; }
-	public bool IsMeleeAttack { get; set; }
-	public bool IsRangeAttack { get; set; }
+	public bool IsAttack { get; set; }
 	public void UpdateValuesState(CharacterAnimationState other)
 	{
 		CurrentTypeWeapon = other.CurrentTypeWeapon;
-		IsMoving = other.IsMoving;
-		IsAimingState = other.IsAimingState;
+		CharacterState = other.CharacterState;
+		TypeAttack = other.TypeAttack;
+		AimState = other.AimState;
 		HorizontalMoveValue = other.HorizontalMoveValue;
 		VerticalMoveValue = other.VerticalMoveValue;
-		IsMeleeAttack = other.IsMeleeAttack;
-		IsRangeAttack = other.IsRangeAttack;
+		IsAttack = other.IsAttack;
 	}
 
 	public bool Equals(CharacterAnimationState other)
 	{
 		return CurrentTypeWeapon == other.CurrentTypeWeapon &&
-			IsMoving == other.IsMoving &&
-			IsAimingState == other.IsAimingState &&
-			IsMeleeAttack == other.IsMeleeAttack &&
-			IsRangeAttack == other.IsRangeAttack;
+			CharacterState == other.CharacterState &&
+			TypeAttack == other.TypeAttack &&
+			AimState == other.AimState &&
+			IsAttack == other.IsAttack;
 	}
 
 	public bool EqualsBlendTreeParams(CharacterAnimationState other)

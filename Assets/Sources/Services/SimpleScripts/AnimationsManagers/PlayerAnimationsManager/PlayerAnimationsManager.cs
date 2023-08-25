@@ -2,34 +2,34 @@ using UnityEngine;
 
 public class PlayerAnimationsManager : AnimationsManager
 {
-    private bool isAnimationAttackInProgress;
-    private bool needUpdateAnimationsState;
+	private bool isAnimationAttackInProgress;
+	private bool needUpdateAnimationsState;
 	private int[] idsAnimationsStrikes;
 
 	public PlayerAnimationsManager(in Animator animator, in AnimationEvents animationEvents) : base(animator)
-    {
-        this.animationCounterAttacks = animationEvents.CounterAnimations;
+	{
+		this.animationCounterAttacks = animationEvents.CounterAnimations;
 
-        InitializeCloseCombatAnimations();
+		InitMeleeAttacksAnimations();
 
-        animationEvents.OnStartAttack += StartAttack;
+		animationEvents.OnStartAttack += StartAttack;
 		animationEvents.OnEndAttack += EndAttack;
 	}
 
-    public void StartAttack()
-    {
-        isAnimationAttackInProgress = true;
+	public void StartAttack()
+	{
+		isAnimationAttackInProgress = true;
 	}
 
-    public void EndAttack()
-    {
-        isAnimationAttackInProgress = false;
-        needUpdateAnimationsState = true;
-    }
-
-	public void InitializeCloseCombatAnimations()
+	public void EndAttack()
 	{
-        idsAnimationsStrikes = new int[this.animationCounterAttacks.TotalNumberAttacks];
+		isAnimationAttackInProgress = false;
+		needUpdateAnimationsState = true;
+	}
+
+	public void InitMeleeAttacksAnimations()
+	{
+		idsAnimationsStrikes = new int[this.animationCounterAttacks.TotalNumberAttacks];
 		idsAnimationsStrikes[0] = HashCharacterAnimations.MeleeFirstAttack;
 		idsAnimationsStrikes[1] = HashCharacterAnimations.MeleeSecondAttack;
 		idsAnimationsStrikes[2] = HashCharacterAnimations.MeleeThirdAttack;
@@ -37,112 +37,159 @@ public class PlayerAnimationsManager : AnimationsManager
 	}
 
 	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
-    {
-        if (currentAnimationState.EqualsBlendTreeParams(updatedAnimationsState) == false)
-        {
-            SetParamsBlendTree(updatedAnimationsState);
-        }
+	{
+		if (currentAnimationState.EqualsBlendTreeParams(updatedAnimationsState) == false)
+		{
+			SetParamsBlendTree(updatedAnimationsState);
+		}
 
-        if (isAnimationAttackInProgress)
-        {            
-            return;
-        }
+		if (isAnimationAttackInProgress)
+		{
+			return;
+		}
 
-		if (updatedAnimationsState.IsMeleeAttack == true)
+		if (updatedAnimationsState.IsAttack == true && updatedAnimationsState.TypeAttack == TypeAttack.MELEE)
 		{
 			AnimateAttack(idsAnimationsStrikes[this.animationCounterAttacks.CurrentNumberAnimation]);
-            isAnimationAttackInProgress = true;
-            return;
+			isAnimationAttackInProgress = true;
+			return;
 		}
 
-		if (currentAnimationState.Equals(updatedAnimationsState) && !needUpdateAnimationsState) 
-        {
-            return;
-        }
-        needUpdateAnimationsState = false;
-        bool isChangedAttackState = ChangeAttackState(updatedAnimationsState);
-		
-		if (updatedAnimationsState.IsAimingState == false)
-        {
-			ChangeLayerArmsHeavyNoAttack(updatedAnimationsState, isChangedAttackState);
-			if (currentAnimationState.IsMoving != updatedAnimationsState.IsMoving || isChangedAttackState)
-            {
-                ChangeNoAttackMovingState(updatedAnimationsState);
-            }
-        }
-
-        currentAnimationState.UpdateValuesState(updatedAnimationsState);
-	}
-
-    private bool ChangeAttackState(CharacterAnimationState updatedAnimationsState)
-    {
-        bool isChangedWeapon = updatedAnimationsState.CurrentTypeWeapon != currentAnimationState.CurrentTypeWeapon;
-
-		if (currentAnimationState.IsAimingState != updatedAnimationsState.IsAimingState || 
-            isChangedWeapon && updatedAnimationsState.IsAimingState == true)
+		if (currentAnimationState.Equals(updatedAnimationsState) && !needUpdateAnimationsState)
 		{
-            ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
-            ChangeAnimationAttackWeapon(updatedAnimationsState);
-            return true;
+			return;
 		}
-        return false;
+		needUpdateAnimationsState = false;
+		ChangeCharacterState(updatedAnimationsState);
+		currentAnimationState.UpdateValuesState(updatedAnimationsState);
 	}
 
-    private void ChangeNoAttackMovingState(CharacterAnimationState updatedAnimationsState)
-    {
-		if (updatedAnimationsState.IsMoving == true)
+	private void ChangeCharacterState(CharacterAnimationState updatedAnimationsState)
+	{
+		switch (updatedAnimationsState.CharacterState)
 		{
-			PlayAnimation(HashCharacterAnimations.LocomotionRun);
+			case CharacterState.IDLE:
+				CharacterStateIdle(updatedAnimationsState);
+				break;
+			case CharacterState.WALK:
+				CharacterStateWalk(updatedAnimationsState);
+				break;
+			case CharacterState.RUN:
+				CharacterStateRun(updatedAnimationsState);
+				break;
 		}
-		else
+	}
+
+	private void CharacterStateIdle(CharacterAnimationState updatedAnimationsState)
+	{
+		switch (updatedAnimationsState.AimState)
 		{
-			PlayAnimation(HashCharacterAnimations.LocomotionIdle);
+			case AimState.NO_AIM:
+				CharacterNoAimingIdleState(updatedAnimationsState);
+				break;
+			case AimState.AIM:
+				CharacterAimingIdleState(updatedAnimationsState);
+				break;
 		}
 	}
 
-    private void ChangeLayerArmsHeavyNoAttack(CharacterAnimationState updatedAnimationState, bool isChangedAttackState)
-    {
-        if (currentAnimationState.CurrentTypeWeapon == updatedAnimationState.CurrentTypeWeapon && isChangedAttackState == false)
-        {
-            return;
-        }
-
-        if (updatedAnimationState.CurrentTypeWeapon == TypeWeapon.HEAVY)
-        {
-            SetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
-        }
-        else
-        {
-            ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAttack);
+	private void CharacterStateRun(CharacterAnimationState updatedAnimationsState)
+	{
+		switch (updatedAnimationsState.AimState)
+		{
+			case AimState.NO_AIM:
+				CharacterNoAimingRunState(updatedAnimationsState);
+				break;
+			case AimState.AIM:
+				CharacterAimingRunState(updatedAnimationsState);
+				break;
 		}
 	}
-    private void ChangeAnimationAttackWeapon(CharacterAnimationState animationState)
-    {
-        var typeWeapon = animationState.CurrentTypeWeapon;
-        switch (typeWeapon)
-        {
-            case TypeWeapon.GUN:
-                SetBlendTreeGunAttack();
-                break;
-            case TypeWeapon.HEAVY:
-				SetBlendTreeHeavyAttack();
-                break;
-        }
-    }
 
-    private void SetBlendTreeGunAttack()
-    {
-        PlayAnimation(HashCharacterAnimations.GunAimingRunBlendTree);
-    }
+	private void CharacterAimingIdleState(CharacterAnimationState updatedAnimationsState)
+	{
+		switch (updatedAnimationsState.CurrentTypeWeapon)
+		{
+			case TypeWeapon.MELEE:
+				break;
+			case TypeWeapon.GUN:
+				SetBlendTreeGunAiming();
+				break;
+			case TypeWeapon.HEAVY:
+				SetBlendTreeHeavyAiming();
+				break;
+		}
+	}
 
-    private void SetBlendTreeHeavyAttack()
-    {
+	private void CharacterNoAimingIdleState(CharacterAnimationState updatedAnimationsState)
+	{
+		switch (updatedAnimationsState.CurrentTypeWeapon)
+		{
+			case TypeWeapon.MELEE:
+				ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
+				break;
+			case TypeWeapon.GUN:
+				ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
+				break;
+			case TypeWeapon.HEAVY:
+				SetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
+				break;
+		}
+		PlayAnimation(HashCharacterAnimations.LocomotionIdle);
+	}
+
+	private void CharacterAimingRunState(CharacterAnimationState updatedAnimationsState)
+	{
+		switch (updatedAnimationsState.CurrentTypeWeapon)
+		{
+			case TypeWeapon.MELEE:
+				break;
+			case TypeWeapon.GUN:
+				SetBlendTreeGunAiming();
+				break;
+			case TypeWeapon.HEAVY:
+				SetBlendTreeHeavyAiming();
+				break;
+		}
+	}
+
+	private void CharacterNoAimingRunState(CharacterAnimationState updatedAnimationsState)
+	{
+		switch (updatedAnimationsState.CurrentTypeWeapon)
+		{
+			case TypeWeapon.MELEE:
+				ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
+				break;
+			case TypeWeapon.GUN:
+				ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
+				break;
+			case TypeWeapon.HEAVY:
+				SetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
+				break;
+		}
+		PlayAnimation(HashCharacterAnimations.LocomotionRun);
+	}
+
+	private void SetBlendTreeGunAiming()
+	{
+		ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
+		PlayAnimation(HashCharacterAnimations.GunAimingRunBlendTree);
+	}
+
+	private void SetBlendTreeHeavyAiming()
+	{
+		ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
 		PlayAnimation(HashCharacterAnimations.HeavyAimingRunBlendTree);
 	}
 
-    private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)
-    {
-        animator.SetFloat(HashParamsAnimations.Horizontal, updatedAnimationsState.HorizontalMoveValue);
-        animator.SetFloat(HashParamsAnimations.Vertical, updatedAnimationsState.VerticalMoveValue);
-    }
+	private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)
+	{
+		animator.SetFloat(HashParamsAnimations.Horizontal, updatedAnimationsState.HorizontalMoveValue);
+		animator.SetFloat(HashParamsAnimations.Vertical, updatedAnimationsState.VerticalMoveValue);
+	}
+
+	private void CharacterStateWalk(CharacterAnimationState updatedAnimationsState)
+	{
+
+	}
 }

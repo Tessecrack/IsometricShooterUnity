@@ -11787,25 +11787,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpawnPoint: {fileID: 1568812812}
-  turretsSpawnPoints:
-  - {fileID: 943888503}
-  - {fileID: 1021873383}
-  - {fileID: 1658215710}
-  - {fileID: 572699324}
-  - {fileID: 991209430}
-  - {fileID: 905571523}
-  enemiesSpawnPoints:
-  - {fileID: 118314778}
-  - {fileID: 697368720}
-  - {fileID: 120672666}
-  - {fileID: 1740451284}
-  - {fileID: 547635955}
-  - {fileID: 1512663812}
-  - {fileID: 147653683}
-  - {fileID: 1391633796}
-  - {fileID: 1016651253}
-  - {fileID: 2088093812}
-  - {fileID: 2094323237}
+  turretsSpawnPoints: []
+  enemiesSpawnPoints: []
 --- !u!1 &174928997
 GameObject:
   m_ObjectHideFlags: 0

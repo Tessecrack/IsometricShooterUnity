@@ -24,7 +24,7 @@ public class TurretInitSystem : IEcsInitSystem
 			EcsPool<RotatableComponent> poolRotatableComponents = world.GetPool<RotatableComponent>();
 			EcsPool<AIComponent> poolAIEnemyComponents = world.GetPool<AIComponent>();
 			EcsPool<TargetComponent> poolTargetComponents = world.GetPool<TargetComponent>();
-			EcsPool<StateAttackComponent> poolStateAttackComponents = world.GetPool<StateAttackComponent>();
+			EcsPool<AimTimerComponent> poolStateAttackComponents = world.GetPool<AimTimerComponent>();
 			EcsPool<CharacterComponent> poolCharacterComponents = world.GetPool<CharacterComponent>();
 			EcsPool<WeaponComponent> poolWeaponComponents = world.GetPool<WeaponComponent>();
 			EcsPool<InputAttackComponent> poolAttackComponents = world.GetPool<InputAttackComponent>();
@@ -76,7 +76,7 @@ public class TurretInitSystem : IEcsInitSystem
 			baseAttack.baseAttack = weaponComponent.weapon.BaseAttack;
 
 			attackComponent.attackerTransform = turretInstance.transform;
-			attackComponent.typeAttack = TypeAttack.Range;
+			attackComponent.typeAttack = TypeAttack.RANGE;
 
 			weaponTypeComponent.typeWeapon = TypeWeapon.HEAVY;
 

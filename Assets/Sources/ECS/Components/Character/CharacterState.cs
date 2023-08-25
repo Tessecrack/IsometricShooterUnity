@@ -1,5 +1,6 @@
 public enum CharacterState : byte
 {
-	Idle,
-	Aiming
+	IDLE,
+	WALK,
+	RUN
 }

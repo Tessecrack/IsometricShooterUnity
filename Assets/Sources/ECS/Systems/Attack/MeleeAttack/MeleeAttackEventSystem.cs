@@ -1,6 +1,6 @@
 using Leopotam.EcsLite;
 using UnityEngine;
-
+/*
 public class MeleeAttackEventSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
@@ -32,12 +32,6 @@ public class MeleeAttackEventSystem : IEcsRunSystem
 			ref var stateAttack = ref stateAttackComponents.Get(entity);
 			ref var attackEvent = ref attackEvents.Get(entity);
 
-			if (attackEvent.baseAttack == null)
-			{
-				Debug.Log("uuuuuuuuuuu");
-				continue;
-			}
-
 			if (attackEvent.baseAttack.IsAttackInProcess)
 			{
 				continue;
@@ -59,3 +53,4 @@ public class MeleeAttackEventSystem : IEcsRunSystem
 		}
 	}
 }
+*/

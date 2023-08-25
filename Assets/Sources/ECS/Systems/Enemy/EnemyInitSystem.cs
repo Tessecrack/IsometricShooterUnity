@@ -30,7 +30,7 @@ public class EnemyInitSystem : IEcsInitSystem
 			EcsPool<AnimatorComponent> poolAnimatorComponents = world.GetPool<AnimatorComponent>();
 
 			EcsPool<InputAttackComponent> poolAttackComponent = world.GetPool<InputAttackComponent>();
-			EcsPool<StateAttackComponent> poolStateAttackComponents = world.GetPool<StateAttackComponent>();
+			EcsPool<AimTimerComponent> poolStateAttackComponents = world.GetPool<AimTimerComponent>();
 			EcsPool<DashComponent> poolDashComponent = world.GetPool<DashComponent>();
 			EcsPool<HealthComponent> poolHeathComponents = world.GetPool<HealthComponent>();
 			EcsPool<TargetComponent> poolTargetComponents = world.GetPool<TargetComponent>();
@@ -45,6 +45,14 @@ public class EnemyInitSystem : IEcsInitSystem
 			EcsPool<WeaponTypeComponent> poolWeaponTypes = world.GetPool<WeaponTypeComponent>();
 			EcsPool<VelocityComponent> poolVelocities = world.GetPool<VelocityComponent>();
 			EcsPool<BaseAttackComponent> poolBaseAttacks = world.GetPool<BaseAttackComponent>();
+			EcsPool<CharacterStateComponent> poolCharacterStates = world.GetPool<CharacterStateComponent>();
+			EcsPool<AimStateComponent> poolAimStates = world.GetPool<AimStateComponent>();
+
+			ref var characterState = ref poolCharacterStates.Add(entityEnemy);
+			characterState.characterState = CharacterState.IDLE;
+
+			ref var aimState = ref poolAimStates.Add(entityEnemy);
+			aimState.aimState = AimState.NO_AIM;
 
 			ref var velocity = ref poolVelocities.Add(entityEnemy);
 			ref var enemyComponent = ref poolEnemyComponents.Add(entityEnemy);
@@ -119,18 +127,16 @@ public class EnemyInitSystem : IEcsInitSystem
 				var rangeAttack = new RangeAttackEvent(animEvents, shooter);
 
 				baseAttack.baseAttack = rangeAttack;
-
-				weaponType.typeWeapon = TypeWeapon.HEAVY;
 				damage.damage = enemyComponent.enemySettings.RangeDamage;
 			}
 			else
 			{
 				var meleeAttack = new MeleeAttackEvent(animEvents);
-				weaponType.typeWeapon = TypeWeapon.MELEE;
 				damage.damage = enemyComponent.enemySettings.MeleeDamage;
 
 				baseAttack.baseAttack = meleeAttack;
 			}
+			weaponType.typeWeapon = TypeWeapon.NO_WEAPON;
 		}
 	}
 }

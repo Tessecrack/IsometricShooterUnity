@@ -9,20 +9,20 @@ public class CharacterMoveSystem : IEcsRunSystem
 		EcsFilter filter = world.Filter<CharacterComponent>()
 			.Inc<CharacterEventsComponent>()
 			.Inc<MovableComponent>()
-			.Inc<StateAttackComponent>()
 			.Inc<DashComponent>()
 			.Inc<TargetComponent>()
 			.Inc<EnablerComponent>()
 			.Inc<VelocityComponent>()
+			.Inc<AimStateComponent>()
 			.End();
 
 		var characters = world.GetPool<CharacterComponent>();
 		var inputs = world.GetPool<CharacterEventsComponent>();
 		var movables = world.GetPool<MovableComponent>();
 		var dashes = world.GetPool<DashComponent>();
-		var states = world.GetPool<StateAttackComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
 		var velocityComponents = world.GetPool<VelocityComponent>();
+		var aimStates = world.GetPool<AimStateComponent>();
 
 		foreach(int entity in filter)
 		{
@@ -36,8 +36,8 @@ public class CharacterMoveSystem : IEcsRunSystem
 			ref var inputComponent = ref inputs.Get(entity);
 			ref var movableComponent = ref movables.Get(entity);
 			ref var dashComponent = ref dashes.Get(entity);
-			ref var state = ref states.Get(entity);
 			ref var velocityComponent = ref velocityComponents.Get(entity);
+			ref var aimState = ref aimStates.Get(entity);
 
 			var velocity = velocityComponent.velocity;
 
@@ -49,20 +49,13 @@ public class CharacterMoveSystem : IEcsRunSystem
 			{
 				continue;
 			}
+
 			var speedMove = dashComponent.isActiveDash ? dashComponent.dashSpeed : movableComponent.moveSpeed;
 			movableComponent.isActiveDash = dashComponent.isActiveDash;
 
-			if (state.isMeleeAttack == true || state.isRangeAttack == true)
-			{
-				if (dashComponent.isActiveDash)
-				{
-					characterComponent.characterController.Move(speedMove * Time.deltaTime * velocity);
-				}
-				continue;
-			}
 			characterComponent.characterController.Move(speedMove * Time.deltaTime * velocity);
 
-			if (velocity.magnitude > 0 && state.state == CharacterState.Idle)
+			if (velocity.magnitude > 0 && aimState.aimState == AimState.NO_AIM)
 			{
 				velocity.y = 0;
 				movableComponent.transform.forward = Vector3.Slerp(characterComponent.characterTransform.forward,

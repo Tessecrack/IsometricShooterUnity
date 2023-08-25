@@ -23,5 +23,6 @@ public class AutomaticWeapon : RangeWeapon
 		shooter.SetDamage(damage);
 
 		BaseAttack = new RangeAutomaticAttack(shooter);
+		BaseAttack.SetDelayBetweenAttack(delayBetweenAttack);
 	}
 }

@@ -22,7 +22,6 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<AnimatorComponent> poolAnimatorComponent = world.GetPool<AnimatorComponent>();
 		EcsPool<WeaponComponent> poolWeaponComponent = world.GetPool<WeaponComponent>();
 		EcsPool<InputAttackComponent> poolAttackComponent = world.GetPool<InputAttackComponent>();
-		EcsPool<StateAttackComponent> poolCharacterStateComponent = world.GetPool<StateAttackComponent>();
 		EcsPool<DashComponent> poolDashComponent = world.GetPool<DashComponent>();
 		EcsPool<HealthComponent> poolHealthComponent = world.GetPool<HealthComponent>();
 		EcsPool<CharacterRigComponent> poolCharacterRigComponent = world.GetPool<CharacterRigComponent>();
@@ -35,7 +34,16 @@ public class PlayerInitSystem : IEcsInitSystem
 		EcsPool<HitMeComponent> poolHitMeComponents = world.GetPool<HitMeComponent>();
 		EcsPool<WeaponTypeComponent> poolTypeWeapon = world.GetPool<WeaponTypeComponent>();
 		EcsPool<VelocityComponent> poolVelocities = world.GetPool<VelocityComponent>();
+
 		EcsPool<BaseAttackComponent> poolBaseAttacks = world.GetPool<BaseAttackComponent>();
+		EcsPool<CharacterStateComponent> poolCharacterStates = world.GetPool<CharacterStateComponent>();
+		EcsPool<AimStateComponent> poolAimStates = world.GetPool<AimStateComponent>();
+		EcsPool<AimTimerComponent> poolAimTimerComponent = world.GetPool<AimTimerComponent>();
+		ref var characterState = ref poolCharacterStates.Add(entityPlayer);
+		characterState.characterState = CharacterState.IDLE;
+
+		ref var aimState = ref poolAimStates.Add(entityPlayer);
+		aimState.aimState = AimState.NO_AIM;
 
 		ref var velocity = ref poolVelocities.Add(entityPlayer);
 		ref var playerComponent = ref poolPlayer.Add(entityPlayer);
@@ -47,7 +55,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var animatorComponent = ref poolAnimatorComponent.Add(entityPlayer);
 		ref var weaponComponent = ref poolWeaponComponent.Add(entityPlayer);
 		ref var attackComponent = ref poolAttackComponent.Add(entityPlayer);
-		ref var characterState = ref poolCharacterStateComponent.Add(entityPlayer);
+		ref var aimTimer = ref poolAimTimerComponent.Add(entityPlayer);
 		ref var dashComponent = ref poolDashComponent.Add(entityPlayer);	
 		ref var healthComponent = ref poolHealthComponent.Add(entityPlayer);
 		ref var characterRigComponent = ref poolCharacterRigComponent.Add(entityPlayer);
@@ -62,8 +70,8 @@ public class PlayerInitSystem : IEcsInitSystem
 		ref var baseAttack = ref poolBaseAttacks.Add(entityPlayer);
 
 		playerComponent.numberPlayer = 0;
-		
-		characterState.stateAttackTime = 3;
+
+		aimTimer.stateAimTime = 4;
 
 		GameObject player = sceneData.PlayerInstance;
 		var animEvents = player.GetComponent<AnimationEvents>();

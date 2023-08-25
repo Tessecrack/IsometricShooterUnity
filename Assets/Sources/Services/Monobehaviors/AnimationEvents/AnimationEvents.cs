@@ -29,11 +29,11 @@ public class AnimationEvents : MonoBehaviour
 		animationCounterAttacks = new AnimationCounterAttacks(countAnimationAttacks);
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		if (isEndAnimationAttack)
 		{
-			passedTimeLastAttack += Time.deltaTime;
+			passedTimeLastAttack += Time.fixedDeltaTime;
 		}
 		if (isStartAnimationAttack)
 		{

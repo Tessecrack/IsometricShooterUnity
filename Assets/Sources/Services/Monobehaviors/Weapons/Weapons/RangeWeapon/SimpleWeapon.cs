@@ -1,5 +1,4 @@
 using System.Linq;
-using UnityEngine;
 
 public class SimpleWeapon : RangeWeapon
 {
@@ -22,5 +21,6 @@ public class SimpleWeapon : RangeWeapon
 		shooter.SetDamage(damage);
 
 		BaseAttack = new RangeSimpleAttack(shooter);
+		BaseAttack.SetDelayBetweenAttack(delayBetweenAttack);
 	}
 }

@@ -1,48 +1,49 @@
 using Leopotam.EcsLite;
+using UnityEngine;
 
 public class CharacterAimingSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var entities = world.Filter<CharacterComponent>()
-			.Inc<StateAttackComponent>()
-			.Inc<WeaponComponent>()
+		var entities = world.Filter<AimStateComponent>()
+			.Inc<AimTimerComponent>()
+			.Inc<BaseAttackComponent>()
 			.Inc<EnablerComponent>()
-			.Inc<WeaponSpawnPointComponent>()
-			.Exc<TurretComponent>()
 			.End();
 
-		var characterComponents = world.GetPool<CharacterComponent>();
-		var statesComponents = world.GetPool<StateAttackComponent>();
-		var weaponComponents = world.GetPool<WeaponComponent>();
+		var aimStates = world.GetPool<AimStateComponent>();
+		var aimTimers = world.GetPool<AimTimerComponent>();
+		var baseAttackComponents = world.GetPool<BaseAttackComponent>();
 		var enablerComponents = world.GetPool<EnablerComponent>();
-		var weaponSpawnPoints = world.GetPool<WeaponSpawnPointComponent>();
-
-		foreach(var entity in entities)
+	
+		foreach (var entity in entities)
 		{
 			ref var enabler = ref enablerComponents.Get(entity);
 			if (enabler.isEnabled == false)
-			{ 
-				continue; 
-			}
-			ref var stateComponent = ref statesComponents.Get(entity);
-			if (stateComponent.state != CharacterState.Aiming)
-			{
-				continue;
-			}
-			ref var weaponComponent = ref weaponComponents.Get(entity);
-			if (weaponComponent.weapon.TypeWeapon == TypeWeapon.MELEE)
 			{
 				continue;
 			}
 
-			if (stateComponent.state == CharacterState.Aiming 
-				&& weaponComponent.weapon.TypeWeapon != TypeWeapon.MELEE)
+			ref var aimState = ref aimStates.Get(entity);
+			ref var aimTimer = ref aimTimers.Get(entity);
+			ref var baseAttack = ref baseAttackComponents.Get(entity);
+			
+			if (baseAttack.baseAttack.IsStartAttack)
 			{
-				ref var pointSpawnWeapon = ref weaponSpawnPoints.Get(entity);
-				ref var characterComponent = ref characterComponents.Get(entity);
-				pointSpawnWeapon.weaponSpawPoint.forward = characterComponent.characterTransform.forward;
+				aimState.aimState = AimState.AIM;
+				aimTimer.passedTime = 0;
+			}
+
+			if (aimState.aimState == AimState.AIM)
+			{
+				aimTimer.passedTime += Time.fixedDeltaTime;
+			}
+
+			if (aimTimer.passedTime >= aimTimer.stateAimTime)
+			{
+				aimState.aimState = AimState.NO_AIM;
+				aimTimer.passedTime = 0;
 			}
 		}
 	}
