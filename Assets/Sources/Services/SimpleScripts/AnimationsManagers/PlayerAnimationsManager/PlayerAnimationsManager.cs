@@ -198,8 +198,15 @@ public class PlayerAnimationsManager : AnimationsManager
 
 	private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)
 	{
-		animator.SetFloat(HashParamsAnimations.Horizontal, updatedAnimationsState.HorizontalMoveValue);
-		animator.SetFloat(HashParamsAnimations.Vertical, updatedAnimationsState.VerticalMoveValue);
+		if (currentAnimationState.HorizontalMoveValue != updatedAnimationsState.HorizontalMoveValue)
+		{
+			animator.SetFloat(HashParamsAnimations.Horizontal, updatedAnimationsState.HorizontalMoveValue);
+		}
+
+		if (currentAnimationState.VerticalMoveValue != updatedAnimationsState.VerticalMoveValue)
+		{
+			animator.SetFloat(HashParamsAnimations.Vertical, updatedAnimationsState.VerticalMoveValue);
+		}
 	}
 
 	private void CharacterStateWalk(CharacterAnimationState updatedAnimationsState)

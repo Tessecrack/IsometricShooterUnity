@@ -29,7 +29,6 @@ public abstract class AnimationsManager
 		{
 			return;
 		}
-
 		PlayAnimation(hashId);
 		previousIdAnimation = hashId;
 	}
