@@ -81,6 +81,11 @@ public class CharacterRigSystem : IEcsRunSystem
 					characterRigComponent.characterRigController.SetRigRightArm();
 				}
 			}
+			else
+			{
+				characterRigComponent.characterRigController.ResetRigLeftArm();
+				characterRigComponent.characterRigController.ResetRigRightArm();
+			}
 		}
 	}
 }

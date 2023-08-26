@@ -6,22 +6,30 @@ public class PlayerAnimationsManager : AnimationsManager
 	private bool needUpdateAnimationsState;
 	private int[] idsAnimationsStrikes;
 
+	private bool isAimingGun;
+
+	private bool isAimingHeavy;
+
+	private bool isLocomotionIdle;
+
+	private bool isLocomotionRun;
+
 	public PlayerAnimationsManager(in Animator animator, in AnimationEvents animationEvents) : base(animator)
 	{
 		this.animationCounterAttacks = animationEvents.CounterAnimations;
 
 		InitMeleeAttacksAnimations();
 
-		animationEvents.OnStartAttack += StartAttack;
-		animationEvents.OnEndAttack += EndAttack;
+		animationEvents.OnStartAttack += HandlerStartAttackEvent;
+		animationEvents.OnEndAttack += HandlerEndAttackEvent;
 	}
 
-	public void StartAttack()
+	public void HandlerStartAttackEvent()
 	{
 		isAnimationAttackInProgress = true;
 	}
 
-	public void EndAttack()
+	public void HandlerEndAttackEvent()
 	{
 		isAnimationAttackInProgress = false;
 		needUpdateAnimationsState = true;
@@ -111,6 +119,7 @@ public class PlayerAnimationsManager : AnimationsManager
 		switch (updatedAnimationsState.CurrentTypeWeapon)
 		{
 			case TypeWeapon.MELEE:
+				PlayAnimation(HashCharacterAnimations.LocomotionIdle);
 				break;
 			case TypeWeapon.GUN:
 				SetBlendTreeGunAiming();
@@ -123,6 +132,9 @@ public class PlayerAnimationsManager : AnimationsManager
 
 	private void CharacterNoAimingIdleState(CharacterAnimationState updatedAnimationsState)
 	{
+		isAimingHeavy = false;
+		isAimingGun = false;
+
 		switch (updatedAnimationsState.CurrentTypeWeapon)
 		{
 			case TypeWeapon.MELEE:
@@ -143,6 +155,7 @@ public class PlayerAnimationsManager : AnimationsManager
 		switch (updatedAnimationsState.CurrentTypeWeapon)
 		{
 			case TypeWeapon.MELEE:
+				PlayAnimation(HashCharacterAnimations.LocomotionRun);
 				break;
 			case TypeWeapon.GUN:
 				SetBlendTreeGunAiming();
@@ -155,6 +168,9 @@ public class PlayerAnimationsManager : AnimationsManager
 
 	private void CharacterNoAimingRunState(CharacterAnimationState updatedAnimationsState)
 	{
+		isAimingHeavy = false;
+		isAimingGun = false;
+
 		switch (updatedAnimationsState.CurrentTypeWeapon)
 		{
 			case TypeWeapon.MELEE:
@@ -172,14 +188,24 @@ public class PlayerAnimationsManager : AnimationsManager
 
 	private void SetBlendTreeGunAiming()
 	{
+		if (isAimingGun)
+		{
+			return;
+		}
 		ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
 		PlayAnimation(HashCharacterAnimations.GunAimingRunBlendTree);
+		isAimingGun = true;
 	}
 
 	private void SetBlendTreeHeavyAiming()
 	{
+		if (isAimingHeavy)
+		{
+			return;
+		}
 		ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
 		PlayAnimation(HashCharacterAnimations.HeavyAimingRunBlendTree);
+		isAimingHeavy = true;
 	}
 
 	private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)

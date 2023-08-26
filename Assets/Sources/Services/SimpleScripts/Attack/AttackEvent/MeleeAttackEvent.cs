@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 public class MeleeAttackEvent : MeleeAttack
 {
 	public MeleeAttackEvent(in AnimationEvents animationEvents)
