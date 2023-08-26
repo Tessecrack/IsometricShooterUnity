@@ -6,14 +6,6 @@ public class PlayerAnimationsManager : AnimationsManager
 	private bool needUpdateAnimationsState;
 	private int[] idsAnimationsStrikes;
 
-	private bool isAimingGun;
-
-	private bool isAimingHeavy;
-
-	private bool isLocomotionIdle;
-
-	private bool isLocomotionRun;
-
 	public PlayerAnimationsManager(in Animator animator, in AnimationEvents animationEvents) : base(animator)
 	{
 		this.animationCounterAttacks = animationEvents.CounterAnimations;
@@ -119,7 +111,7 @@ public class PlayerAnimationsManager : AnimationsManager
 		switch (updatedAnimationsState.CurrentTypeWeapon)
 		{
 			case TypeWeapon.MELEE:
-				PlayAnimation(HashCharacterAnimations.LocomotionIdle);
+				PlayLocomotionRun();
 				break;
 			case TypeWeapon.GUN:
 				SetBlendTreeGunAiming();
@@ -132,9 +124,6 @@ public class PlayerAnimationsManager : AnimationsManager
 
 	private void CharacterNoAimingIdleState(CharacterAnimationState updatedAnimationsState)
 	{
-		isAimingHeavy = false;
-		isAimingGun = false;
-
 		switch (updatedAnimationsState.CurrentTypeWeapon)
 		{
 			case TypeWeapon.MELEE:
@@ -147,7 +136,8 @@ public class PlayerAnimationsManager : AnimationsManager
 				SetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
 				break;
 		}
-		PlayAnimation(HashCharacterAnimations.LocomotionIdle);
+
+		PlayLocomotionIdle();
 	}
 
 	private void CharacterAimingRunState(CharacterAnimationState updatedAnimationsState)
@@ -155,7 +145,7 @@ public class PlayerAnimationsManager : AnimationsManager
 		switch (updatedAnimationsState.CurrentTypeWeapon)
 		{
 			case TypeWeapon.MELEE:
-				PlayAnimation(HashCharacterAnimations.LocomotionRun);
+				PlayLocomotionRun();
 				break;
 			case TypeWeapon.GUN:
 				SetBlendTreeGunAiming();
@@ -168,9 +158,6 @@ public class PlayerAnimationsManager : AnimationsManager
 
 	private void CharacterNoAimingRunState(CharacterAnimationState updatedAnimationsState)
 	{
-		isAimingHeavy = false;
-		isAimingGun = false;
-
 		switch (updatedAnimationsState.CurrentTypeWeapon)
 		{
 			case TypeWeapon.MELEE:
@@ -183,29 +170,30 @@ public class PlayerAnimationsManager : AnimationsManager
 				SetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
 				break;
 		}
-		PlayAnimation(HashCharacterAnimations.LocomotionRun);
+
+		PlayLocomotionRun();
 	}
 
 	private void SetBlendTreeGunAiming()
 	{
-		if (isAimingGun)
-		{
-			return;
-		}
 		ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
-		PlayAnimation(HashCharacterAnimations.GunAimingRunBlendTree);
-		isAimingGun = true;
+		PlayAnimationWithCheck(HashCharacterAnimations.GunAimingRunBlendTree);
 	}
 
 	private void SetBlendTreeHeavyAiming()
 	{
-		if (isAimingHeavy)
-		{
-			return;
-		}
 		ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
-		PlayAnimation(HashCharacterAnimations.HeavyAimingRunBlendTree);
-		isAimingHeavy = true;
+		PlayAnimationWithCheck(HashCharacterAnimations.HeavyAimingRunBlendTree);
+	}
+
+	private void PlayLocomotionIdle()
+	{
+		PlayAnimationWithCheck(HashCharacterAnimations.LocomotionIdle);
+	}
+
+	private void PlayLocomotionRun()
+	{
+		PlayAnimationWithCheck(HashCharacterAnimations.LocomotionRun);
 	}
 
 	private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)

@@ -68,7 +68,7 @@ public class EnemyAnimationsManager : AnimationsManager
 			return;
 		}
 		needUpdateAnimationsState = false;
-		PlayAnimation(HashCharacterAnimations.LocomotionRun);
+		PlayAnimationWithCheck(HashCharacterAnimations.LocomotionRun);
 		currentAnimationState.UpdateValuesState(updatedAnimationsState);
 		
 	}
