@@ -28,16 +28,24 @@ public class CharacterAimingSystem : IEcsRunSystem
 			ref var aimState = ref aimStates.Get(entity);
 			ref var aimTimer = ref aimTimers.Get(entity);
 			ref var baseAttack = ref baseAttackComponents.Get(entity);
-			
+
 			if (baseAttack.baseAttack.IsStartAttack)
 			{
 				aimState.aimState = AimState.AIM;
 				aimTimer.passedTime = 0;
 			}
 
+			if (baseAttack.baseAttack.TypeAttack == TypeAttack.MELEE 
+				&& baseAttack.baseAttack.IsEndAttack
+				&& aimState.aimState == AimState.AIM)
+			{
+				aimState.aimState = AimState.NO_AIM;
+				aimTimer.passedTime = 0;
+			}
+
 			if (aimState.aimState == AimState.AIM)
 			{
-				aimTimer.passedTime += Time.fixedDeltaTime;
+				aimTimer.passedTime += Time.deltaTime;
 			}
 
 			if (aimTimer.passedTime >= aimTimer.stateAimTime)

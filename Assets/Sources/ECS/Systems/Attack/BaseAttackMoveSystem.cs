@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using UnityEngine;
 
-public class MeleeAttackMoveSystem : IEcsRunSystem
+public class BaseAttackMoveSystem : IEcsRunSystem
 {
 	public void Run(IEcsSystems systems)
 	{
@@ -24,21 +24,30 @@ public class MeleeAttackMoveSystem : IEcsRunSystem
 				continue;
 			}
 
-			ref var attackEvent = ref attackEvents.Get(entity);
-
-			if (attackEvent.baseAttack.NeedForwardMove == false)
-			{
-				continue;
-			}
-
 			ref var movable = ref movableComponents.Get(entity);
 			if (movable.isActiveDash)
 			{
 				continue;
 			}
 
-			var speedMove = 40; // TODO: need to improve
+			ref var attackEvent = ref attackEvents.Get(entity);
+			if (attackEvent.baseAttack.IsEventAttack)
+			{
+				if (attackEvent.baseAttack.IsAttackInProcess)
+				{
+					movable.canMove = false;
+				}
+				else
+				{
+					movable.canMove = true;
+				}
+			}
 
+			var speedMove = 40; // TODO: need to improve
+			if (attackEvent.baseAttack.NeedForwardMove == false)
+			{
+				continue;
+			}
 			ref var characterComponent = ref characterComponents.Get(entity);
 			characterComponent.characterController.Move(characterComponent.characterController.transform.forward
 				* speedMove * Time.deltaTime);

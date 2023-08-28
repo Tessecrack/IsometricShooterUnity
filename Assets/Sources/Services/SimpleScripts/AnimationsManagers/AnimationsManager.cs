@@ -21,6 +21,7 @@ public abstract class AnimationsManager
 	private void PlayAnimation(int hashId)
 	{
 		animator.CrossFade(hashId, 0.02f);
+		previousIdAnimation = hashId;
 	}
 
 	protected void PlayAnimationWithCheck(int hashId)

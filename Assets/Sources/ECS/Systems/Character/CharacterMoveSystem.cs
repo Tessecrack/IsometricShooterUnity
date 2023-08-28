@@ -53,7 +53,10 @@ public class CharacterMoveSystem : IEcsRunSystem
 			var speedMove = dashComponent.isActiveDash ? dashComponent.dashSpeed : movableComponent.moveSpeed;
 			movableComponent.isActiveDash = dashComponent.isActiveDash;
 
-			characterComponent.characterController.Move(speedMove * Time.deltaTime * velocity);
+			if (movableComponent.canMove || movableComponent.isActiveDash)
+			{
+				characterComponent.characterController.Move(speedMove * Time.deltaTime * velocity);
+			}
 
 			if (velocity.magnitude > 0 && aimState.aimState == AimState.NO_AIM)
 			{

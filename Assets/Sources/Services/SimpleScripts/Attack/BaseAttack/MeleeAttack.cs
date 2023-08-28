@@ -15,12 +15,14 @@ public class MeleeAttack : BaseAttack
 	{
 		IsStartAttack = true;
 		IsAttackInProcess = true;
+		IsEndAttack = false;
 	}
 
 	public override void EndAttack()
 	{
 		IsStartAttack = false;
 		IsAttackInProcess = false;
+		IsEndAttack = true;
 	}
 
 	protected void HandlerStartApplyMeleeDamage()

@@ -170,8 +170,8 @@ public class GameStartup : MonoBehaviour
 	private void InitFixedUpdateSystems()
 	{
 		ecsFixedUpdateSystems = new EcsSystems(ecsWorld, sharedData);
-		ecsFixedUpdateSystems
-			.Add(new CharacterAimingSystem());
+		
+			
 		ecsFixedUpdateSystems.Init();
 	}
 
@@ -185,6 +185,7 @@ public class GameStartup : MonoBehaviour
 			.Add(new CharacterSelectWeaponSystem())
 			.Add(new CharacterInputAttackSystem())
 			.Add(new CharacterChangeStateSystem())
+			.Add(new CharacterAimingSystem())
 			.Add(new BaseAttackSystem())
 			.Add(new CharacterRigSystem())
 			.Add(new CharacterMoveSystem());
@@ -203,7 +204,7 @@ public class GameStartup : MonoBehaviour
 		ecsAttackSystems = new EcsSystems(ecsWorld,sharedData);
 		ecsAttackSystems
 			.Add(new BaseAttackSystem())
-			.Add(new MeleeAttackMoveSystem());
+			.Add(new BaseAttackMoveSystem());
 		ecsAttackSystems.Init();
 	}
 
