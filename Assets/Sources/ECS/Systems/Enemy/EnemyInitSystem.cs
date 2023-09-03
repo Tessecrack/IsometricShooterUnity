@@ -79,10 +79,10 @@ public class EnemyInitSystem : IEcsInitSystem
 			ref var weaponType = ref poolWeaponTypes.Add(entityEnemy);
 			ref var baseAttack = ref poolBaseAttacks.Add(entityEnemy);
 
-			var animEvents = enemies[i].GetComponent<AnimationEvents>();
-			animEvents.Init();
-			characterComponent.characterController = enemies[i].GetComponent<CharacterController>();
 			var characterSettings = enemies[i].GetComponent<CharacterSettings>();
+			var animEvents = enemies[i].GetComponent<AnimationEvents>();
+			characterComponent.characterController = enemies[i].GetComponent<CharacterController>();
+			
 			healthComponent.damageable = enemies[i].GetComponent<Damageable>();
 
 			aiEnemyComponent.aiAgent = new AIEnemyAgent();
@@ -92,14 +92,14 @@ public class EnemyInitSystem : IEcsInitSystem
 
 			characterComponent.characterTransform = enemies[i].transform;
 			characterComponent.characterSettings = characterSettings;
-			healthComponent.maxHealth = characterSettings.GetMaxHealth();
+			healthComponent.maxHealth = characterSettings.MaxHealth;
 			healthComponent.currentHealth = healthComponent.maxHealth;
 
 			animatorComponent.animationState = new CharacterAnimationState();
 
 			movableComponent.coefSmooth = 0.3f;
 			movableComponent.transform = enemies[i].transform;
-			movableComponent.moveSpeed = characterSettings.GetCharacterSpeed();
+			movableComponent.moveSpeed = characterSettings.RunSpeed;
 
 			rotatableComponent.coefSmooth = 0.3f;
 			rangeHit.rangeHit = aiEnemyComponent.aiAgent.DistanceAttack;
@@ -123,7 +123,7 @@ public class EnemyInitSystem : IEcsInitSystem
 				shooter.SetSpawnPointsShot(new Transform[] { rangeSettings.PointSpawnProjectile });
 				shooter.SetSpeedProjectile(rangeSettings.SpeedProjectile);
 				shooter.SetDamage(enemyComponent.enemySettings.RangeDamage);
-
+				animEvents.Init(characterSettings.CountAnimationsRangeAttack);
 				var rangeAttack = new RangeAttackEvent(animEvents, shooter);
 
 				baseAttack.baseAttack = rangeAttack;
@@ -133,7 +133,7 @@ public class EnemyInitSystem : IEcsInitSystem
 			{
 				var meleeAttack = new MeleeAttackEvent(animEvents);
 				damage.damage = enemyComponent.enemySettings.MeleeDamage;
-
+				animEvents.Init(characterSettings.CountAnimationsMeleeAttack);
 				baseAttack.baseAttack = meleeAttack;
 			}
 			weaponType.typeWeapon = TypeWeapon.NO_WEAPON;

@@ -42,13 +42,17 @@ public class BaseAttackMoveSystem : IEcsRunSystem
 					movable.canMove = true;
 				}
 			}
+			else
+			{
+				movable.canMove = true;
+			}
 
-			var speedMove = 40; // TODO: need to improve
 			if (attackEvent.baseAttack.NeedForwardMove == false)
 			{
 				continue;
 			}
 			ref var characterComponent = ref characterComponents.Get(entity);
+			var speedMove = characterComponent.characterSettings.SpeedMotionMeleeAttack;
 			characterComponent.characterController.Move(characterComponent.characterController.transform.forward
 				* speedMove * Time.deltaTime);
 		}

@@ -75,13 +75,14 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		GameObject player = sceneData.PlayerInstance;
 		var animEvents = player.GetComponent<AnimationEvents>();
-		animEvents.Init();
+		var characterSettings = player.GetComponent<CharacterSettings>();
+
+		animEvents.Init(characterSettings.CountAnimationsMeleeAttack);
 		inputComponent.userInput = player.GetComponent<UserInput>(); // TODO: NEED IMPROVE
 
 		runtimeData.OwnerCameraTransform = player.transform.position;
 		characterComponent.characterTransform = player.transform;
 
-		var characterSettings = player.GetComponent<CharacterSettings>();
 		healthComponent.damageable = player.GetComponent<Damageable>();
 		characterRigComponent.characterRigController = player.GetComponent<CharacterRigController>();
 		characterComponent.characterController = player.GetComponent<CharacterController>();
@@ -99,14 +100,14 @@ public class PlayerInitSystem : IEcsInitSystem
 
 		player.transform.forward = staticData.GlobalForwardVector;
 		
-		healthComponent.maxHealth = characterSettings.GetMaxHealth();
+		healthComponent.maxHealth = characterSettings.MaxHealth;
 		healthComponent.currentHealth = healthComponent.maxHealth;
 
 		animatorComponent.animationState = new CharacterAnimationState();
 
 		movableComponent.transform = player.transform;
 
-		movableComponent.moveSpeed = characterSettings.GetCharacterSpeed();
+		movableComponent.moveSpeed = characterSettings.RunSpeed;
 
 		targetComponent.target = runtimeData.CursorPosition;
 

@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class AnimationEvents : MonoBehaviour
 {
-	[SerializeField] private int countAnimationAttacks = 4;
-
 	public event Action OnStartAttack;
 	public event Action OnEndAttack;
 
@@ -24,9 +22,9 @@ public class AnimationEvents : MonoBehaviour
 
 	private AnimationCounterAttacks animationCounterAttacks;
 
-	public void Init()
+	public void Init(int countAnimaionsAttacks)
 	{
-		animationCounterAttacks = new AnimationCounterAttacks(countAnimationAttacks);
+		animationCounterAttacks = new AnimationCounterAttacks(countAnimaionsAttacks);
 	}
 
 	private void FixedUpdate()
