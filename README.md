@@ -3,6 +3,8 @@ Isometric 3D-shooter on Unity
 Stage: development  
 Sources: /Assets/Sources  
 
+![demo_video](https://github.com/Tessecrack/Complex13/blob/master/Assets/Screenshots/firstStep.gif)
+
 ![prototype_screen](https://github.com/Tessecrack/Complex13/blob/master/Assets/Screenshots/TestLocation.png)
 
 ![main_hero_screen](https://github.com/Tessecrack/Complex13/blob/master/Assets/Screenshots/NewMainHeroRenegade.png)
