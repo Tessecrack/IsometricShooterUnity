@@ -132,8 +132,10 @@ public class EnemyInitSystem : IEcsInitSystem
 				}
 				else
 				{
-					baseAttack.baseAttack = new RangeAutomaticAttack(shooter);
-					((RangeAttack)baseAttack.baseAttack).SetHasTarget(false);
+					var rangeAutomaticAttack = new RangeAutomaticAttack(shooter);
+					rangeAutomaticAttack.SetHasTarget(false);
+					rangeAutomaticAttack.SetDelayBetweenAttack(rangeSettings.DelayBetweenAttack);
+					baseAttack.baseAttack = rangeAutomaticAttack;
 				}
 				damage.damage = enemyComponent.enemySettings.RangeDamage;
 			}

@@ -12,7 +12,7 @@ public abstract class BaseAttack
 
 	protected bool canAttack;
 	protected float passedTime;
-	protected float delayBetweenAttack = 1.0f;
+	protected float delayBetweenAttack = 0.5f;
 	protected Vector3 targetPosition;
 
 	public abstract void StartAttack();

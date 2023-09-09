@@ -267,6 +267,7 @@ MonoBehaviour:
   - {fileID: 2341430893534848520}
   projectilePrefab: {fileID: 6773687861171711744, guid: 481d0ea200b455a4ba32af9db099767f, type: 3}
   speedProjectile: 10
+  delayBetweenAttack: 0.2
 --- !u!114 &6512039985290597716
 MonoBehaviour:
   m_ObjectHideFlags: 0

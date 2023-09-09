@@ -27,7 +27,7 @@ public class BaseAttackSystem : IEcsRunSystem
 			ref var inputAttackComponent = ref inputAttacks.Get(entity);
 			ref var baseAttack = ref baseAttacks.Get(entity);
 			ref var targetComponent = ref targets.Get(entity);
-			baseAttack.baseAttack.UpdateTime(UnityEngine.Time.fixedDeltaTime);
+			baseAttack.baseAttack.UpdateTime(UnityEngine.Time.deltaTime);
 			if (inputAttackComponent.isStartAttack)
 			{
 				baseAttack.baseAttack.SetTargetPosition(targetComponent.target);

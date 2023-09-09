@@ -156,8 +156,8 @@ MonoBehaviour:
   dashSpeed: 80
   dashTime: 0.06
   maxHealth: 100
-  countAnimationsMeleeAttack: 4
-  countAnimationsRangeAttack: 0
+  countAnimationsMeleeAttack: 0
+  countAnimationsRangeAttack: 1
   speedMotionMeleeAttack: 40
 --- !u!114 &1940186402
 MonoBehaviour:
@@ -187,6 +187,7 @@ MonoBehaviour:
   - {fileID: 2190763721736081712}
   projectilePrefab: {fileID: 8932127953273655131, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
   speedProjectile: 9
+  delayBetweenAttack: 0
 --- !u!114 &4159637538809406516
 MonoBehaviour:
   m_ObjectHideFlags: 0
