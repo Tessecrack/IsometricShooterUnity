@@ -146,11 +146,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e018e23ee43d37a4b838aaa55c04c37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSpeed: 6
+  runSpeed: 6
   isMovable: 1
   dashSpeed: 80
   dashTime: 0.06
   maxHealth: 100
+  countAnimationsMeleeAttack: 0
+  countAnimationsRangeAttack: 1
+  speedMotionMeleeAttack: 40
 --- !u!114 &4797776258321573448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d9191daa1265c47a4d80d81d980e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countAnimationAttacks: 6
 --- !u!114 &6179544920620665351
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 
 public abstract class AnimationsManager
@@ -10,19 +11,17 @@ public abstract class AnimationsManager
 
 	protected int previousIdAnimation;
 
+	protected float currentDeltaTime;
+
+	protected int[] idsAnimationsStrikes;
+
 	public AnimationsManager(in Animator animator)
 	{
 		this.animator = animator;
 		currentAnimationState = new CharacterAnimationState();
 	}
 
-	public abstract void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState);
-
-	private void PlayAnimation(int hashId)
-	{
-		animator.CrossFade(hashId, 0.02f);
-		previousIdAnimation = hashId;
-	}
+	public abstract void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState, float deltaTime);
 
 	protected void PlayAnimationWithCheck(int hashId)
 	{
@@ -57,5 +56,34 @@ public abstract class AnimationsManager
 	protected void AnimateAttack(int idAnimation)
 	{
 		PlayAnimation(idAnimation);
+	}
+
+	protected void InitializeAttackAnimations(TypeAttack typeAttack)
+	{
+		idsAnimationsStrikes = new int[this.animationCounterAttacks.TotalNumberAttacks];
+		if (typeAttack == TypeAttack.MELEE)
+		{
+			InitAttacks("MeleeAttack_");
+		}
+		else
+		{
+			InitAttacks("RangeAttack_");
+		}
+	}
+
+	private void PlayAnimation(int hashId)
+	{
+		animator.CrossFade(hashId, 3f * currentDeltaTime);
+		previousIdAnimation = hashId;
+	}
+
+	private void InitAttacks(string typeAttack)
+	{
+		for (int i = 0; i < idsAnimationsStrikes.Length; ++i)
+		{
+			StringBuilder strBuilder = new StringBuilder();
+			strBuilder.Append(typeAttack).Append(i);
+			idsAnimationsStrikes[i] = Animator.StringToHash(strBuilder.ToString());
+		}
 	}
 }

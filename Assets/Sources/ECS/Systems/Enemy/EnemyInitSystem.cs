@@ -87,8 +87,8 @@ public class EnemyInitSystem : IEcsInitSystem
 
 			aiEnemyComponent.aiAgent = new AIEnemyAgent();
 			aiEnemyComponent.aiAgent.SetTransform(enemies[i].transform);
-
-			animatorComponent.animationsManager = new EnemyAnimationsManager(enemies[i].GetComponent<Animator>(), animEvents);
+			animEvents.Init(characterSettings.CountAnimationsMeleeAttack);
+			
 
 			characterComponent.characterTransform = enemies[i].transform;
 			characterComponent.characterSettings = characterSettings;
@@ -112,7 +112,7 @@ public class EnemyInitSystem : IEcsInitSystem
 
 			aiEnemyComponent.aiAgent.SetMeleeAttack(enemyComponent.enemySettings.HasMeleeAttack);
 			aiEnemyComponent.aiAgent.SetRangeAttack(enemyComponent.enemySettings.HasRangeAttack);
-
+			int amountAttacks = characterSettings.CountAnimationsMeleeAttack;
 			if (enemyComponent.enemySettings.HasRangeAttack)
 			{
 				var rangeSettings = enemies[i].GetComponent<EnemyRangeSettings>();
@@ -128,6 +128,7 @@ public class EnemyInitSystem : IEcsInitSystem
 
 				baseAttack.baseAttack = rangeAttack;
 				damage.damage = enemyComponent.enemySettings.RangeDamage;
+				amountAttacks = characterSettings.CountAnimationsRangeAttack;
 			}
 			else
 			{
@@ -136,6 +137,9 @@ public class EnemyInitSystem : IEcsInitSystem
 				animEvents.Init(characterSettings.CountAnimationsMeleeAttack);
 				baseAttack.baseAttack = meleeAttack;
 			}
+			animEvents.Init(amountAttacks);
+			animatorComponent.animationsManager = new EnemyAnimationsManager(enemies[i].GetComponent<Animator>(), animEvents, 
+				baseAttack.baseAttack.TypeAttack);
 			weaponType.typeWeapon = TypeWeapon.NO_WEAPON;
 		}
 	}

@@ -13,16 +13,4 @@ public class HashCharacterAnimations
 	public static readonly int HeavyAimingRunBlendTree = Animator.StringToHash("HeavyAimingRun");
 
 	public static readonly int GunAimingRunBlendTree = Animator.StringToHash("GunAimingRun");
-
-	public static readonly int MeleeFirstAttack = Animator.StringToHash("MeleeFirstAttack");
-
-	public static readonly int MeleeSecondAttack = Animator.StringToHash("MeleeSecondAttack");
-
-	public static readonly int MeleeThirdAttack = Animator.StringToHash("MeleeThirdAttack");
-
-	public static readonly int MeleeFourthAttack = Animator.StringToHash("MeleeFourthAttack");
-
-	public static readonly int MeleeFifthAttack = Animator.StringToHash("MeleeFifthAttack");
-
-	public static readonly int RangeFirstAttack = Animator.StringToHash("RangeFirstAttack");
 }

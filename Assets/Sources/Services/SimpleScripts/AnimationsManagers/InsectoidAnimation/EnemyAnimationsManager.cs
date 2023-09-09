@@ -4,25 +4,15 @@ public class EnemyAnimationsManager : AnimationsManager
 {
 	private bool isAnimationAttackInProgress;
 	private bool needUpdateAnimationsState;
-	private int[] idsAnimationsStrikes;
 
-	public EnemyAnimationsManager(in Animator animator, in AnimationEvents animationEvents) : base(animator)
+	public EnemyAnimationsManager(in Animator animator, in AnimationEvents animationEvents,
+		TypeAttack typeAttack) : base(animator)
 	{
 		this.animationCounterAttacks = animationEvents.CounterAnimations;
-		InitializeCloseCombatAnimations();
+		InitializeAttackAnimations(typeAttack);
 
 		animationEvents.OnStartAttack += StartAttack;
 		animationEvents.OnEndAttack += EndAttack;
-	}
-
-	public void InitializeCloseCombatAnimations()
-	{
-		idsAnimationsStrikes = new int[this.animationCounterAttacks.TotalNumberAttacks];
-		idsAnimationsStrikes[0] = HashCharacterAnimations.MeleeFirstAttack;
-		idsAnimationsStrikes[1] = HashCharacterAnimations.MeleeSecondAttack;
-		idsAnimationsStrikes[2] = HashCharacterAnimations.MeleeThirdAttack;
-		idsAnimationsStrikes[3] = HashCharacterAnimations.MeleeFourthAttack;
-		idsAnimationsStrikes[4] = HashCharacterAnimations.MeleeFifthAttack;
 	}
 
 	public void StartAttack()
@@ -36,8 +26,9 @@ public class EnemyAnimationsManager : AnimationsManager
 		needUpdateAnimationsState = true;
 	}
 
-	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
+	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState, float deltaTime)
 	{
+		currentDeltaTime = deltaTime;
 		if (currentAnimationState.EqualsBlendTreeParams(updatedAnimationsState) == false)
 		{
 			SetParamsBlendTree(updatedAnimationsState);
@@ -58,7 +49,7 @@ public class EnemyAnimationsManager : AnimationsManager
 
 			if (updatedAnimationsState.TypeAttack == TypeAttack.RANGE)
 			{
-				AnimateAttack(HashCharacterAnimations.RangeFirstAttack);
+				AnimateAttack(idsAnimationsStrikes[0]);
 				return;
 			}
 		}

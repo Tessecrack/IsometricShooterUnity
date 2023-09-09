@@ -53,7 +53,7 @@ MonoBehaviour:
   prefabProjectTile: {fileID: 9086379581574355896, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
   muzzles:
   - {fileID: 7835177241112050848}
-  quantityOneShotBullet: 4
+  quantityOneShotBullet: 1
   projectile: {fileID: 8932127953273655131, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
   isAttackFromOneMuzzle: 1
   delayBetweenAttack: 0.1

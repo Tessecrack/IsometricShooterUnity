@@ -47,14 +47,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameWeapon: 
   typeWeapon: 1
-  delayBetweenAttack: 1
   gripWeapon: {fileID: 6770979467355006884}
+  damage: 25
   additionalGrip: {fileID: 0}
   prefabProjectTile: {fileID: 2281499393827452360, guid: d4c70b0141854b846ade2e7b621f351d, type: 3}
   muzzles:
   - {fileID: 6248557226392801920}
   quantityOneShotBullet: 1
   projectile: {fileID: 3492958782546742559, guid: d4c70b0141854b846ade2e7b621f351d, type: 3}
+  isAttackFromOneMuzzle: 0
+  delayBetweenAttack: 0.1
 --- !u!1 &6248557226392801920
 GameObject:
   m_ObjectHideFlags: 0

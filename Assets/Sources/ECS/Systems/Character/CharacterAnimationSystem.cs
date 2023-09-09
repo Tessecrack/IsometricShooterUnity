@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using UnityEngine;
 
 public class CharacterAnimationSystem : IEcsRunSystem
 {
@@ -50,7 +51,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 
 			animatorComponent.animationState.IsAttack = attackComponent.isStartAttack;
 			
-			animatorComponent.animationsManager.ChangeAnimationsState(animatorComponent.animationState);
+			animatorComponent.animationsManager.ChangeAnimationsState(animatorComponent.animationState, Time.deltaTime);
 		}
 	}
 }

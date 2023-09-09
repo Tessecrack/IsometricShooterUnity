@@ -4,40 +4,18 @@ public class PlayerAnimationsManager : AnimationsManager
 {
 	private bool isAnimationAttackInProgress;
 	private bool needUpdateAnimationsState;
-	private int[] idsAnimationsStrikes;
 
 	public PlayerAnimationsManager(in Animator animator, in AnimationEvents animationEvents) : base(animator)
 	{
 		this.animationCounterAttacks = animationEvents.CounterAnimations;
-
-		InitMeleeAttacksAnimations();
-
+		InitializeAttackAnimations(TypeAttack.MELEE);
 		animationEvents.OnStartAttack += HandlerStartAttackEvent;
 		animationEvents.OnEndAttack += HandlerEndAttackEvent;
 	}
 
-	public void HandlerStartAttackEvent()
+	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState, float deltaTime)
 	{
-		isAnimationAttackInProgress = true;
-	}
-
-	public void HandlerEndAttackEvent()
-	{
-		isAnimationAttackInProgress = false;
-		needUpdateAnimationsState = true;
-	}
-
-	public void InitMeleeAttacksAnimations()
-	{
-		idsAnimationsStrikes = new int[this.animationCounterAttacks.TotalNumberAttacks];
-		idsAnimationsStrikes[0] = HashCharacterAnimations.MeleeFirstAttack;
-		idsAnimationsStrikes[1] = HashCharacterAnimations.MeleeSecondAttack;
-		idsAnimationsStrikes[2] = HashCharacterAnimations.MeleeThirdAttack;
-		idsAnimationsStrikes[3] = HashCharacterAnimations.MeleeFourthAttack;
-	}
-
-	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState)
-	{
+		currentDeltaTime = deltaTime;
 		if (currentAnimationState.EqualsBlendTreeParams(updatedAnimationsState) == false)
 		{
 			SetParamsBlendTree(updatedAnimationsState);
@@ -62,6 +40,17 @@ public class PlayerAnimationsManager : AnimationsManager
 		needUpdateAnimationsState = false;
 		ChangeCharacterState(updatedAnimationsState);
 		currentAnimationState.UpdateValuesState(updatedAnimationsState);
+	}
+
+	private void HandlerStartAttackEvent()
+	{
+		isAnimationAttackInProgress = true;
+	}
+
+	private void HandlerEndAttackEvent()
+	{
+		isAnimationAttackInProgress = false;
+		needUpdateAnimationsState = true;
 	}
 
 	private void ChangeCharacterState(CharacterAnimationState updatedAnimationsState)

@@ -28,6 +28,6 @@ public class CharacterSettings : MonoBehaviour
 	public float DashSpeed => dashSpeed;
 	public float DashTime => dashTime;
 	public int CountAnimationsMeleeAttack => countAnimationsMeleeAttack;
-	public int CountAnimationsRangeAttack => countAnimationsMeleeAttack;
+	public int CountAnimationsRangeAttack => countAnimationsRangeAttack;
 	public int SpeedMotionMeleeAttack => speedMotionMeleeAttack;
 }
