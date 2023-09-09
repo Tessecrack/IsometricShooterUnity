@@ -4,6 +4,8 @@ public class RangeAttack : BaseAttack
 {
 	protected Shooter shooter;
 
+	protected bool hasTarget = true;
+
 	public RangeAttack(Shooter shooter)
 	{
 		this.shooter = shooter;
@@ -14,12 +16,24 @@ public class RangeAttack : BaseAttack
 	{
 		IsStartAttack = true;
 		IsAttackInProcess = true;
-		shooter.Shot(this.targetPosition);
+		if (hasTarget)
+		{
+			shooter.Shot(this.targetPosition);
+		}
+		else
+		{
+			shooter.Shot();
+		}
 	}
 
 	public override void EndAttack()
 	{
 		IsAttackInProcess = false;
 		IsStartAttack = false;
+	}
+
+	public void SetHasTarget(bool hasTarget)
+	{
+		this.hasTarget = hasTarget;
 	}
 }

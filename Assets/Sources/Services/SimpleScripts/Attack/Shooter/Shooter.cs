@@ -18,7 +18,7 @@ public abstract class Shooter
 	{
 		foreach (var pointSpawnShot in pointsSpawnShots)
 		{
-			Shot(pointSpawnShot.position + pointSpawnShot.forward * 2);
+			OneShot(pointSpawnShot, pointSpawnShot.position + pointSpawnShot.forward * 2);
 		}
 	}
 

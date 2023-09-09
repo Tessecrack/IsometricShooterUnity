@@ -133,6 +133,7 @@ public class EnemyInitSystem : IEcsInitSystem
 				else
 				{
 					baseAttack.baseAttack = new RangeAutomaticAttack(shooter);
+					((RangeAttack)baseAttack.baseAttack).SetHasTarget(false);
 				}
 				damage.damage = enemyComponent.enemySettings.RangeDamage;
 			}
