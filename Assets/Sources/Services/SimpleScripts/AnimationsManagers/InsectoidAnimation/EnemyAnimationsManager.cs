@@ -24,6 +24,7 @@ public class EnemyAnimationsManager : AnimationsManager
 	{
 		isAnimationAttackInProgress = false;
 		needUpdateAnimationsState = true;
+		PlayAnimationWithCheck(HashCharacterAnimations.LocomotionRun);
 	}
 
 	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState, float deltaTime)
@@ -61,7 +62,6 @@ public class EnemyAnimationsManager : AnimationsManager
 		needUpdateAnimationsState = false;
 		PlayAnimationWithCheck(HashCharacterAnimations.LocomotionRun);
 		currentAnimationState.UpdateValuesState(updatedAnimationsState);
-		
 	}
 
 	private void SetParamsBlendTree(CharacterAnimationState updatedAnimationsState)
