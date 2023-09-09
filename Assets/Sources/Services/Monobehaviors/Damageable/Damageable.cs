@@ -20,7 +20,7 @@ public class Damageable : MonoBehaviour
 			result = 0;
 			IsDeath = true;
 		}
-		Reset();
+		ResetDamage();
 		return result;
 	}
 
@@ -29,7 +29,7 @@ public class Damageable : MonoBehaviour
 		Destroy(gameObject);
 	}
 
-	private void Reset()
+	private void ResetDamage()
 	{
 		IsTakedDamage = false;
 		this.damage = 0;

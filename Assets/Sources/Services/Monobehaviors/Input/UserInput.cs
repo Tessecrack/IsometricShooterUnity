@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class UserInput : MonoBehaviour
+public class UserInput
 {
     private Controls controls;
     public bool IsStartFire { get; private set; }
@@ -8,24 +6,31 @@ public class UserInput : MonoBehaviour
     public bool IsDash => controls.Main.Dash.WasPerformedThisFrame();
     public int SelectedWeapon { get; private set; }
 
-	private void Awake()
+	public static UserInput CreateUserInput()
 	{
-        controls = new Controls();
+		var userInput = new UserInput();
+		userInput.Init();
+		return userInput;
+	}
 
-        controls.Main.Fire.performed += context => StartFire();
-        controls.Main.Fire.canceled += context => StopFire();
+	public void Init()
+	{
+		controls = new Controls();
 
-        controls.Main.FirstWeapon.performed += context => SelectWeapon(0);
-        controls.Main.SecondWeapon.performed += context => SelectWeapon(1);
+		controls.Main.Fire.performed += context => StartFire();
+		controls.Main.Fire.canceled += context => StopFire();
+
+		controls.Main.FirstWeapon.performed += context => SelectWeapon(0);
+		controls.Main.SecondWeapon.performed += context => SelectWeapon(1);
 		controls.Main.ThirdWeapon.performed += context => SelectWeapon(2);
 	}
 
-	private void OnEnable()
+	public void Enable()
 	{
-        controls.Enable();
+		controls.Enable();
 	}
 
-	private void OnDisable()
+	public void Disable()
 	{
 		controls.Disable();
 	}

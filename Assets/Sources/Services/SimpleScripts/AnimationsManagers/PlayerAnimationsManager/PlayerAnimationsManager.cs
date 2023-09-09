@@ -5,7 +5,7 @@ public class PlayerAnimationsManager : AnimationsManager
 	private bool isAnimationAttackInProgress;
 	private bool needUpdateAnimationsState;
 
-	public PlayerAnimationsManager(in Animator animator, in AnimationEvents animationEvents) : base(animator)
+	public PlayerAnimationsManager(in Animator animator, in AnimationEvents animationEvents) : base(animator, animationEvents)
 	{
 		this.animationCounterAttacks = animationEvents.CounterAnimations;
 		InitializeAttackAnimations(TypeAttack.MELEE);
@@ -16,6 +16,8 @@ public class PlayerAnimationsManager : AnimationsManager
 	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState, float deltaTime)
 	{
 		currentDeltaTime = deltaTime;
+		animationEvents.UpdateTime(deltaTime);
+
 		if (currentAnimationState.EqualsBlendTreeParams(updatedAnimationsState) == false)
 		{
 			SetParamsBlendTree(updatedAnimationsState);

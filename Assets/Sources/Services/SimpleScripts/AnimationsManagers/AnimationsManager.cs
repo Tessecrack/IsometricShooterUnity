@@ -15,10 +15,13 @@ public abstract class AnimationsManager
 
 	protected int[] idsAnimationsStrikes;
 
-	public AnimationsManager(in Animator animator)
+	protected AnimationEvents animationEvents;
+
+	public AnimationsManager(in Animator animator, in AnimationEvents animationEvents)
 	{
 		this.animator = animator;
-		currentAnimationState = new CharacterAnimationState();
+		this.currentAnimationState = new CharacterAnimationState();
+		this.animationEvents = animationEvents;
 	}
 
 	public abstract void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState, float deltaTime);

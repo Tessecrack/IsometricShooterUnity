@@ -1,9 +1,10 @@
 using Leopotam.EcsLite;
-using System;
 using UnityEngine;
 
 public class GameStartup : MonoBehaviour
 {
+	private UserInput userInput;
+
     [Header("Objects/data in game")]
     public StaticData StaticData;
 
@@ -51,6 +52,17 @@ public class GameStartup : MonoBehaviour
 		InitAnimationSystem();
 
 		InitFixedUpdateSystems();
+	}
+
+	private void OnEnable() // TODO: NEED TO IMPROVE
+	{
+		this.userInput = UserInput.CreateUserInput();
+		userInput.Enable();
+	}
+
+	private void OnDisable()
+	{
+		userInput.Disable();
 	}
 
 	private void Update()
@@ -119,7 +131,7 @@ public class GameStartup : MonoBehaviour
 
 	private void InitSharedData()
 	{
-		sharedData.Init(StaticData, SceneData, runtimeData);
+		sharedData.Init(StaticData, SceneData, runtimeData, userInput);
 	}
 
 	private void InitInputSystem()

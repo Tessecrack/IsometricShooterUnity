@@ -12,6 +12,7 @@ public class PlayerInitSystem : IEcsInitSystem
 		var staticData = sharedData.StaticData;
 		var sceneData = sharedData.SceneData;
 		var runtimeData = sharedData.RuntimeData;
+		var userInput = sharedData.UserInput;
 
 		EcsPool<PlayerComponent> poolPlayer = world.GetPool<PlayerComponent>();
 		EcsPool<CharacterComponent> poolCharacterComponent = world.GetPool<CharacterComponent>();
@@ -78,7 +79,8 @@ public class PlayerInitSystem : IEcsInitSystem
 		var characterSettings = player.GetComponent<CharacterSettings>();
 
 		animEvents.Init(characterSettings.CountAnimationsMeleeAttack);
-		inputComponent.userInput = player.GetComponent<UserInput>(); // TODO: NEED IMPROVE
+
+		inputComponent.userInput = userInput;
 
 		runtimeData.OwnerCameraTransform = player.transform.position;
 		characterComponent.characterTransform = player.transform;

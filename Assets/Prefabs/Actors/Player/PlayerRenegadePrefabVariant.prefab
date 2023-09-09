@@ -2537,7 +2537,6 @@ GameObject:
   - component: {fileID: 1709042859659896358}
   - component: {fileID: 6340366110240624981}
   - component: {fileID: 8322615476185346409}
-  - component: {fileID: 769023355603686269}
   - component: {fileID: 5064463964796563112}
   - component: {fileID: 4173451954542426855}
   - component: {fileID: 4154911256120508500}
@@ -2608,11 +2607,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e018e23ee43d37a4b838aaa55c04c37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSpeed: 6
+  runSpeed: 6
   isMovable: 1
   dashSpeed: 80
   dashTime: 0.06
   maxHealth: 100
+  countAnimationsMeleeAttack: 4
+  countAnimationsRangeAttack: 0
+  speedMotionMeleeAttack: 40
 --- !u!143 &4210835231722591443
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2757,18 +2759,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86af0ac450f31440b10ad1e64b1239a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &769023355603686269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3445261361879102271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37aad2e7ad7ac134298c70d9cc6c7b04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5064463964796563112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2810,7 +2800,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d9191daa1265c47a4d80d81d980e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countAnimationAttacks: 4
 --- !u!1 &3445261361912603064
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class EnemyAnimationsManager : AnimationsManager
 	private bool needUpdateAnimationsState;
 
 	public EnemyAnimationsManager(in Animator animator, in AnimationEvents animationEvents,
-		TypeAttack typeAttack) : base(animator)
+		TypeAttack typeAttack) : base(animator, animationEvents)
 	{
 		this.animationCounterAttacks = animationEvents.CounterAnimations;
 		InitializeAttackAnimations(typeAttack);
@@ -30,6 +30,8 @@ public class EnemyAnimationsManager : AnimationsManager
 	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState, float deltaTime)
 	{
 		currentDeltaTime = deltaTime;
+		this.animationEvents.UpdateTime(deltaTime);
+
 		if (currentAnimationState.EqualsBlendTreeParams(updatedAnimationsState) == false)
 		{
 			SetParamsBlendTree(updatedAnimationsState);
