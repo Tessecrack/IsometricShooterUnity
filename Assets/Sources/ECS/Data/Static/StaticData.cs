@@ -9,12 +9,6 @@ public class StaticData : ScriptableObject
 	[Header("Enemies insectoids prefabs")]
 	public StaticEnemies EnemiesInsectoids;
 
-	[Header("Enemy turrets")]
-	public StaticEnemyTurret EnemyTurrets;
-
-	[Header("Friendly turrets")]
-	public StaticFriendlyTurret FriendlyTurrets;
-
 	[Header("Weapons prefabs")]
 	public StaticArsenal Weapons;
 

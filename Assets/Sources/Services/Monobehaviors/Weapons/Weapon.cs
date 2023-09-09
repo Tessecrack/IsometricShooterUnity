@@ -39,9 +39,4 @@ public abstract class Weapon : MonoBehaviour
 	}
 
 	public Transform AdditionalGrip => additionalGrip;
-
-	private void FixedUpdate()
-	{
-		BaseAttack.UpdateStateAttack(Time.fixedDeltaTime);
-	}
 }

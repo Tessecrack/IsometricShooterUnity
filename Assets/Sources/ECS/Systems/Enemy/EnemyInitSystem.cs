@@ -25,13 +25,11 @@ public class EnemyInitSystem : IEcsInitSystem
 			EcsPool<EnemyComponent> poolEnemyComponents = world.GetPool<EnemyComponent>();
 			EcsPool<CharacterComponent> poolCharacterComponents = world.GetPool<CharacterComponent>();
 			EcsPool<CharacterEventsComponent> poolEventsComponents = world.GetPool<CharacterEventsComponent>();
-			EcsPool<MovableComponent> poolMovableComponents = world.GetPool<MovableComponent>();
 			EcsPool<RotatableComponent> poolRotatableComponents = world.GetPool<RotatableComponent>();
-			EcsPool<AnimatorComponent> poolAnimatorComponents = world.GetPool<AnimatorComponent>();
 
 			EcsPool<InputAttackComponent> poolAttackComponent = world.GetPool<InputAttackComponent>();
 			EcsPool<AimTimerComponent> poolStateAttackComponents = world.GetPool<AimTimerComponent>();
-			EcsPool<DashComponent> poolDashComponent = world.GetPool<DashComponent>();
+			
 			EcsPool<HealthComponent> poolHeathComponents = world.GetPool<HealthComponent>();
 			EcsPool<TargetComponent> poolTargetComponents = world.GetPool<TargetComponent>();
 			EcsPool<EnablerComponent> poolEnablerComponents = world.GetPool<EnablerComponent>();
@@ -48,6 +46,8 @@ public class EnemyInitSystem : IEcsInitSystem
 			EcsPool<CharacterStateComponent> poolCharacterStates = world.GetPool<CharacterStateComponent>();
 			EcsPool<AimStateComponent> poolAimStates = world.GetPool<AimStateComponent>();
 
+			var characterSettings = enemies[i].GetComponent<CharacterSettings>();
+
 			ref var characterState = ref poolCharacterStates.Add(entityEnemy);
 			characterState.characterState = CharacterState.IDLE;
 
@@ -61,7 +61,6 @@ public class EnemyInitSystem : IEcsInitSystem
 			enablerComponent.instance = enemies[i];
 			enemyComponent.enemySettings = enemies[i].GetComponent<EnemySettings>();
 
-			ref var movableComponent = ref poolMovableComponents.Add(entityEnemy);
 			ref var rotatableComponent = ref poolRotatableComponents.Add(entityEnemy);
 			ref var aiEnemyComponent = ref poolAIEnemyComponents.Add(entityEnemy);
 			ref var healthComponent = ref poolHeathComponents.Add(entityEnemy);
@@ -69,37 +68,37 @@ public class EnemyInitSystem : IEcsInitSystem
 			ref var stateAttackComponent = ref poolStateAttackComponents.Add(entityEnemy);
 			ref var characterComponent = ref poolCharacterComponents.Add(entityEnemy);
 			ref var eventComponent = ref poolEventsComponents.Add(entityEnemy);
-			ref var animatorComponent = ref poolAnimatorComponents.Add(entityEnemy);
 			ref var hitComponent = ref poolHitComponents.Add(entityEnemy);
 			ref var attackComponent = ref poolAttackComponent.Add(entityEnemy);
-			ref var dashComponent = ref poolDashComponent.Add(entityEnemy);
 			ref var rangeHit = ref poolRangeHit.Add(entityEnemy);
 			ref var damage = ref poolDamage.Add(entityEnemy);
 			ref var hitList = ref poolHitList.Add(entityEnemy);
 			ref var weaponType = ref poolWeaponTypes.Add(entityEnemy);
 			ref var baseAttack = ref poolBaseAttacks.Add(entityEnemy);
 
-			var characterSettings = enemies[i].GetComponent<CharacterSettings>();
-			var animEvents = enemies[i].GetComponent<AnimationEvents>();
+			if (characterSettings.IsMovable)
+			{
+				EcsPool<MovableComponent> poolMovableComponents = world.GetPool<MovableComponent>();
+				EcsPool<DashComponent> poolDashComponent = world.GetPool<DashComponent>();
+
+				ref var movableComponent = ref poolMovableComponents.Add(entityEnemy);
+				ref var dashComponent = ref poolDashComponent.Add(entityEnemy);
+
+				movableComponent.coefSmooth = 0.3f;
+				movableComponent.transform = enemies[i].transform;
+				movableComponent.moveSpeed = characterSettings.RunSpeed;
+			}
 			characterComponent.characterController = enemies[i].GetComponent<CharacterController>();
 			
 			healthComponent.damageable = enemies[i].GetComponent<Damageable>();
 
 			aiEnemyComponent.aiAgent = new AIEnemyAgent();
-			aiEnemyComponent.aiAgent.SetTransform(enemies[i].transform);
-			animEvents.Init(characterSettings.CountAnimationsMeleeAttack);
-			
+			aiEnemyComponent.aiAgent.SetTransform(enemies[i].transform);	
 
 			characterComponent.characterTransform = enemies[i].transform;
 			characterComponent.characterSettings = characterSettings;
 			healthComponent.maxHealth = characterSettings.MaxHealth;
 			healthComponent.currentHealth = healthComponent.maxHealth;
-
-			animatorComponent.animationState = new CharacterAnimationState();
-
-			movableComponent.coefSmooth = 0.3f;
-			movableComponent.transform = enemies[i].transform;
-			movableComponent.moveSpeed = characterSettings.RunSpeed;
 
 			rotatableComponent.coefSmooth = 0.3f;
 			rangeHit.rangeHit = aiEnemyComponent.aiAgent.DistanceAttack;
@@ -112,7 +111,9 @@ public class EnemyInitSystem : IEcsInitSystem
 
 			aiEnemyComponent.aiAgent.SetMeleeAttack(enemyComponent.enemySettings.HasMeleeAttack);
 			aiEnemyComponent.aiAgent.SetRangeAttack(enemyComponent.enemySettings.HasRangeAttack);
-			int amountAttacks = characterSettings.CountAnimationsMeleeAttack;
+
+			var animEvents = enemies[i].GetComponent<AnimationEvents>();
+
 			if (enemyComponent.enemySettings.HasRangeAttack)
 			{
 				var rangeSettings = enemies[i].GetComponent<EnemyRangeSettings>();
@@ -120,27 +121,41 @@ public class EnemyInitSystem : IEcsInitSystem
 				var shooter = new SingleShooter();
 				shooter.SetProjectile(rangeSettings.ProjectilePrefab);
 				shooter.SetQuantityOneShotProjectile(1);
-				shooter.SetSpawnPointsShot(new Transform[] { rangeSettings.PointSpawnProjectile });
+				shooter.SetSpawnPointsShot(rangeSettings.PointsSpawnProjectile);
 				shooter.SetSpeedProjectile(rangeSettings.SpeedProjectile);
 				shooter.SetDamage(enemyComponent.enemySettings.RangeDamage);
-				animEvents.Init(characterSettings.CountAnimationsRangeAttack);
-				var rangeAttack = new RangeAttackEvent(animEvents, shooter);
 
-				baseAttack.baseAttack = rangeAttack;
+				if (animEvents != null)
+				{
+					animEvents.Init(characterSettings.CountAnimationsRangeAttack);
+					baseAttack.baseAttack = new RangeAttackEvent(animEvents, shooter);
+				}
+				else
+				{
+					baseAttack.baseAttack = new RangeAutomaticAttack(shooter);
+				}
 				damage.damage = enemyComponent.enemySettings.RangeDamage;
-				amountAttacks = characterSettings.CountAnimationsRangeAttack;
 			}
 			else
 			{
-				var meleeAttack = new MeleeAttackEvent(animEvents);
-				damage.damage = enemyComponent.enemySettings.MeleeDamage;
-				animEvents.Init(characterSettings.CountAnimationsMeleeAttack);
-				baseAttack.baseAttack = meleeAttack;
+				if (animEvents != null)
+				{
+					animEvents.Init(characterSettings.CountAnimationsMeleeAttack);
+					var meleeAttack = new MeleeAttackEvent(animEvents);
+					damage.damage = enemyComponent.enemySettings.MeleeDamage;
+					baseAttack.baseAttack = meleeAttack;
+				}
 			}
-			animEvents.Init(amountAttacks);
-			animatorComponent.animationsManager = new EnemyAnimationsManager(enemies[i].GetComponent<Animator>(), animEvents, 
-				baseAttack.baseAttack.TypeAttack);
-			weaponType.typeWeapon = TypeWeapon.NO_WEAPON;
+
+			if (enemies[i].TryGetComponent<Animator>(out var animator))
+			{
+				EcsPool<AnimatorComponent> poolAnimatorComponents = world.GetPool<AnimatorComponent>();
+				ref var animatorComponent = ref poolAnimatorComponents.Add(entityEnemy);
+				animatorComponent.animationState = new CharacterAnimationState();
+				animatorComponent.animationsManager = new EnemyAnimationsManager(animator, animEvents,
+					baseAttack.baseAttack.TypeAttack);
+				weaponType.typeWeapon = TypeWeapon.NO_WEAPON;
+			}
 		}
 	}
 }

@@ -193,68 +193,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ab4a941639d4c241aaf47a18141b78e, type: 3}
---- !u!1 &239297831652110263 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4585616983224468151, guid: 6ab4a941639d4c241aaf47a18141b78e, type: 3}
-  m_PrefabInstance: {fileID: 4391372775805349120}
-  m_PrefabAsset: {fileID: 0}
---- !u!143 &2240714833536546950
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239297831652110263}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 3
-  m_Radius: 3
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 3, z: 0}
---- !u!114 &1550211057739191083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239297831652110263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c86af0ac450f31440b10ad1e64b1239a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5997396156038048193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239297831652110263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b502db6ea1301aa4d907b0b1e63d330f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameWeapon: TurretWeaponBlue
-  typeWeapon: 2
-  gripWeapon: {fileID: 0}
-  damage: 5
-  additionalGrip: {fileID: 0}
-  prefabProjectTile: {fileID: 1924134549938743637, guid: 6ca21177d8de8244b8ff64d4952ffb2e, type: 3}
-  muzzles:
-  - {fileID: 5401843063706711199}
-  - {fileID: 423438839810086714}
-  - {fileID: 8340075710670569215}
-  - {fileID: 8103055311942009926}
-  quantityOneShotBullet: 1
-  projectile: {fileID: 2076025600507299303, guid: 6ca21177d8de8244b8ff64d4952ffb2e, type: 3}
-  isAttackFromOneMuzzle: 1
-  delayBetweenAttack: 0.2
 --- !u!4 &1826266614656173024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2713833887125892832, guid: 6ab4a941639d4c241aaf47a18141b78e, type: 3}
@@ -265,7 +203,25 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8870592839556487193, guid: 6ab4a941639d4c241aaf47a18141b78e, type: 3}
   m_PrefabInstance: {fileID: 4391372775805349120}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1381861598051806811
+--- !u!143 &3003884317155732374
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5182490288178967833}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 3
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 5, z: 0}
+--- !u!114 &368223082407909494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,9 +230,64 @@ MonoBehaviour:
   m_GameObject: {fileID: 5182490288178967833}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d8e0ff3e20ec5a4fad23e528d4d79ec, type: 3}
+  m_Script: {fileID: 11500000, guid: e018e23ee43d37a4b838aaa55c04c37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretMount: {fileID: 239297831652110263}
+  runSpeed: 0
+  isMovable: 0
+  dashSpeed: 0
+  dashTime: 0
   maxHealth: 100
-  rangeDetection: 8
+  countAnimationsMeleeAttack: 0
+  countAnimationsRangeAttack: 0
+  speedMotionMeleeAttack: 0
+--- !u!114 &4217793678119443984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5182490288178967833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0654021836a768448b65ff679f380caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsSpawnProjectile:
+  - {fileID: 2506717609556209130}
+  - {fileID: 1407438510158372817}
+  - {fileID: 2579269090141088869}
+  - {fileID: 5169792701203929972}
+  projectilePrefab: {fileID: 2076025600507299303, guid: 6ca21177d8de8244b8ff64d4952ffb2e, type: 3}
+  speedProjectile: 10
+--- !u!114 &5622231458262221993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5182490288178967833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86af0ac450f31440b10ad1e64b1239a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9126077171816803907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5182490288178967833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65382a43c6ed2d34a8408376868b12c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasMeleeAttack: 0
+  hasRangeAttack: 1
+  meleeDamage: 0
+  rangeDamage: 25
+  rangeDetectTarget: 10
+  distanceMeleeAttack: 1.5
+  distanceRangeAttack: 10

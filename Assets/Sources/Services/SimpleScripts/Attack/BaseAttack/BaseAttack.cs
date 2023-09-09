@@ -12,7 +12,7 @@ public abstract class BaseAttack
 
 	protected bool canAttack;
 	protected float passedTime;
-	protected float delayBetweenAttack;
+	protected float delayBetweenAttack = 1.0f;
 	protected Vector3 targetPosition;
 
 	public abstract void StartAttack();
@@ -28,7 +28,7 @@ public abstract class BaseAttack
 		this.delayBetweenAttack = delayBetweenAttack;
 	}
 
-	public void UpdateStateAttack(float time)
+	public void UpdateTime(float time)
 	{
 		if (passedTime >= delayBetweenAttack)
 		{

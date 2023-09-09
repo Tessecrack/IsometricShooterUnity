@@ -19,7 +19,6 @@ public class GameStartup : MonoBehaviour
 
 	private EcsSystems ecsUpdateInputSystems;
 	private EcsSystems ecsUpdatePlayerSystems;
-	private EcsSystems ecsUpdateTurretSystems;
 	private EcsSystems ecsUpdateEnemySystems;
 	private EcsSystems ecsUpdateCharacterSystems;
     private EcsSystems ecsUpdateCameraSystems;
@@ -42,7 +41,6 @@ public class GameStartup : MonoBehaviour
 
 		InitSharedData();
 		InitPlayerSystem();
-		InitTurretSystem();
 		InitEnemySystem();
 		InitInputSystem();
 		InitCharacterSystem();
@@ -65,8 +63,6 @@ public class GameStartup : MonoBehaviour
 
 		ecsUpdateEnemySystems?.Run();
 
-		ecsUpdateTurretSystems?.Run();
-
 		ecsAttackSystems?.Run();
 
 		ecsUpdateCharacterSystems?.Run();
@@ -87,9 +83,6 @@ public class GameStartup : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		ecsUpdateTurretSystems?.Destroy();
-		ecsUpdateTurretSystems = null;
-
 		ecsUpdateEnemySystems?.Destroy();
 		ecsUpdateEnemySystems = null;
 
@@ -157,14 +150,6 @@ public class GameStartup : MonoBehaviour
 			.Add(new EnemyDetectTargetSystem())
 			.Add(new AIMotionSystem());
 		ecsUpdateEnemySystems.Init();
-	}
-
-	private void InitTurretSystem()
-	{
-		ecsUpdateTurretSystems = new EcsSystems(ecsWorld, sharedData);
-		ecsUpdateTurretSystems
-			.Add(new TurretInitSystem());
-		ecsUpdateTurretSystems.Init();
 	}
 
 	private void InitFixedUpdateSystems()

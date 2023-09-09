@@ -151,11 +151,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e018e23ee43d37a4b838aaa55c04c37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSpeed: 6
+  runSpeed: 6
   isMovable: 1
   dashSpeed: 80
   dashTime: 0.06
   maxHealth: 100
+  countAnimationsMeleeAttack: 4
+  countAnimationsRangeAttack: 0
+  speedMotionMeleeAttack: 40
 --- !u!114 &1940186402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0654021836a768448b65ff679f380caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointSpawnProjectile: {fileID: 2190763721736081712}
+  pointsSpawnProjectile:
+  - {fileID: 2190763721736081712}
   projectilePrefab: {fileID: 8932127953273655131, guid: 278cacf73658a014f8093ec5e9d00632, type: 3}
   speedProjectile: 9
 --- !u!114 &4159637538809406516
@@ -195,4 +199,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d9191daa1265c47a4d80d81d980e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countAnimationAttacks: 6

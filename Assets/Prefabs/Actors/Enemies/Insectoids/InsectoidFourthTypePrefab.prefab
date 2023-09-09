@@ -178,7 +178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0654021836a768448b65ff679f380caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointSpawnProjectile: {fileID: 8172591896439073134}
+  pointsSpawnProjectile:
+  - {fileID: 8172591896439073134}
   projectilePrefab: {fileID: 5212988438947693026, guid: 86ab7c6e98e1c394ca31622302f3e588, type: 3}
   speedProjectile: 8
 --- !u!114 &7282486051642759480

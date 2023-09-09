@@ -10,7 +10,6 @@ public class CharacterAligmentWeaponSystem : IEcsRunSystem
 			.Inc<EnablerComponent>()
 			.Inc<WeaponSpawnPointComponent>()
 			.Inc<AimStateComponent>()
-			.Exc<TurretComponent>()
 			.End();
 
 		var characterComponents = world.GetPool<CharacterComponent>();
