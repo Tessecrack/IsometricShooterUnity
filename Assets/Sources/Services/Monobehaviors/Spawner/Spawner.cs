@@ -17,7 +17,10 @@ public class Spawner : MonoBehaviour
 		playerInstance = playerSpawnPoint.Spawn(true);
 		for (int i = 0; i < enemiesSpawnPoints.Count; ++i)
 		{
-			enemyInstances.Add(enemiesSpawnPoints[i].Spawn(false));
+			if (enemiesSpawnPoints[i].IsEnabledPoint)
+			{
+				enemyInstances.Add(enemiesSpawnPoints[i].Spawn(false));
+			}
 		}
 	}
 

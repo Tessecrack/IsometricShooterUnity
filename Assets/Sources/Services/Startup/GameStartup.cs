@@ -166,9 +166,7 @@ public class GameStartup : MonoBehaviour
 
 	private void InitFixedUpdateSystems()
 	{
-		ecsFixedUpdateSystems = new EcsSystems(ecsWorld, sharedData);
-		
-			
+		ecsFixedUpdateSystems = new EcsSystems(ecsWorld, sharedData);	
 		ecsFixedUpdateSystems.Init();
 	}
 

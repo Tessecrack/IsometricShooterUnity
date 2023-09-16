@@ -6,7 +6,7 @@ public class EnemySettings : MonoBehaviour
 	[SerializeField] private bool hasRangeAttack;
 	[SerializeField] private int meleeDamage = 25;
 	[SerializeField] private int rangeDamage = 25;
-	[SerializeField] private float rangeDetectTarget = 5.0f;
+	[SerializeField] private float rangeDetectTarget = 10.0f;
 	[SerializeField] private float distanceMeleeAttack = 1.5f;
 	[SerializeField] private float distanceRangeAttack = 10.0f;
 
