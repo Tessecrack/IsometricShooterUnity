@@ -154,6 +154,7 @@ MonoBehaviour:
   countAnimationsMeleeAttack: 0
   countAnimationsRangeAttack: 1
   speedMotionMeleeAttack: 40
+  countDeathAnimations: 4
 --- !u!114 &4797776258321573448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +183,7 @@ MonoBehaviour:
   - {fileID: 8172591896439073134}
   projectilePrefab: {fileID: 5212988438947693026, guid: 86ab7c6e98e1c394ca31622302f3e588, type: 3}
   speedProjectile: 8
+  delayBetweenAttack: 0.5
 --- !u!114 &7282486051642759480
 MonoBehaviour:
   m_ObjectHideFlags: 0

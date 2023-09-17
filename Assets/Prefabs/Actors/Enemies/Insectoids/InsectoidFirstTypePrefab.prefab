@@ -108,11 +108,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e018e23ee43d37a4b838aaa55c04c37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSpeed: 6
+  runSpeed: 6
   isMovable: 1
   dashSpeed: 80
   dashTime: 0.06
   maxHealth: 100
+  countAnimationsMeleeAttack: 4
+  countAnimationsRangeAttack: 0
+  speedMotionMeleeAttack: 40
+  countDeathAnimations: 4
 --- !u!114 &6362111178350573607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65382a43c6ed2d34a8408376868b12c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasArsenal: 0
   hasMeleeAttack: 1
   hasRangeAttack: 0
   meleeDamage: 10
@@ -145,4 +148,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d9191daa1265c47a4d80d81d980e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countAnimationAttacks: 6

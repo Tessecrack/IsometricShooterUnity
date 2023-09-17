@@ -6765,7 +6765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 2857737251512992987, guid: 6a26b4a5cfd3a5c47bf55613f8d9eae9, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &89031015
 GameObject:
   m_ObjectHideFlags: 0
@@ -8118,7 +8118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 6756397548703371726, guid: f76c7a66753394f42a0a381913ec84b7, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &105242639
 GameObject:
   m_ObjectHideFlags: 0
@@ -10428,7 +10428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 8886403118077841448, guid: 6cb4f4b8c255b5c4687ee885350c5dee, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &150796688
 GameObject:
   m_ObjectHideFlags: 0
@@ -11191,7 +11191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 8886403118077841448, guid: 6cb4f4b8c255b5c4687ee885350c5dee, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &164088078
 GameObject:
   m_ObjectHideFlags: 0
@@ -13955,7 +13955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 8886403118077841448, guid: 6cb4f4b8c255b5c4687ee885350c5dee, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &207370724
 GameObject:
   m_ObjectHideFlags: 0
@@ -22083,7 +22083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 2464970961380106857, guid: e4404607332c8794bb2e6c9316f26ce7, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &340622251
 GameObject:
   m_ObjectHideFlags: 0
@@ -23757,7 +23757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 2570818114527106543, guid: d04bb57b086c6fd4e8ff1962c28c3d6d, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &366058197
 GameObject:
   m_ObjectHideFlags: 0
@@ -60522,7 +60522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 2857737251512992987, guid: 6a26b4a5cfd3a5c47bf55613f8d9eae9, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &981652137
 GameObject:
   m_ObjectHideFlags: 0
@@ -62218,7 +62218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 6756397548703371726, guid: f76c7a66753394f42a0a381913ec84b7, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &1019318343
 GameObject:
   m_ObjectHideFlags: 0
@@ -64580,7 +64580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 2464970961380106857, guid: e4404607332c8794bb2e6c9316f26ce7, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &1065191092
 GameObject:
   m_ObjectHideFlags: 0
@@ -76992,7 +76992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 8886403118077841448, guid: 6cb4f4b8c255b5c4687ee885350c5dee, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &1271462802
 GameObject:
   m_ObjectHideFlags: 0
@@ -84838,7 +84838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 2857737251512992987, guid: 6a26b4a5cfd3a5c47bf55613f8d9eae9, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &1392911194
 GameObject:
   m_ObjectHideFlags: 0
@@ -91436,7 +91436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 2464970961380106857, guid: e4404607332c8794bb2e6c9316f26ce7, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &1514591219
 GameObject:
   m_ObjectHideFlags: 0
@@ -100208,7 +100208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 2857737251512992987, guid: 6a26b4a5cfd3a5c47bf55613f8d9eae9, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &1672304090
 GameObject:
   m_ObjectHideFlags: 0
@@ -109937,7 +109937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 8886403118077841448, guid: 6cb4f4b8c255b5c4687ee885350c5dee, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &1859543965
 GameObject:
   m_ObjectHideFlags: 0
@@ -122459,7 +122459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 8294214000374871811, guid: b57e856bb53a60044a629f9ec65ded95, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &2089114895
 GameObject:
   m_ObjectHideFlags: 0
@@ -122969,7 +122969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObject: {fileID: 8886403118077841448, guid: 6cb4f4b8c255b5c4687ee885350c5dee, type: 3}
-  isEnabledPoint: 0
+  isEnabledPoint: 1
 --- !u!1 &2096269061
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public abstract class AnimationsManager
 
 	protected int[] idsAnimationsStrikes;
 
-	protected int[] idsAnimationsDeath;
+	protected int idAnimationDeath;
 
 	protected AnimationEvents animationEvents;
 
@@ -65,11 +65,14 @@ public abstract class AnimationsManager
 
 	protected void InitializeDeathAnimations(int countDeathAnimations)
 	{
-		idsAnimationsDeath = new int[countDeathAnimations];
-		for (int i = 0; i < countDeathAnimations; ++i)
+		if (countDeathAnimations == 0)
 		{
-			idsAnimationsDeath[i] = Animator.StringToHash("Death_" + i);
+			idAnimationDeath = Animator.StringToHash("Death_0");
+			return;
 		}
+
+		var randomNum = new System.Random().Next(countDeathAnimations);
+		idAnimationDeath = Animator.StringToHash("Death_" + randomNum);
 	}
 
 	protected void InitializeAttackAnimations(TypeAttack typeAttack)

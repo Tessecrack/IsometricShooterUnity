@@ -31,8 +31,7 @@ public class EnemyAnimationsManager : AnimationsManager
 	{
 		if (updatedAnimationsState.CharacterState == CharacterState.DEATH)
 		{
-			var rand = new System.Random().Next(idsAnimationsDeath.Length);
-			PlayAnimationWithCheck(idsAnimationsDeath[rand]);
+			PlayAnimationWithCheck(idAnimationDeath);
 			return;
 		}
 

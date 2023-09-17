@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6271737424705732997, guid: 26f2a3b63ce2a3c489bf9a7033a0bbdc, type: 3}
+      propertyPath: countDeathAnimations
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26f2a3b63ce2a3c489bf9a7033a0bbdc, type: 3}
 --- !u!1 &8886403118077841448 stripped
@@ -74,7 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65382a43c6ed2d34a8408376868b12c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasArsenal: 0
   hasMeleeAttack: 1
   hasRangeAttack: 0
   meleeDamage: 10
@@ -94,4 +97,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d9191daa1265c47a4d80d81d980e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countAnimationAttacks: 6

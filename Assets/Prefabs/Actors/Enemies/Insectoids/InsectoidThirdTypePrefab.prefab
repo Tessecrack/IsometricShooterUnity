@@ -159,6 +159,7 @@ MonoBehaviour:
   countAnimationsMeleeAttack: 0
   countAnimationsRangeAttack: 1
   speedMotionMeleeAttack: 40
+  countDeathAnimations: 4
 --- !u!114 &1940186402
 MonoBehaviour:
   m_ObjectHideFlags: 0

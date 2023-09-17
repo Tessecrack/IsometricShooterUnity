@@ -30,7 +30,7 @@ public class CharacterSettings : MonoBehaviour
 	[SerializeField] private int speedMotionMeleeAttack = 40;
 
 	[Header("Count Death Animations")]
-	[Range(0.0f, 100.0f)]
+	[Range(0.0f, 5.0f)]
 	[SerializeField] private int countDeathAnimations = 1;
 
 	public float RunSpeed => runSpeed;

@@ -19,7 +19,7 @@ public class PlayerAnimationsManager : AnimationsManager
 		if (updatedAnimationsState.CharacterState == CharacterState.DEATH)
 		{
 			ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
-			PlayAnimationWithCheck(idsAnimationsDeath[0]);
+			PlayAnimationWithCheck(idAnimationDeath);
 			return;
 		}
 
