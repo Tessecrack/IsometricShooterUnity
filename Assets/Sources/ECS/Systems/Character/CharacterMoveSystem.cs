@@ -31,7 +31,7 @@ public class CharacterMoveSystem : IEcsRunSystem
 			{
 				continue;
 			}
-
+			
 			ref var characterComponent = ref characters.Get(entity);
 			ref var inputComponent = ref inputs.Get(entity);
 			ref var movableComponent = ref movables.Get(entity);

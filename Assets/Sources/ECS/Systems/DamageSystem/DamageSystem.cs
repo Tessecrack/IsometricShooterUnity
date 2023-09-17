@@ -8,10 +8,12 @@ public class DamageSystem : IEcsRunSystem
 		var filter = world.Filter<HealthComponent>()
 			.Inc<CharacterComponent>()
 			.Inc<EnablerComponent>()
+			.Inc<CharacterStateComponent>()
 			.End();
 
 		var healths = world.GetPool<HealthComponent>();
 		var characters = world.GetPool<CharacterComponent>();
+		var characterStates = world.GetPool<CharacterStateComponent>();
 		var enablers = world.GetPool<EnablerComponent>();
 
 		foreach(int entity in filter)
@@ -21,8 +23,10 @@ public class DamageSystem : IEcsRunSystem
 			{
 				continue;
 			}
+
 			ref var healthComponent = ref healths.Get(entity);
 			ref var characterComponent = ref characters.Get(entity);
+			ref var characterState = ref characterStates.Get(entity);
 
 			if (healthComponent.damageable.IsTakedDamage)
 			{
@@ -31,8 +35,10 @@ public class DamageSystem : IEcsRunSystem
 			
 			if (healthComponent.damageable.IsDeath)
 			{
-				healthComponent.damageable.DisableObject();
-				world.DelEntity(entity);
+				characterState.characterState = CharacterState.DEATH;
+				enabler.isEnabled = false;
+				//healthComponent.damageable.DisableObject();
+				//world.DelEntity(entity);
 			}
 		}
 	}

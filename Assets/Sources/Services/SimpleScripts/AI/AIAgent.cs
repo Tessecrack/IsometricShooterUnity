@@ -13,6 +13,7 @@ public class AIAgent
 	private bool isTargetDetected;
 	private bool canAttack;
 
+	private bool isEnabled = true;
 
 	public void SetRangeAttack(bool hasRangeAttack)
 	{
@@ -46,12 +47,22 @@ public class AIAgent
 
 	public bool IsDetectTarget(in Vector3 target)
 	{
+		if (isEnabled == false)
+		{
+			return false;
+		}
+
 		var distance = target - transform.position;
 		return isTargetDetected = rangeDetection >= distance.magnitude;
 	}
 
 	public bool CanMeleeAttack(in Vector3 target)
 	{
+		if (isEnabled == false)
+		{
+			return false;
+		}
+
 		if (hasMeleeAttack)
 		{
 			isTargetDetected = true;
@@ -63,6 +74,11 @@ public class AIAgent
 
 	public bool CanRangeAttack(in Vector3 target)
 	{
+		if (isEnabled == false)
+		{
+			return false;
+		}
+
 		if (hasRangeAttack)
 		{
 			isTargetDetected = true;
@@ -74,6 +90,11 @@ public class AIAgent
 
 	public Vector3 MoveToTarget(in Vector3 target)
 	{
+		if (isEnabled == false)
+		{
+			return Vector3.zero;
+		}
+
 		if (isTargetDetected)
 		{
 			if (hasRangeAttack && CanRangeAttack(target))
@@ -91,4 +112,9 @@ public class AIAgent
 	public float DistanceAttack => distanceMeleeAttack;
 
 	public Vector3 Position => transform.position;
+
+	public void Disable()
+	{
+		isEnabled = false;
+	}
 }

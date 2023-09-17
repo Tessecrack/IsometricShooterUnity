@@ -13,4 +13,6 @@ public class HashCharacterAnimations
 	public static readonly int HeavyAimingRunBlendTree = Animator.StringToHash("HeavyAimingRun");
 
 	public static readonly int GunAimingRunBlendTree = Animator.StringToHash("GunAimingRun");
+
+	public static readonly int Death = Animator.StringToHash("Death");
 }

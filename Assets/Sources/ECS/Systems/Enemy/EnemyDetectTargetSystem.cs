@@ -29,11 +29,6 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 		foreach (var entityPlayer in filterPlayer)
 		{
 			ref var playerEnabler = ref playerEnablers.Get(entityPlayer);
-			if (playerEnabler.isEnabled == false)
-			{
-				continue;
-			}
-
 			ref var playerCharacterComponent = ref playerCharacterComponents.Get(entityPlayer);
 			var playerPosition = playerCharacterComponent.characterTransform.position;
 
@@ -51,6 +46,12 @@ public class EnemyDetectTargetSystem : IEcsRunSystem
 				ref var eventComponent = ref inputEvents.Get(entity);
 
 				targetComponent.target = playerPosition;
+
+				if (playerEnabler.isEnabled == false)
+				{
+					aimState.aimState = AimState.NO_AIM;
+					aiEnemyComponent.aiAgent.Disable();
+				}
 
 				if (aiEnemyComponent.aiAgent.IsDetectTarget(playerPosition))
 				{

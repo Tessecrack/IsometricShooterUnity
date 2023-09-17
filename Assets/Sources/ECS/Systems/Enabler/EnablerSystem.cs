@@ -6,7 +6,7 @@ public class EnablerSystem : IEcsRunSystem
 	public void Run(IEcsSystems systems)
 	{
 		var world = systems.GetWorld();
-		var filter = world.Filter<EnablerComponent>().End();
+		var filter = world.Filter<EnablerComponent>().Exc<PlayerComponent>().End();
 
 		var sharedData = systems.GetShared<SharedData>();
 		var playerPosition = sharedData.RuntimeData.PlayerPosition;

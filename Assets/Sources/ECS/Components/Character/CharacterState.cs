@@ -2,5 +2,6 @@ public enum CharacterState : byte
 {
 	IDLE,
 	WALK,
-	RUN
+	RUN,
+	DEATH
 }

@@ -33,13 +33,15 @@ public class CharacterRigSystem : IEcsRunSystem
 		foreach(var entity in entities)
 		{
 			ref var enabler = ref enablers.Get(entity);
+			ref var characterRigComponent = ref characterRigComponents.Get(entity);
+
 			if (enabler.isEnabled == false)
 			{
+				characterRigComponent.characterRigController.ResetAll();
 				continue;
 			}
 
 			ref var characterComponent = ref characterComponents.Get(entity);
-			ref var characterRigComponent = ref characterRigComponents.Get(entity);
 			ref var aimState = ref aimStates.Get(entity);
 			ref var movableComponent = ref movableComponents.Get(entity);
 			ref var weaponComponent = ref weaponComponents.Get(entity);
@@ -52,6 +54,12 @@ public class CharacterRigSystem : IEcsRunSystem
 
 			var angle = Vector3.Angle(characterTransform.forward, targetComponent.target - characterTransform.position);
 
+			if (characterState.characterState == CharacterState.DEATH)
+			{
+				characterRigComponent.characterRigController.ResetAll();
+				continue;
+			}
+			
 			if (characterState.characterState == CharacterState.IDLE 
 				&& velocityComponent.velocity.magnitude == 0 && angle < 90 
 				&& aimState.aimState == AimState.NO_AIM)

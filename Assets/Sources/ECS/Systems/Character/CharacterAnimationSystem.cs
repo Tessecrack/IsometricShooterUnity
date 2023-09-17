@@ -30,7 +30,7 @@ public class CharacterAnimationSystem : IEcsRunSystem
 			ref var enablerComponent = ref enablers.Get(entity);
 			if (!enablerComponent.isEnabled)
 			{
-				continue;
+				//continue;
 			}
 			ref var animatorComponent = ref animators.Get(entity);
 			ref var movableComponent = ref movables.Get(entity);

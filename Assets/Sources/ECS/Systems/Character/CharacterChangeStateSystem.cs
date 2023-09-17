@@ -22,8 +22,14 @@ public class CharacterChangeStateSystem : IEcsRunSystem
 			{
 				continue;
 			}
+
 			ref var velocity = ref velocityComponents.Get(entity);
 			ref var characterState = ref characterStates.Get(entity);
+
+			if (characterState.characterState == CharacterState.DEATH)
+			{
+				continue;
+			}
 
 			if (velocity.velocity == Vector3.zero)
 			{

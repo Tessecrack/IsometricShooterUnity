@@ -7,6 +7,7 @@ public class CharacterAnimationState
 	public float HorizontalMoveValue { get; set; }
 	public float VerticalMoveValue { get; set; }
 	public bool IsAttack { get; set; }
+
 	public void UpdateValuesState(CharacterAnimationState other)
 	{
 		CurrentTypeWeapon = other.CurrentTypeWeapon;

@@ -69,4 +69,11 @@ public class CharacterRigController : MonoBehaviour
 	{
 		rigRightArm.weight = 0;
 	}
+
+	public void ResetAll()
+	{
+		ResetRigHeadChest(false);
+		ResetRigRightArm();
+		ResetRigLeftArm();
+	}
 }

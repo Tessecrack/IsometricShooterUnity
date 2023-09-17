@@ -15,6 +15,13 @@ public class PlayerAnimationsManager : AnimationsManager
 
 	public override void ChangeAnimationsState(CharacterAnimationState updatedAnimationsState, float deltaTime)
 	{
+		if (updatedAnimationsState.CharacterState == CharacterState.DEATH)
+		{
+			ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
+			PlayAnimationWithCheck(HashCharacterAnimations.Death);
+			return;
+		}
+
 		currentDeltaTime = deltaTime;
 		animationEvents.UpdateTime(deltaTime);
 
