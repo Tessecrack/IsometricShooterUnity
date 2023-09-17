@@ -9,6 +9,7 @@ public class PlayerAnimationsManager : AnimationsManager
 	{
 		this.animationCounterAttacks = animationEvents.CounterAnimations;
 		InitializeAttackAnimations(TypeAttack.MELEE);
+		InitializeDeathAnimations(1);
 		animationEvents.OnStartAttack += HandlerStartAttackEvent;
 		animationEvents.OnEndAttack += HandlerEndAttackEvent;
 	}
@@ -18,7 +19,7 @@ public class PlayerAnimationsManager : AnimationsManager
 		if (updatedAnimationsState.CharacterState == CharacterState.DEATH)
 		{
 			ResetLayer((int)CharacterAnimationLayers.ArmsHeavyNoAiming);
-			PlayAnimationWithCheck(HashCharacterAnimations.Death);
+			PlayAnimationWithCheck(idsAnimationsDeath[0]);
 			return;
 		}
 

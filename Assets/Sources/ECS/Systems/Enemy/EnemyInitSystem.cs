@@ -156,7 +156,7 @@ public class EnemyInitSystem : IEcsInitSystem
 				ref var animatorComponent = ref poolAnimatorComponents.Add(entityEnemy);
 				animatorComponent.animationState = new CharacterAnimationState();
 				animatorComponent.animationsManager = new EnemyAnimationsManager(animator, animEvents,
-					baseAttack.baseAttack.TypeAttack);
+					baseAttack.baseAttack.TypeAttack, characterSettings.CountDeathAnimations);
 				weaponType.typeWeapon = TypeWeapon.NO_WEAPON;
 			}
 		}

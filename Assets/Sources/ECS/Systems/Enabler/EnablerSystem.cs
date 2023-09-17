@@ -23,7 +23,7 @@ public class EnablerSystem : IEcsRunSystem
 				continue;
 			}
 
-			if (distance <= 30)
+			if (distance <= 30 && !enablerComponent.instance.activeSelf)
 			{
 				enablerComponent.instance.SetActive(true);
 				enablerComponent.isEnabled = true;
